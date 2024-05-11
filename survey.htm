@@ -129,20 +129,93 @@
             height: 200px; /* Altezza maggiore per le immagini 3 e 4 */
         }
 
+ body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            background-color: #f4f4f4; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .container h1 { 
+            text-align: center; 
+            color: #333;
+            font-size: 2em;
+        }
+        .container p { 
+            text-align: justify; 
+            line-height: 1.6;
+        }
+        .container a { 
+            color: #0078D7; 
+            text-decoration: none; 
+        }
+        .container a:hover { 
+            text-decoration: underline; 
+        }
+        .container table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px;
+        }
+        .container th, .container td { 
+            padding: 10px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd;
+        }
+        .container tr:hover {
+            background-color: #f5f5f5;
+        }
+        .container th {
+            background-color: #0078D7;
+            color: white;
+        }
+        .container footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0078D7;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Animazioni */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
 
-<div class="content">
+
     <h1>Survey Experiment</h1>
-    <p> Agli intervistati verrà chiesto di esprimere le loro preferenze di acquisto tra due prodotti, un paio di occhiali e una bottiglietta d'acqua. I due prodotti sono identici e appaiono in ordine randomizzato. Prima dell'esperimento viene spiegato agli intervistati che alcuni di loro avranno effettivamente la possibilità di ricevere i prodotti selezionati, in particolar modo riceveranno il prodotto non durevole e un buono per l'acquisto del prodotto durevole.</p>
+    <p> Durante l’esperimento ogni intervistato dovrà indicare la sua preferenza per due prodotti (che appaiono in modo randomizzato): una bottiglietta d’acqua e un paio di occhiali da sole. Per ogni prodotto l’intervistato deve scegliere tra un’alternativa meno costosa in plastica tradizionale e un’alternativa più costosa in bioplastica (i prezzi variano in modo randomizzato). L’intervistato può anche decidere di non acquistare alcun prodotto. 
+In seguito vengono descritti i diversi trattamenti. Prima dell'esperimento viene spiegato agli intervistati che alcuni di loro avranno effettivamente la possibilità di ricevere i prodotti selezionati, in particolar modo riceveranno il prodotto non durevole e un buono per l'acquisto del prodotto durevole.</p>
 </div>
 
 
 
  <div class="nota nota-controllo">
-    <strong>GRUPPO DI CONTROLLO:</strong> Il materiale con cui sono realizzati i prodotti viene descritto solo attraverso etichette. Le etichette sono un mezzo per offrire informazioni ai consumatori. Ma sono sufficienti? I consumatori spesso non prestano attenzione alle etichette o non le comprendono (<a href="http://centmapress.ilb.uni-bonn.de/ojs/index.php/fsd/article/view/232/0">Grunert, 2011)</a>.
+    <strong>GRUPPO DI CONTROLLO:</strong> Il materiale con cui sono realizzati i prodotti viene descritto solo attraverso etichette. Le etichette sono un mezzo per offrire informazioni ai consumatori. Ma sono sufficienti? I consumatori spesso non prestano attenzione alle etichette o non le comprendono (<a href="http://centmapress.ilb.uni-bonn.de/ojs/index.php/fsd/article/view/232/0">Grunert, 2011</a>).
     <p>Nel gruppo di controllo i prodotti in bioplastica vengono descritti tramite le etichette “compostabile/biodegradabile”, “biobased” o tramite entrambe le etichette. Anche i prodotti in plastica tradizionale vengono descritti tramite le etichette relative. In seguito sono mostrate le immagini delle etichette.</p>
 
 
@@ -248,10 +321,10 @@
 
 </div>
 <div class="nota nota-terzo" style="text-align: left;">
-    <strong>DOMANDE DOPO TASK CHOICES:</strong> In ogni trattamento verrà chiesto agli intervistati di indicare le loro preferenze di acquisto per due prodotti: un paio di occhiali e una bottiglietta d'acqua (i prodotti appaiono in modo random e con prezzi randomizzati). Successivamente agli intervistati può succedere che:
+    <strong>DOMANDE DOPO TASK CHOICES:</strong>  Dopo che è stato chiesto di indicare le proprie preferenze di acquisto per i due prodotti, in modo randomico possono accadere due scenari:
     <ol>
-        <li>Vengono direttamente offerte maggiori informazioni riguardo a bioplastica (o biodegradabile o biobased), a seconda di come era descritto il prodotto.</li>
-        <li>Viene chiesto agli intervistati se vogliono ricevere maggiori informazioni riguardo a bioplastica (o biodegrabile o biobased).</li>
+        <li> 1. Vengono offerte maggiori informazioni riguardo a bioplastica (o biodegradabile o biobased), a seconda di come era descritto il prodotto.</li>
+        <li> 2. Viene chiesto agli intervistati se vogliono ricevere maggiori informazioni riguardo a bioplastica (o biodegrabile o biobased).</li>
     </ol>
     In seguito, viene chiesto a tutti se vogliono rivedere le scelte precedentemente fatte.
 </div>
@@ -259,4 +332,11 @@
 <!-- Aggiungi qui la descrizione grafica del Survey Experiment -->
 
 </body>
+
+
+           <button onclick="window.location.href='sito.htm';">
+  &#x2190; Indietro
+</button>
+
 </html>
+
