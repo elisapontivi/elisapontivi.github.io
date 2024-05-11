@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #27ae60;
+            text-align: center;
+        }
+        p, label {
+            color: #333;
+            line-height: 1.6;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .question input[type="radio"], .question input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .submit-button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .submit-button:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="pagina9.php" method="post">
+            <div class="question">
+                                <h2> I parte </h2>
+
+                   <p> <strong> Che ruolo hanno le materie plastiche nella tua vita?</strong>.</p>
+                <label><input type="radio" name="plastic_role" value="inimmaginabile" required>Una vita senza plastica è inimmaginabile per me.</label>
+                <label><input type="radio" name="plastic_role" value="farne_a_meno">Cerco di farne a meno.</label>
+                <label><input type="radio" name="plastic_role" value="usare_meno">Vorrei usare meno prodotti in plastica nella mia vita quotidiana, ma non so bene come fare.</label>
+            </div>
+
+   <!-- Vero/Falso -->
+<div class="question">
+                                <h2> II parte </h2>
+    <p>Tutte le bioplastiche sono completamente biodegradabili.</p>
+    <label><input type="radio" name="biodegradable" value="true">Vero</label>
+    <label><input type="radio" name="biodegradable" value="false">Falso</label>
+
+    <p>Tutte le bioplastiche sono derivanti da fonti rinnovabili come piante o alghe.</p>
+    <label><input type="radio" name="renewable_sources" value="true">Vero</label>
+    <label><input type="radio" name="renewable_sources" value="false">Falso</label>
+
+    <p>La bioplastica è realizzata a partire da plastica riciclata.</p>
+    <label><input type="radio" name="recycled_plastic" value="true">Vero</label>
+    <label><input type="radio" name="recycled_plastic" value="false">Falso</label>
+
+    <p>L'industria della bioplastica contribuisce a ridurre la dipendenza da risorse non rinnovabili e a promuovere soluzioni più sostenibili.</p>
+    <label><input type="radio" name="sustainable_industry" value="true">Vero</label>
+    <label><input type="radio" name="sustainable_industry" value="false">Falso</label>
+
+    <p>Un materiale plastico biodegradabile con origine fossile è definito bioplastica.</p>
+    <label><input type="radio" name="fossil_based" value="true">Vero</label>
+    <label><input type="radio" name="fossil_based" value="false">Falso</label>
+</div>
+
+
+
+            <!-- Definizioni -->
+            <div class="question">
+                                <h2> III parte </h2>
+                <p> <strong> Quale tra le seguenti può essere identificata come una definizione di “biodegradabile”</strong>.</p>
+                <label><input type="radio" name="definition_biodegradable" value="instant_dissolve">A) Un materiale che si dissolve istantaneamente in presenza di luce solare.</label>
+                <label><input type="radio" name="definition_biodegradable" value="microorganisms_decomposition">B) Un oggetto che si scompone grazie all'azione di microrganismi presenti nell'ambiente, trasformandosi in sostanze naturali.</label>
+                <label><input type="radio" name="definition_biodegradable" value="indefinite_recycling">C) Un prodotto che può essere riciclato indefinitamente senza perdere le sue proprietà.</label>
+                <label><input type="radio" name="definition_biodegradable" value="harmful_emissions">D) Un materiale che emette sostanze chimiche nocive durante il processo di decomposizione.</label>
+
+                <p> <strong> Quale tra le seguenti può essere identificata come una definizione di “bio-based”</strong></p>
+                <label><input type="radio" name="definition_biobased" value="natural_decomposition">A) Un materiale che si decompone naturalmente nel tempo.</label>
+                <label><input type="radio" name="definition_biobased" value="biological_origin">B) Un oggetto composto principalmente da materiali di origine biologica o rinnovabile, derivati da piante, animali o microrganismi.</label>
+                <label><input type="radio" name="definition_biobased" value="marine_safe">C) Un prodotto che può essere utilizzato in ambienti marini senza causare danni.</label>
+                <label><input type="radio" name="definition_biobased" value="sunlight_transformation">D) Un materiale che subisce una trasformazione chimica a causa dell'esposizione alla luce solare.</label>
+            </div>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <h2> IV parte </h2>
+<style>
+    /* Stili CSS come prima */
+</style>
+
+
+<div class="question-container" id="likertQuestions">
+    <!-- Le domande verranno inserite qui dal JavaScript -->
+    <p> <strong>  Ti chiediamo di esprimere il suo grado di accordo o disaccordo con le seguenti affermazioni utilizzando la scala Likert di seguito. Ogni numero rappresenta un livello di accordo, dove "1" indica "Totalmente in disaccordo" e "5" indica "Totalmente d'accordo".
+
+Per favore, selezioni il numero che meglio rappresenta la sua opinione per ciascuna affermazione.
+
+1. Totalmente in disaccordo
+2. In disaccordo
+3. Né in accordo né in disaccordo
+4. D'accordo
+5. Totalmente d'accordo </strong>.</p>
+
+</div>
+
+<script>
+    const questions = [
+        {
+            name: 'etichetta_ecologica',
+            question: 'La presenza di un\'etichetta ecologica aumenta la mia fiducia nella sostenibilità complessiva di un prodotto.'
+        },
+        {
+            name: 'standard_ambientali',
+            question: 'Ho fiducia che i prodotti con etichette ecologiche rispettino rigorosi standard ambientali.'
+        },
+        {
+            name: 'impegno_aziende',
+            question: 'Credo che le aziende che espongono etichette ecologiche siano sinceramente impegnate in pratiche ambientalmente responsabili.'
+        },
+        {
+            name: 'bioplastica_ambiente',
+            question: 'Credo che la bioplastica sia significativamente migliore per l\'ambiente rispetto alla plastica convenzionale.'
+        },
+        {
+            name: 'ruolo_bioplastica',
+            question: 'La bioplastica svolgerà un ruolo cruciale nel ridurre l\'inquinamento globale da plastica.'
+        },
+        {
+            name: 'sostenibilita_bioplastica',
+            question: 'La produzione di bioplastica è sostenibile e non entra in competizione con le risorse alimentari.'
+        },
+        {
+            name: 'pagare_di_piu',
+            question: 'Sono disposto/a pagare di più per prodotti realizzati con bioplastica a causa dei suoi benefici ambientali.'
+        },
+        {
+            name: 'soluzione_combustibili',
+            question: 'La bioplastica rappresenta una soluzione efficace per ridurre la nostra dipendenza dai combustibili fossili.'
+        },
+        {
+            name: 'prodotti_non_dannosi',
+            question: 'È importante per me che i prodotti che utilizzo non danneggino l\'ambiente.'
+        },
+        {
+            name: 'impatto_ambientale_decisioni',
+            question: 'Considero l\'eventuale impatto ambientale delle mie azioni quando prendo molte delle mie decisioni.'
+        },
+        {
+            name: 'abitudini_acquisto',
+            question: 'Le mie abitudini di acquisto sono influenzate dalla mia preoccupazione per il nostro ambiente.'
+        },
+        {
+            name: 'spreco_risorse',
+            question: 'Mi preoccupa lo spreco delle risorse del nostro pianeta.'
+        },
+        {
+            name: 'responsabilita_ambientale',
+            question: 'Mi descriverei come responsabile dal punto di vista ambientale.'
+        },
+        {
+            name: 'azioni_ecologiche',
+            question: 'Sono disposto a compiere azioni che potrebbero richiedere uno sforzo aggiuntivo per promuovere comportamenti ecologici.'
+        }
+    ];
+
+    function shuffle(array) {
+        // Funzione per randomizzare l'ordine delle domande
+        // Come prima
+    }
+
+    shuffle(questions);
+
+    function generateQuestionHTML(question, index) {
+        return `
+            <div class="question">
+                <label>${question.question}
+                    <div class="likert">
+                        <input type="radio" name="${question.name}" value="1"> 1
+                        <input type="radio" name="${question.name}" value="2"> 2
+                        <input type="radio" name="${question.name}" value="3"> 3
+                        <input type="radio" name="${question.name}" value="4"> 4
+                        <input type="radio" name="${question.name}" value="5"> 5
+                    </div>
+                </label>
+            </div>
+        `;
+    }
+
+    const container = document.getElementById('likertQuestions');
+
+    questions.forEach((question, index) => {
+        container.innerHTML += generateQuestionHTML(question, index);
+    });
+</script>
+
+
+
+           <button onclick="window.location.href='sito.htm';">
+  &#x2190; Indietro
+</button>
+        </form>
+    </div>
+</body>
+</html>

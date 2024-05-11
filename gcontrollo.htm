@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        img, .opzione button {
+            width: 800px;
+            height: auto;
+            cursor: pointer;
+            border: 3px solid transparent; /* Bordo trasparente per tutte le immagini e bottoni */
+        }
+        .selezionata {
+            background-color: #00ff00; /* Sfondo verde per l'elemento selezionato */
+            color: black; /* Testo nero per il bottone selezionato */
+        }
+        .opzione {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            color: black; /* Testo nero per il bottone non selezionato */
+        }
+        .descrizione {
+            font-weight: bold; /* Testo in grassetto */
+            font-size: 1.2em; /* Dimensione del font aumentata */
+            margin-top: -10px; /* Riduci lo spazio sopra la descrizione */
+            text-align: center; /* Centra il testo */
+        }
+    </style>
+</head>
+<body>
+  
+        <h2>Task choice 1</h2>
+        <p>Sei al ristorante e stai pranzando, hai sete e vuoi acquistare una bottiglietta d'acqua. Hai le seguenti opzioni, quale acquisteresti? </p>
+        <div class="opzione">
+            <img id="bot25" src="https://lh3.googleusercontent.com/drive-viewer/AKGpihY8orv8MTy_3y1nbDeCwe47q4ZWogxZfMnaSWAbBciLGaGuWztEXVLAdXV0_CcdQDXRrWQQeAPUObReNfLSUX-o8HuOKrrXrNg=s1600-rw-v1" alt="bot25" onclick="seleziona('bot25', 'Opzione 1')">
+        </div>
+        <div class="opzione">
+            <img id="plastica25" src="https://lh3.googleusercontent.com/drive-viewer/AKGpihaLSynrOqYcPkf8pNFVX61h86_ucXYeVDGwepn2mY_UHIDFopPA-J0f_OAb5enLXjawLpgMRznZCWXHUhyZGoiAjnIuCg2zWKU=s1600-v0" alt="plastica25" onclick="seleziona('plastica25', 'Opzione 2')">
+        </div>
+        <div class="opzione">
+            <button id="opzione3" type="button" onclick="seleziona('opzione3', 'Opzione 3')">Non acquisterei la bottiglietta</button>
+        </div>
+        <input type="hidden" name="scelta1" id="scelta1" value="">
+
+  <button onclick="window.location.href='survey.htm';">
+  &#x2190; Indietro
+</button>
+        <script>
+            function seleziona(id, valore) {
+                // Rimuovi la classe 'selezionata' da tutte le immagini e bottoni
+                document.querySelectorAll('img, .opzione button').forEach(el => {
+                    el.classList.remove('selezionata');
+                });
+                // Aggiungi la classe 'selezionata' all'elemento cliccato
+                document.getElementById(id).classList.add('selezionata');
+                // Imposta il valore del campo nascosto con il valore dell'opzione selezionata
+                document.getElementById('scelta1').value = valore;
+            }
+
+
+        </script>
+    </form>
+</body>
+</html>

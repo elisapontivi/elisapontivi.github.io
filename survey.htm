@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Experiment</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-color: #e7eff6; 
+        }
+        .content { 
+            max-width: 800px; 
+            margin: auto; 
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .content h1 { 
+            text-align: center; 
+        }
+        .content p, .content figure { 
+            text-align: justify; 
+            margin-bottom: 20px; 
+        }
+        .nota { 
+            background-color: #f8f8f8; 
+            border-left: 3px solid #0078D7; 
+            padding: 10px; 
+            margin-bottom: 20px; 
+        }
+        a { 
+            color: #0078D7; 
+            text-decoration: none; 
+        }
+        a:hover { 
+            text-decoration: underline; 
+        }
+        figure { 
+            margin: 20px 0; 
+        }
+        figcaption { 
+            text-align: center; 
+        }
+        header, footer {
+            background-color: #0078D7;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+        footer {
+            border-radius: 0 0 8px 8px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        table {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        th {
+            background-color: #0078D7;
+            color: white;
+        }
+        .nota-controllo {
+            background-color: #e6f7ff; /* Colore azzurro chiaro */
+            border-left: 3px solid #1890ff; /* Bordo azzurro */
+        }
+        .nota-trattamento {
+            background-color: #fffbe6; /* Colore giallo chiaro */
+            border-left: 3px solid #ffc53d; /* Bordo giallo */
+        }
+
+  .nota-terzo {
+            background-color: #ffe6f0; /* Colore rosa chiaro */
+            border-left: 3px solid #ff80b3; /* Bordo rosa */
+        }
+
+       .contenitore-immagini {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Permette agli elementi di andare a capo se non ci sta spazio */
+        }
+
+        /* Stile per le immagini */
+        .immagine-allineata {
+            margin: 5px;
+            flex: 0 0 auto; /* Non permette alle immagini di crescere o restringersi */
+        }
+
+        .immagine-allineata img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Stile per le didascalie */
+        .immagine-allineata figcaption {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+      .immagine-3 img, .immagine-4 img {
+            width: 200px; /* Larghezza maggiore per le immagini 3 e 4 */
+            height: 200px; /* Altezza maggiore per le immagini 3 e 4 */
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="content">
+    <h1>Survey Experiment</h1>
+    <p> Agli intervistati verrà chiesto di esprimere le loro preferenze di acquisto tra due prodotti, un paio di occhiali e una bottiglietta d'acqua. I due prodotti sono identici e appaiono in ordine randomizzato. Prima dell'esperimento viene spiegato agli intervistati che alcuni di loro avranno effettivamente la possibilità di ricevere i prodotti selezionati, in particolar modo riceveranno il prodotto non durevole e un buono per l'acquisto del prodotto durevole.</p>
+</div>
+
+
+
+ <div class="nota nota-controllo">
+    <strong>GRUPPO DI CONTROLLO:</strong> Il materiale con cui sono realizzati i prodotti viene descritto solo attraverso etichette. Le etichette sono un mezzo per offrire informazioni ai consumatori. Ma sono sufficienti? I consumatori spesso non prestano attenzione alle etichette o non le comprendono (<a href="http://centmapress.ilb.uni-bonn.de/ojs/index.php/fsd/article/view/232/0">Grunert, 2011</a>.
+    <p>Nel gruppo di controllo i prodotti in bioplastica vengono descritti tramite le etichette “compostabile/biodegradabile”, “biobased” o tramite entrambe le etichette. Anche i prodotti in plastica tradizionale vengono descritti tramite le etichette relative. In seguito sono mostrate le immagini delle etichette.</p>
+
+
+  <div class="contenitore-immagini">
+            <!-- Immagine 1 -->
+            <figure class="immagine-allineata">
+                <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihYCOtnhkZvlGqBVvcG1boQGG-CLsavKlxtfLVAsdrvzQZDXY1HB8yIjD4LvYm0c3R4MTmp4srdK2SiUTeFatVKOfeHqOC15ZKk=s2560" alt="Biobased">
+                <figcaption>Biobased</figcaption>
+            </figure>
+
+            <!-- Immagine 2 -->
+            <figure class="immagine-allineata">
+                <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpiharD9N8w5nEy4UzgBQ8xmpUMzaoXg-RaT9VChxs_nYhRyQMF9bHgSBF-i5VRusqAniuM7IvAemMes4nulxidCPkJ2ieFOqbKzU=s2560" alt="Compostabile/Biodegradabile">
+                <figcaption>Compostabile/Biodegradabile</figcaption>
+            </figure>
+
+    <!-- Immagine 3 (ingrandita) -->
+            <figure class="immagine-allineata immagine-3">
+                <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihb2kX-94BJV8UwyknMwF6lMiIroyxn1g3FB0WgIcaMzQA2mEwHUPWBQ_AjEr0nSuBPVinT0oKelKr7eX2iZR471O4AfRF8VkA=s2560" alt="Pet">
+                <figcaption>Pet</figcaption>
+            </figure>
+
+            <!-- Immagine 4 (ingrandita) -->
+            <figure class="immagine-allineata immagine-4">
+                <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihZ-qKEGMI76Fz0kW21rASan04OgEvha3d4Qlthe3AM1ja-3bh0sTNu1Xgb-d1rklh5RsdSsM8IMgN1EzYl00rx31AafeCWdEeg=s2560" alt="Other">
+                <figcaption>Other</figcaption>
+            </figure>
+
+</div>
+
+ <p><a href="gcontrollo.htm">Esempio task choice gruppo di controllo</a></p>
+
+</div>
+
+</div>
+
+<div class="nota nota-trattamento">
+    <strong>TRATTAMENTO 1:</strong> Il materiale con cui sono realizzati i prodotti viene descritto attraverso le etichette e un breve testo aggiuntivo. L'obiettivo è di capire se il rendere più saliente il fatto che un prodotto è realizzato in bioplastica o rendere più salienti le caratteristiche della bioplastica possa essere un incentivo per spingere le persone ad acquistare prodotti in bioplastica. Si vuole valutare, poi, quale "testo aggiuntivo", eventualmente, possa essere più efficace nell'incentivare l'acquisto di prodotti in bioplastica.
+     <p>Il prodotto in plastica tradizionale è descritto con l’etichetta e il testo “questo prodotto è realizzato in plastica tradizionale”. Il prodotto in bioplastica, invece, può avere diverse descrizioni.</p>
+<table style="width:100%; border-collapse: collapse;">
+
+</div>
+
+  <tr>
+    <th></th>
+    <th>Etichetta biodegradabile</th>
+    <th>Etichetta biobased</th>
+    <th>Descrizione prodotto in bioplastica</th>
+  </tr>
+  <!-- Ripeti il seguente blocco per ogni riga della tabella -->
+  <tr>
+    <td>2.1</td>
+    <td>X</td>
+    <td></td>
+    <td>Questo prodotto è realizzato in bioplastica</td>
+  </tr>
+ <tr>
+    <td>2.2</td>
+    <td></td>
+    <td>X</td>
+    <td>Questo prodotto è realizzato in bioplastica</td>
+  </tr>
+ <tr>
+    <td>2.3</td>
+    <td>X</td>
+    <td>X</td>
+    <td>Questo prodotto è realizzato in bioplastica</td>
+  </tr>
+ <tr>
+    <td>2.4</td>
+    <td>X</td>
+    <td></td>
+    <td>Questo prodotto è biodegradabile</td>
+  </tr>
+ <tr>
+    <td>2.5</td>
+    <td></td>
+    <td>X</td>
+    <td>Questo prodotto ha origine organica</td>
+  </tr>
+ <tr>
+    <td>2.6</td>
+    <td></td>
+    <td>X</td>
+    <td>Questo prodotto non ha origine fossile</td>
+  </tr>
+ <tr>
+    <td>2.7</td>
+    <td>X</td>
+    <td>X</td>
+    <td>Questo prodotto è biodegradabile e ha origine organica</td>
+  </tr>
+ <tr>
+    <td>2.8</td>
+    <td>X</td>
+    <td>X</td>
+    <td>Questo prodotto è biodegradabile e non ha origine fossile</td>
+  </tr>
+  <!-- Aggiungi altre righe qui -->
+</table>
+
+ <p><a href="trattamento1.htm">Esempio task choice trattamento 1 </a></p>
+
+</div>
+<div class="nota nota-terzo" style="text-align: left;">
+    <strong>DOMANDE DOPO TASK CHOICES:</strong> In ogni trattamento verrà chiesto agli intervistati di indicare le loro preferenze di acquisto per due prodotti: un paio di occhiali e una bottiglietta d'acqua (i prodotti appaiono in modo random e con prezzi randomizzati). Successivamente agli intervistati può succedere che:
+    <ol>
+        <li>Vengono direttamente offerte maggiori informazioni riguardo a bioplastica (o biodegradabile o biobased), a seconda di come era descritto il prodotto.</li>
+        <li>Viene chiesto agli intervistati se vogliono ricevere maggiori informazioni riguardo a bioplastica (o biodegrabile o biobased).</li>
+    </ol>
+    In seguito, viene chiesto a tutti se vogliono rivedere le scelte precedentemente fatte.
+</div>
+
+<!-- Aggiungi qui la descrizione grafica del Survey Experiment -->
+
+</body>
+</html>

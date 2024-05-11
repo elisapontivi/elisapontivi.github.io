@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, p {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        img, .opzione button {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .selezionata {
+            background-color: #00ff00;
+            color: black;
+            border-color: #00ff00;
+        }
+        .opzione {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f9f9f9;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://surveymaps.000webhostapp.com/save_location.php" method="post">
+        <p>1. Quanti anni hai?</p>
+        <select name="age" id="age" required>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="47">47</option>
+            <option value="48">48</option>
+            <option value="49">49</option>
+            <option value="50">50</option>
+            <option value="51">51</option>
+            <option value="52">52</option>
+            <option value="53">53</option>
+            <option value="54">54</option>
+            <option value="55">55</option>
+            <option value="56">56</option>
+            <option value="57">57</option>
+            <option value="58">58</option>
+            <option value="59">59</option>
+            <option value="60">60</option>
+            <option value="61">61</option>
+            <option value="62">62</option>
+            <option value="63">63</option>
+            <option value="64">64</option>
+            <option value="65">65</option>
+            <option value="66">66</option>
+            <option value="67">67</option>
+            <option value="68">68</option>
+            <option value="69">69</option>
+            <option value="70">70</option>
+            <option value="71">71</option>
+            <option value="72">72</option>
+            <option value="73">73</option>
+            <option value="74">74</option>
+            <option value="75">75</option>
+            <option value="76">76</option>
+            <option value="77">77</option>
+            <option value="78">78</option>
+            <option value="79">79</option>
+            <option value="80">80</option>
+            <option value="81">81</option>
+            <option value="82">82</option>
+            <option value="83">83</option>
+            <option value="84">84</option>
+            <option value="85">85</option>
+            <option value="86">86</option>
+            <option value="87">87</option>
+            <option value="88">88</option>
+            <option value="89">89</option>
+            <option value="90">90</option>
+            <option value="91">91</option>
+            <option value="92">92</option>
+            <option value="93">93</option>
+            <option value="94">94</option>
+            <option value="95">95</option>
+            <option value="96">96</option>
+            <option value="97">97</option>
+            <option value="98">98</option>
+            <option value="99">99</option>
+            <option value="100">100</option>
+        </select>
+        <p>2. Indica il comune dove vivi</p>
+        <input type="text" id="search" name="location" placeholder="Cerca il tuo comune" required>
+ <!-- Script per la mappa e l'autocompletamento -->
+    <script>
+         function initMap() {
+            const mapCenter = { lat: 41.8719, lng: 12.5674 }; // Centro la mappa su Roma, Italia di default
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: mapCenter,
+                zoom: 6
+            });
+             const input = document.getElementById("search");
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo("bounds", map);
+
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    console.error("Nessuna località trovata per l'input:", input.value);
+                    return;
+                }
+                map.setCenter(place.geometry.location);
+                new google.maps.Marker({
+                    position: place.geometry.location,
+                    map: map
+                });
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-5Rc5Bmn-LBSjNS6hb4GEFFd58lvLQXQ&libraries=places&callback=initMap" async defer></script>
+       <div id="map"></div>
+   <p>3. Quale è il tuo genere?</p>
+        <select name="gender" id="gender" required>
+            <option value="maschio">Maschio</option>
+            <option value="femmina">Femmina</option>
+            <option value="non_binario">Genere non binario</option>
+            <option value="non_specificato">Preferisco non specificarlo</option>
+        </select>
+<p>4. Qual è il tuo titolo di studio?</p>
+<select name="education" id="education" required>
+    <option value="">Seleziona il tuo titolo di studio</option>
+    <option value="licenza_elementare">Licenza elementare</option>
+    <option value="licenza_media">Licenza media</option>
+    <option value="diploma_scuola_superiore">Diploma di scuola superiore</option>
+    <option value="laurea_triennale">Laurea triennale</option>
+    <option value="laurea_magistrale">Laurea magistrale</option>
+    <option value="dottorato">Dottorato</option>
+</select>
+<p>5. Al momento sei...? (Seleziona tutte le opzioni applicabili)</p>
+<div>
+    <input type="checkbox" id="studente" name="status[]" value="Studente">
+    <label for="studente">Studente</label>
+</div>
+<div>
+    <input type="checkbox" id="lavoratore" name="status[]" value="Lavoratore">
+    <label for="lavoratore">Lavoratore</label>
+</div>
+<div>
+    <input type="checkbox" id="disoccupato" name="status[]" value="Disoccupato">
+    <label for="disoccupato">Disoccupato</label>
+</div>
+<div>
+    <input type="checkbox" id="casalinga_o" name="status[]" value="Casalinga/o">
+    <label for="casalinga_o">Casalinga/o</label>
+</div>
+<div>
+    <input type="checkbox" id="in_cerca_di_occupazione" name="status[]" value="In cerca di occupazione">
+    <label for="in_cerca_di_occupazione">In cerca di occupazione</label>
+</div>
+        <p>6. Con quante persone vivi?</p>
+        <select name="living_situation" id="living_situation"  onchange="showAdditionalQuestions()">
+            <option value="">Seleziona un'opzione</option>
+            <option value="vivo_da_solo">Vivo da solo</option>
+            <option value="vivo_con_una_persona">Vivo con una persona</option>
+            <option value="vivo_con_due_persone">Vivo con due persone</option>
+            <option value="vivo_con_tre_persone">Vivo con tre persone</option>
+            <option value="vivo_con_quattro_persone">Vivo con quattro persone</option>
+            <option value="vivo_con_piu_di_quattro_persone">Vivo con più di quattro persone</option>
+        </select>
+<div id="living-with-question" style="display:none;">
+    <p> Con chi vivi?</p>
+    <select name="living_with" id="living_with" required onchange="showFamilyIncomeQuestion()">
+        <option value="">Seleziona un'opzione</option>
+        <option value="con_la_mia_famiglia">Con la mia famiglia</option>
+        <option value="con_dei_coinquilini">Con dei coinquilini</option>
+    </select>
+</div>
+<!-- Domanda 7 (condizionale) -->
+<div id="income-question" style="display:none;">
+    <p> Qual è il tuo reddito mensile netto?</p>
+   <select name="net_income" id="net_income" >
+                <option value="">Seleziona il tuo reddito mensile netto</option>
+<option value="nessun_reddito">Non ho reddito</option>
+                <option value="meno_di_500">Meno di 500€</option>
+                <option value="tra_500_e_1000">Tra 500€ e 1000€</option>
+                <option value="tra_1000_e_1500">Tra 1000€ e 1500€</option>
+                <option value="tra_1500_e_2000">Tra 1500€ e 2000€</option>
+                <option value="tra_2000_e_2500">Tra 2000€ e 2500€</option>
+                <option value="piu_di_2500">Più di 2500€</option>
+            </select>
+</div>
+
+<div id="expense-responsibility-question" style="display:none;">
+    <p>Chi si occupa delle spese domestiche e alimentari?</p>
+    <select name="expense_responsibility" id="expense_responsibility"  onchange="handleExpenseResponsibilityChange()">
+        <option value="">Seleziona un'opzione</option>
+        <option value="personalmente">Mi occupo personalmente di tutte le spese</option>
+                    <option value="sostenuto">Sono sostenuto economicamente dalla mia famiglia o da altri</option>
+                    <option value="parzialmente_sostenuto">Mi occupo di alcune spese e sono sostenuto economicamente dalla mia famiglia o da altri</option>
+    </select>
+</div>
+<!-- Domanda 9 (condizionale) -->
+<div id="family-income-question" style="display:none;">
+    <p> Qual è il reddito mensile netto della tua famiglia?</p>
+    <select name="family_income" id="family_income" >
+     <option value="meno_di_1000">Meno di 1000€</option>
+                    <option value="tra_1000_e_2000">Tra 1000€ e 2000€</option>
+                    <option value="tra_2000_e_3000">Tra 2000€ e 3000€</option>
+                    <option value="tra_3000_e_4000">Tra 3000€ e 4000€</option>
+                    <option value="tra_4000_e_5000">Tra 4000€ e 5000€</option>
+                    <option value="piu_di_5000">Più di 5000€</option>
+    </select>
+</div>
+<script>
+function showAdditionalQuestions() {
+    var livingSituation = document.getElementById('living_situation').value;
+    var incomeQuestion = document.getElementById('income-question');
+    var livingWithQuestion = document.getElementById('living-with-question');
+    var familyIncomeQuestion = document.getElementById('family-income-question');
+    var expenseResponsibilityQuestion = document.getElementById('expense-responsibility-question');
+    incomeQuestion.style.display = 'none';
+    livingWithQuestion.style.display = 'none';
+    familyIncomeQuestion.style.display = 'none';
+    expenseResponsibilityQuestion.style.display = 'none';
+    // Logica per mostrare le domande in base alla situazione abitativa
+    if (livingSituation === 'vivo_da_solo') {
+        incomeQuestion.style.display = 'block';
+        expenseResponsibilityQuestion.style.display = 'block';
+        familyIncomeQuestion.style.display = 'block';
+    } else if (livingSituation !== '') {
+        livingWithQuestion.style.display = 'block';
+    }
+}
+function showFamilyIncomeQuestion() {
+    var livingWith = document.getElementById('living_with').value;
+    var familyIncomeQuestion = document.getElementById('family-income-question');
+    var expenseResponsibilityQuestion = document.getElementById('expense-responsibility-question');
+    familyIncomeQuestion.style.display = 'none';
+    expenseResponsibilityQuestion.style.display = 'none';
+    if (livingWith === 'con_la_mia_famiglia') {
+        familyIncomeQuestion.style.display = 'block';
+    } else if (livingWith === 'con_dei_coinquilini') {
+        document.getElementById('income-question').style.display = 'block';
+        expenseResponsibilityQuestion.style.display = 'block';
+        familyIncomeQuestion.style.display = 'block';
+    }
+}
+
+function handleExpenseResponsibilityChange() {
+    var expenseResponsibility = document.getElementById('expense_responsibility').value;
+    var familyIncomeQuestion = document.getElementById('family-income-question');
+    
+    // Nascondi la domanda sul reddito familiare di default
+    familyIncomeQuestion.style.display = 'none';
+    
+    // Mostra la domanda sul reddito familiare se le condizioni sono soddisfatte
+    if (expenseResponsibility === 'sostenuto' || expenseResponsibility === 'parzialmente_sostenuto') {
+        familyIncomeQuestion.style.display = 'block';
+    }
+}
+
+// Assicurati di collegare questa funzione all'evento 'change' del menu a tendina 'expense_responsibility'
+document.getElementById('expense_responsibility').addEventListener('change', handleExpenseResponsibilityChange);
+
+
+
+// Aggiungi listener agli elementi select
+document.getElementById('living_situation').addEventListener('change', showAdditionalQuestions);
+document.getElementById('living_with').addEventListener('change', showFamilyIncomeQuestion);
+document.getElementById('expense_responsibility').addEventListener('change', handleExpenseResponsibilityChange);
+
+document.getElementById('monthly_income').addEventListener('change', function() {
+    document.getElementById('expense-responsibility-question').style.display = 'block';
+});
+document.getElementById('living_with').addEventListener('change', function() {
+    document.getElementById('expense-responsibility-question').style.display = 'block';
+});
+showAdditionalQuestions();
+</script>
+<button onclick="window.location.href='sito.htm';">
+  &#x2190; Indietro
+</button>
+</form>
+</body>
+</html>
