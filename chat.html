@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attivazione ChatGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #343541;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .activation-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .activation-message {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .activation-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .activation-form input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .activation-form button {
+            padding: 10px 20px;
+            background-color: #10a37f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .activation-form button:hover {
+            background-color: #0d8c6d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">ChatGPT</div>
+    <div class="activation-container">
+        <div class="activation-message">
+            Hai ricevuto un voucher con un codice di attivazione per ChatGPT. 
+            Inseriscilo qui sotto per attivare il tuo abbonamento.
+        </div>
+        <form class="activation-form" onsubmit="return checkCode()">
+            <input type="text" id="activationCode" placeholder="Inserisci il codice di attivazione" required>
+            <button type="submit">Attiva abbonamento</button>
+        </form>
+    </div>
+
+    <script>
+        function checkCode() {
+            var code = document.getElementById('activationCode').value;
+            if (code === 'Pisticchio69') {
+                window.location.href = 'video_page.html';
+                return false;
+            }
+            alert('Codice non valido. Riprova.');
+            return false;
+        }
+    </script>
+</body>
+</html>
