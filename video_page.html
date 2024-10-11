@@ -12,31 +12,28 @@
             height: 100%;
             overflow: hidden;
         }
-        #videoPlayer {
+        #videoContainer {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-            background-size: cover;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <video id="videoPlayer" autoplay loop muted playsinline>
-        <source src="https://github.com/elisapontivi/elisapontivi.github.io/raw/refs/heads/main/EH!%20VOLEVI.mp4" type="video/mp4">
-        Il tuo browser non supporta il tag video.
-    </video>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var video = document.getElementById('videoPlayer');
-            video.muted = false;  // Abilita l'audio
-            video.play();         // Avvia la riproduzione
-        });
-    </script>
+    <div id="videoContainer">
+        <iframe
+            src="https://www.youtube.com/embed/d8M0cCQ8srA?autoplay=1&controls=0&showinfo=0&rel=0&loop=1&playlist=d8M0cCQ8srA"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
 </body>
 </html>
