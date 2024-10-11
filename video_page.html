@@ -11,6 +11,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            background-color: #000;
         }
         #videoContainer {
             position: fixed;
@@ -18,22 +19,60 @@
             left: 0;
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #playButton {
+            font-size: 24px;
+            padding: 20px 40px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div id="videoContainer">
+        <button id="playButton">Riproduci Video</button>
         <iframe
-            src="https://www.youtube.com/embed/d8M0cCQ8srA?autoplay=1&controls=0&showinfo=0&rel=0&loop=1&playlist=d8M0cCQ8srA"
+            id="videoFrame"
+            src="https://www.youtube.com/embed/d8M0cCQ8srA?enablejsapi=1&controls=0&showinfo=0&rel=0&loop=1&playlist=d8M0cCQ8srA"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
         </iframe>
     </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        var playButton = document.getElementById('playButton');
+        var videoFrame = document.getElementById('videoFrame');
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoFrame', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            playButton.addEventListener('click', function() {
+                videoFrame.style.display = 'block';
+                playButton.style.display = 'none';
+                player.playVideo();
+            });
+        }
+    </script>
 </body>
 </html>
