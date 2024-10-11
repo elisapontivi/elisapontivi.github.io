@@ -3,43 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Reindirizzamento a YouTube</title>
+    <title>Video</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
-        .message {
-            text-align: center;
-            padding: 20px;
+        #videoPlayer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background-size: cover;
         }
     </style>
 </head>
 <body>
-    <div class="message">
-        <h1>Reindirizzamento a YouTube</h1>
-        <p>Stai per essere reindirizzato allo Short su YouTube...</p>
-    </div>
+    <video id="videoPlayer" autoplay loop muted playsinline>
+        <source src="https://raw.githubusercontent.com/elisapontivi/elisapontivi.github.io/EH!%20VOLEVI.mp4" type="video/mp4">
+        Il tuo browser non supporta il tag video.
+    </video>
 
     <script>
-        // URL dello YouTube Short
-        var shortUrl = "https://github.com/elisapontivi/elisapontivi.github.io/blob/main/EH!%20VOLEVI.mp4";
-        
-        // Funzione per reindirizzare dopo un breve ritardo
-        function redirect() {
-            window.location.href = shortUrl;
-        }
-
-        // Reindirizza dopo 2 secondi
-        setTimeout(redirect, 2000);
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var video = document.getElementById('videoPlayer');
+            video.muted = false;  // Abilita l'audio
+            video.play();         // Avvia la riproduzione
+        });
     </script>
 </body>
 </html>
