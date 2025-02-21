@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donazione per l'Ambiente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c7c3e;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"], input[type="text"] {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .donation-summary {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-left: 4px solid #1e88e5;
+            border-radius: 4px;
+        }
+        .area-option {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .area-option.selected {
+            border-color: #2c7c3e;
+            background-color: #f0f7f0;
+        }
+        .area-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .area-header input {
+            margin-right: 10px;
+        }
+        .area-header label {
+            display: inline;
+            font-weight: bold;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .percentage-control {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+        }
+        .percentage-control input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .percentage-control input[type="number"] {
+            width: 60px;
+        }
+        .allocation-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+        .progress-bar-container {
+            margin-top: 10px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #4caf50;
+            transition: width 0.3s;
+        }
+        .likert-scale {
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+        }
+        .likert-item {
+            margin-bottom: 15px;
+        }
+        .likert-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            max-width: 500px;
+        }
+        .likert-option {
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .likert-option input {
+            margin-top: 5px;
+        }
+        .note {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #2c7c3e;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #2c7c3e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <h1>DONAZIONE PER L'AMBIENTE</h1>
+
+    <div class="form-section">
+        <p>Dei 15€ che hai ricevuto per la partecipazione all'esperimento, hai la possibilità di donare una parte o l'intero importo a progetti di tutela ambientale. Per ogni euro che deciderai di donare, i ricercatori aggiungeranno il 50% in più (ad esempio, se doni 10€, noi aggiungeremo 5€ per un totale di 15€).</p>
+
+        <form id="donationForm">
+            <div class="form-group">
+                <label for="donationAmount"><strong>Domanda 1:</strong> Quanto dei tuoi 15€ desideri donare a un'associazione che si occupa di tutela ambientale?</label>
+                <div>
+                    <input type="radio" id="donate" name="donationChoice" value="donate">
+                    <label for="donate" style="display: inline;">Desidero donare: </label>
+                    <input type="number" id="donationAmount" min="1" max="15" step="1" style="width: 60px;"> € (indica un valore da 1 a 15)
+                </div>
+                <div style="margin-top: 10px;">
+                    <input type="radio" id="noDonate" name="donationChoice" value="noDonate">
+                    <label for="noDonate" style="display: inline;">Non desidero donare</label>
+                </div>
+                
+                <div id="donationSummary" class="donation-summary" style="display: none;">
+                    <p><strong>Riepilogo donazione:</strong></p>
+                    <ul style="list-style-type: none; padding-left: 5px;">
+                        <li>Tua donazione: <span id="yourDonation">0</span> €</li>
+                        <li>Contributo aggiuntivo dei ricercatori (+50%): <span id="researcherContribution">0</span> €</li>
+                        <li>Donazione totale: <span id="totalDonation">0</span> €</li>
+                        <li>Ti restano: <span id="remainingAmount">15</span> € dei 15€ iniziali</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group" id="destinationSection" style="display: none;">
+                <label><strong>Domanda 2:</strong> A quali aree ambientali preferisci destinare la tua donazione?</label>
+                <p style="margin-bottom: 20px;">Seleziona le aree che desideri sostenere e indica quale percentuale della tua donazione vuoi destinare a ciascuna (il totale deve essere 100%).</p>
+                
+                <div class="area-option" id="areaOption1">
+                    <div class="area-header">
+                        <input type="checkbox" id="option1" class="area-checkbox">
+                        <label for="option1">Contrasto all'inquinamento da microplastiche nelle acque</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider1" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent1" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="area-option" id="areaOption2">
+                    <div class="area-header">
+                        <input type="checkbox" id="option2" class="area-checkbox">
+                        <label for="option2">Protezione della biodiversità e degli ecosistemi naturali</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider2" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent2" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="area-option" id="areaOption3">
+                    <div class="area-header">
+                        <input type="checkbox" id="option3" class="area-checkbox">
+                        <label for="option3">Lotta al cambiamento climatico</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider3" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent3" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="area-option" id="areaOption4">
+                    <div class="area-header">
+                        <input type="checkbox" id="option4" class="area-checkbox">
+                        <label for="option4">Gestione sostenibile dei rifiuti</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider4" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent4" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="area-option" id="areaOption5">
+                    <div class="area-header">
+                        <input type="checkbox" id="option5" class="area-checkbox">
+                        <label for="option5">Conservazione delle risorse naturali</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider5" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent5" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="area-option" id="areaOption6">
+                    <div class="area-header">
+                        <input type="checkbox" id="option6" class="area-checkbox">
+                        <label for="option6">Educazione e sensibilizzazione ambientale</label>
+                    </div>
+                    <div class="percentage-control" style="display: none;">
+                        <input type="range" id="slider6" min="0" max="100" value="0" step="5">
+                        <input type="number" id="percent6" min="0" max="100" value="0" step="5"> %
+                    </div>
+                </div>
+                
+                <div class="allocation-summary">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><strong>Totale allocato:</strong></span>
+                        <span id="percentageTotal" style="font-size: 18px; font-weight: bold;">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <p id="allocationMessage" style="margin-top: 10px; text-align: center;">Seleziona le aree ambientali e distribuisci il 100% della tua donazione</p>
+                </div>
+            </div>
+
+            <div class="form-group" id="microplasticsSection" style="display: none;">
+                <label><strong>Domanda 3:</strong> Per quanto riguarda il contrasto all'inquinamento da microplastiche nelle acque, indica quanto ritieni importante ciascuno dei seguenti aspetti:</label>
+                
+                <div class="likert-scale">
+                    <div class="likert-item">
+                        <div>Rimozione e filtrazione delle microplastiche già presenti nelle acque</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <div>Per nulla importante</div>
+                                <input type="radio" name="likert1" value="1">
+                                <label>1</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert1" value="2">
+                                <label>2</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert1" value="3">
+                                <label>3</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert1" value="4">
+                                <label>4</label>
+                            </div>
+                            <div class="likert-option">
+                                <div>Estremamente importante</div>
+                                <input type="radio" name="likert1" value="5">
+                                <label>5</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="likert-item">
+                        <div>Conversione delle microplastiche in risorse utili tramite biotecnologie</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <div>Per nulla importante</div>
+                                <input type="radio" name="likert2" value="1">
+                                <label>1</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert2" value="2">
+                                <label>2</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert2" value="3">
+                                <label>3</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert2" value="4">
+                                <label>4</label>
+                            </div>
+                            <div class="likert-option">
+                                <div>Estremamente importante</div>
+                                <input type="radio" name="likert2" value="5">
+                                <label>5</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="likert-item">
+                        <div>Ricerca sugli effetti delle microplastiche sull'ambiente e sulla salute</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <div>Per nulla importante</div>
+                                <input type="radio" name="likert3" value="1">
+                                <label>1</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert3" value="2">
+                                <label>2</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert3" value="3">
+                                <label>3</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert3" value="4">
+                                <label>4</label>
+                            </div>
+                            <div class="likert-option">
+                                <div>Estremamente importante</div>
+                                <input type="radio" name="likert3" value="5">
+                                <label>5</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="likert-item">
+                        <div>Prevenzione e riduzione dell'immissione di microplastiche nelle acque</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <div>Per nulla importante</div>
+                                <input type="radio" name="likert4" value="1">
+                                <label>1</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert4" value="2">
+                                <label>2</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert4" value="3">
+                                <label>3</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert4" value="4">
+                                <label>4</label>
+                            </div>
+                            <div class="likert-option">
+                                <div>Estremamente importante</div>
+                                <input type="radio" name="likert4" value="5">
+                                <label>5</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="likert-item">
+                        <div>Sviluppo di alternative alle plastiche che generano microplastiche</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <div>Per nulla importante</div>
+                                <input type="radio" name="likert5" value="1">
+                                <label>1</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert5" value="2">
+                                <label>2</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert5" value="3">
+                                <label>3</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="likert5" value="4">
+                                <label>4</label>
+                            </div>
+                            <div class="likert-option">
+                                <div>Estremamente importante</div>
+                                <input type="radio" name="likert5" value="5">
+                                <label>5</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <p><strong>Nota importante:</strong> Le donazioni raccolte saranno effettivamente devolute a organizzazioni che si occupano delle specifiche attività indicate. Al termine dell'esperimento riceverai informazione sulle associazioni beneficiarie delle donazioni.</p>
+            </div>
+
+            <button type="submit" style="margin-top: 20px;">Invia risposta</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementi del form
+            const donationForm = document.getElementById('donationForm');
+            const donationRadios = document.querySelectorAll('input[name="donationChoice"]');
+            const destinationSection = document.getElementById('destinationSection');
+            const microplasticsSection = document.getElementById('microplasticsSection');
+            const donationAmountInput = document.getElementById('donationAmount');
+            const donationSummary = document.getElementById('donationSummary');
+            const yourDonation = document.getElementById('yourDonation');
+            const researcherContribution = document.getElementById('researcherContribution');
+            const totalDonation = document.getElementById('totalDonation');
+            const remainingAmount = document.getElementById('remainingAmount');
+            const percentageTotal = document.getElementById('percentageTotal');
+            const progressBar = document.getElementById('progressBar');
+            const allocationMessage = document.getElementById('allocationMessage');
+            const areaCheckboxes = document.querySelectorAll('.area-checkbox');
+            
+            // Listener per la scelta di donare o meno
+            donationRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'donate') {
+                        destinationSection.style.display = 'block';
+                        donationSummary.style.display = 'block';
+                        updateDonationSummary();
+                    } else {
+                        destinationSection.style.display = 'none';
+                        microplasticsSection.style.display = 'none';
+                        donationSummary.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Aggiornamento del riepilogo della donazione
+            donationAmountInput.addEventListener('input', updateDonationSummary);
+            
+            function updateDonationSummary() {
+                const amount = parseFloat(donationAmountInput.value) || 0;
+                const contribution = amount * 0.5;
+                const remaining = 15 - amount;
+                
+                yourDonation.textContent = amount.toFixed(2);
+                researcherContribution.textContent = contribution.toFixed(2);
+                totalDonation.textContent = (amount + contribution).toFixed(2);
+                remainingAmount.textContent = remaining.toFixed(2);
+            }
+            
+            // Gestione delle aree e delle percentuali
+            areaCheckboxes.forEach((checkbox, index) => {
+                const areaNumber = index + 1;
+                const areaOption = document.getElementById(`areaOption${areaNumber}`);
+                const percentageControl = areaOption.querySelector('.percentage-control');
+                const slider = document.getElementById(`slider${areaNumber}`);
+                const percentInput = document.getElementById(`percent${areaNumber}`);
+                
+                // Quando si seleziona una casella, mostra i controlli percentuali
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        areaOption.classList.add('selected');
+                        percentageControl.style.display = 'flex';
+                        percentInput.value = "0";
+                        slider.value = "0";
+                        
+                        // Se è la prima opzione (microplastiche), mostra la sezione 3
+                        if (areaNumber === 1) {
+                            microplasticsSection.style.display = 'block';
+                        }
+                    } else {
+                        areaOption.classList.remove('selected');
+                        percentageControl.style.display = 'none';
+                        percentInput.value = "0";
+                        slider.value = "0";
+                        
+                        // Se è la prima opzione, nascondi la sezione 3
+                        if (areaNumber === 1) {
+                            microplasticsSection.style.display = 'none';
+                        }
+                    }
+                    updateTotal();
+                });
+                
+                // Collegamento tra slider e input numerico
+                slider.addEventListener('input', function() {
+                    percentInput.value = this.value;
+                    updateTotal();
+                });
+                
+                percentInput.addEventListener('input', function() {
+                    slider.value = this.value;
+                    updateTotal();
+                });
+            });
+            
+            // Aggiornamento del totale e della barra di avanzamento
+            function updateTotal() {
+                let total = 0;
+                
+                for (let i = 1; i <= 6; i++) {
+                    const percentInput = document.getElementById(`percent${i}`);
+                    const areaOption = document.getElementById(`areaOption${i}`);
+                    const isSelected = areaOption.classList.contains('selected');
+                    
+                    if (isSelected && percentInput.value) {
+                        total += parseInt(percentInput.value);
+                    }
+                }
+                
+                // Aggiornamento degli elementi visivi
+                percentageTotal.textContent = `${total}%`;
+                progressBar.style.width = `${total}%`;
+                
+                // Impostazione dei colori e del messaggio in base al totale
+                if (total === 100) {
+                    percentageTotal.style.color = '#4caf50';
+                    progressBar.style.backgroundColor = '#4caf50';
+                    allocationMessage.textContent = 'Perfetto! Hai allocato il 100% della tua donazione';
+                    allocationMessage.style.color = '#4caf50';
+                } else if (total > 100) {
+                    percentageTotal.style.color = '#f44336';
+                    progressBar.style.backgroundColor = '#f44336';
+                    allocationMessage.textContent = 'Attenzione: hai superato il 100%';
+                    allocationMessage.style.color = '#f44336';
+                } else {
+                    percentageTotal.style.color = '#ff9800';
+                    progressBar.style.backgroundColor = '#ff9800';
+                    allocationMessage.textContent = `Manca ancora il ${100-total}% da allocare`;
+                    allocationMessage.style.color = '#ff9800';
+                }
+            }
+            
+            // Gestione dell'invio del form
+            donationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Logica di validazione
+                let valid = true;
+                let donationChoice = '';
+                
+                donationRadios.forEach(radio => {
+                    if (radio.checked) {
+                        donationChoice = radio.value;
+                    }
+                });
+                
+                if (!donationChoice) {
+                    alert('Per favore, indica se desideri donare o meno.');
+                    valid = false;
+                    return;
+                }
+                
+                if (donationChoice === 'donate') {
+                    const donationAmount = donationAmountInput.value;
+                    if (!donationAmount || donationAmount < 1 || donationAmount > 15) {
+                        alert('Per favore, indica un importo valido da donare (da 1 a 15€).');
+                        valid = false;
+                        return;
+                    }
+                    
+                    // Verifica se almeno un'area è selezionata
+                    let oneChecked = false;
+                    areaCheckboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            oneChecked = true;
+                        }
+                    });
+                    
+                    if (!oneChecked) {
+                        alert('Per favore, seleziona almeno un\'area a cui destinare la tua donazione.');
+                        valid = false;
+                        return;
+                    }
+                    
+                    // Verifica se le percentuali sommano a 100
+                    let total = 0;
+                    for (let i = 1; i <= 6; i++) {
+                        const checkbox = document.getElementById(`option${i}`);
+                        const percentInput = document.getElementById(`percent${i}`);
+                        
+                        if (checkbox.checked && percentInput.value) {
+                            total += parseInt(percentInput.value);
+                        }
+                    }
+                    
+                    if (total !== 100) {
+                        alert('La somma delle percentuali deve essere 100%.');
+                        valid = false;
+                        return;
+                    }
+                }
+                
+                if (valid) {
+                    alert('Grazie per la tua partecipazione! La tua risposta è stata registrata.');
+                    // Qui normalmente invieresti i dati al server
+                }
+            });
+            
+            // Migliora l'interazione con le aree cliccabili
+            const areaOptions = document.querySelectorAll('.area-option');
+            areaOptions.forEach(area => {
+                area.addEventListener('click', function(e) {
+                    // Evita il click se stai già interagendo con gli input
+                    if (e.target.tagName === 'INPUT') return;
+                    
+                    const checkbox = this.querySelector('.area-checkbox');
+                    checkbox.checked = !checkbox.checked;
+                    
+                    // Attiva manualmente l'evento change
+                    const event = new Event('change');
+                    checkbox.dispatchEvent(event);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
