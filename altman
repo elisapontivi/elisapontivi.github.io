@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevedere la crisi</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #6c5ce7;
+            padding: 30px 20px;
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .header p {
+            margin-top: 0;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        #add-note-btn {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #add-note-btn:hover {
+            background-color: #5b4bc4;
+        }
+        
+        .board {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            background-color: #6c5ce7;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title .options {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .note {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        
+        .note:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .note .title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .note .content {
+            font-size: 14px;
+            color: #555;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .note img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .note .actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .note:hover .actions {
+            opacity: A1;
+        }
+        
+        .note .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .modal-content h2 {
+            margin-top: 0;
+            color: #6c5ce7;
+        }
+        
+        .modal-content input, 
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .modal-content textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .modal-content button {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        
+        .modal-content .cancel-btn {
+            background-color: #9e9e9e;
+            margin-right: 10px;
+        }
+        
+        .file-input {
+            margin-bottom: 15px;
+        }
+        
+        .creator-info {
+            font-size: 12px;
+            color: #9e9e9e;
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .note-link {
+            display: block;
+            margin-top: 15px;
+            color: #6c5ce7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .note-link:hover {
+            text-decoration: underline;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .attribution {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Altman Z score </h1>
+    </div>
+    
+        
+         <!-- SEZIONE: Slide -->
+        <div class="section">
+            <div class="section-title">
+                Slide
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Articolo originale di Altman (1968)</div>
+                    <div class="content">
+                        <p>L'articolo originale "Financial Ratios, Discriminant Analysis and the Prediction of Corporate Bankruptcy" pubblicato sul Journal of Finance.</p>
+                        <a href="documenti/altman_original_paper_1968.pdf" download class="note-link">📄 Scarica l'articolo originale (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Workshop applicazioni pratiche Z-score</div>
+                    <div class="content">
+                        <p>Materiale formativo utilizzato durante i workshop sulla previsione delle crisi aziendali tramite il modello Z-score.</p>
+                        <a href="documenti/workshop_applicazione_zscore.pdf" download class="note-link">📄 Scarica le slides (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEZIONE: Articoli modelli Z-score -->
+        <div class="section">
+            <div class="section-title">
+                Articoli modelli Z-score
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Articolo originale di Altman (1968)</div>
+                    <div class="content">
+                        <p>L'articolo originale "Financial Ratios, Discriminant Analysis and the Prediction of Corporate Bankruptcy" pubblicato sul Journal of Finance.</p>
+                        <a href="documenti/altman_original_paper_1968.pdf" download class="note-link">📄 Scarica l'articolo originale (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Z-score per il mercato italiano</div>
+                    <div class="content">
+                        <p>Adattamento del modello Z-score al contesto italiano con coefficienti ricalibrati per le PMI italiane.</p>
+                        <a href="documenti/zscore_mercato_italiano.pdf" download class="note-link">📄 Scarica l'articolo (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Evoluzione dello Z-score: Z'-score e Z"-score</div>
+                    <div class="content">
+                        <p>Articolo che analizza l'evoluzione del modello originale con le versioni Z'-score (adattato per le aziende private) e Z"-score (per le aziende non manifatturiere e i mercati emergenti).</p>
+                        <a href="documenti/evoluzione_zscore.pdf" download class="note-link">📄 Scarica l'articolo (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEZIONE: Dati utilizzati nella presentazione -->
+        <div class="section">
+            <div class="section-title">
+                Dati utilizzati nella presentazione
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Dataset aziende analizzate</div>
+                    <div class="content">
+                        <p>Dataset completo delle aziende utilizzate nell'analisi con tutti i relativi indicatori finanziari e calcolo dello Z-score.</p>
+                        <a href="documenti/dataset_aziende_zscore.xlsx" download class="note-link">📊 Scarica il dataset (Excel) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Serie storica fallimenti aziendali 2010-2024</div>
+                    <div class="content">
+                        <p>Dati storici sui fallimenti aziendali in Italia e correlazione con lo Z-score predittivo calcolato ex-ante.</p>
+                        <a href="documenti/serie_storica_fallimenti.csv" download class="note-link">📊 Scarica i dati (CSV) →</a>
+                        <a href="documenti/analisi_predittiva_fallimenti.pdf" download class="note-link">📄 Nota metodologica (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Dati settoriali per industria</div>
+                    <div class="content">
+                        <p>Valori medi dello Z-score suddivisi per settore industriale con analisi comparative e soglie di rischio settoriali.</p>
+                        <a href="documenti/zscore_analisi_settoriale.xlsx" download class="note-link">📊 Scarica l'analisi settoriale (Excel) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEZIONE: Articoli applicazione modello Z score -->
+        <div class="section">
+            <div class="section-title">
+                Articoli applicazione modello Z score
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Applicazione del modello Z-score alle PMI</div>
+                    <div class="content">
+                        <p>Articolo che analizza l'efficacia del modello Z-score applicato alle piccole e medie imprese con adattamenti specifici per il contesto delle PMI.</p>
+                        <a href="documenti/zscore_applicazione_pmi.pdf" download class="note-link">📄 Scarica l'articolo (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Z-score e sistemi bancari di rating</div>
+                    <div class="content">
+                        <p>Studio comparativo tra il modello Z-score e i moderni sistemi di rating utilizzati dalle banche per la valutazione del rischio di credito.</p>
+                        <a href="documenti/zscore_vs_rating_bancari.pdf" download class="note-link">📄 Scarica lo studio (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Z-score e indicatori ESG: correlazioni</div>
+                    <div class="content">
+                        <p>Ricerca innovativa che esplora le correlazioni tra i punteggi Z-score tradizionali e i moderni indicatori ESG (Environmental, Social, Governance).</p>
+                        <a href="documenti/zscore_esg_correlazioni.pdf" download class="note-link">📄 Scarica la ricerca (PDF) →</a>
+                        <a href="documenti/dataset_zscore_esg.xlsx" download class="note-link">📊 Dataset utilizzato (Excel) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEZIONE: Statistica -->
+        <div class="section">
+            <div class="section-title">
+                Statistica
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Analisi statistica dell'affidabilità del modello Z-score</div>
+                    <div class="content">
+                        <p>Studio statistico sull'accuratezza predittiva del modello Z-score con test di significatività, analisi degli errori di Tipo I e Tipo II, e valutazione dell'area sotto la curva ROC.</p>
+                        <a href="documenti/analisi_statistica_zscore.pdf" download class="note-link">📄 Scarica l'analisi (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Test statistici di robustezza</div>
+                    <div class="content">
+                        <p>Analisi della robustezza del modello Z-score a fronte di variazioni nei dati di input, inclusi test di sensibilità e specificità in vari scenari economici.</p>
+                        <a href="documenti/test_robustezza_zscore.pdf" download class="note-link">📄 Scarica il report (PDF) →</a>
+                        <a href="documenti/codice_r_analisi_zscore.zip" download class="note-link">💻 Script di analisi in R (ZIP) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Confronto statistico tra modelli predittivi</div>
+                    <div class="content">
+                        <p>Analisi comparativa dell'accuratezza predittiva tra il modello Z-score di Altman e altri modelli di previsione delle crisi aziendali (Ohlson O-score, Zmijewski, modelli basati su Machine Learning).</p>
+                        <a href="documenti/confronto_modelli_predittivi.pdf" download class="note-link">📄 Scarica lo studio comparativo (PDF) →</a>
+                        <a href="documenti/dashboard_confronto_modelli.xlsx" download class="note-link">📊 Dashboard interattiva (Excel) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEZIONE: Omega score -->
+        <div class="section">
+            <div class="section-title">
+                Omega score
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <div class="note">
+                    <div class="title">Introduzione all'Omega score</div>
+                    <div class="content">
+                        <p>Presentazione del modello Omega score, un'evoluzione del tradizionale Z-score che incorpora indicatori di sostenibilità, governance e fattori di rischio sistemico.</p>
+                        <a href="documenti/introduzione_omega_score.pdf" download class="note-link">📄 Scarica l'introduzione (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Metodologia di calcolo dell'Omega score</div>
+                    <div class="content">
+                        <p>Guida dettagliata alla metodologia di calcolo dell'Omega score con spiegazione delle variabili incluse e dei coefficienti utilizzati.</p>
+                        <a href="documenti/metodologia_omega_score.pdf" download class="note-link">📄 Scarica la metodologia (PDF) →</a>
+                        <a href="documenti/calcolatore_omega_score.xlsx" download class="note-link">📊 Foglio di calcolo (Excel) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <div class="title">Casi studio: Applicazione dell'Omega score</div>
+                    <div class="content">
+                        <p>Raccolta di casi studio sull'applicazione pratica dell'Omega score a diverse tipologie di aziende e settori, con analisi dei risultati ottenuti.</p>
+                        <a href="documenti/casi_studio_omega_score.pdf" download class="note-link">📄 Scarica i casi studio (PDF) →</a>
+                    </div>
+                    <div class="creator-info">Aggiunto il: 18/03/2025</div>
+                    <div class="actions">
+                        <button class="delete-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenuto basato sul Padlet originale -->
+        <div class="note">
+            <div class="title">Introduzione alla previsione delle crisi</div>
+            <div class="content">
+                La previsione delle crisi aziendali è diventata una competenza fondamentale nel contesto economico moderno. Comprendere i segnali precoci di difficoltà può fare la differenza tra il superamento di un momento difficile e il fallimento aziendale.
+                <p><strong>Documenti di approfondimento:</strong></p>
+                <a href="documenti/introduzione_crisi_aziendale.pdf" download class="note-link">📄 Scarica presentazione introduttiva (PDF) →</a>
+                <a href="documenti/bibliografia_previsione_crisi.docx" download class="note-link">📝 Bibliografia consigliata (Word) →</a>
+            </div>
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Indicatori di allerta precoce</div>
+            <div class="content">
+                <p>Gli indicatori più comuni che possono segnalare l'avvicinarsi di una crisi aziendale:</p>
+                <ul>
+                    <li>Calo progressivo dei margini operativi</li>
+                    <li>Aumento dell'indebitamento</li>
+                    <li>Riduzione della liquidità</li>
+                    <li>Perdita di clienti strategici</li>
+                    <li>Turnover elevato del personale</li>
+                </ul>
+                <p>Monitorare questi parametri regolarmente permette di intervenire tempestivamente.</p>
+                <p><strong>Strumenti di monitoraggio:</strong></p>
+                <a href="documenti/dashboard_indicatori_allerta.xlsx" download class="note-link">📊 Dashboard di monitoraggio (Excel) →</a>
+                <a href="documenti/indicatori_allerta_CNDCEC.pdf" download class="note-link">📄 Linee guida CNDCEC (PDF) →</a>
+                <a href="documenti/modello_kpi_finanziari.xlsx" download class="note-link">📊 Modello KPI finanziari (Excel) →</a>
+            </div>
+            <img src="/api/placeholder/400/250" alt="Grafico indicatori di crisi">
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Il modello Z-Score di Altman</div>
+            <div class="content">
+                <p>Il modello Z-Score, sviluppato da Edward Altman nel 1968, è ancora oggi uno degli strumenti più utilizzati per prevedere la probabilità di fallimento di un'azienda. Si basa su una formula che combina cinque indici di bilancio:</p>
+                <p>Z = 1.2X₁ + 1.4X₂ + 3.3X₃ + 0.6X₄ + 1.0X₅</p>
+                <p>Dove:</p>
+                <ul>
+                    <li>X₁ = Capitale circolante / Totale attività</li>
+                    <li>X₂ = Utili non distribuiti / Totale attività</li>
+                    <li>X₃ = EBIT / Totale attività</li>
+                    <li>X₄ = Valore di mercato del capitale / Debiti totali</li>
+                    <li>X₅ = Vendite / Totale attività</li>
+                </ul>
+                <p>Se Z < 1.81, l'azienda è in zona di pericolo.</p>
+                <p><strong>Strumenti di calcolo:</strong></p>
+                <a href="documenti/zscore_calculator.xlsx" download class="note-link">📊 Foglio di calcolo Z-Score (Excel) →</a>
+                <a href="documenti/altman_original_paper.pdf" download class="note-link">📄 Paper originale di Altman (PDF) →</a>
+            </div>
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Codice della crisi d'impresa</div>
+            <div class="content">
+                <p>Il Codice della Crisi d'Impresa e dell'Insolvenza (D.Lgs. 14/2019) ha introdotto in Italia nuovi strumenti per la prevenzione e la gestione della crisi aziendale.</p>
+                <p>Punti fondamentali:</p>
+                <ul>
+                    <li>Obbligo di adottare assetti organizzativi adeguati</li>
+                    <li>Monitoraggio continuo dell'equilibrio economico-finanziario</li>
+                    <li>Procedure di allerta per l'emersione tempestiva della crisi</li>
+                    <li>Ruolo attivo degli organi di controllo</li>
+                </ul>
+                <p><strong>Documentazione normativa:</strong></p>
+                <a href="documenti/codice_crisi_dlgs_14_2019.pdf" download class="note-link">📄 Testo completo D.Lgs. 14/2019 (PDF) →</a>
+                <a href="documenti/guida_pratica_codice_crisi.pdf" download class="note-link">📄 Guida pratica al Codice (PDF) →</a>
+                <a href="documenti/checklist_adeguamenti.docx" download class="note-link">📝 Checklist adeguamenti aziendali (Word) →</a>
+            </div>
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Risk management preventivo</div>
+            <div class="content">
+                <p>Il risk management preventivo è una strategia essenziale per anticipare e mitigare le crisi aziendali:</p>
+                <ol>
+                    <li>Identificazione sistematica dei rischi potenziali</li>
+                    <li>Analisi e valutazione dell'impatto di ciascun rischio</li>
+                    <li>Sviluppo di strategie di mitigazione</li>
+                    <li>Monitoraggio continuo</li>
+                    <li>Creazione di piani di contingenza</li>
+                </ol>
+                <p>Un approccio proattivo al rischio può prevenire molte situazioni di crisi prima che si manifestino completamente.</p>
+                <p><strong>Strumenti e modelli:</strong></p>
+                <a href="documenti/matrice_rischi_template.xlsx" download class="note-link">📊 Template matrice dei rischi (Excel) →</a>
+                <a href="documenti/risk_assessment_questionnaire.docx" download class="note-link">📝 Questionario valutazione rischi (Word) →</a>
+                <a href="documenti/piano_contingenza_esempio.pptx" download class="note-link">📊 Esempio piano di contingenza (PowerPoint) →</a>
+            </div>
+            <img src="/api/placeholder/400/220" alt="Schema di risk management">
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Resilienza organizzativa</div>
+            <div class="content">
+                <p>La resilienza organizzativa è la capacità di un'azienda di adattarsi e prosperare nonostante i cambiamenti e le sfide. Le organizzazioni resilienti:</p>
+                <ul>
+                    <li>Creano una cultura che accetta il cambiamento</li>
+                    <li>Sviluppano processi flessibili</li>
+                    <li>Mantengono riserve adeguate (finanziarie e non)</li>
+                    <li>Diversificano le fonti di reddito</li>
+                    <li>Investono nella formazione e nello sviluppo dei dipendenti</li>
+                </ul>
+                <p>Costruire la resilienza prima di una crisi è molto più efficace che cercare di svilupparla durante l'emergenza.</p>
+                <p><strong>Materiali sulla resilienza organizzativa:</strong></p>
+                <a href="documenti/valutazione_resilienza_aziendale.pdf" download class="note-link">📄 Tool di valutazione resilienza (PDF) →</a>
+                <a href="documenti/webinar_resilienza_organizzativa.mp4" download class="note-link">🎬 Registrazione webinar (MP4) →</a>
+                <a href="documenti/esercizi_team_building_resilienza.pdf" download class="note-link">📄 Esercizi di team building (PDF) →</a>
+            </div>
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Digital transformation come strategia anti-crisi</div>
+            <div class="content">
+                <p>La trasformazione digitale può essere un potente strumento di prevenzione delle crisi:</p>
+                <ul>
+                    <li>Migliora la visibilità sui dati aziendali in tempo reale</li>
+                    <li>Aumenta l'efficienza operativa</li>
+                    <li>Facilita l'adattamento rapido alle mutevoli condizioni di mercato</li>
+                    <li>Crea nuovi canali di revenue</li>
+                    <li>Riduce i costi operativi</li>
+                </ul>
+                <p>Le aziende che hanno investito nella digitalizzazione hanno dimostrato maggiore resilienza durante le recenti crisi globali.</p>
+                <p><strong>Risorse per la trasformazione digitale:</strong></p>
+                <a href="documenti/roadmap_digitale_PMI.pdf" download class="note-link">📄 Roadmap di trasformazione digitale per PMI (PDF) →</a>
+                <a href="documenti/strumenti_digital_analytics.zip" download class="note-link">🗂️ Kit strumenti di digital analytics (ZIP) →</a>
+                <a href="documenti/casi_studio_digital_transformation.pdf" download class="note-link">📄 Casi studio di successo (PDF) →</a>
+            </div>
+            <img src="/api/placeholder/400/200" alt="Digital transformation">
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+        
+        <div class="note">
+            <div class="title">Case study: Previsione e gestione della crisi in Fiat/FCA</div>
+            <div class="content">
+                <p>Un esempio interessante di come un'azienda storica italiana ha affrontato e superato momenti di profonda crisi:</p>
+                <ul>
+                    <li>Riconoscimento tempestivo delle difficoltà strutturali</li>
+                    <li>Cambiamento del management e della governance</li>
+                    <li>Ripensamento strategico del posizionamento</li>
+                    <li>Alleanze e fusioni internazionali (Chrysler)</li>
+                    <li>Focalizzazione su segmenti ad alto margine</li>
+                </ul>
+                <p>La trasformazione di Fiat in FCA e poi in Stellantis dimostra come anche una crisi profonda possa essere superata con le giuste strategie.</p>
+                <p><strong>Approfondimenti sul caso Fiat/FCA:</strong></p>
+                <a href="documenti/case_study_completo_fiat_fca.pdf" download class="note-link">📄 Case study completo (PDF) →</a>
+                <a href="documenti/intervista_marchionne_2015.mp3" download class="note-link">🔊 Intervista audio a Marchionne (MP3) →</a>
+                <a href="documenti/dati_finanziari_fiat_fca_2000_2020.xlsx" download class="note-link">📊 Serie storica dati finanziari 2000-2020 (Excel) →</a>
+            </div>
+            <div class="creator-info">Aggiunto il: 18/03/2025</div>
+            <div class="actions">
+                <button class="delete-btn">×</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="note-modal">
+        <div class="modal-content">
+            <h2>Aggiungi Nuova Nota</h2>
+            <form id="note-form">
+                <label for="note-title">Titolo:</label>
+                <input type="text" id="note-title" required>
+                
+                <label for="note-content">Contenuto:</label>
+                <textarea id="note-content" required></textarea>
+                
+                <label for="note-image">Immagine (opzionale):</label>
+                <input type="file" id="note-image" class="file-input" accept="image/*">
+                
+                <div>
+                    <button type="button" class="cancel-btn" id="cancel-btn">Annulla</button>
+                    <button type="submit">Salva Nota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="attribution">
+        Clone di Padlet - Prevedere la crisi © 2025
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addNoteBtn = document.getElementById('add-note-btn');
+            const modal = document.getElementById('note-modal');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const noteForm = document.getElementById('note-form');
+            const board = document.getElementById('board');
+            
+            // Aggiunge il campo per selezionare la sezione
+            const formHTML = `
+                <label for="note-section">Sezione:</label>
+                <select id="note-section" required>
+                    <option value="">Seleziona una sezione</option>
+                    <option value="Slides">Slides (cliccare sul link in descrizione)</option>
+                    <option value="Articoli Z-score">Articoli modelli Z-score</option>
+                    <option value="Dati">Dati utilizzati nella presentazione</option>
+                    <option value="Articoli applicazione">Articoli applicazione modello Z score</option>
+                    <option value="Statistica">Statistica</option>
+                    <option value="Omega">Omega score</option>
+                </select>
+            `;
+            
+            // Inserisce il campo prima del titolo
+            const titleLabel = document.querySelector('label[for="note-title"]');
+            titleLabel.insertAdjacentHTML('beforebegin', formHTML);
+            
+            // Mostra il modal quando si clicca su "Aggiungi Nota"
+            addNoteBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
+            
+            // Nascondi il modal quando si clicca su "Annulla"
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                noteForm.reset();
+            });
+            
+            // Gestisci l'invio del form
+            noteForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('note-title').value;
+                const content = document.getElementById('note-content').
+                
+                // Chiudi il modal e resetta il form
+                modal.style.display = 'none';
+                noteForm.reset();
+            });
+            
+            // Aggiungi funzionalità per eliminare le note predefinite
+            document.querySelectorAll('.delete-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    this.closest('.note').remove();
+                });
+            });
+            
+            // Chiudi il modal se si clicca all'esterno
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    noteForm.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
