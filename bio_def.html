@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esperimento Economico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+        }
+        .welcome {
+            background-color: #e8f4fc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .instructions {
+            margin-bottom: 20px;
+        }
+        .question {
+            display: none;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .task {
+            display: block;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .game-container {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+        }
+        .sequence-game {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+        }
+        .sequence-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 20px 0;
+            height: 60px;
+            text-align: center;
+        }
+        .sequence-input {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .sequence-input input {
+            font-size: 24px;
+            padding: 10px;
+            text-align: center;
+            width: 60%;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+        }
+        .difficulty-selector {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .difficulty-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .difficulty-btn:hover {
+            background-color: #d5dbdb;
+        }
+        .difficulty-btn.selected {
+            background-color: #3498db;
+            border-color: #2980b9;
+            color: white;
+        }
+        .dotation-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .option-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        .option {
+            flex: 1;
+            margin: 0 10px;
+            padding: 20px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .option.selected {
+            background-color: #d4edda;
+            border-color: #28a745;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .package-badge {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .result-box {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        .earnings-box {
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #17a2b8;
+            font-weight: bold;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .final {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #d4edda;
+            border-radius: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .timer {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .eco-badge {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .attempts-counter {
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <div class="welcome">
+            <h1>Esperimento Economico</h1>
+            <p>Grazie per la tua partecipazione!</p>
+            <p>Parteciperai a una task di memoria numerica.</p>
+            <p>Importante: <span class="eco-badge">Eco-friendly</span> Tutti i partecipanti riceveranno una penna in bioplastica come parte della dotazione iniziale.</p>
+        </div>
+
+        <div class="instructions">
+            <h2>Istruzioni</h2>
+            <p>Ecco come funziona la task di memoria numerica:</p>
+            <ol>
+                <li>Ti verrà mostrata una sequenza di numeri per alcuni secondi</li>
+                <li>La sequenza scomparirà e dovrai digitarla correttamente</li>
+                <li>Hai 3 tentativi in totale</li>
+                <li>Puoi scegliere tra tre livelli di difficoltà:
+                    <ul>
+                        <li><strong>Facile:</strong> 5 cifre (guadagno: 0,40€ per ogni risposta corretta)</li>
+                        <li><strong>Medio:</strong> 7 cifre (guadagno: 0,60€ per ogni risposta corretta)</li>
+                        <li><strong>Difficile:</strong> 9 cifre (guadagno: 0,80€ per ogni risposta corretta)</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>Dopo questa task, procederai a una seconda fase dell'esperimento in cui dovrai prendere alcune decisioni.</p>
+            <button id="start-game-button">Inizia la Task</button>
+        </div>
+
+        <div id="game-container" class="task" style="display: none;">
+            <h2>Task di Memoria Numerica</h2>
+            <div class="attempts-counter" id="attempts-counter">Tentativi rimanenti: 3</div>
+            
+            <div class="difficulty-selector">
+                <div class="difficulty-btn" id="easy-btn" onclick="selectDifficulty('easy')">Facile (5 cifre)</div>
+                <div class="difficulty-btn" id="medium-btn" onclick="selectDifficulty('medium')">Medio (7 cifre)</div>
+                <div class="difficulty-btn" id="hard-btn" onclick="selectDifficulty('hard')">Difficile (9 cifre)</div>
+            </div>
+            
+            <div class="game-container">
+                <div class="sequence-game">
+                    <div class="sequence-display" id="sequence-display"></div>
+                    <div class="sequence-input" id="sequence-input" style="display: none;">
+                        <input type="text" id="user-input" placeholder="Digita la sequenza qui">
+                    </div>
+                    <button id="submit-sequence" style="display: none;">Invia Risposta</button>
+                    <button id="next-sequence" style="display: none;">Prossima Sequenza</button>
+                </div>
+            </div>
+            
+            <div class="earnings-box" style="display: none;" id="game-earnings">
+                <p>Task completata!</p>
+                <h3>Risposte corrette: <span id="correct-count">0</span>/3</h3>
+                <h3>Guadagno dalla task: <span id="game-earnings-value">0,00</span>€</h3>
+            </div>
+            
+            <button id="continue-after-game" style="display: none;">Continua</button>
+        </div>
+        
+        <div id="game-results" class="task" style="display: none;">
+            <h2>Risultati della Task</h2>
+            <div class="earnings-box">
+                <p>La tua dotazione monetaria è:</p>
+                <h3>3,00€ (base) + <span id="memory-earnings">0,00</span>€ (task) = <span id="total-earnings">3,00</span>€</h3>
+                <p>+ 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+            </div>
+            
+            <p>Ora procederai alla seconda fase dell'esperimento, dove dovrai prendere alcune decisioni.</p>
+            <button id="start-experiment-button">Continua</button>
+        </div>
+
+        <div id="experiment-instructions" class="instructions" style="display: none;">
+            <h2>Fase 2</h2>
+            <div id="wta-instructions" style="display: none;">
+                <p>In questa fase ti verranno presentate alcune situazioni di scelta.</p>
+                <p>Come parte dell'esperimento, alla tua dotazione monetaria di <span id="wta-earnings"></span>€ è stata aggiunta <strong>1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                <p>In ogni situazione, dovrai scegliere tra mantenere questa dotazione o optare per un pacchetto alternativo che include una penna in plastica e un importo monetario diverso.</p>
+                <p>Una delle tue scelte sarà selezionata casualmente e implementata realmente, quindi valuta attentamente ogni decisione.</p>
+            </div>
+            <div id="wtp-instructions" style="display: none;">
+                <p>In questa fase ti verranno presentate alcune situazioni di scelta.</p>
+                <p>Come parte dell'esperimento, alla tua dotazione monetaria di <span id="wtp-earnings"></span>€ è stata aggiunta <strong>1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                <p>In ogni situazione, dovrai scegliere tra mantenere questa dotazione o optare per un pacchetto alternativo che include una penna in plastica e un importo monetario diverso.</p>
+                <p>Una delle tue scelte sarà selezionata casualmente e implementata realmente, quindi valuta attentamente ogni decisione.</p>
+            </div>
+            <button id="start-experiment-choices-button">Inizia le Scelte</button>
+        </div>
+
+        <!-- Per la versione WTA (bioplastica -> plastica) -->
+        <div id="wta-container" style="display: none;">
+            <!-- Domanda iniziale WTA -->
+            <div id="wta-question-0" class="question">
+                <div class="dotation-box">
+                    <h3>Situazione di scelta</h3>
+                    <p>Ti è stata assegnata una dotazione iniziale composta da <strong><span class="wta-monetary-value">0,00</span>€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                    <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                </div>
+                
+                <div class="option-container">
+                    <div class="option" id="wta-option-0-A">
+                        <div class="package-badge">Pacchetto A</div>
+                        <div class="option-title">Dotazione iniziale</div>
+                        <p><span class="wta-monetary-value">0,00</span>€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                    </div>
+                    
+                    <div class="option" id="wta-option-0-B">
+                        <div class="package-badge">Pacchetto B</div>
+                        <div class="option-title">Alternativa</div>
+                        <p><span class="wta-monetary-value">0,00</span>€ + 1 penna in plastica</p>
+                    </div>
+                </div>
+                
+                <div class="result-box" id="wta-result-0">
+                    Hai scelto: <span id="wta-result-text-0"></span>
+                </div>
+                
+                <button id="wta-next-0" disabled>Continua</button>
+            </div>
+
+            <!-- Domanda WTA 1 -->
+            <div id="wta-question-1" class="question">
+                <div class="dotation-box">
+                    <h3>Situazione di scelta</h3>
+                    <p>Ti è stata assegnata una dotazione iniziale composta da <strong><span class="wta-monetary-value">0,00</span>€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                    <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                </div>
+                
+                <div class="option-container">
+                    <div class="option" id="wta-option-1-A">
+                        <div class="package-badge">Pacchetto A</div>
+                        <div class="option-title">Dotazione iniziale</div>
+                        <p><span class="wta-monetary-value">0,00</span>€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                    </div>
+                    
+                    <div class="option" id="wta-option-1-B">
+                        <div class="package-badge">Pacchetto B</div>
+                        <div class="option-title">Alternativa</div>
+                        <p><span class="wta-monetary-value-plus-01">0,00</span>€ + 1 penna in plastica</p>
+                    </div>
+                </div>
+                
+                <div class="result-box" id="wta-result-1">
+                    Hai scelto: <span id="wta-result-text-1"></span>
+                </div>
+                
+                <button id="wta-next-1" disabled>Continua</button>
+            </div>
+
+            <!-- Le altre domande WTA (2-10) saranno generate dinamicamente -->
+        </div>
+
+        <!-- Per la versione WTP (bioplastica -> plastica con soldi extra) -->
+        <div id="wtp-container" style="display: none;">
+            <!-- Domanda iniziale WTP -->
+            <div id="wtp-question-0" class="question">
+                <div class="dotation-box">
+                    <h3>Situazione di scelta</h3>
+                    <p>Ti è stata assegnata una dotazione iniziale composta da <strong><span class="wtp-monetary-value">0,00</span>€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                    <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                </div>
+                
+                <div class="option-container">
+                    <div class="option" id="wtp-option-0-A">
+                        <div class="package-badge">Pacchetto A</div>
+                        <div class="option-title">Dotazione iniziale</div>
+                        <p><span class="wtp-monetary-value">0,00</span>€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                    </div>
+                    
+                    <div class="option" id="wtp-option-0-B">
+                        <div class="package-badge">Pacchetto B</div>
+                        <div class="option-title">Alternativa</div>
+                        <p><span class="wtp-monetary-value">0,00</span>€ + 1 penna in plastica</p>
+                    </div>
+                </div>
+                
+                <div class="result-box" id="wtp-result-0">
+                    Hai scelto: <span id="wtp-result-text-0"></span>
+                </div>
+                
+                <button id="wtp-next-0" disabled>Continua</button>
+            </div>
+
+            <!-- Domanda WTP 1 -->
+            <div id="wtp-question-1" class="question">
+                <div class="dotation-box">
+                    <h3>Situazione di scelta</h3>
+                    <p>Ti è stata assegnata una dotazione iniziale composta da <strong><span class="wtp-monetary-value">0,00</span>€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                    <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                </div>
+                
+                <div class="option-container">
+                    <div class="option" id="wtp-option-1-A">
+                        <div class="package-badge">Pacchetto A</div>
+                        <div class="option-title">Dotazione iniziale</div>
+                        <p><span class="wtp-monetary-value">0,00</span>€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                    </div>
+                    
+                    <div class="option" id="wtp-option-1-B">
+                        <div class="package-badge">Pacchetto B</div>
+                        <div class="option-title">Alternativa</div>
+                        <p><span class="wtp-monetary-value-plus-01">0,00</span>€ + 1 penna in plastica</p>
+                    </div>
+                </div>
+                
+                <div class="result-box" id="wtp-result-1">
+                    Hai scelto: <span id="wtp-result-text-1"></span>
+                </div>
+                
+                <button id="wtp-next-1" disabled>Continua</button>
+            </div>
+
+            <!-- Le altre domande WTP (2-10) saranno generate dinamicamente -->
+        </div>
+
+        <!-- Domanda finale comune a entrambi gli esperimenti -->
+        <div id="question-final" class="question">
+            <h3>Domanda finale</h3>
+            <p>Secondo te, qual è la differenza di prezzo tra una penna in bioplastica e una penna in plastica?</p>
+            <p>Stima (in euro): <input type="number" id="price-diff" step="0.01" min="0"></p>
+            <button id="finish-button">Termina l'esperimento</button>
+        </div>
+
+        <div id="final" class="final">
+            <h2>Grazie per aver completato l'esperimento!</h2>
+            <p>Le tue risposte sono state registrate.</p>
+            <p>La tua dotazione finale sarà di <span id="final-earnings">0,00</span>€ più la penna selezionata.</p>
+            <p>Un supervisore ti fornirà le tue vincite.</p>
+        </div>
+    </div>
+
+    <script>
+        // Variabili per memorizzare le risposte
+        let answers = {};
+        let taskEarnings = 0.00;
+        let baseEarnings = 3.00;
+        let totalEarnings = 0.00;
+        let experimentType = "";
+        
+        // Variabili per la task di memoria
+        let currentDifficulty = "";
+        let currentSequence = "";
+        let attemptsLeft = 3; // 3 task
+        let correctAnswers = 0;
+        let earnings = {
+            easy: 0.40,    // Più facile, meno guadagno
+            medium: 0.60,  // Difficoltà media, guadagno medio
+            hard: 0.80     // Più difficile, più guadagno
+        };
+        let sequenceLengths = {
+            easy: 5,
+            medium: 7,
+            hard: 9
+        };
+        let showTime = {
+            easy: 5000,  // 5 secondi
+            medium: 7000, // 7 secondi
+            hard: 9000   // 9 secondi
+        };
+        
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            // Task iniziale
+            document.getElementById('start-game-button').addEventListener('click', startTask);
+            document.getElementById('submit-sequence').addEventListener('click', checkSequence);
+            document.getElementById('next-sequence').addEventListener('click', nextSequence);
+            document.getElementById('continue-after-game').addEventListener('click', showGameResults);
+            
+            // User input field - enter key and prevent paste
+            const inputField = document.getElementById('user-input');
+            if (inputField) {
+                // Prevenire il copia-incolla
+                inputField.addEventListener('paste', function(event) {
+                    event.preventDefault();
+                    alert("Non è permesso copiare e incollare. Devi digitare la sequenza a memoria.");
+                });
+                
+                // Prevenire anche il drag & drop
+                inputField.addEventListener('drop', function(event) {
+                    event.preventDefault();
+                });
+                
+                // Enter key per inviare
+                inputField.addEventListener('keyup', function(event) {
+                    if (event.key === 'Enter') {
+                        checkSequence();
+                    }
+                });
+            }
+            
+            // Continua all'esperimento dopo la task
+            document.getElementById('start-experiment-button').addEventListener('click', showExperimentInstructions);
+            document.getElementById('start-experiment-choices-button').addEventListener('click', startExperiment);
+            
+            // Pulsante finale
+            document.getElementById('finish-button').addEventListener('click', finishExperiment);
+        });
+        
+        // Funzione per avviare la task
+        function startTask() {
+            document.querySelector('.instructions').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+        }
+        
+        // Seleziona la difficoltà
+        function selectDifficulty(difficulty) {
+            // Reset dei pulsanti di difficoltà
+            document.getElementById('easy-btn').classList.remove('selected');
+            document.getElementById('medium-btn').classList.remove('selected');
+            document.getElementById('hard-btn').classList.remove('selected');
+            
+            // Seleziona il pulsante corrente
+            document.getElementById(`${difficulty}-btn`).classList.add('selected');
+            
+            // Salva la difficoltà corrente
+            currentDifficulty = difficulty;
+            
+            // Genera una nuova sequenza
+            generateSequence();
+        }
+        
+        // Genera una sequenza casuale
+        function generateSequence() {
+            if (!currentDifficulty) return;
+            
+            const length = sequenceLengths[currentDifficulty];
+            let sequence = '';
+            
+            for (let i = 0; i < length; i++) {
+                sequence += Math.floor(Math.random() * 10);
+            }
+            
+            currentSequence = sequence;
+            
+            // Disabilita i pulsanti di difficoltà durante la sequenza
+            document.getElementById('easy-btn').style.pointerEvents = 'none';
+            document.getElementById('medium-btn').style.pointerEvents = 'none';
+            document.getElementById('hard-btn').style.pointerEvents = 'none';
+            
+            // Mostra la sequenza
+            const display = document.getElementById('sequence-display');
+            display.textContent = sequence;
+            
+            // Nascondi la sequenza dopo un certo tempo
+            setTimeout(() => {
+                display.textContent = '';
+                
+                // Mostra l'input e il pulsante di invio
+                document.getElementById('sequence-input').style.display = 'flex';
+                document.getElementById('submit-sequence').style.display = 'block';
+                
+                // Focus sull'input
+                document.getElementById('user-input').focus();
+            }, showTime[currentDifficulty]);
+        }
+        
+        // Controlla la sequenza inserita dall'utente
+        function checkSequence() {
+            const userInput = document.getElementById('user-input').value.trim();
+            const resultDisplay = document.getElementById('sequence-display');
+            
+            // Controlla se la risposta è corretta
+            if (userInput === currentSequence) {
+                resultDisplay.textContent = '✓ Corretto!';
+                resultDisplay.style.color = '#27ae60';
+                correctAnswers++;
+                
+                // Aggiorna i guadagni
+                taskEarnings = (parseFloat(taskEarnings) + parseFloat(earnings[currentDifficulty])).toFixed(2);
+            } else {
+                resultDisplay.textContent = '✗ Errato! La sequenza era: ' + currentSequence;
+                resultDisplay.style.color = '#e74c3c';
+            }
+            
+            // Aggiorna i tentativi rimanenti
+            attemptsLeft--;
+            document.getElementById('attempts-counter').textContent = `Tentativi rimanenti: ${attemptsLeft}`;
+            
+            // Nascondi l'input e il pulsante di invio
+            document.getElementById('sequence-input').style.display = 'none';
+            document.getElementById('submit-sequence').style.display = 'none';
+            document.getElementById('user-input').value = '';
+            
+            // Mostra il pulsante per la prossima sequenza o fine del gioco
+            if (attemptsLeft > 0) {
+                document.getElementById('next-sequence').style.display = 'block';
+            } else {
+                finishTask();
+            }
+        }
+        
+        // Prepara la prossima sequenza
+        function nextSequence() {
+            // Nascondi il pulsante per la prossima sequenza
+            document.getElementById('next-sequence').style.display = 'none';
+            
+            // Reset del display
+            const display = document.getElementById('sequence-display');
+            display.textContent = '';
+            display.style.color = '#2c3e50';
+            
+            // Riabilita i pulsanti di difficoltà
+            document.getElementById('easy-btn').style.pointerEvents = 'auto';
+            document.getElementById('medium-btn').style.pointerEvents = 'auto';
+            document.getElementById('hard-btn').style.pointerEvents = 'auto';
+        }
+        
+        // Termina la task e mostra i risultati
+        function finishTask() {
+            // Calcola e mostra i risultati
+            document.getElementById('correct-count').textContent = correctAnswers;
+            document.getElementById('game-earnings-value').textContent = taskEarnings;
+            
+            // Mostra il riepilogo dei guadagni
+            document.getElementById('game-earnings').style.display = 'block';
+            document.getElementById('continue-after-game').style.display = 'block';
+            
+            // Disabilita i puls// Disabilita i pulsanti di difficoltà
+            document.getElementById('easy-btn').style.pointerEvents = 'none';
+            document.getElementById('medium-btn').style.pointerEvents = 'none';
+            document.getElementById('hard-btn').style.pointerEvents = 'none';
+            
+            // Nascondi tutti gli altri elementi di gioco
+            document.getElementById('sequence-display').textContent = 'Task completata!';
+            document.getElementById('sequence-input').style.display = 'none';
+            document.getElementById('submit-sequence').style.display = 'none';
+            document.getElementById('next-sequence').style.display = 'none';
+        }
+        
+        // Mostra i risultati della task
+        function showGameResults() {
+            document.getElementById('game-container').style.display = 'none';
+            document.getElementById('game-results').style.display = 'block';
+            
+            // Aggiorna i risultati
+            document.getElementById('memory-earnings').textContent = taskEarnings;
+            totalEarnings = (baseEarnings + parseFloat(taskEarnings)).toFixed(2);
+            document.getElementById('total-earnings').textContent = totalEarnings;
+            
+            // Scegli casualmente il tipo di esperimento (non mostrato all'utente)
+            experimentType = Math.random() < 0.5 ? "WTA" : "WTP";
+            console.log("Tipo di esperimento assegnato:", experimentType);
+        }
+        
+        // Mostra le istruzioni dell'esperimento
+        function showExperimentInstructions() {
+            document.getElementById('game-results').style.display = 'none';
+            document.getElementById('experiment-instructions').style.display = 'block';
+            
+            // Assicurati che il tipo di esperimento sia stato selezionato
+            if (!experimentType) {
+                experimentType = Math.random() < 0.5 ? "WTA" : "WTP";
+                console.log("Tipo di esperimento assegnato:", experimentType);
+            }
+            
+            if (experimentType === "WTA") {
+                document.getElementById('wta-instructions').style.display = 'block';
+                document.getElementById('wtp-instructions').style.display = 'none';
+                document.getElementById('wta-earnings').textContent = totalEarnings;
+            } else {
+                document.getElementById('wta-instructions').style.display = 'none';
+                document.getElementById('wtp-instructions').style.display = 'block';
+                document.getElementById('wtp-earnings').textContent = totalEarnings;
+            }
+        }
+        
+        // Avvia l'esperimento
+        function startExperiment() {
+            document.getElementById('experiment-instructions').style.display = 'none';
+            
+            if (experimentType === "WTA") {
+                setupWTA();
+                document.getElementById('wta-container').style.display = 'block';
+                document.getElementById('wta-question-0').classList.add('active');
+            } else {
+                setupWTP();
+                document.getElementById('wtp-container').style.display = 'block';
+                document.getElementById('wtp-question-0').classList.add('active');
+            }
+            
+            // Aggiungi event listener per le opzioni e i pulsanti continua
+            setupEventListeners();
+        }
+        
+        // Configura l'esperimento WTA
+        function setupWTA() {
+            // Aggiorna i valori monetari
+            const wtaValues = document.querySelectorAll('.wta-monetary-value');
+            wtaValues.forEach(el => {
+                el.textContent = totalEarnings;
+            });
+            
+            // Aggiorna i valori monetari incrementati
+            const valueplus01 = document.querySelector('.wta-monetary-value-plus-01');
+            if (valueplus01) {
+                const incrementAmount = (1 * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                valueplus01.textContent = newAmount;
+            }
+            
+            // Crea dinamicamente le domande WTA mancanti (2-10)
+            createWTAQuestions();
+        }
+        
+        // Configura l'esperimento WTP
+        function setupWTP() {
+            // Aggiorna i valori monetari
+            const wtpValues = document.querySelectorAll('.wtp-monetary-value');
+            wtpValues.forEach(el => {
+                el.textContent = totalEarnings;
+            });
+            
+            // Aggiorna i valori monetari incrementati
+            const valueplus01 = document.querySelector('.wtp-monetary-value-plus-01');
+            if (valueplus01) {
+                const incrementAmount = (1 * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                valueplus01.textContent = newAmount;
+            }
+            
+            // Crea dinamicamente le domande WTP mancanti (2-10)
+            createWTPQuestions();
+        }
+        
+        // Crea dinamicamente le domande WTA mancanti (2-10)
+        function createWTAQuestions() {
+            const container = document.getElementById('wta-container');
+            
+            for (let i = 2; i <= 10; i++) {
+                const incrementAmount = (i * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                
+                const questionDiv = document.createElement('div');
+                questionDiv.id = `wta-question-${i}`;
+                questionDiv.className = 'question';
+                
+                questionDiv.innerHTML = `
+                    <div class="dotation-box">
+                        <h3>Situazione di scelta</h3>
+                        <p>Ti è stata assegnata una dotazione iniziale composta da <strong>${totalEarnings}€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                        <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                    </div>
+                    
+                    <div class="option-container">
+                        <div class="option" id="wta-option-${i}-A">
+                            <div class="package-badge">Pacchetto A</div>
+                            <div class="option-title">Dotazione iniziale</div>
+                            <p>${totalEarnings}€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                        </div>
+                        
+                        <div class="option" id="wta-option-${i}-B">
+                            <div class="package-badge">Pacchetto B</div>
+                            <div class="option-title">Alternativa</div>
+                            <p>${newAmount}€ + 1 penna in plastica</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-box" id="wta-result-${i}">
+                        Hai scelto: <span id="wta-result-text-${i}"></span>
+                    </div>
+                    
+                    <button id="wta-next-${i}" disabled>Continua</button>
+                `;
+                
+                container.appendChild(questionDiv);
+            }
+        }
+        
+        // Crea dinamicamente le domande WTP mancanti (2-10)
+        function createWTPQuestions() {
+            const container = document.getElementById('wtp-container');
+            
+            for (let i = 2; i <= 10; i++) {
+                const incrementAmount = (i * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                
+                const questionDiv = document.createElement('div');
+                questionDiv.id = `wtp-question-${i}`;
+                questionDiv.className = 'question';
+                
+                questionDiv.innerHTML = `
+                    <div class="dotation-box">
+                        <h3>Situazione di scelta</h3>
+                        <p>Ti è stata assegnata una dotazione iniziale composta da <strong>${totalEarnings}€ + 1 penna in bioplastica</strong> <span class="eco-badge">Eco-friendly</span>.</p>
+                        <p>Scegli tra mantenere questa dotazione o optare per un pacchetto alternativo:</p>
+                    </div>
+                    
+                    <div class="option-container">
+                        <div class="option" id="wtp-option-${i}-A">
+                            <div class="package-badge">Pacchetto A</div>
+                            <div class="option-title">Dotazione iniziale</div>
+                            <p>${totalEarnings}€ + 1 penna in bioplastica <span class="eco-badge">Eco-friendly</span></p>
+                        </div>
+                        
+                        <div class="option" id="wtp-option-${i}-B">
+                            <div class="package-badge">Pacchetto B</div>
+                            <div class="option-title">Alternativa</div>
+                            <p>${newAmount}€ + 1 penna in plastica</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-box" id="wtp-result-${i}">
+                        Hai scelto: <span id="wtp-result-text-${i}"></span>
+                    </div>
+                    
+                    <button id="wtp-next-${i}" disabled>Continua</button>
+                `;
+                
+                container.appendChild(questionDiv);
+            }
+        }// Aggiungi event listener per le opzioni e i pulsanti continua
+        function setupEventListeners() {
+            // WTA event listeners
+            if (experimentType === "WTA") {
+                for (let i = 0; i <= 10; i++) {
+                    const optionA = document.getElementById(`wta-option-${i}-A`);
+                    const optionB = document.getElementById(`wta-option-${i}-B`);
+                    const nextButton = document.getElementById(`wta-next-${i}`);
+                    
+                    if (optionA && optionB && nextButton) {
+                        optionA.addEventListener('click', function() {
+                            selectWTAOption(i, 'A');
+                        });
+                        
+                        optionB.addEventListener('click', function() {
+                            selectWTAOption(i, 'B');
+                        });
+                        
+                        nextButton.addEventListener('click', function() {
+                            nextWTAQuestion(i);
+                        });
+                    }
+                }
+            }
+            // WTP event listeners
+            else {
+                for (let i = 0; i <= 10; i++) {
+                    const optionA = document.getElementById(`wtp-option-${i}-A`);
+                    const optionB = document.getElementById(`wtp-option-${i}-B`);
+                    const nextButton = document.getElementById(`wtp-next-${i}`);
+                    
+                    if (optionA && optionB && nextButton) {
+                        optionA.addEventListener('click', function() {
+                            selectWTPOption(i, 'A');
+                        });
+                        
+                        optionB.addEventListener('click', function() {
+                            selectWTPOption(i, 'B');
+                        });
+                        
+                        nextButton.addEventListener('click', function() {
+                            nextWTPQuestion(i);
+                        });
+                    }
+                }
+            }
+        }
+        
+        // Funzione per selezionare un'opzione WTA
+        function selectWTAOption(questionNum, option) {
+            const optionA = document.getElementById(`wta-option-${questionNum}-A`);
+            const optionB = document.getElementById(`wta-option-${questionNum}-B`);
+            
+            optionA.classList.remove('selected');
+            optionB.classList.remove('selected');
+            
+            if (option === 'A') {
+                optionA.classList.add('selected');
+                document.getElementById(`wta-result-text-${questionNum}`).textContent = `Pacchetto A (${totalEarnings}€ + penna in bioplastica)`;
+            } else {
+                optionB.classList.add('selected');
+                // Calcola il valore monetario incrementato
+                const incrementAmount = (questionNum * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                document.getElementById(`wta-result-text-${questionNum}`).textContent = `Pacchetto B (${newAmount}€ + penna in plastica)`;
+            }
+            
+            // Mostra il riepilogo
+            document.getElementById(`wta-result-${questionNum}`).style.display = 'block';
+            
+            // Memorizza la risposta
+            answers[`wta_question_${questionNum}`] = option;
+            
+            // Abilita il pulsante continua
+            document.getElementById(`wta-next-${questionNum}`).disabled = false;
+        }
+        
+        // Funzione per selezionare un'opzione WTP
+        function selectWTPOption(questionNum, option) {
+            const optionA = document.getElementById(`wtp-option-${questionNum}-A`);
+            const optionB = document.getElementById(`wtp-option-${questionNum}-B`);
+            
+            optionA.classList.remove('selected');
+            optionB.classList.remove('selected');
+            
+            if (option === 'A') {
+                optionA.classList.add('selected');
+                document.getElementById(`wtp-result-text-${questionNum}`).textContent = `Pacchetto A (${totalEarnings}€ + penna in bioplastica)`;
+            } else {
+                optionB.classList.add('selected');
+                // Calcola il valore monetario incrementato
+                const incrementAmount = (questionNum * 0.10).toFixed(2);
+                const newAmount = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                document.getElementById(`wtp-result-text-${questionNum}`).textContent = `Pacchetto B (${newAmount}€ + penna in plastica)`;
+            }
+            
+            // Mostra il riepilogo
+            document.getElementById(`wtp-result-${questionNum}`).style.display = 'block';
+            
+            // Memorizza la risposta
+            answers[`wtp_question_${questionNum}`] = option;
+            
+            // Abilita il pulsante continua
+            document.getElementById(`wtp-next-${questionNum}`).disabled = false;
+        }
+        
+        // Funzione per passare alla domanda successiva WTA
+        function nextWTAQuestion(currentNum) {
+            document.getElementById(`wta-question-${currentNum}`).classList.remove('active');
+            
+            // Se l'utente seleziona l'opzione B (passa alla plastica) in qualsiasi domanda,
+            // vai direttamente alla domanda finale
+            if (answers[`wta_question_${currentNum}`] === 'B') {
+                document.getElementById('question-final').classList.add('active');
+                return;
+            }
+            
+            // Se è l'ultima domanda, vai alla domanda finale
+            if (currentNum === 10) {
+                document.getElementById('question-final').classList.add('active');
+                return;
+            }
+            
+            // Altrimenti, vai alla prossima domanda
+            document.getElementById(`wta-question-${currentNum + 1}`).classList.add('active');
+        }
+        
+        // Funzione per passare alla domanda successiva WTP
+        function nextWTPQuestion(currentNum) {
+            document.getElementById(`wtp-question-${currentNum}`).classList.remove('active');
+            
+            // Se l'utente seleziona l'opzione B (passa alla plastica) in qualsiasi domanda,
+            // vai direttamente alla domanda finale
+            if (answers[`wtp_question_${currentNum}`] === 'B') {
+                document.getElementById('question-final').classList.add('active');
+                return;
+            }
+            
+            // Se è l'ultima domanda, vai alla domanda finale
+            if (currentNum === 10) {
+                document.getElementById('question-final').classList.add('active');
+                return;
+            }
+            
+            // Altrimenti, vai alla prossima domanda
+            document.getElementById(`wtp-question-${currentNum + 1}`).classList.add('active');
+        }
+        
+        // Funzione per terminare l'esperimento
+        function finishExperiment() {
+            const priceDiff = document.getElementById('price-diff').value;
+            if (!priceDiff) {
+                alert('Per favore, inserisci una stima della differenza di prezzo.');
+                return;
+            }
+            
+            answers['price_difference'] = priceDiff;
+            
+            // Calcola il guadagno finale (implementa la selezione casuale di una scelta)
+            let finalEarnings = totalEarnings;
+            let selectedChoice = "";
+            
+            if (experimentType === "WTA") {
+                // Seleziona casualmente una delle domande WTA
+                const wtaQuestions = Object.keys(answers).filter(key => key.startsWith('wta_question_'));
+                if (wtaQuestions.length > 0) {
+                    const randomQuestion = wtaQuestions[Math.floor(Math.random() * wtaQuestions.length)];
+                    const questionNum = parseInt(randomQuestion.split('_')[2]);
+                    const choice = answers[randomQuestion];
+                    
+                    if (choice === 'B') {
+                        // Ha scelto di prendere più soldi e la penna in plastica
+                        const incrementAmount = (questionNum * 0.10).toFixed(2);
+                        finalEarnings = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                        selectedChoice = `Pacchetto B (${finalEarnings}€ + penna in plastica)`;
+                    } else {
+                        // Ha mantenuto la dotazione iniziale
+                        selectedChoice = `Pacchetto A (${finalEarnings}€ + penna in bioplastica)`;
+                    }
+                }
+            } else {
+                // Seleziona casualmente una delle domande WTP
+                const wtpQuestions = Object.keys(answers).filter(key => key.startsWith('wtp_question_'));
+                if (wtpQuestions.length > 0) {
+                    const randomQuestion = wtpQuestions[Math.floor(Math.random() * wtpQuestions.length)];
+                    const questionNum = parseInt(randomQuestion.split('_')[2]);
+                    const choice = answers[randomQuestion];
+                    
+                    if (choice === 'B') {
+                        // Ha scelto di prendere più soldi e la penna in plastica
+                        const incrementAmount = (questionNum * 0.10).toFixed(2);
+                        finalEarnings = (parseFloat(totalEarnings) + parseFloat(incrementAmount)).toFixed(2);
+                        selectedChoice = `Pacchetto B (${newAmount}€ + penna in plastica)`;
+                    } else {
+                        // Ha mantenuto la dotazione iniziale
+                        selectedChoice = `Pacchetto A (${finalEarnings}€ + penna in bioplastica)`;
+                    }
+                }
+            }
+            
+            // Aggiorna il guadagno finale visualizzato
+            document.getElementById('final-earnings').textContent = finalEarnings;
+            
+            // In un esperimento reale, qui si invierebbero i dati al server
+            answers['final_earnings'] = finalEarnings;
+            answers['experimental_condition'] = experimentType;
+            answers['task_earnings'] = taskEarnings;
+            answers['selected_choice'] = selectedChoice;
+            
+            console.log('Risposte:', answers);
+            
+            document.getElementById('question-final').classList.remove('active');
+            document.getElementById('final').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
