@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Classificazione Contabile Mobile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .score-board {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .score-item {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .reset-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:active {
+            transform: scale(0.95);
+        }
+
+        .game-mode-selector {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 15px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: #2ed573;
+            transform: scale(1.05);
+        }
+
+        .game-area {
+            display: none;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .document {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .document h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.4rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section {
+            min-height: 120px;
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .section h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1.2rem;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section.drag-over {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+
+        .section.correct {
+            border-color: #2ed573;
+            background-color: rgba(46, 213, 115, 0.2);
+        }
+
+        .section.incorrect {
+            border-color: #ff4757;
+            background-color: rgba(255, 71, 87, 0.2);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .items-pool {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .items-pool h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item::before {
+            content: '👆';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .item:active {
+            transform: scale(0.98);
+        }
+
+        .item.dragging {
+            opacity: 0.8;
+            transform: scale(1.05);
+            z-index: 1000;
+        }
+
+        .item.placed {
+            cursor: not-allowed;
+            opacity: 0.8;
+            background: #95a5a6;
+        }
+
+        .item.correct-placed {
+            background: linear-gradient(135deg, #2ed573, #17a085);
+            animation: bounce 0.6s;
+        }
+
+        .item.incorrect-placed {
+            background: linear-gradient(135deg, #ff4757, #c44569);
+            animation: shake 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            max-width: 90%;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: popup 0.5s;
+        }
+
+        @keyframes popup {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .feedback h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2ed573;
+        }
+
+        .feedback-btn {
+            margin-top: 15px; 
+            padding: 15px 25px; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 15px; 
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #2ed573;
+            height: 100%;
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .hint {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Animazioni per il tocco */
+        .touch-indicator {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: touch-ripple 0.6s ease-out;
+        }
+
+        @keyframes touch-ripple {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Classificazione Contabile</h1>
+            <p>Tocca e trascina le voci!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-row">
+                <div class="score-item">Punteggio: <span id="score">0</span></div>
+                <div class="score-item">Corrette: <span id="correct">0</span>/<span id="total">8</span></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <button class="reset-btn" onclick="resetGame()">🔄 Ricomincia Gioco</button>
+        </div>
+
+        <div class="game-mode-selector">
+            <div class="hint">Scegli quale argomento praticare:</div>
+            <div class="mode-buttons">
+                <button class="mode-btn active" onclick="switchMode('patrimonio')" id="btnPatrimonio">
+                    📊 Stato Patrimoniale
+                </button>
+                <button class="mode-btn" onclick="switchMode('economico')" id="btnEconomico">
+                    💰 Conto Economico
+                </button>
+            </div>
+        </div>
+
+        <!-- Modalità Stato Patrimoniale -->
+        <div class="game-area active" id="patrimonioArea">
+            <div class="document">
+                <h2>📊 STATO PATRIMONIALE</h2>
+                <div class="sections">
+                    <div class="section" data-category="attivo">
+                        <h3>⬆️ ATTIVO</h3>
+                        <div class="hint">Risorse e investimenti dell'azienda</div>
+                    </div>
+                    <div class="section" data-category="passivo">
+                        <h3>⬇️ PASSIVO + PATRIMONIO NETTO</h3>
+                        <div class="hint">Fonti di finanziamento</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items-pool">
+                <h2>🎲 Voci da Classificare</h2>
+                <div class="items-container" id="patrimonioItems">
+                    <!-- Items generati dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modalità Conto Economico -->
+        <div class="game-area" id="economicoArea">
+            <div class="document">
+                <h2>💰 CONTO ECONOMICO</h2>
+                <div class="sections">
+                    <div class="section" data-category="costi">
+                        <h3>⬇️ COSTI</h3>
+                        <div class="hint">Spese sostenute dall'azienda</div>
+                    </div>
+                    <div class="section" data-category="ricavi">
+                        <h3>⬆️ RICAVI</h3>
+                        <div class="hint">Entrate dell'azienda</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items-pool">
+                <h2>🎲 Voci da Classificare</h2>
+                <div class="items-container" id="economicoItems">
+                    <!-- Items generati dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <h3 id="feedbackTitle">🎉 Complimenti!</h3>
+        <p id="feedbackMessage">Hai completato il livello!</p>
+        <button class="feedback-btn" onclick="hideFeedback()">Continua</button>
+    </div>
+
+    <script>
+        const gameData = {
+            patrimonio: [
+                { name: "🏢 Immobilizzazioni materiali", category: "attivo", points: 10 },
+                { name: "👥 Crediti verso clienti", category: "attivo", points: 10 },
+                { name: "📦 Rimanenze di magazzino", category: "attivo", points: 10 },
+                { name: "💰 Disponibilità liquide", category: "attivo", points: 10 },
+                { name: "🏛️ Capitale sociale", category: "passivo", points: 10 },
+                { name: "🚚 Debiti verso fornitori", category: "passivo", points: 10 },
+                { name: "🏦 Debiti verso banche", category: "passivo", points: 10 },
+                { name: "💎 Riserve", category: "passivo", points: 10 }
+            ],
+            economico: [
+                { name: "🔧 Costi per materie prime", category: "costi", points: 10 },
+                { name: "⚙️ Costi per servizi", category: "costi", points: 10 },
+                { name: "👨‍💼 Costi del personale", category: "costi", points: 10 },
+                { name: "📉 Ammortamenti", category: "costi", points: 10 },
+                { name: "💵 Ricavi delle vendite", category: "ricavi", points: 10 },
+                { name: "💹 Proventi finanziari", category: "ricavi", points: 10 },
+                { name: "➕ Altri ricavi", category: "ricavi", points: 10 },
+                { name: "📈 Plusvalenze", category: "ricavi", points: 10 }
+            ]
+        };
+
+        let currentMode = 'patrimonio';
+        let score = 0;
+        let correctAnswers = 0;
+        let totalItems = 8;
+        let draggedItem = null;
+        let touchStartPos = { x: 0, y: 0 };
+
+        function initGame() {
+            const currentData = gameData[currentMode];
+            const containerSelector = currentMode === 'patrimonio' ? '#patrimonioItems' : '#economicoItems';
+            const container = document.querySelector(containerSelector);
+            
+            container.innerHTML = '';
+            
+            const shuffledData = [...currentData].sort(() => Math.random() - 0.5);
+            
+            shuffledData.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'item';
+                itemElement.textContent = item.name;
+                itemElement.dataset.category = item.category;
+                itemElement.dataset.points = item.points;
+                itemElement.dataset.index = index;
+                
+                // Eventi touch
+                itemElement.addEventListener('touchstart', handleTouchStart, { passive: false });
+                itemElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+                itemElement.addEventListener('touchend', handleTouchEnd, { passive: false });
+                
+                // Eventi mouse per desktop
+                itemElement.addEventListener('mousedown', handleMouseDown);
+                itemElement.addEventListener('mousemove', handleMouseMove);
+                itemElement.addEventListener('mouseup', handleMouseUp);
+                
+                container.appendChild(itemElement);
+            });
+            
+            updateScore();
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartPos = { x: touch.clientX, y: touch.clientY };
+            draggedItem = e.target;
+            e.target.classList.add('dragging');
+            
+            // Effetto di tocco
+            createTouchIndicator(touch.clientX, touch.clientY);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!draggedItem) return;
+            
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - touchStartPos.x);
+            const deltaY = Math.abs(touch.clientY - touchStartPos.y);
+            
+            // Se il movimento è significativo, considera come drag
+            if (deltaX > 10 || deltaY > 10) {
+                draggedItem.style.position = 'fixed';
+                draggedItem.style.zIndex = '1000';
+                draggedItem.style.left = (touch.clientX - 50) + 'px';
+                draggedItem.style.top = (touch.clientY - 25) + 'px';
+                draggedItem.style.pointerEvents = 'none';
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            if (!draggedItem) return;
+            
+            const touch = e.changedTouches[0];
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const section = elementBelow ? elementBelow.closest('.section') : null;
+            
+            // Reset stile
+            draggedItem.style.position = '';
+            draggedItem.style.zIndex = '';
+            draggedItem.style.left = '';
+            draggedItem.style.top = '';
+            draggedItem.style.pointerEvents = '';
+            draggedItem.classList.remove('dragging');
+            
+            if (section && !draggedItem.classList.contains('placed')) {
+                handleDrop(section, draggedItem);
+            }
+            
+            draggedItem = null;
+        }
+
+        function handleMouseDown(e) {
+            draggedItem = e.target;
+            e.target.classList.add('dragging');
+        }
+
+        function handleMouseMove(e) {
+            // Implementazione per desktop se necessaria
+        }
+
+        function handleMouseUp(e) {
+            if (!draggedItem) return;
+            
+            const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+            const section = elementBelow ? elementBelow.closest('.section') : null;
+            
+            draggedItem.classList.remove('dragging');
+            
+            if (section && !draggedItem.classList.contains('placed')) {
+                handleDrop(section, draggedItem);
+            }
+            
+            draggedItem = null;
+        }
+
+        function handleDrop(section, item) {
+            const itemCategory = item.dataset.category;
+            const sectionCategory = section.dataset.category;
+            const points = parseInt(item.dataset.points);
+            
+            item.classList.add('placed');
+            
+            if (itemCategory === sectionCategory) {
+                // Risposta corretta
+                item.classList.add('correct-placed');
+                section.classList.add('correct');
+                score += points;
+                correctAnswers++;
+                
+                section.appendChild(item);
+                
+                setTimeout(() => {
+                    section.classList.remove('correct');
+                }, 1000);
+                
+            } else {
+                // Risposta sbagliata
+                item.classList.add('incorrect-placed');
+                section.classList.add('incorrect');
+                score = Math.max(0, score - 5);
+                
+                setTimeout(() => {
+                    section.classList.remove('incorrect');
+                    item.classList.remove('placed', 'incorrect-placed');
+                }, 1500);
+            }
+            
+            updateScore();
+            
+            if (correctAnswers === totalItems) {
+                setTimeout(showWinFeedback, 1000);
+            }
+        }
+
+        function createTouchIndicator(x, y) {
+            const indicator = document.createElement('div');
+            indicator.className = 'touch-indicator';
+            indicator.style.left = x + 'px';
+            indicator.style.top = y + 'px';
+            document.body.appendChild(indicator);
+            
+            setTimeout(() => {
+                document.body.removeChild(indicator);
+            }, 600);
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Aggiorna pulsanti
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(mode === 'patrimonio' ? 'btnPatrimonio' : 'btnEconomico').classList.add('active');
+            
+            // Mostra area corretta
+            document.querySelectorAll('.game-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            document.getElementById(mode + (mode === 'patrimonio' ? 'Area' : 'Area')).classList.add('active');
+            
+            resetGame();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('total').textContent = totalItems;
+            
+            const progress = (correctAnswers / totalItems) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showWinFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const title = document.getElementById('feedbackTitle');
+            const message = document.getElementById('feedbackMessage');
+            
+            title.textContent = '🎉 Eccellente!';
+            message.textContent = `Hai completato ${currentMode === 'patrimonio' ? 'lo Stato Patrimoniale' : 'il Conto Economico'} con ${score} punti!`;
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function hideFeedback() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show');
+        }
+
+        function resetGame() {
+            score = 0;
+            correctAnswers = 0;
+            
+            // Rimuovi items dalle sezioni
+            document.querySelectorAll('.section').forEach(section => {
+                const items = section.querySelectorAll('.item');
+                items.forEach(item => {
+                    item.classList.remove('placed', 'correct-placed', 'incorrect-placed');
+                });
+            });
+            
+            initGame();
+        }
+
+        // Previeni lo scroll durante il drag
+        document.addEventListener('touchmove', function(e) {
+            if (draggedItem) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Avvia il gioco
+        initGame();
+    </script>
+</body>
+</html>
