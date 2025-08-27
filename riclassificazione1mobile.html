@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Classificazione Contabile Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .score-board {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .score-item {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            border-radius: 10px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #2ed573;
+            height: 100%;
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+
+        .reset-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-top: 8px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .reset-btn:active {
+            transform: scale(0.95);
+            border: 2px solid white;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 12px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .documents-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .document {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .document h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .section {
+            min-height: 100px;
+            border: 3px dashed #ddd;
+            border-radius: 12px;
+            padding: 12px;
+            position: relative;
+            transition: all 0.3s;
+            background: #f8f9fa;
+            cursor: pointer;
+        }
+
+        .section h3 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 1rem;
+            background: white;
+            padding: 6px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section .hint {
+            text-align: center;
+            color: #777;
+            font-size: 0.75rem;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .section:active {
+            transform: scale(0.98);
+        }
+
+        .section.highlight {
+            border-color: #ffa502;
+            background-color: rgba(255, 165, 2, 0.15);
+            transform: scale(1.02);
+            border-width: 4px;
+        }
+
+        .section.correct {
+            border-color: #2ed573;
+            background-color: rgba(46, 213, 115, 0.2);
+            animation: success-pulse 0.6s;
+        }
+
+        .section.incorrect {
+            border-color: #ff4757;
+            background-color: rgba(255, 71, 87, 0.2);
+            animation: error-shake 0.5s;
+        }
+
+        @keyframes success-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes error-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .items-pool {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .items-pool h2 {
+            text-align: center;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .item:active {
+            transform: scale(0.95);
+        }
+
+        .item.selected {
+            background: linear-gradient(135deg, #ffa502, #ff6348);
+            transform: scale(1.05);
+            border: 2px solid white;
+            box-shadow: 0 6px 20px rgba(255, 165, 2, 0.3);
+            animation: selected-pulse 1s infinite;
+        }
+
+        @keyframes selected-pulse {
+            0%, 100% { box-shadow: 0 6px 20px rgba(255, 165, 2, 0.3); }
+            50% { box-shadow: 0 6px 30px rgba(255, 165, 2, 0.5); }
+        }
+
+        .item.placed {
+            cursor: not-allowed;
+            opacity: 0.8;
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            transform: scale(0.95);
+        }
+
+        .item.correct-placed {
+            background: linear-gradient(135deg, #2ed573, #17a085);
+            animation: success-bounce 0.8s;
+        }
+
+        .item.incorrect-placed {
+            background: linear-gradient(135deg, #ff4757, #c44569);
+            animation: error-shake 0.5s;
+        }
+
+        @keyframes success-bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-6px); }
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            max-width: 85%;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: feedback-popup 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes feedback-popup {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+                opacity: 1; 
+            }
+        }
+
+        .feedback h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #2ed573;
+        }
+
+        .feedback p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .feedback-btn {
+            padding: 12px 25px; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 15px; 
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .feedback-btn:active {
+            transform: scale(0.95);
+            background: #5a67d8;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+            animation: fade-in 0.3s;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .status-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            z-index: 500;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .status-message.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .difficulty-indicator {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Classificazione Contabile Completa</h1>
+            <p>SP + CE insieme - Sfida completa!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-row">
+                <div class="score-item">Punteggio: <span id="score">0</span></div>
+                <div class="score-item">Corrette: <span id="correct">0</span>/<span id="total">16</span></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <button class="reset-btn" onclick="resetGame()">🔄 Ricomincia Gioco</button>
+        </div>
+
+        <div class="difficulty-indicator">
+            <strong>🔥 Modalità Avanzata:</strong> Tutte le voci sono mischiate! Prima decidi se va nello SP o CE, poi dove esattamente.
+        </div>
+
+        <div class="instructions">
+            <strong>📱 Come giocare:</strong><br>
+            1️⃣ Tocca una voce per selezionarla<br>
+            2️⃣ Tocca la sezione giusta (Attivo, Passivo, Costi o Ricavi)<br>
+            3️⃣ Classifica tutte le 16 voci correttamente!
+        </div>
+
+        <div class="documents-container">
+            <!-- Stato Patrimoniale -->
+            <div class="document">
+                <h2>📊 STATO PATRIMONIALE</h2>
+                <div class="sections">
+                    <div class="section" data-category="attivo" onclick="handleSectionClick(this)">
+                        <h3>⬆️ ATTIVO</h3>
+                        <div class="hint">Risorse e investimenti</div>
+                    </div>
+                    <div class="section" data-category="passivo" onclick="handleSectionClick(this)">
+                        <h3>⬇️ PASSIVO + PATRIMONIO NETTO</h3>
+                        <div class="hint">Fonti di finanziamento</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conto Economico -->
+            <div class="document">
+                <h2>💰 CONTO ECONOMICO</h2>
+                <div class="sections">
+                    <div class="section" data-category="costi" onclick="handleSectionClick(this)">
+                        <h3>⬇️ COSTI</h3>
+                        <div class="hint">Spese sostenute</div>
+                    </div>
+                    <div class="section" data-category="ricavi" onclick="handleSectionClick(this)">
+                        <h3>⬆️ RICAVI</h3>
+                        <div class="hint">Entrate dell'azienda</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="items-pool">
+            <h2>🎲 Tutte le voci mischiate - Tocca per selezionare</h2>
+            <div class="items-container" id="itemsContainer"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <h3 id="feedbackTitle">🎉 Complimenti!</h3>
+        <p id="feedbackMessage">Hai completato la classificazione!</p>
+        <button class="feedback-btn" onclick="hideFeedback()">Continua</button>
+    </div>
+
+    <div class="status-message" id="statusMessage"></div>
+
+    <script>
+        // Tutte le voci mischiate insieme
+        const allGameData = [
+            // Stato Patrimoniale - Attivo
+            { name: "🏢 Immobilizzazioni materiali", category: "attivo", points: 10, document: "SP" },
+            { name: "👥 Crediti verso clienti", category: "attivo", points: 10, document: "SP" },
+            { name: "📦 Rimanenze di magazzino", category: "attivo", points: 10, document: "SP" },
+            { name: "💰 Disponibilità liquide", category: "attivo", points: 10, document: "SP" },
+            
+            // Stato Patrimoniale - Passivo
+            { name: "🏛️ Capitale sociale", category: "passivo", points: 10, document: "SP" },
+            { name: "🚚 Debiti verso fornitori", category: "passivo", points: 10, document: "SP" },
+            { name: "🏦 Debiti verso banche", category: "passivo", points: 10, document: "SP" },
+            { name: "💎 Riserve", category: "passivo", points: 10, document: "SP" },
+            
+            // Conto Economico - Costi
+            { name: "🔧 Costi per materie prime", category: "costi", points: 10, document: "CE" },
+            { name: "⚙️ Costi per servizi", category: "costi", points: 10, document: "CE" },
+            { name: "👨‍💼 Costi del personale", category: "costi", points: 10, document: "CE" },
+            { name: "📉 Ammortamenti", category: "costi", points: 10, document: "CE" },
+            
+            // Conto Economico - Ricavi
+            { name: "💵 Ricavi delle vendite", category: "ricavi", points: 10, document: "CE" },
+            { name: "💹 Proventi finanziari", category: "ricavi", points: 10, document: "CE" },
+            { name: "➕ Altri ricavi", category: "ricavi", points: 10, document: "CE" },
+            { name: "📈 Plusvalenze", category: "ricavi", points: 10, document: "CE" }
+        ];
+
+        let score = 0;
+        let correctAnswers = 0;
+        let totalItems = 16;
+        let selectedItem = null;
+
+        function initGame() {
+            const container = document.getElementById('itemsContainer');
+            container.innerHTML = '';
+            
+            // Mescola TUTTE le voci insieme
+            const shuffledData = [...allGameData].sort(() => Math.random() - 0.5);
+            
+            shuffledData.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'item';
+                itemElement.textContent = item.name;
+                itemElement.dataset.category = item.category;
+                itemElement.dataset.points = item.points;
+                itemElement.dataset.document = item.document;
+                itemElement.dataset.index = index;
+                
+                itemElement.addEventListener('click', handleItemClick);
+                
+                container.appendChild(itemElement);
+            });
+            
+            updateScore();
+            showStatusMessage("🔥 Modalità difficile! Tutte le voci sono mischiate!");
+        }
+
+        function handleItemClick(e) {
+            if (e.target.classList.contains('placed')) return;
+            
+            // Deseleziona altri items
+            document.querySelectorAll('.item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Rimuovi highlight da sezioni
+            document.querySelectorAll('.section.highlight').forEach(section => {
+                section.classList.remove('highlight');
+            });
+            
+            // Seleziona questo item
+            e.target.classList.add('selected');
+            selectedItem = e.target;
+            
+            // Evidenzia TUTTE le sezioni disponibili
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('highlight');
+            });
+            
+            const docType = e.target.dataset.document === 'SP' ? 'Stato Patrimoniale' : 'Conto Economico';
+            showStatusMessage(`Selezionata voce ${docType}! Tocca la sezione giusta.`);
+        }
+
+        function handleSectionClick(section) {
+            if (!selectedItem || selectedItem.classList.contains('placed')) {
+                if (!selectedItem) {
+                    showStatusMessage("Prima seleziona una voce!");
+                }
+                return;
+            }
+            
+            processPlacement(selectedItem, section);
+            
+            // Reset selezione
+            selectedItem.classList.remove('selected');
+            selectedItem = null;
+            
+            // Rimuovi highlight
+            document.querySelectorAll('.section.highlight').forEach(s => {
+                s.classList.remove('highlight');
+            });
+        }
+
+        function processPlacement(item, section) {
+            const itemCategory = item.dataset.category;
+            const sectionCategory = section.dataset.category;
+            const points = parseInt(item.dataset.points);
+            const itemDocument = item.dataset.document;
+            
+            item.classList.add('placed');
+            
+            if (itemCategory === sectionCategory) {
+                // Risposta corretta
+                item.classList.add('correct-placed');
+                section.classList.add('correct');
+                score += points;
+                correctAnswers++;
+                
+                section.appendChild(item);
+                
+                const docName = itemDocument === 'SP' ? 'SP' : 'CE';
+                showStatusMessage(`✅ Perfetto! Voce ${docName} classificata correttamente! +${points} punti`);
+                
+                setTimeout(() => {
+                    section.classList.remove('correct');
+                }, 1000);
+                
+            } else {
+                // Risposta sbagliata
+                item.classList.add('incorrect-placed');
+                section.classList.add('incorrect');
+                score = Math.max(0, score - 5);
+                
+                const correctDoc = itemDocument === 'SP' ? 'Stato Patrimoniale' : 'Conto Economico';
+                const correctSectionName = itemCategory === 'attivo' ? 'Attivo' : 
+                                         itemCategory === 'passivo' ? 'Passivo' :
+                                         itemCategory === 'costi' ? 'Costi' : 'Ricavi';
+                
+                showStatusMessage(`❌ Sbagliato! Va nel ${correctDoc} → ${correctSectionName}`);
+                
+                setTimeout(() => {
+                    section.classList.remove('incorrect');
+                    item.classList.remove('placed', 'incorrect-placed');
+                }, 2000);
+            }
+            
+            updateScore();
+            
+            if (correctAnswers === totalItems) {
+                setTimeout(showWinFeedback, 1500);
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('total').textContent = totalItems;
+            
+            const progress = (correctAnswers / totalItems) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showStatusMessage(message) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.classList.add('show');
+            
+            setTimeout(() => {
+                statusEl.classList.remove('show');
+            }, 3500);
+        }
+
+        function showWinFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const title = document.getElementById('feedbackTitle');
+            const message = document.getElementById('feedbackMessage');
+            
+            let performance = '';
+            if (score >= 140) performance = '🏆 Eccellente!';
+            else if (score >= 120) performance = '🥈 Molto bene!';
+            else if (score >= 100) performance = '🥉 Bene!';
+            else performance = '💪 Continua a praticare!';
+            
+            title.textContent = performance;
+            message.textContent = `Hai classificato tutte le 16 voci con ${score} punti! Hai dimostrato di saper distinguere tra Stato Patrimoniale e Conto Economico!`;
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function hideFeedback() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show');
+        }
+
+        function resetGame() {
+            score = 0;
+            correctAnswers = 0;
+            selectedItem = null;
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('highlight');
+                const items = section.querySelectorAll('.item');
+                items.forEach(item => {
+                    item.classList.remove('placed', 'correct-placed', 'incorrect-placed', 'selected');
+                });
+            });
+            
+            initGame();
+        }
+
+        // Avvia il gioco
+        initGame();
+    </script>
+</body>
+</html>
