@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificazione Contabile - Gioco Educativo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .score-board {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .score {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .reset-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .document {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .document h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .section {
+            min-height: 200px;
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .section h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.2rem;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .section.drag-over {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
+        }
+
+        .section.correct {
+            border-color: #2ed573;
+            background-color: rgba(46, 213, 115, 0.1);
+        }
+
+        .section.incorrect {
+            border-color: #ff4757;
+            background-color: rgba(255, 71, 87, 0.1);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .items-pool {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .items-pool h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .items-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .item.dragging {
+            opacity: 0.8;
+            transform: rotate(5deg) scale(1.1);
+            cursor: grabbing;
+        }
+
+        .item.placed {
+            cursor: not-allowed;
+            opacity: 0.7;
+            background: #95a5a6;
+        }
+
+        .item.correct-placed {
+            background: linear-gradient(135deg, #2ed573, #17a085);
+            animation: bounce 0.6s;
+        }
+
+        .item.incorrect-placed {
+            background: linear-gradient(135deg, #ff4757, #c44569);
+            animation: shake 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: popup 0.5s;
+        }
+
+        @keyframes popup {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .feedback h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #2ed573;
+        }
+
+        .feedback.win h3 {
+            color: #2ed573;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .game-area {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .item {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Gioco di Classificazione Contabile</h1>
+            <p>Trascina le voci nel posto giusto!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score">Punteggio: <span id="score">0</span></div>
+            <div class="score">Corrette: <span id="correct">0</span> / <span id="total">16</span></div>
+            <button class="reset-btn" onclick="resetGame()">🔄 Ricomincia</button>
+        </div>
+
+        <div class="game-area">
+            <div class="document">
+                <h2>📊 STATO PATRIMONIALE</h2>
+                <div class="sections">
+                    <div class="section" data-category="attivo">
+                        <h3>ATTIVO</h3>
+                    </div>
+                    <div class="section" data-category="passivo">
+                        <h3>PASSIVO</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document">
+                <h2>💰 CONTO ECONOMICO</h2>
+                <div class="sections">
+                    <div class="section" data-category="costi">
+                        <h3>COSTI</h3>
+                    </div>
+                    <div class="section" data-category="ricavi">
+                        <h3>RICAVI</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="items-pool">
+            <h2>🎲 Voci da Classificare</h2>
+            <div class="items-container" id="itemsContainer">
+                <!-- Gli items verranno generati dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <h3 id="feedbackTitle">🎉 Complimenti!</h3>
+        <p id="feedbackMessage">Hai completato il gioco!</p>
+        <button onclick="hideFeedback()" style="margin-top: 15px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 10px; cursor: pointer;">Continua</button>
+    </div>
+
+    <script>
+        // Dati del gioco
+        const gameData = [
+            // Stato Patrimoniale - Attivo
+            { name: "Immobilizzazioni materiali", category: "attivo", points: 10 },
+            { name: "Crediti verso clienti", category: "attivo", points: 10 },
+            { name: "Rimanenze di magazzino", category: "attivo", points: 10 },
+            { name: "Disponibilità liquide", category: "attivo", points: 10 },
+            
+            // Stato Patrimoniale - Passivo
+            { name: "Capitale sociale", category: "passivo", points: 10 },
+            { name: "Debiti verso fornitori", category: "passivo", points: 10 },
+            { name: "Debiti verso banche", category: "passivo", points: 10 },
+            { name: "Riserve", category: "passivo", points: 10 },
+            
+            // Conto Economico - Costi
+            { name: "Costi per materie prime", category: "costi", points: 10 },
+            { name: "Costi per servizi", category: "costi", points: 10 },
+            { name: "Costi del personale", category: "costi", points: 10 },
+            { name: "Ammortamenti", category: "costi", points: 10 },
+            
+            // Conto Economico - Ricavi
+            { name: "Ricavi delle vendite", category: "ricavi", points: 10 },
+            { name: "Proventi finanziari", category: "ricavi", points: 10 },
+            { name: "Altri ricavi", category: "ricavi", points: 10 },
+            { name: "Plusvalenze", category: "ricavi", points: 10 }
+        ];
+
+        let score = 0;
+        let correctAnswers = 0;
+        let draggedItem = null;
+
+        // Inizializza il gioco
+        function initGame() {
+            const container = document.getElementById('itemsContainer');
+            container.innerHTML = '';
+            
+            // Mescola gli items
+            const shuffledData = [...gameData].sort(() => Math.random() - 0.5);
+            
+            shuffledData.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'item';
+                itemElement.textContent = item.name;
+                itemElement.draggable = true;
+                itemElement.dataset.category = item.category;
+                itemElement.dataset.points = item.points;
+                itemElement.dataset.index = index;
+                
+                // Eventi drag and drop
+                itemElement.addEventListener('dragstart', handleDragStart);
+                itemElement.addEventListener('dragend', handleDragEnd);
+                
+                container.appendChild(itemElement);
+            });
+            
+            // Aggiungi eventi alle sezioni
+            document.querySelectorAll('.section').forEach(section => {
+                section.addEventListener('dragover', handleDragOver);
+                section.addEventListener('drop', handleDrop);
+                section.addEventListener('dragenter', handleDragEnter);
+                section.addEventListener('dragleave', handleDragLeave);
+            });
+            
+            updateScore();
+        }
+
+        function handleDragStart(e) {
+            draggedItem = e.target;
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+            e.target.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.target.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const section = e.target.closest('.section');
+            section.classList.remove('drag-over');
+            
+            if (!draggedItem || draggedItem.classList.contains('placed')) return;
+            
+            const itemCategory = draggedItem.dataset.category;
+            const sectionCategory = section.dataset.category;
+            const points = parseInt(draggedItem.dataset.points);
+            
+            draggedItem.classList.add('placed');
+            
+            if (itemCategory === sectionCategory) {
+                // Risposta corretta
+                draggedItem.classList.add('correct-placed');
+                section.classList.add('correct');
+                score += points;
+                correctAnswers++;
+                
+                // Sposta l'item nella sezione
+                section.appendChild(draggedItem);
+                
+                setTimeout(() => {
+                    section.classList.remove('correct');
+                }, 1000);
+                
+            } else {
+                // Risposta sbagliata
+                draggedItem.classList.add('incorrect-placed');
+                section.classList.add('incorrect');
+                score = Math.max(0, score - 5);
+                
+                setTimeout(() => {
+                    section.classList.remove('incorrect');
+                    draggedItem.classList.remove('placed', 'incorrect-placed');
+                }, 1500);
+            }
+            
+            updateScore();
+            
+            // Controlla se il gioco è completato
+            if (correctAnswers === gameData.length) {
+                setTimeout(showWinFeedback, 1000);
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct').textContent = correctAnswers;
+        }
+
+        function showWinFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const title = document.getElementById('feedbackTitle');
+            const message = document.getElementById('feedbackMessage');
+            
+            title.textContent = '🎉 Fantastico!';
+            message.textContent = `Hai completato il gioco con ${score} punti! Ottimo lavoro nella classificazione contabile!`;
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show', 'win');
+        }
+
+        function hideFeedback() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show', 'win');
+        }
+
+        function resetGame() {
+            score = 0;
+            correctAnswers = 0;
+            
+            // Rimuovi tutti gli items dalle sezioni
+            document.querySelectorAll('.section').forEach(section => {
+                const items = section.querySelectorAll('.item');
+                items.forEach(item => {
+                    item.classList.remove('placed', 'correct-placed', 'incorrect-placed');
+                    document.getElementById('itemsContainer').appendChild(item);
+                });
+            });
+            
+            updateScore();
+            initGame();
+        }
+
+        // Avvia il gioco
+        initGame();
+    </script>
+</body>
+</html>
