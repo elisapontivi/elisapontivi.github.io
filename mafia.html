@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia e Stato - Legalità, Giustizia e Resistenza Civile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "⚖️";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "🔍";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .falcone-quote {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        .falcone-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .falcone-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .context-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #c0392b;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #c0392b;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .eroi-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .eroi-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .eroe-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .eroe-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .mafia-types {
+            background: linear-gradient(135deg, #f8e8d8, #fbeee6);
+            border-left: 5px solid #e67e22;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .mafia-types h3 {
+            color: #d35400;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .legacy-section {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .legacy-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .falcone-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚫 Mafia e Stato</h1>
+            <p>Legalità, Giustizia e Resistenza Civile</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Mafia e Stato in Educazione Civica?</h2>
+                <p>Lo studio del rapporto tra mafia e Stato è <strong>fondamentale per l'educazione civica</strong> perché aiuta a comprendere come le organizzazioni criminali minacciano la democrazia e lo stato di diritto. È essenziale perché:</p>
+                <ul>
+                    <li><strong>Consapevolezza civica:</strong> Comprendere come la criminalità organizzata danneggia la società</li>
+                    <li><strong>Cultura della legalità:</strong> Promuovere il rispetto delle leggi e delle istituzioni</li>
+                    <li><strong>Memoria storica:</strong> Ricordare i sacrifici di chi ha lottato contro la mafia</li>
+                    <li><strong>Cittadinanza attiva:</strong> Sviluppare senso di responsabilità civile</li>
+                    <li><strong>Antimafia sociale:</strong> Riconoscere il ruolo della società civile nella lotta alla criminalità</li>
+                    <li><strong>Economia legale:</strong> Comprendere l'importanza dell'economia trasparente</li>
+                    <li><strong>Giustizia:</strong> Valorizzare il ruolo della magistratura e delle forze dell'ordine</li>
+                </ul>
+            </div>
+
+            <div class="falcone-quote">
+                La mafia non è affatto invincibile. È un fatto umano e come tutti i fatti umani ha un inizio e avrà anche una fine
+                <br><small>- Giovanni Falcone</small>
+            </div>
+
+            <div class="context-section">
+                <h3>🏛️ Il fenomeno mafioso: definizione e caratteristiche</h3>
+                <p>La <strong>mafia</strong> non è solo criminalità comune, ma un <strong>sistema di potere parallelo</strong> che si contrappone allo Stato democratico. Le sue caratteristiche principali sono:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Elementi costitutivi della mafia:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Violenza e intimidazione:</strong> Uso sistematico della forza per imporre la propria volontà</li>
+                        <li><strong>Omertà:</strong> Codice del silenzio che impedisce collaborazione con lo Stato</li>
+                        <li><strong>Controllo del territorio:</strong> Gestione di attività economiche e sociali</li>
+                        <li><strong>Connivenza:</strong> Rapporti con pezzi dello Stato, politica ed economia</li>
+                        <li><strong>Organizzazione gerarchica:</strong> Struttura piramidale con ruoli definiti</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mafia-types">
+                <h3>🗺️ Le diverse organizzazioni mafiose in Italia</h3>
+                
+                <div class="eroe-item">
+                    <h4>🏴‍☠️ Cosa Nostra (Sicilia)</h4>
+                    <p>La più antica e potente organizzazione mafiosa italiana. Strutturata in "famiglie" che controllano territori specifici. Ha dominato il traffico internazionale di droga dagli anni '70.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>⚔️ 'Ndrangheta (Calabria)</h4>
+                    <p>Considerata oggi la più pericolosa al mondo. Basata su legami di sangue ("'ndrine"), controlla gran parte del traffico internazionale di cocaina.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>🔫 Camorra (Campania)</h4>
+                    <p>Organizzazione più frammentata, con numerosi clan in competizione. Forte presenza nell'economia legale e illegale della Campania.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>👑 Sacra Corona Unita (Puglia)</h4>
+                    <p>La più recente delle mafie italiane, nata negli anni '80. Specializzata nel traffico di armi, droga e esseri umani attraverso l'Adriatico.</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 Momenti chiave nella lotta alla mafia</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1962</div>
+                    <div class="timeline-event">Creazione della Commissione Antimafia parlamentare</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1982</div>
+                    <div class="timeline-event">Assassinio del generale Carlo Alberto Dalla Chiesa</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1986</div>
+                    <div class="timeline-event">Maxiprocesso di Palermo, 475 imputati</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">23 maggio 1992</div>
+                    <div class="timeline-event">Strage di Capaci: ucciso Giovanni Falcone</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">19 luglio 1992</div>
+                    <div class="timeline-event">Strage di Via D'Amelio: ucciso Paolo Borsellino</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1996</div>
+                    <div class="timeline-event">Nascita di Libera, associazioni contro le mafie</div>
+                </div>
+            </div>
+
+            <div class="eroi-section">
+                <h3>🦸‍♂️ Gli eroi della legalità</h3>
+                
+                <div class="eroe-item">
+                    <h4>Giovanni Falcone (1939-1992)</h4>
+                    <p>Magistrato siciliano, pioniere delle indagini patrimoniali e della cooperazione internazionale antimafia. Creatore del pool antimafia con Paolo Borsellino.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>Paolo Borsellino (1940-1992)</h4>
+                    <p>Magistrato palermitano, amico fraterno di Falcone. Specializzato nelle indagini sui rapporti tra mafia, politica e appalti pubblici.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>Giuseppe Impastato (1948-1978)</h4>
+                    <p>Giornalista e attivista di Cinisi. Denunciò pubblicamente il boss mafioso Gaetano Badalamenti. Ucciso a 30 anni per il suo impegno.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>Don Luigi Ciotti</h4>
+                    <p>Sacerdote piemontese, fondatore del Gruppo Abele e di Libera. Da decenni in prima linea nella lotta alle mafie e per la giustizia sociale.</p>
+                </div>
+                
+                <div class="eroe-item">
+                    <h4>Roberto Saviano</h4>
+                    <p>Scrittore e giornalista napoletano. Il suo libro "Gomorra" ha rivelato al mondo i meccanismi della camorra. Vive sotto scorta dal 2006.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>⚖️ Gli strumenti dello Stato contro la mafia</h3>
+                <p>Lo Stato italiano ha sviluppato nel tempo <strong>strumenti legislativi e operativi</strong> specifici per combattere la criminalità organizzata:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Strumenti legislativi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Articolo 416-bis C.P.:</strong> Reato di associazione mafiosa</li>
+                        <li><strong>Confisca dei beni:</strong> Sequestro e confisca dei patrimoni illeciti</li>
+                        <li><strong>Collaboratori di giustizia:</strong> Protezione per pentiti</li>
+                        <li><strong>Misure di prevenzione:</strong> Sorveglianza speciale, obbligo di soggiorno</li>
+                        <li><strong>Antimafia amministrativa:</strong> Controlli su appalti e licenze</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Organismi specializzati:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>DIA:</strong> Direzione Investigativa Antimafia</li>
+                        <li><strong>DNA:</strong> Direzione Nazionale Antimafia</li>
+                        <li><strong>AGENZIA:</strong> Agenzia Nazionale per i Beni Sequestrati e Confiscati</li>
+                        <li><strong>Commissioni Antimafia:</strong> Controllo parlamentare</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="legacy-section">
+                <h3>🌱 L'antimafia sociale: cittadinanza attiva</h3>
+                <p>La lotta alla mafia non è solo compito dello Stato, ma responsabilità di tutti i cittadini:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Libera:</strong> Rete di oltre 1600 associazioni contro le mafie</li>
+                    <li><strong>Addiopizzo:</strong> Movimento di commercianti che rifiutano il pizzo</li>
+                    <li><strong>Cooperatives sociali:</strong> Gestione di beni confiscati alla mafia</li>
+                    <li><strong>Educazione:</strong> Progetti nelle scuole per la cultura della legalità</li>
+                    <li><strong>Memoria:</strong> Commemorazioni e luoghi della memoria</li>
+                    <li><strong>Economia etica:</strong> Consumo critico e commercio equo</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><strong>23 maggio - Giornata della Legalità:</strong> Ogni anno si commemora il sacrificio di Falcone, Borsellino e di tutte le vittime di mafia. Migliaia di studenti partecipano alle manifestazioni per rinnovare l'impegno civile.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>💰 L'economia criminale e il danno alla società</h3>
+                <p>La criminalità organizzata non danneggia solo la sicurezza, ma <strong>distorce l'intero sistema economico e sociale</strong>:</p>
+                
+                <div class="warning-box">
+                    <p><strong>Danni economici:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Concorrenza sleale:</strong> Le imprese criminali falsano il mercato</li>
+                        <li><strong>Tassazione criminale:</strong> Il pizzo come tassa parallela</li>
+                        <li><strong>Investimenti scoraggiati:</strong> Clima di insicurezza allontana capitali</li>
+                        <li><strong>Corruzione:</strong> Degrado delle istituzioni pubbliche</li>
+                        <li><strong>Riciclaggio:</strong> Inquinamento dell'economia legale</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>Danni sociali:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cultura dell'illegalità:</strong> Normalizzazione della violenza</li>
+                        <li><strong>Emigrazione forzata:</strong> I giovani abbandonano i territori controllati</li>
+                        <li><strong>Disuguaglianze:</strong> Concentrazione della ricchezza criminale</li>
+                        <li><strong>Sfiducia nelle istituzioni:</strong> Erosione del patto sociale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🌍 Le mafie oggi: sfide globali</h3>
+                <p>Nel XXI secolo, le organizzazioni criminali si sono globalizzate e adattate alle nuove tecnologie:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Nuove sfide:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cybercrime:</strong> Attività criminali nel mondo digitale</li>
+                        <li><strong>Traffici globali:</strong> Droga, armi e esseri umani su scala mondiale</li>
+                        <li><strong>Ecomafia:</strong> Criminalità ambientale e smaltimento illecito</li>
+                        <li><strong>Infiltrazioni legali:</strong> Penetrazione nell'economia e nelle istituzioni</li>
+                        <li><strong>Social network:</strong> Nuovi canali per intimidazione e reclutamento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>Qual è la differenza tra criminalità comune e criminalità organizzata di tipo mafioso?</li>
+                    <li>Perché l'omertà è considerata uno dei pilastri del potere mafioso?</li>
+                    <li>Come può un singolo cittadino contribuire alla lotta contro le mafie?</li>
+                    <li>Quale ruolo ha giocato la magistratura nella lotta alla mafia dagli anni '80 ad oggi?</li>
+                    <li>Perché la confisca dei beni è considerata un'arma efficace contro la criminalità organizzata?</li>
+                    <li>Come influisce la presenza mafiosa sull'economia di un territorio?</li>
+                    <li>Quale significato ha la Giornata della Legalità del 23 maggio?</li>
+                    <li>Perché è importante studiare la storia della lotta alla mafia nelle scuole?</li>
+                    <li>Come si sono evolute le organizzazioni criminali nell'era di internet?</li>
+                    <li>Quale rapporto esiste tra cultura della legalità e sviluppo democratico?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

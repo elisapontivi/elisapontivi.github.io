@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evasione Fiscale in Italia - Un Problema di Cittadinanza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 30%, #b22222 70%, #800000 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8b0000, #dc143c);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "💸";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "⚖️";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fiscal-quote {
+            background: linear-gradient(135deg, #8b0000, #dc143c);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .fiscal-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .fiscal-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .dati-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .dati-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #dc143c;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #dc143c;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #dc143c;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .strumenti-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .strumenti-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .strumento-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .strumento-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .conseguenze-section {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .conseguenze-section h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #8b0000;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff0f0;
+            border-left: 4px solid #dc143c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .stat-box {
+            background: #f0f8ff;
+            border: 2px solid #4682b4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .big-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #dc143c;
+            display: block;
+        }
+
+        .stat-description {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .fiscal-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .big-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💸 Evasione Fiscale in Italia</h1>
+            <p>Un Problema di Cittadinanza e Giustizia Sociale</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, ISTITUZIONI E REGOLE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare l'Evasione Fiscale in Educazione Civica?</h2>
+                <p>L'evasione fiscale rappresenta una delle <strong>violazioni più gravi del patto sociale</strong> e uno studio fondamentale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Dovere costituzionale:</strong> Art. 53 Costituzione "Tutti sono tenuti a concorrere alle spese pubbliche"</li>
+                    <li><strong>Solidarietà sociale:</strong> Chi evade scarica i costi sui cittadini onesti</li>
+                    <li><strong>Servizi pubblici:</strong> Meno tasse = meno scuole, ospedali, infrastrutture</li>
+                    <li><strong>Equità fiscale:</strong> Chi ha di più deve contribuire di più</li>
+                    <li><strong>Concorrenza leale:</strong> L'evasione distorce il mercato a danno delle imprese oneste</li>
+                    <li><strong>Legalità:</strong> Rispetto delle regole come fondamento della democrazia</li>
+                    <li><strong>Cittadinanza responsabile:</strong> Senso civico e partecipazione attiva</li>
+                </ul>
+            </div>
+
+            <div class="fiscal-quote">
+                Le tasse sono il prezzo che paghiamo per una società civilizzata
+                <br><small>- Oliver Wendell Holmes Jr., Giudice Corte Suprema USA</small>
+            </div>
+
+            <div class="story-section">
+                <h3>📊 L'evasione fiscale in Italia: i numeri</h3>
+                <p>L'Italia ha uno dei tassi di evasione fiscale più alti d'Europa, con conseguenze drammatiche per l'economia e la società:</p>
+                
+                <div class="stat-box">
+                    <span class="big-number">110</span>
+                    <div class="stat-description">miliardi di euro evasi ogni anno (dati MEF 2023)</div>
+                </div>
+
+                <div class="stat-box">
+                    <span class="big-number">18,2%</span>
+                    <div class="stat-description">tax gap - differenza tra tasse dovute e riscosse</div>
+                </div>
+
+                <div class="stat-box">
+                    <span class="big-number">67%</span>
+                    <div class="stat-description">dell'evasione IVA è concentrata nel Sud Italia</div>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>📈 Composizione dell'evasione fiscale italiana:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>IVA:</strong> 35 miliardi di euro (il 32% del totale)</li>
+                        <li><strong>IRPEF:</strong> 30 miliardi di euro (lavoro autonomo e imprese)</li>
+                        <li><strong>IRAP:</strong> 8 miliardi di euro (imposta regionale)</li>
+                        <li><strong>Contributi sociali:</strong> 37 miliardi di euro (lavoro nero)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dati-section">
+                <h3>🌍 Italia vs Europa: un confronto impietoso</h3>
+                <p>Il confronto internazionale mostra le gravi carenze del sistema fiscale italiano:</p>
+                
+                <div class="warning-box">
+                    <p><strong>🔍 Tax gap IVA in Europa (2021):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>🇮🇹 Italia:</strong> 18,2% - uno dei peggiori d'Europa</li>
+                        <li><strong>🇬🇷 Grecia:</strong> 25,8% - il peggiore</li>
+                        <li><strong>🇫🇷 Francia:</strong> 7,8% - virtuosa</li>
+                        <li><strong>🇩🇪 Germania:</strong> 7,8% - efficienza tedesca</li>
+                        <li><strong>🇸🇪 Svezia:</strong> 1,4% - il migliore</li>
+                        <li><strong>🇪🇺 Media UE:</strong> 9,1% - Italia doppia della media</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>💡 Cosa ci insegnano i paesi virtuosi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Digitalizzazione:</strong> Fatturazione elettronica obbligatoria</li>
+                        <li><strong>Controlli incrociati:</strong> Banche dati integrate</li>
+                        <li><strong>Cultura fiscale:</strong> Educazione civica fin da piccoli</li>
+                        <li><strong>Semplificazione:</strong> Procedure più semplici e chiare</li>
+                        <li><strong>Fiducia:</strong> Rapporto collaborativo fisco-contribuente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="conseguenze-section">
+                <h3>⚠️ Le conseguenze dell'evasione fiscale</h3>
+                <p>L'evasione fiscale ha effetti devastanti su economia e società italiana:</p>
+                
+                <div class="strumento-item">
+                    <h4>💰 Conseguenze economiche</h4>
+                    <p><strong>Deficit pubblico:</strong> 110 miliardi in meno nelle casse dello Stato ogni anno</p>
+                    <p><strong>Debito pubblico:</strong> Necessità di indebitarsi per finanziare i servizi</p>
+                    <p><strong>Pressione fiscale:</strong> Chi paga, paga di più per compensare chi evade</p>
+                    <p><strong>Competitività:</strong> Le imprese oneste sono penalizzate rispetto a quelle che evadono</p>
+                </div>
+
+                <div class="strumento-item">
+                    <h4>🏥 Conseguenze sociali</h4>
+                    <p><strong>Servizi pubblici:</strong> Meno risorse per scuole, ospedali, trasporti</p>
+                    <p><strong>Welfare:</strong> Pensioni e sussidi meno generosi</p>
+                    <p><strong>Investimenti:</strong> Meno infrastrutture e modernizzazione</p>
+                    <p><strong>Ricerca:</strong> Minori investimenti in università e innovazione</p>
+                </div>
+
+                <div class="strumento-item">
+                    <h4>⚖️ Conseguenze sulla giustizia sociale</h4>
+                    <p><strong>Disuguaglianza:</strong> Chi evade (spesso chi ha di più) paga meno di chi rispetta le regole</p>
+                    <p><strong>Sfiducia:</strong> Erosione del patto sociale e della fiducia nelle istituzioni</p>
+                    <p><strong>Illegalità diffusa:</strong> Normalizzazione dei comportamenti illegali</p>
+                    <p><strong>Spirale negativa:</strong> "Se lo fanno tutti, lo faccio anch'io"</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 Storia della lotta all'evasione in Italia</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1973</div>
+                    <div class="timeline-event">Riforma tributaria - nasce l'IRPEF e l'IVA moderne</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1991</div>
+                    <div class="timeline-event">Nascita dell'Agenzia delle Entrate per modernizzare il fisco</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2001</div>
+                    <div class="timeline-event">Riforma Tremonti - condoni fiscali controversi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2010</div>
+                    <div class="timeline-event">"Redditometro" - controllo sulla coerenza redditi-spese</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2017</div>
+                    <div class="timeline-event">Fatturazione elettronica obbligatoria B2B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2019</div>
+                    <div class="timeline-event">Fatturazione elettronica estesa a B2C</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-event">Cashback e lotteria degli scontrini contro l'evasione IVA</div>
+                </div>
+            </div>
+
+            <div class="strumenti-section">
+                <h3>🛠️ Gli strumenti per combattere l'evasione</h3>
+                <p>L'Italia sta modernizzando gli strumenti di controllo e prevenzione:</p>
+                
+                <div class="strumento-item">
+                    <h4>💻 Digitalizzazione</h4>
+                    <p><strong>Fatturazione elettronica:</strong> Tracciabilità di tutte le transazioni commerciali</p>
+                    <p><strong>Corrispettivi telematici:</strong> Scontrini digitali per bar, ristoranti, negozi</p>
+                    <p><strong>Dichiarazione precompilata:</strong> Semplificazione per i contribuenti onesti</p>
+                    <p><strong>Risultati:</strong> Aumento del gettito IVA di oltre 5 miliardi dal 2019</p>
+                </div>
+                
+                <div class="strumento-item">
+                    <h4>🔍 Controlli intelligenti</h4>
+                    <p><strong>Intelligenza artificiale:</strong> Algoritmi per individuare anomalie</p>
+                    <p><strong>Banche dati incrociate:</strong> Confronto tra redditi dichiarati e spese</p>
+                    <p><strong>Geo-localizzazione:</strong> Controlli mirati per territorio e settore</p>
+                    <p><strong>Risk assessment:</strong> Priorità ai contribuenti ad alto rischio</p>
+                </div>
+                
+                <div class="strumento-item">
+                    <h4>🤝 Cooperative compliance</h4>
+                    <p><strong>Dialogo preventivo:</strong> Collaborazione fisco-contribuente</p>
+                    <p><strong>Ruling internazionale:</strong> Accordi preventivi sui prezzi di trasferimento</p>
+                    <p><strong>Patent box:</strong> Regime agevolato per proprietà intellettuale</p>
+                    <p><strong>Adempimento collaborativo:</strong> Trasparenza in cambio di certezza</p>
+                </div>
+                
+                <div class="strumento-item">
+                    <h4>💳 Tracciabilità dei pagamenti</h4>
+                    <p><strong>Credito d'imposta:</strong> Vantaggi per chi paga elettronicamente</p>
+                    <p><strong>Limiti al contante:</strong> Massimo 1.000 euro per transazione</p>
+                    <p><strong>POS obbligatorio:</strong> Tutti gli esercenti devono accettare carte</p>
+                    <p><strong>Lotteria scontrini:</strong> Incentivi per i consumatori a chiedere scontrino</p>
+                </div>
+            </div>
+
+           
+
+  <div class="story-section">
+                <h3>📱 Progetto interdisciplinare: Matematica/Informatica + Educazione Civica</h3>
+                <p>Analisi quantitativa dell'<strong>evasione fiscale</strong> attraverso dati reali e modelli matematici:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>🔗 Fonti dati e approfondimenti:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>MEF:</strong> Relazione annuale su tax gap ed evasione fiscale</li>
+                        <li><strong>Agenzia delle Entrate:</strong> Statistiche delle dichiarazioni</li>
+                        <li><strong>LaVoce.info:</strong> <a href="https://lavoce.info/archives/106871/se-torna-a-crescere-levasione/" target="_blank" style="color: #8b0000;">Se torna a crescere l'evasione</a></li>
+                        <li><strong>LaVoce.info:</strong> <a href="https://lavoce.info/archives/103335/tre-grafici-sullevasione-fiscale-e-contributiva/" target="_blank" style="color: #8b0000;">Tre grafici sull'evasione fiscale</a></li>
+                        <li><strong>Commissione Europea:</strong> VAT Gap Report annuale</li>
+                    </ul>
+                </div>
+
+                <div class="strumento-item">
+                    <h4>💰 Proposta 1: Simulatore "Cosa Pagherei Se..."</h4>
+                    <p><strong>Matematica:</strong> Calcolo delle aliquote progressive IRPEF (23%, 35%, 43%), detrazioni per lavoro dipendente, bonus fiscali, calcolo dell'ISEE</p>
+                    <p><strong>Informatica:</strong> Applicazione web interattiva che simula il carico fiscale per diverse fasce di reddito, con confronto grafico tra lordo e netto</p>
+                    <p><strong>Educazione Civica:</strong> Comprensione pratica della progressività fiscale, del principio costituzionale di capacità contributiva (Art. 53), e dell'equità del sistema</p>
+                    <p><strong>Output:</strong> Calcolatore personale che mostra: "Con 30.000€ lordi annui paghi 6.960€ di IRPEF (23,2% effettivo) e ti restano 23.040€ netti"</p>
+                    <p><strong>Dati da utilizzare:</strong> Scaglioni IRPEF 2024, detrazioni standard, addizionali regionali e comunali medie</p>
+                </div>
+
+                <div class="strumento-item">
+                    <h4>🌍 Proposta 2: "Italia vs Europa - Gara di Onestà Fiscale"</h4>
+                    <p><strong>Matematica:</strong> Calcolo di percentili, ranking europei, indici compositi di performance fiscale, correlazioni tra tax gap e PIL pro capite</p>
+                    <p><strong>Informatica:</strong> Dashboard comparativa con grafici radar per confrontare Italia con Germania, Francia, Svezia su: tax gap, pressione fiscale, fiducia nel fisco</p>
+                    <p><strong>Educazione Civica:</strong> Cittadinanza europea, analisi dei modelli fiscali virtuosi, studio delle cause culturali e strutturali dell'evasione</p>
+                    <p><strong>Output:</strong> "Pagella europea dell'Italia" - scorecard interattiva che mostra posizione italiana in classifica UE per trasparenza, efficienza, equità fiscale</p>
+                    <p><strong>Approfondimento:</strong> Utilizzare i dati dell'articolo <a href="https://lavoce.info/archives/103335/tre-grafici-sullevasione-fiscale-e-contributiva/" target="_blank" style="color: #2980b9;">Tre grafici sull'evasione</a> per confronti internazionali</p>
+                </div>
+                <div class="warning-box">
+                    <p><strong>💡 Competenze sviluppate:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Financial literacy:</strong> Comprensione pratica del sistema fiscale italiano</li>
+                        <li><strong>Data analysis:</strong> Interpretazione di statistiche fiscali complesse</li>
+                        <li><strong>Civic engagement:</strong> Collegamento diretto tra doveri fiscali e diritti sociali</li>
+                        <li><strong>European awareness:</strong> Confronto critico con altri sistemi europei</li>
+                        <li><strong>Digital skills:</strong> Creazione di strumenti web per la simulazione fiscale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎥 Video di approfondimento</h3>
+                <p>Per comprendere meglio il fenomeno dell'evasione fiscale in Italia e le sue conseguenze:</p>
+                
+                <div class="highlight-box" style="text-align: center; padding: 30px;">
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; margin: 20px 0;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ZZGE8wRoX9s?si=lPGRsGOG9ZHUtoUQ" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px;"
+                            title="Video sull'Evasione Fiscale in Italia"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic; color: #666;">
+                    </p>
+                </div>
+
+                </div>
+            </div>

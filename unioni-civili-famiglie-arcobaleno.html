@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unioni civili, famiglie arcobaleno e adozione per coppie same-sex</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #90EE90;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "✓"; color: #27ae60; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .overtourism-quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .overtourism-quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section {
+            background: #f8f9fa; border-radius: 15px;
+        }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        /* Embed video responsivo */
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .overtourism-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👨‍👨‍👧‍👦 Unioni civili, famiglie arcobaleno e adozione</h1>
+            <p>Diritti, tutele e dati per discutere con consapevolezza</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — COSTITUZIONE • DIRITTI • CITTADINANZA</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il tema interseca <strong>uguaglianza e non discriminazione</strong> (artt. 2, 3), <strong>formazioni sociali</strong>, <strong>tutela dei minori</strong> e l’evoluzione delle politiche familiari. Offre un terreno concreto per ragionare su diritti, doveri, narrativa pubblica e dati.</p>
+                <ul>
+                    <li><strong>Costituzione e cittadinanza:</strong> come si bilanciano e si aggiornano i diritti?</li>
+                    <li><strong>Tutela dei bambini:</strong> continuità affettiva, responsabilità genitoriale, migliori interessi del minore</li>
+                    <li><strong>Dati e realtà sociali:</strong> numeri delle unioni civili, distribuzione territoriale, evidenze sugli esiti per i figli</li>
+                    <li><strong>Convivere nella diversità:</strong> contrasto a stigma e disinformazione</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Domanda-guida: come garantire i diritti delle famiglie senza escludere nessuno e mettendo al centro il benessere dei minori?
+            </div>
+
+            <div class="story-section">
+                <h3>🏛 Quadro: unioni civili e genitorialità</h3>
+                <p>In Italia le <strong>unioni civili</strong> hanno introdotto un riconoscimento giuridico per le coppie same-sex, con diritti e doveri specifici. Il dibattito si concentra oggi su riconoscimento della <strong>genitorialità</strong>, adozioni e tutele uniformi sul territorio.</p>
+                                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>📊 Temi chiave per capire</h3>
+                <div class="impact-item">
+                    <h4>⚖ Uguaglianza e non discriminazione</h4>
+                    <p>Le norme devono evitare trattamenti discriminatori e assicurare tutele effettive alle famiglie, indipendentemente dall’orientamento dei genitori.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>👶 Miglior interesse del minore</h4>
+                    <p>Il focus è la continuità affettiva e la stabilità giuridica: sicurezza, accesso a servizi, successione, decisioni sanitarie.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🗺 Dati e realtà territoriali</h4>
+                    <p>I numeri delle unioni civili e la loro distribuzione mostrano come fenomeni sociali e amministrativi varino tra regioni e città.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🔬 Evidenze sugli esiti per i figli</h4>
+                    <p>Una parte della letteratura internazionale indica esiti comparabili per i figli cresciuti in famiglie omogenitoriali, se a parità di contesto socio-economico e relazionale.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Strumenti e tutele</h3>
+                <div class="solution-item">
+                    <h4>🧭 Chiarezza dei diritti</h4>
+                    <p>Uniformare prassi e tutele per evitare differenze territoriali, garantendo certezze su responsabilità genitoriali e decisioni per i minori.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧒 Centralità del minore</h4>
+                    <p>Procedure che mettano al centro l’interesse del bambino: tempi certi, continuità affettiva, accesso a cure, scuola, assistenza.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📚 Educazione e informazione</h4>
+                    <p>Competenze per docenti/studenti su stereotipi, linguaggio rispettoso, lettura critica di dati e fonti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧩 Coordinamento istituzionale</h4>
+                    <p>Maggiore coerenza tra amministrazioni, servizi e autorità competenti per ridurre contenziosi e incertezze.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Quali diritti fondamentali entrano in gioco quando parliamo di famiglie arcobaleno?</li>
+                    <li>In che modo il “miglior interesse del minore” dovrebbe orientare le scelte giuridiche e amministrative?</li>
+                    <li>Come si combattono stereotipi e disinformazione usando i dati?</li>
+                    <li>Che differenza c’è tra riconoscimento sociale e riconoscimento giuridico di una famiglia?</li>
+                    <li>Quali strumenti potrebbero garantire tutele più uniformi nel territorio?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <p style="margin-bottom:10px;">Introduzione al tema: diritti, riconoscimento e famiglie arcobaleno</p>
+                    <div class="video-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed/I1hLq_yOD80"
+                            title="Video YouTube — Unioni civili e famiglie arcobaleno"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">DATI</span>
+                    <a href="https://www.infodata.ilsole24ore.com/2024/04/10/unioni-civili-in-italia-quante-sono-e-dove-si-fanno/?refresh_ce=1" target="_blank" rel="noopener">
+                        InfoData — Quante sono e dove si fanno le unioni civili in Italia (2024)
+                    </a>
+                    <p>Visualizzazioni e numeri utili per leggere la distribuzione territoriale e discutere le tendenze.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.ilpost.it/2014/07/08/figli-coppie-omosessuali-studio-australia/" target="_blank" rel="noopener">
+                        Il Post — Studio australiano su figli di coppie omosessuali (2014)
+                    </a>
+                    <p>Una sintesi di risultati di ricerca sugli esiti per i figli cresciuti in famiglie omogenitoriali.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

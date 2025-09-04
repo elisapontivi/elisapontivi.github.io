@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economia Aziendale: Educazione Civica</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #1976d2;
+            padding: 30px 20px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+        }
+        
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+            letter-spacing: 1px;
+        }
+        
+        .board {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .section-title {
+            background-color: #1976d2;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 0;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+        }
+        
+        .section-title .options {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+            background-color: rgba(25, 118, 210, 0.05);
+            border-radius: 0 0 10px 10px;
+            margin-top: 0;
+        }
+        
+        .note {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 15px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        
+        .note:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.15);
+        }
+        
+        .note .title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #333;
+            border-bottom: 2px solid rgba(25, 118, 210, 0.1);
+            padding-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .note .content {
+            font-size: 14px;
+            color: #555;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .note img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .creator-info {
+            font-size: 12px;
+            color: #9e9e9e;
+            margin-top: 15px;
+            text-align: right;
+            font-weight: bold;
+            background-color: #f3f7fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            float: right;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+        
+        /* Stile per la scrollbar verticale */
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #1976d2;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ECONOMIA AZIENDALE: EDUCAZIONE CIVICA</h1>
+    </div>
+
+    <div class="board">
+        <!-- SEZIONE: 3 AFM -->
+        <div class="section">
+            <div class="section-title">
+                3 AFM
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <!-- Sotto-sezione Economia Circolare -->
+                <div style="background-color: #e8f5e8; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 3px solid #4caf50;">
+                    <h3 style="color: #2e7d32; margin: 0 0 20px 0; font-size: 18px; font-weight: bold; text-align: center; background-color: #4caf50; color: white; padding: 10px; border-radius: 8px;">🌱 ECONOMIA CIRCOLARE</h3>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #4caf50;">
+                        <div class="title" style="color: #2e7d32; border-bottom-color: #4caf50;">Cos'è l'Economia Circolare</div>
+                        <div class="content">
+                            <p>L'economia circolare è un modello economico rigenerativo che mira a mantenere i materiali in uso il più a lungo possibile, estraendo il massimo valore durante l'utilizzo, per poi recuperarli e rigenerarli alla fine del loro ciclo di vita. Questo approccio si contrappone al tradizionale modello lineare "prendi-produci-getta", promuovendo la riduzione dei rifiuti, il riuso e il riciclaggio per creare un sistema sostenibile che beneficia sia l'ambiente che l'economia.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #c8e6c9; color: #2e7d32;">Introduzione</div>
+                    </div>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #4caf50;">
+                        <div class="title" style="color: #2e7d32; border-bottom-color: #4caf50;">
+                            <a href="https://www.sfridoo.com/blog/esempi-economia-circolare/" target="_blank" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                                Esempi di Aziende che Fanno Economia Circolare
+                            </a>
+                        </div>
+                        <div class="content">
+                            <p>Articolo completo di Sfridoo che presenta esempi concreti di aziende che hanno abbracciato i principi dell'economia circolare. Il blog illustra come diverse imprese, dal settore manifatturiero a quello dei servizi, stiano implementando strategie innovative per ridurre gli sprechi, riutilizzare materiali e creare valore attraverso modelli di business sostenibili.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #c8e6c9; color: #2e7d32;">Link esterno</div>
+                    </div>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #4caf50;">
+                        <div class="title" style="color: #2e7d32; border-bottom-color: #4caf50;">
+                            <a href="https://esgnews.it/environmental/economia-circolare-esempi/" target="_blank" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                                Economia Circolare: Esempi ESG News
+                            </a>
+                        </div>
+                        <div class="content">
+                            <p>Approfondimento di ESG News sui casi studio e gli esempi pratici di economia circolare nel panorama italiano e internazionale. L'articolo analizza le best practice aziendali e le strategie innovative adottate dalle imprese per implementare modelli circolari sostenibili, con particolare focus sui benefici economici e ambientali.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #c8e6c9; color: #2e7d32;">Link esterno</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #4caf50;">
+                        <div class="title" style="color: #2e7d32; border-bottom-color: #4caf50;">Video sull'Economia Circolare</div>
+                        <div class="content">
+                            <p>Video di approfondimento sui temi dell'economia circolare.</p>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/ni8-BuHUzUg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #c8e6c9; color: #2e7d32;">YouTube</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #4caf50; background-color: #f1f8e9;">
+                        <div class="title" style="color: #2e7d32; border-bottom-color: #4caf50; font-size: 18px;">💡 PROGETTO DI GRUPPO: STARTUP ECONOMIA CIRCOLARE</div>
+                        <div class="content">
+                            <div style="background-color: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #2e7d32; margin-top: 0;">🎲 LISTA PRODOTTI DI SCARTO (1 per gruppo)</h4>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px;">
+                                    <div>1. <strong>Fondi di caffè</strong> ☕</div>
+                                    <div>9. <strong>Bottiglie di vetro</strong> 🍷</div>
+                                    <div>2. <strong>Bucce d'arancia</strong> 🍊</div>
+                                    <div>10. <strong>Cartoni della pizza</strong> 🍕</div>
+                                    <div>3. <strong>Pneumatici usati</strong> 🚗</div>
+                                    <div>11. <strong>Capsule del caffè</strong> ☕</div>
+                                    <div>4. <strong>Libri scolastici dismessi</strong> 📚</div>
+                                    <div>12. <strong>Jeans strappati</strong> 👖</div>
+                                    <div>5. <strong>Cassette di legno della frutta</strong> 📦</div>
+                                    <div>13. <strong>Tappi di sughero</strong> 🍷</div>
+                                    <div>6. <strong>Gusci d'uovo</strong> 🥚</div>
+                                    <div>14. <strong>Carta da giornale</strong> 📰</div>
+                                    <div>7. <strong>Vestiti fast fashion</strong> 👕</div>
+                                    <div>15. <strong>Mobili IKEA dismessi</strong> 🪑</div>
+                                    <div>8. <strong>Scarti di potatura</strong> 🌳</div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #2e7d32; margin-top: 0;">📋 METODOLOGIA DI LAVORO</h4>
+                                
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #1b5e20;">FASE 1: Identificazione dei Produttori</strong><br>
+                                    <span style="font-size: 14px; color: #2e7d32;">Chi genera questo scarto? Dove? In che quantità?</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li>Aziende, negozi, famiglie, enti pubblici</li>
+                                        <li>Frequenza di produzione (giornaliera, stagionale, ecc.)</li>
+                                        <li>Costi attuali di smaltimento</li>
+                                    </ul>
+                                </div>
+                                
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #1b5e20;">FASE 2: Ricerca Online</strong><br>
+                                    <span style="font-size: 14px; color: #2e7d32;">Come viene già riutilizzato nel mondo?</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li>Best practice italiane ed europee</li>
+                                        <li>Tecnologie disponibili</li>
+                                        <li>Mercati di sbocco esistenti</li>
+                                        <li>Esempi di startup simili</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <strong style="color: #1b5e20;">FASE 3: Progettazione Startup</strong><br>
+                                    <span style="font-size: 14px; color: #2e7d32;">Proporre un <strong>modello di business semplice</strong>:</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li><strong>Nome e mission</strong> della startup</li>
+                                        <li><strong>Processo</strong>: come raccogliete e trasformate lo scarto</li>
+                                        <li><strong>Prodotto finale</strong>: cosa create e a chi lo vendete</li>
+                                        <li><strong>Ricavi</strong>: come guadagnate</li>
+                                        <li><strong>Team</strong>: che competenze servono</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #e8f5e8; padding: 15px; border-radius: 8px;">
+                                <h4 style="color: #2e7d32; margin-top: 0;">📊 PRESENTAZIONE FINALE (10 minuti)</h4>
+                                <strong style="color: #1b5e20;">Slide da includere:</strong>
+                                <ol style="font-size: 14px; margin: 8px 0;">
+                                    <li><strong>Il problema</strong>: il nostro scarto e chi lo produce</li>
+                                    <li><strong>La soluzione</strong>: come lo trasformiamo</li>
+                                    <li><strong>Il mercato</strong>: a chi vendiamo il prodotto finale</li>
+                                    <li><strong>Il modello di business</strong>: come funziona e guadagna la startup</li>
+                                    <li><strong>I primi passi</strong>: cosa fare per iniziare davvero</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #c8e6c9; color: #2e7d32;">Progetto di classe</div>
+                    </div>
+                </div>
+                
+                        
+        <!-- SEZIONE: 4 AFM -->
+        <div class="section">
+            <div class="section-title">
+                4 AFM
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <!-- Richiamo al programma curriculare -->
+                <div style="background-color: #fff3e0; border-radius: 10px; padding: 15px; margin-bottom: 20px; border-left: 4px solid #ff9800;">
+                    <h4 style="color: #e65100; margin: 0 0 10px 0; font-size: 16px;">📚 ARGOMENTI GIÀ STUDIATI IN AULA</h4>
+                    <p style="font-size: 14px; color: #bf360c; margin: 0; line-height: 1.5;">
+                        Nel programma curriculare di Economia Aziendale la classe 4 AFM affronta già: 
+                        <strong>Responsabilità Sociale dell'Impresa (CSR)</strong>, 
+                        <strong>Comunicazione Sociale e Ambientale</strong> e 
+                        <strong>Rendiconto Sociale e Ambientale</strong>.
+                    </p>
+                </div>
+                
+                <!-- Sotto-sezione Greenwashing -->
+                <div style="background-color: #fff3e0; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 3px solid #ff9800;">
+                    <h3 style="color: #e65100; margin: 0 0 20px 0; font-size: 18px; font-weight: bold; text-align: center; background-color: #ff9800; color: white; padding: 10px; border-radius: 8px;">🎭 GREENWASHING</h3>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #ff9800;">
+                        <div class="title" style="color: #e65100; border-bottom-color: #ff9800;">Cos'è il Greenwashing</div>
+                        <div class="content">
+                            <p>Il greenwashing è una strategia di comunicazione o marketing perseguita da aziende, istituzioni, enti che presentano come ecosostenibili le proprie attività, cercando di occultarne l'impatto ambientale negativo. Si tratta di una forma di appropriazione indebita di virtù ambientaliste finalizzata alla creazione di un'immagine positiva della propria reputazione, distogliendo l'attenzione del pubblico dagli effetti negativi per l'ambiente dovuti alle proprie attività.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #ffe0b2; color: #e65100;">Introduzione</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #ff9800; margin-bottom: 15px;">
+                        <div class="title" style="color: #e65100; border-bottom-color: #ff9800;">
+                            <a href="https://sustrain.com/esempi-greenwashing/" target="_blank" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                                Esempi di Greenwashing
+                            </a>
+                        </div>
+                        <div class="content">
+                            <p>Approfondimento di Sustrain con esempi concreti di greenwashing messi in atto da aziende famose. L'articolo analizza le strategie di comunicazione ingannevole utilizzate da diverse imprese per apparire più sostenibili di quanto non siano realmente, fornendo casi studio utili per comprendere come riconoscere e smascherare il greenwashing.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #ffe0b2; color: #e65100;">Link esterno</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #ff9800; margin-bottom: 15px;">
+                        <div class="title" style="color: #e65100; border-bottom-color: #ff9800;">Video sul Greenwashing</div>
+                        <div class="content">
+                            <p>Video di approfondimento sui meccanismi e gli esempi di greenwashing nel mondo aziendale.</p>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/Bpw5krNtrBU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #ffe0b2; color: #e65100;">YouTube</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #ff9800; background-color: #fff8f0;">
+                        <div class="title" style="color: #e65100; border-bottom-color: #ff9800; font-size: 18px;">🔍 PROGETTO DI GRUPPO: "SOSTENIBILI O GREENWASHING?"</div>
+                        <div class="content">
+                            <div style="background-color: #ffe0b2; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #e65100; margin-top: 0;">🎲 LISTA AZIENDE DA SORTEGGIARE (1 per gruppo)</h4>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 14px;">
+                                    <div><strong style="color: #d84315;">Aziende "Sospette":</strong><br>
+                                    1. H&M 2. Ryanair 3. McDonald's<br>
+                                    4. Coca-Cola 5. Shell 6. Volkswagen<br>
+                                    7. Nestlé 8. Amazon</div>
+                                    <div><strong style="color: #2e7d32;">Aziende "Virtuose":</strong><br>
+                                    9. Patagonia 10. Unilever 11. Interface<br>
+                                    12. Illy 13. Ferrero 14. Enel 15. Barilla</div>
+                                </div>
+                                <div style="margin-top: 10px; font-size: 14px;">
+                                    <strong style="color: #ff6f00;">Aziende "Miste" (casi complessi):</strong><br>
+                                    16. Tesla 17. IKEA 18. Apple 19. Microsoft 20. Nike
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #ffe0b2; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #e65100; margin-top: 0;">📋 METODOLOGIA DI RICERCA</h4>
+                                
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #bf360c;">STEP 1: Analisi del Bilancio</strong><br>
+                                    <span style="font-size: 14px; color: #e65100;">Consultare bilancio di sostenibilità o report ESG</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li>Investimenti e progetti concreti per la sostenibilità</li>
+                                        <li>Dati e risultati raggiunti (KPI, percentuali)</li>
+                                        <li>Obiettivi futuri e certificazioni</li>
+                                    </ul>
+                                </div>
+                                
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #bf360c;">STEP 2: Analisi della Comunicazione</strong><br>
+                                    <span style="font-size: 14px; color: #e65100;">Esplorare sito web, pubblicità, social media</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li>Coerenza tra comunicazione esterna e dati del bilancio</li>
+                                        <li>Tone of voice usato (realistico/esagerato/vago)</li>
+                                        <li>Focus della comunicazione vs reale impegno</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <strong style="color: #bf360c;">STEP 3: Valutazione Finale</strong><br>
+                                    <span style="font-size: 14px; color: #e65100;">Confrontare aspetti positivi e negativi</span>
+                                    <ul style="font-size: 14px; margin: 8px 0;">
+                                        <li><strong style="color: #2e7d32;">✅ Sostenibilità autentica</strong>: investimenti documentati, dati verificabili, trasparenza</li>
+                                        <li><strong style="color: #d32f2f;">❌ Red flags greenwashing</strong>: claim vaghi, contraddizioni, mancanza certificazioni</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #ffe0b2; padding: 15px; border-radius: 8px;">
+                                <h4 style="color: #e65100; margin-top: 0;">📊 PRESENTAZIONE FINALE (10-12 minuti)</h4>
+                                <strong style="color: #bf360c;">Contenuti da includere:</strong>
+                                <ol style="font-size: 14px; margin: 8px 0;">
+                                    <li><strong>L'azienda</strong>: settore, dimensioni, contesto</li>
+                                    <li><strong>Aspetti positivi</strong>: progetti, investimenti, risultati concreti</li>
+                                    <li><strong>Aspetti negativi</strong>: limiti, contraddizioni, criticità</li>
+                                    <li><strong>Confronto bilancio vs comunicazione</strong>: coerenza?</li>
+                                    <li><strong>Conclusione personale</strong>: punteggio da 1 a 10 motivato</li>
+                                </ol>
+                                <p style="font-size: 14px; margin: 8px 0; color: #e65100;"><strong>Formato libero:</strong> slide, infografiche, video, confronti grafici - stile a scelta del gruppo</p>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #ffe0b2; color: #e65100;">Progetto di classe</div>
+                    </div>
+                </div>
+                
+                <!-- Spazio per altri contenuti -->
+                <div class="note" style="border: 2px dashed #1976d2; background-color: #f3f7fd;">
+                    <div class="title" style="color: #1976d2; text-align: center;">💬         
+        <!-- SEZIONE: 5 AFM -->
+        <div class="section">
+            <div class="section-title">
+                5 AFM
+                <div class="options">⋮</div>
+            </div>
+            <div class="section-content">
+                <!-- Sotto-sezione ESG e Sostenibilità -->
+                <div style="background-color: #f3e5f5; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 3px solid #9c27b0;">
+                    <h3 style="color: #6a1b9a; margin: 0 0 20px 0; font-size: 18px; font-weight: bold; text-align: center; background-color: #9c27b0; color: white; padding: 10px; border-radius: 8px;">📊 ESG E SOSTENIBILITÀ AZIENDALE</h3>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #9c27b0;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0;">Etimologia e Significato di Sostenibilità</div>
+                        <div class="content">
+                            <p><strong>Dal latino "sustinēre":</strong> "sus" (sotto) + "tenere" (tenere) = "tenere su, sostenere, supportare"</p>
+                            <p><strong>Dibattito iniziale:</strong> Cosa significa essere davvero sostenibili? È possibile mantenere qualcosa indefinitamente? Come bilanciare crescita economica, benessere sociale e tutela ambientale?</p>
+                            <div style="background-color: #fce4ec; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                <strong style="color: #7b1fa2;">Definizione moderna:</strong> <em>Lo sviluppo sostenibile è quello che soddisfa i bisogni del presente senza compromettere la capacità delle future generazioni di soddisfare i propri bisogni.</em>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Etimologia e definizioni</div>
+                    </div>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #9c27b0;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0;">Storia degli ESG: Le Tappe Fondamentali</div>
+                        <div class="content">
+                            <div style="font-size: 14px; line-height: 1.6;">
+                                <div style="margin-bottom: 8px;"><strong style="color: #7b1fa2;">1953</strong> - H.R. Bowen pubblica "Social Responsibilities of the Businessman" - primo studio sistematico sulla responsabilità sociale d'impresa</div>
+                                <div style="margin-bottom: 8px;"><strong style="color: #7b1fa2;">1972</strong> - Rapporto "I Limiti dello Sviluppo" del Club di Roma - allarme sui limiti della crescita economica</div>
+                                <div style="margin-bottom: 8px;"><strong style="color: #7b1fa2;">1972</strong> - Dichiarazione di Stoccolma - prima conferenza ONU sull'ambiente umano</div>
+                                <div style="margin-bottom: 8px;"><strong style="color: #7b1fa2;">1987</strong> - "Our Common Future" (Rapporto Brundtland) - definizione ufficiale di sviluppo sostenibile</div>
+                                <div style="margin-bottom: 8px;"><strong style="color: #7b1fa2;">2015</strong> - Agenda 2030 (17 SDGs) e Accordo di Parigi - impegni globali per la sostenibilità</div>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Timeline storica</div>
+                    </div>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #9c27b0;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0;">Cosa sono gli ESG</div>
+                        <div class="content">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 14px;">
+                                <div style="background-color: #c8e6c9; padding: 10px; border-radius: 5px;">
+                                    <strong style="color: #2e7d32;">🌍 ENVIRONMENTAL</strong><br>
+                                    Cambiamento climatico, inquinamento, biodiversità, efficienza energetica, gestione rifiuti
+                                </div>
+                                <div style="background-color: #bbdefb; padding: 10px; border-radius: 5px;">
+                                    <strong style="color: #1976d2;">👥 SOCIAL</strong><br>
+                                    Diritti umani, condizioni lavorative, diversità e inclusione, impatto sulla comunità
+                                </div>
+                                <div style="background-color: #ffe0b2; padding: 10px; border-radius: 5px;">
+                                    <strong style="color: #f57c00;">⚖️ GOVERNANCE</strong><br>
+                                    Trasparenza, etica aziendale, struttura del CdA, politiche anticorruzione
+                                </div>
+                            </div>
+                            <p style="margin-top: 10px;"><strong>ESG</strong> rappresenta i criteri che gli investitori utilizzano per valutare la sostenibilità e l'impatto etico degli investimenti in un'azienda.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Framework ESG</div>
+                    </div>
+                    
+                    <div class="note" style="margin-bottom: 15px; border-left: 4px solid #9c27b0;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0;">
+                            <a href="https://www.esg360.it/environmental/esg-tutto-quello-che-ce-da-sapere-per-orientarsi-su-environmental-social-governance/" target="_blank" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                                Guida Completa agli ESG
+                            </a>
+                        </div>
+                        <div class="content">
+                            <p>Approfondimento completo di ESG360 che illustra tutti gli aspetti degli Environmental, Social and Governance criteria. L'articolo fornisce una panoramica dettagliata su come orientarsi nel mondo degli ESG, dalle definizioni base alle applicazioni pratiche nel mondo degli investimenti e della gestione aziendale.</p>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Link esterno</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #9c27b0; background-color: #fce4ec; margin-bottom: 15px;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0; font-size: 18px;">🎯 PROGETTO 1: SDGs AZIENDALI</div>
+                        <div class="content">
+                            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #6a1b9a; margin-top: 0;">📋 OBIETTIVO</h4>
+                                <p style="font-size: 14px; color: #7b1fa2;">Identificare e analizzare gli Obiettivi di Sviluppo Sostenibile (SDGs) che possono essere concretamente perseguiti da un'azienda, sviluppando proposte operative specifiche.</p>
+                            </div>
+                            
+                            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px;">
+                                <h4 style="color: #6a1b9a; margin-top: 0;">🚀 METODOLOGIA</h4>
+                                <strong style="color: #7b1fa2;">Ogni gruppo sceglie un settore e identifica 4-5 SDGs prioritari:</strong>
+                                <ul style="font-size: 14px; margin: 8px 0;">
+                                    <li><strong>Selezione SDGs:</strong> Quali obiettivi 2030 può perseguire un'azienda del vostro settore?</li>
+                                    <li><strong>Azioni concrete:</strong> Cosa può fare praticamente l'azienda per contribuire?</li>
+                                    <li><strong>Indicatori:</strong> Come misurare il progresso verso questi obiettivi?</li>
+                                    <li><strong>Timeline:</strong> Obiettivi a breve (2025) e medio termine (2030)</li>
+                                </ul>
+                                <p style="font-size: 14px; margin-top: 10px; color: #7b1fa2;"><strong>Presentazione:</strong> 8 minuti per gruppo + discussione su fattibilità e impatto</p>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Progetto SDGs</div>
+                    </div>
+                    
+                    <div class="note" style="border-left: 4px solid #9c27b0; background-color: #fce4ec;">
+                        <div class="title" style="color: #6a1b9a; border-bottom-color: #9c27b0; font-size: 18px;">📑 PROGETTO 2: ANALISI BILANCI INTEGRATI</div>
+                        <div class="content">
+                            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4 style="color: #6a1b9a; margin-top: 0;">📊 BILANCI INTEGRATI DISPONIBILI</h4>
+                                <div style="font-size: 14px; line-height: 1.6;">
+                                    <div>📄 <a href="https://www.benettongroup.com/site/assets/files/7902/it-2023-bilancio_integrato_01.pdf" target="_blank" style="color: #9c27b0;"><strong>Benetton Group 2023</strong></a> - Moda e sostenibilità</div>
+                                    <div>📄 <a href="https://www.leonardo.com/documents/15646808/28608810/Bilancio+Integrato+2024.pdf?t=1741973485310" target="_blank" style="color: #9c27b0;"><strong>Leonardo 2024</strong></a> - Aerospazio e difesa</div>
+                                    <div>📄 <a href="https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/it/sustainability/sustainability-reporting/2023/UniCredit_Bilancio_Integrato_2023.pdf" target="_blank" style="color: #9c27b0;"><strong>UniCredit 2023</strong></a> - Settore bancario</div>
+                                    <div>📄 <a href="https://www.fsitaliane.it/content/dam/fsitaliane/Documents/investor-relations/2025_07_02_Report_Integrato_2024.pdf" target="_blank" style="color: #9c27b0;"><strong>FS Italiane 2024</strong></a> - Trasporti ferroviari</div>
+                                    <div>📄 <a href="https://www.generali.com/doc/jcr:259c5d6e-46f7-4a43-9512-58e5dcbd2a56/Relazione%20Annuale%20Integrata%20e%20Bilancio%20Consolidato%202024_Gruppo%20Generali_finale_interattiva.pdf/lang:it/Relazione_Annuale_Integrata_e_Bilancio_Consolidato_2024_Gruppo_Generali_finale_interattiva.pdf" target="_blank" style="color: #9c27b0;"><strong>Generali 2024</strong></a> - Assicurazioni</div>
+                                    <div>📄 <a href="https://www.juventus.com/it/sostenibilita/i-nostri-report" target="_blank" style="color: #9c27b0;"><strong>Juventus FC</strong></a> - Sport e intrattenimento</div>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px;">
+                                <h4 style="color: #6a1b9a; margin-top: 0;">🔍 ANALISI RICHIESTA</h4>
+                                <strong style="color: #7b1fa2;">Ogni gruppo analizza un bilancio integrato e presenta:</strong>
+                                <ol style="font-size: 14px; margin: 8px 0;">
+                                    <li><strong>Strategia ESG dell'azienda:</strong> Quali sono le priorità dichiarate?</li>
+                                    <li><strong>Azioni concrete realizzate:</strong> Progetti, investimenti, risultati raggiunti</li>
+                                    <li><strong>Collegamento agli SDGs:</strong> Quali obiettivi 2030 l'azienda sta perseguendo?</li>
+                                    <li><strong>Metriche e KPI:</strong> Come misura i progressi in sostenibilità?</li>
+                                    <li><strong>Obiettivi futuri:</strong> Target 2025-2030 e roadmap</li>
+                                    <li><strong>Valutazione critica:</strong> Sostanza reale o possibile greenwashing?</li>
+                                </ol>
+                                <div style="background-color: #fff9c4; padding: 10px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ff9800;">
+                                    <strong style="color: #e65100;">Presentazione finale:</strong> <span style="font-size: 13px; color: #ef6c00;">10-12 minuti + confronto tra i diversi approcci settoriali alla sostenibilità</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="creator-info" style="background-color: #e1bee7; color: #6a1b9a;">Progetto bilanci</div>
+                    </div>
+                </div>
+                
+             

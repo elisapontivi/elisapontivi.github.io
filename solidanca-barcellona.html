@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solidança - Economia Circolare, Riuso e Inclusione Sociale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a4c93 0%, #c06c84 30%, #f67280 70%, #f8b500 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a4c93, #c06c84);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .header::before {
+            content: "♻️";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        .nucleo-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .content {
+            padding: 40px;
+        }
+        .perche-civica {
+            background: linear-gradient(135deg, #f4e9f7, #f8f4fa);
+            border-left: 5px solid #6a4c93;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #6a4c93;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "🔄";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quote-box {
+            background: linear-gradient(135deg, #6a4c93, #c06c84);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(106, 76, 147, 0.3);
+        }
+        .quote-box:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+        .quote-box:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+        .economia-section {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .economia-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .sociale-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 5px solid #ff9800;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .sociale-section h3 {
+            color: #f57c00;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .innovazione-section {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid #2196f3;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .innovazione-section h3 {
+            color: #1976d2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .timeline-item {
+            border-left: 3px solid #6a4c93;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #6a4c93;
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: #6a4c93;
+            font-size: 1.1rem;
+        }
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+        .tool-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #6a4c93;
+        }
+        .tool-item h4 {
+            color: #6a4c93;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .vantaggi-sfide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .vantaggi-box {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+        .sfide-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+        .vantaggi-box h4 {
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+        .sfide-box h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+        .obiettivi-section {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .obiettivi-section h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .discussion-questions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .discussion-questions h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #6a4c93, #c06c84);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 76, 147, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 76, 147, 0.4);
+        }
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #6a4c93;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .research-section {
+            background: linear-gradient(135deg, #ffe0f7, #f3e5f5);
+            border-left: 5px solid #e91e63;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .research-section h3 {
+            color: #c2185b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        .sdg-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .sdg-icon {
+            width: 60px;
+            height: 60px;
+            background: #6a4c93;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .quote-box {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            .vantaggi-sfide {
+                grid-template-columns: 1fr;
+            }
+            .sdg-icons {
+                gap: 5px;
+            }
+            .sdg-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>♻️ Solidança: Il Riuso che Include</h1>
+            <p>Economia Circolare, Dignità del Lavoro e Innovazione Sociale</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 2 - AGENDA 2030 E CITTADINANZA DIGITALE</div>
+        </div>
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Solidança in Educazione Civica?</h2>
+                <p>Solidança di Barcellona rappresenta un <strong>modello concreto</strong> di come l'economia circolare possa diventare strumento di inclusione sociale e cittadinanza attiva:</p>
+                <ul>
+                    <li><strong>Economia circolare applicata:</strong> Dal rifiuto alla risorsa attraverso riuso e riparazione</li>
+                    <li><strong>Inclusione sociale:</strong> Lavoro e dignità per migranti e persone vulnerabili</li>
+                    <li><strong>Innovazione sociale:</strong> Modello economico che mette al centro le persone</li>
+                    <li><strong>Cooperazione internazionale:</strong> Accoglienza e integrazione attraverso il lavoro</li>
+                    <li><strong>Educazione alla sostenibilità:</strong> Formazione pratica sui temi ambientali</li>
+                    <li><strong>Turismo responsabile:</strong> Ostello dell'economia circolare</li>
+                    <li><strong>Partecipazione cittadina:</strong> Coinvolgimento attivo della comunità locale</li>
+                </ul>
+                
+                <div class="sdg-icons">
+                    <div class="sdg-icon">SDG 1</div>
+                    <div class="sdg-icon">SDG 8</div>
+                    <div class="sdg-icon">SDG 10</div>
+                    <div class="sdg-icon">SDG 11</div>
+                    <div class="sdg-icon">SDG 12</div>
+                    <div class="sdg-icon">SDG 13</div>
+                </div>
+            </div>
+            
+            <div class="quote-box">
+                Quando il rifiuto diventa risorsa: trasformare vecchi tessuti in un cappotto nuovo, riparare elettrodomestici che sembravano da buttare
+                <br><small>- Solidança, il più grande centro del riuso della Catalogna</small>
+            </div>
+            
+            <div class="story-section">
+                <h3>🏭 Cos'è Solidança?</h3>
+                <p>Solidança è un'organizzazione no profit nata a Barcellona nel 1997, che oggi gestisce la più importante struttura per il riuso di tutta la Catalogna:</p>
+                
+                <div class="tool-item">
+                    <h4>📍 Identità e Missione</h4>
+                    <p><strong>Dove:</strong> Barcellona, Catalogna, Spagna</p>
+                    <p><strong>Quando:</strong> Fondata nel 1997 (27 anni di attività)</p>
+                    <p><strong>Cosa fa:</strong> Trasforma vecchi tessuti in cappotti nuovi, crea mobili d'arredamento da vecchie librerie, ripara elettrodomestici e cellulari</p>
+                    <p><strong>Dimensioni:</strong> Il più grande centro del riuso della Catalogna</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>🔄 Attività Principali</h4>
+                    <p><strong>Riparazione:</strong> Elettrodomestici, dispositivi elettronici, oggetti di uso comune</p>
+                    <p><strong>Trasformazione:</strong> Tessuti riciclati, mobili restaurati, oggetti reinventati</p>
+                    <p><strong>Rivendita solidale:</strong> Shop con prezzi accessibili per la comunità</p>
+                    <p><strong>Formazione:</strong> Workshop su riparazione, economia circolare, sostenibilità</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>🏨 Innovazioni Sociali</h4>
+                    <p><strong>Ostello dell'economia circolare:</strong> Turismo responsabile con visite guidate</p>
+                    <p><strong>Programmi di integrazione:</strong> "Puertas al cambio" e "Programa Acol" per l'inserimento lavorativo dei migranti</p>
+                    <p><strong>Supporto documentale:</strong> Nel 2019 ha aiutato molti a ottenere i documenti necessari per il permesso di soggiorno</p>
+                </div>
+            </div>
+            
+            <div class="economia-section">
+                <h3>💚 Economia Circolare in Azione</h3>
+                <p>Solidança applica concretamente i <strong>principi dell'economia circolare</strong>, dimostrando come il "rifiuto" possa diventare "risorsa":</p>
+                
+                <div class="highlight-box">
+                    <p><strong>♻️ Catena del Riuso:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Raccolta:</strong> I cittadini portano oggetti non più utilizzati</li>
+                        <li><strong>Valutazione:</strong> Team esperto seleziona cosa può essere recuperato</li>
+                        <li><strong>Riparazione:</strong> Laboratori specializzati rimettono in funzione gli oggetti</li>
+                        <li><strong>Trasformazione:</strong> Creatività per dare nuova vita ai materiali</li>
+                        <li><strong>Rivendita:</strong> Mercato solidale accessibile a tutti</li>
+                        <li><strong>Formazione:</strong> Insegnare alla comunità come riparare e riusare</li>
+                    </ol>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>📊 Impatto Quantitativo:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Tonnellate salvate:</strong> Centinaia di tonnellate sottratte alla discarica ogni anno</li>
+                        <li><strong>Oggetti trasformati:</strong> Migliaia di prodotti ottengono una "seconda vita"</li>
+                        <li><strong>Risparmio CO2:</strong> Riduzione significativa delle emissioni da produzione</li>
+                        <li><strong>Risparmio idrico:</strong> Meno bisogno di nuove produzioni industriali</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>🌊 Sfide della Pandemia:</strong></p>
+                    <p>Con l'esplodere della pandemia, molte attività sono state ridimensionate e il settore delle vendite ha subito una forte diminuzione, ma Solidança è riuscita a reagire ripensando l'organizzazione del lavoro</p>
+                </div>
+            </div>
+            
+            <div class="sociale-section">
+                <h3>🤝 Inclusione Sociale attraverso il Lavoro</h3>
+                <p>Solidança dimostra come l'economia circolare possa essere <strong>strumento di giustizia sociale</strong> e integrazione:</p>
+                
+                <div class="tool-item">
+                    <h4>🌍 Programmi per l'Integrazione</h4>
+                    <p><strong>"Puertas al cambio":</strong> Progetti dedicati all'inserimento lavorativo dei migranti</p>
+                    <p><strong>"Programa Acol":</strong> Nel 2019 ha aiutato molti a trovare un impiego e ottenere documenti per il permesso di soggiorno</p>
+                    <p><strong>Formazione professionale:</strong> Competenze tecniche in riparazione e economia circolare</p>
+                    <p><strong>Rete di supporto:</strong> Accompagnamento burocratico e sociale</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>👥 Modello Inclusivo</h4>
+                    <p><strong>Diversità culturale:</strong> Team multietnico che riflette Barcellona</p>
+                    <p><strong>Apprendimento reciproco:</strong> Competenze tradizionali si incontrano con innovazione</p>
+                    <p><strong>Dignità del lavoro:</strong> Occupazione qualificata, non assistenzialismo</p>
+                    <p><strong>Empowerment:</strong> Le persone diventano protagoniste del cambiamento</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>🏠 Impatto sulla Comunità</h4>
+                    <p><strong>Prezzi accessibili:</strong> Beni di qualità per famiglie con difficoltà economiche</p>
+                    <p><strong>Educazione ambientale:</strong> Sensibilizzazione sui temi della sostenibilità</p>
+                    <p><strong>Coesione sociale:</strong> Spazi di incontro e collaborazione</p>
+                    <p><strong>Turismo responsabile:</strong> Visitatori che imparano modelli alternativi</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <h3>📅 L'evoluzione di Solidança</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1997</div>
+                    <div class="timeline-event">Fondazione di Solidança come organizzazione no profit a Barcellona</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2000-2005</div>
+                    <div class="timeline-event">Crescita delle attività di riparazione e primi laboratori specializzati</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2010-2015</div>
+                    <div class="timeline-event">Espansione: diventa il principale centro del riuso della Catalogna</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2016-2019</div>
+                    <div class="timeline-event">Lancio programmi integrazione: "Puertas al cambio" e "Programa Acol"</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020-2021</div>
+                    <div class="timeline-event">Adattamento alla pandemia: ripensamento dell'organizzazione</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022-2024</div>
+                    <div class="timeline-event">Innovazione: ostello dell'economia circolare e turismo responsabile</div>
+                </div>
+            </div>
+            
+            <div class="innovazione-section">
+                <h3>🚀 Innovazioni e Modelli Replicabili</h3>
+                <p>Le innovazioni di Solidança offrono <strong>spunti concreti</strong> per replicare il modello in altri contesti:</p>
+                
+                <div class="tool-item">
+                    <h4>🏨 Ostello dell'Economia Circolare</h4>
+                    <p><strong>Concept innovativo:</strong> Turismo responsabile con visite guidate e programmi formativi</p>
+                    <p><strong>Educazione esperienziale:</strong> I visitatori vivono l'economia circolare</p>
+                    <p><strong>Sostenibilità economica:</strong> Diversificazione delle fonti di reddito</p>
+                    <p><strong>Impatto culturale:</strong> Diffusione di modelli alternativi di sviluppo</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>🛠️ Laboratori Specializzati</h4>
+                    <p><strong>Tessile:</strong> Trasformazione di vecchi tessuti in nuovi capi</p>
+                    <p><strong>Elettronica:</strong> Riparazione di smartphone, tablet, elettrodomestici</p>
+                    <p><strong>Falegnameria:</strong> Restauro e trasformazione di mobili</p>
+                    <p><strong>Design:</strong> Creatività applicata al riuso</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>🤖 Integrazione con la Tecnologia</h4>
+                    <p><strong>Sistemi di tracciabilità:</strong> Monitoraggio del ciclo di vita degli oggetti</p>
+                    <p><strong>Platform online:</strong> Vendita e prenotazione servizi</p>
+                    <p><strong>Social media:</strong> Comunicazione e sensibilizzazione</p>
+                    <p><strong>App mobile:</strong> Accesso ai servizi per la cittadinanza</p>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <h3>🎯 Connessioni con l'Agenda 2030</h3>
+                <p>Solidança realizza concretamente <strong>diversi Obiettivi di Sviluppo Sostenibile</strong>:</p>
+                
+                <div class="vantaggi-sfide">
+                    <div class="vantaggi-box">
+                        <h4>🎯 SDG Realizzati</h4>
+                        <ul>
+                            <li><strong>SDG 1:</strong> Riduzione povertà con prezzi accessibili</li>
+                            <li><strong>SDG 8:</strong> Lavoro dignitoso per migranti e vulnerabili</li>
+                            <li><strong>SDG 10:</strong> Riduzione disuguaglianze attraverso inclusione</li>
+                            <li><strong>SDG 11:</strong> Comunità sostenibili e servizi accessibili</li>
+                            <li><strong>SDG 12:</strong> Consumo responsabile ed economia circolare</li>
+                            <li><strong>SDG 13:</strong> Azione climatica riducendo rifiuti e emissioni</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sfide-box">
+                        <h4>⚠️ Sfide e Limitazioni</h4>
+                        <ul>
+                            <li><strong>Scalabilità:</strong> Difficile replicare la complessità del modello</li>
+                            <li><strong>Finanziamenti:</strong> Dipendenza da fondi pubblici e donazioni</li>
+                            <li><strong>Competenze:</strong> Necessità di personale specializzato</li>
+                            <li><strong>Normative:</strong> Regolamentazioni complesse sui rifiuti</li>
+                            <li><strong>Mercato:</strong> Concorrenza con prodotti nuovi a basso costo</li>
+                            <li><strong>Logistica:</strong> Gestione complessa di raccolta e distribuzione</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <h3>🔍 Attività pratiche per la classe</h3>
+                <p>Cercare altri esempi di realtà simili</p>
+                

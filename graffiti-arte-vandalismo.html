@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graffiti: Arte o Vandalismo? — Arte e Territorio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #90EE90;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+
+        .perche-civica ul { list-style: none; padding-left: 0; }
+
+        .perche-civica li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60; font-weight: bold; font-size: 1.2rem;
+            position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .overtourism-quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .overtourism-quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .overtourism-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Graffiti: Arte o Vandalismo?</h1>
+            <p>Esplorare il confine tra creatività urbana, legalità e identità del territorio</p>
+            <div class="nucleo-badge">MATERIA — ARTE E TERRITORIO</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare i graffiti a scuola</h2>
+                <p>I graffiti e la street art trasformano lo spazio pubblico in un luogo di espressione, ma aprono dilemmi su <strong>diritto d’autore</strong>, <strong>tutela del patrimonio</strong>, <strong>decoro</strong>, <strong>partecipazione</strong> e <strong>legalità</strong>. Sono quindi perfetti per un lavoro interdisciplinare su arte, città e cittadinanza.</p>
+                <ul>
+                    <li><strong>Arte pubblica e comunità:</strong> quando l’opera dialoga con quartieri e memorie collettive</li>
+                    <li><strong>Spazio urbano come bene comune:</strong> chi decide cosa è “arte” nello spazio di tutti?</li>
+                    <li><strong>Legalità e responsabilità:</strong> autorizzazioni, proprietà, tutela dei beni pubblici/privati</li>
+                    <li><strong>Economia culturale:</strong> rigenerazione, turismo creativo, valorizzazione del territorio</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Domanda-guida: i graffiti “illegal” possono avere valore artistico e civico, oppure il contesto (permessi, luogo, intenzione) è ciò che fa la differenza?
+            </div>
+
+            <div class="story-section">
+                <h3>🏛 Cos’è graffitismo e cos’è street art?</h3>
+                <p><strong>Graffitismo</strong> (writing): lettere, tag, throw-up, pezzi, nati in contesti underground e spesso non autorizzati. <strong>Street art</strong>: murales figurativi, stencil, poster, installazioni, talvolta commissionati o autorizzati. La linea non è netta: tecniche e comunità si sovrappongono; il punto chiave è <em>relazione con il luogo e le regole</em>.</p>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚠ Impatti su città e territorio</h3>
+                <div class="impact-item">
+                    <h4>📣 Espressione e identità</h4>
+                    <p>Raccontano storie locali, rivendicazioni, appartenenze; creano percorsi visivi che cambiano la percezione dei quartieri.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🧹 Conflitto con decoro e proprietà</h4>
+                    <p>Senza autorizzazione possono danneggiare beni, costare interventi di pulizia e generare conflitti tra residenti, artisti e istituzioni.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏗 Rigenerazione o gentrificazione?</h4>
+                    <p>Progetti di arte urbana possono attivare cura dello spazio pubblico e attrattività, ma anche innescare aumento dei canoni e trasformazioni sociali.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>⚖ Diritto d’autore e tutela</h4>
+                    <p>Temi di paternità dell’opera, uso delle immagini, conservazione o rimozione: quando e come l’opera “appartiene” alla città?</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Politiche e pratiche efficaci</h3>
+                <div class="solution-item">
+                    <h4>🎯 Zone e muri legali</h4>
+                    <p>Definire aree autorizzate (“hall of fame”) per canalizzare l’espressione, ridurre conflitti e promuovere qualità.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🤝 Co-progettazione con scuole e comunità</h4>
+                    <p>Laboratori con artisti, studenti, comitati di quartiere; linee guida condivise su temi, luoghi e manutenzione.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏛 Curatela e tutela</h4>
+                    <p>Commissioni civiche o musei diffusi per selezionare, documentare, restaurare o rimuovere responsabilmente.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📚 Educazione al visuale</h4>
+                    <p>Leggere lettering, simboli, riferimenti; distinguere tra tag, bombing, murales, interventi site-specific.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Quali criteri useresti per dire che un graffito è “arte” e non “vandalismo”?</li>
+                    <li>Chi può decidere cosa resta e cosa si rimuove nello spazio pubblico?</li>
+                    <li>Un’opera illegale può diventare patrimonio del quartiere? Con quali conseguenze legali ed etiche?</li>
+                    <li>I muri legali riducono il vandalismo o lo spostano altrove?</li>
+                    <li>Come progetteresti un percorso di arte urbana nel tuo territorio (luoghi, temi, regole)?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">PLAYLIST VIDEO</span>
+                    <a href="https://www.youtube.com/watch?v=LK87C9iNqVs&list=PLTDRWjDw7X3B_DOGBIXauvizf28X_skVL" target="_blank" rel="noopener">
+                        “Graffiti: Arte o Vandalismo?” — Selezione YouTube
+                    </a>
+                    <p>Clip e approfondimenti per stimolare il confronto in classe sul confine tra arte e illegalità.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">PDF ACCADEMICO</span>
+                    <a href="https://unitesi.unive.it/retrieve/5fb442eb-6da3-4e77-9bfa-715201b8341d/836613-1214753.pdf" target="_blank" rel="noopener">
+                        Studio su street art, diritto d’autore e città
+                    </a>
+                    <p>Riferimenti utili per i profili giuridici: paternità, riproduzione, rapporto con il bene comune e gli spazi urbani.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.ilpost.it/2025/04/20/montieri-w-le-scritte-sui-muri/" target="_blank" rel="noopener">
+                        Il Post — “W le scritte sui muri” (20/04/2025)
+                    </a>
+                    <p>Riflessione sul senso delle scritte come linguaggio collettivo e memoria di comunità nello spazio urbano.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

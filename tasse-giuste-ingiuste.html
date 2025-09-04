@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasse Giuste o Ingiuste? - Il Prezzo della Civiltà</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 30%, #3b82f6 70%, #1d4ed8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "💰";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "💡";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .beautiful-quote {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .beautiful-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .beautiful-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .principi-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .principi-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .dibattito-section {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .dibattito-section h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .pro-contro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pro-box {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .contro-box {
+            background: #fff0f0;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .pro-box h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .contro-box h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #3b82f6;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #3b82f6;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .modelli-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .modelli-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .modello-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .modello-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #1e3c72;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff0f0;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .stat-box {
+            background: #f0f8ff;
+            border: 2px solid #4682b4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .big-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1e3c72;
+            display: block;
+        }
+
+        .stat-description {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .beautiful-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .big-number {
+                font-size: 2rem;
+            }
+
+            .pro-contro {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Tasse: Giuste o Ingiuste?</h1>
+            <p>Il Prezzo della Civiltà e della Solidarietà</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, ISTITUZIONI E REGOLE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché il dibattito sulle tasse è fondamentale per l'educazione civica?</h2>
+                <p>Il dibattito sulla <strong>giustizia fiscale</strong> è al centro della convivenza democratica perché tocca i valori fondamentali della società:</p>
+                <ul>
+                    <li><strong>Solidarietà sociale:</strong> Le tasse finanziano sanità, scuola, sicurezza per tutti</li>
+                    <li><strong>Uguaglianza:</strong> Redistribuzione della ricchezza per ridurre le disuguaglianze</li>
+                    <li><strong>Libertà responsabile:</strong> I diritti costano e vanno finanziati collettivamente</li>
+                    <li><strong>Partecipazione democratica:</strong> "No taxation without representation"</li>
+                    <li><strong>Sostenibilità generazionale:</strong> Investimenti per il futuro dei giovani</li>
+                    <li><strong>Coesione nazionale:</strong> Senso di appartenenza e responsabilità condivisa</li>
+                    <li><strong>Efficienza economica:</strong> Correzione dei fallimenti del mercato</li>
+                </ul>
+            </div>
+
+            <div class="beautiful-quote">
+                Dovremmo avere il coraggio di dire che le tasse sono una cosa bellissima, un modo civilissimo di contribuire a servizi indispensabili come la salute e la scuola
+                <br><small>- Piero Ignazi, Scienza Politica</small>
+            </div>
+
+            <div class="principi-section">
+                <h3>⚖️ I principi costituzionali della fiscalità</h3>
+                <p>La Costituzione italiana stabilisce i <strong>principi fondamentali</strong> che devono guidare il sistema fiscale:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>📜 Art. 53 Costituzione:</strong></p>
+                    <p style="font-style: italic; font-size: 1.2rem; margin: 15px 0;">"Tutti sono tenuti a concorrere alle spese pubbliche in ragione della loro capacità contributiva. Il sistema tributario è informato a criteri di progressività."</p>
+                </div>
+                
+                <div class="modello-item">
+                    <h4>💡 Cosa significa "capacità contributiva"?</h4>
+                    <p>Chi ha di più deve contribuire di più, non solo in termini assoluti ma anche relativi. Un milionario che paga il 10% del suo reddito in tasse ha meno "sacrificio" di un operaio che ne paga il 20%.</p>
+                </div>
+                
+                <div class="modello-item">
+                    <h4>📈 Cosa significa "progressività"?</h4>
+                    <p>Le aliquote fiscali devono crescere al crescere del reddito. In Italia: 23% fino a 28.000€, 35% da 28.000€ a 50.000€, 43% oltre 50.000€. Non è una "punizione" per il successo, ma solidarietà sociale.</p>
+                </div>
+            </div>
+
+            <div class="dibattito-section">
+                <h3>🗣️ Il grande dibattito: tasse alte o basse?</h3>
+                <p>Due visioni contrapposte che attraversano la storia del pensiero economico e politico:</p>
+                
+                <div class="pro-contro">
+                    <div class="pro-box">
+                        <h4>👍 PRO: "Tasse come investimento sociale"</h4>
+                        <ul>
+                            <li><strong>Servizi di qualità:</strong> Sanità, scuola, trasporti efficienti</li>
+                            <li><strong>Riduzione disuguaglianze:</strong> Welfare redistribuisce ricchezza</li>
+                            <li><strong>Stabilità sociale:</strong> Meno povertà = meno criminalità</li>
+                            <li><strong>Investimenti pubblici:</strong> Ricerca, infrastrutture, innovazione</li>
+                            <li><strong>Sicurezza economica:</strong> Ammortizzatori sociali per tutti</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contro-box">
+                        <h4>👎 CONTRO: "Tasse come freno alla crescita"</h4>
+                        <ul>
+                            <li><strong>Disincentivo al lavoro:</strong> "Perché impegnarsi se poi mi tassano?"</li>
+                            <li><strong>Fuga di capitali:</strong> Ricchi e imprese si spostano altrove</li>
+                            <li><strong>Inefficienza pubblica:</strong> Lo Stato spreca più del privato</li>
+                            <li><strong>Burocrazia:</strong> Complessità fiscale danneggia l'economia</li>
+                            <li><strong>Libertà individuale:</strong> "I miei soldi li spendo meglio io"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📊 I dati parlano: dove vanno le nostre tasse?</h3>
+                <p>Per giudicare se le tasse sono "giuste", dobbiamo sapere <strong>come vengono spese</strong>:</p>
+                
+                <div class="stat-box">
+                    <span class="big-number">45,9%</span>
+                    <div class="stat-description">Pressione fiscale italiana nel 2023 (media UE: 40,2%)</div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>💰 Come lo Stato spende 100 euro di tasse (2023):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>🏥 Sanità:</strong> 22 euro (Sistema Sanitario Nazionale)</li>
+                        <li><strong>👥 Assistenza sociale:</strong> 18 euro (pensioni, disoccupazione, famiglia)</li>
+                        <li><strong>🏛️ Servizi generali:</strong> 15 euro (PA, giustizia, sicurezza)</li>
+                        <li><strong>🎓 Istruzione:</strong> 9 euro (scuole, università, ricerca)</li>
+                        <li><strong>💸 Interessi su debito:</strong> 8 euro (costo del debito pubblico)</li>
+                        <li><strong>🚇 Trasporti e infrastrutture:</strong> 6 euro</li>
+                        <li><strong>🌍 Ambiente:</strong> 2 euro (protezione ambientale)</li>
+                        <li><strong>🎭 Cultura e sport:</strong> 1 euro</li>
+                        <li><strong>🔄 Altro:</strong> 19 euro (difesa, ordine pubblico, affari economici)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modelli-section">
+                <h3>🌍 Modelli fiscali nel mondo: cosa possiamo imparare?</h3>
+                <p>Ogni paese ha scelto un <strong>mix diverso</strong> tra tasse e servizi. Quali funzionano meglio?</p>
+                
+                <div class="modello-item">
+                    <h4>🇸🇪 Modello nordico (Svezia)</h4>
+                    <p><strong>Pressione fiscale:</strong> 42,9% del PIL</p>
+                    <p><strong>Filosofia:</strong> "Tasse alte, servizi eccellenti"</p>
+                    <p><strong>Risultati:</strong> Sanità gratuita di qualità, università gratis, congedi parentali generosi, bassa disuguaglianza</p>
+                    <p><strong>Critica:</strong> Aliquote molto elevate (fino al 57%), possibile fuga di talenti</p>
+                </div>
+                
+                <div class="modello-item">
+                    <h4>🇺🇸 Modello liberale (USA)</h4>
+                    <p><strong>Pressione fiscale:</strong> 25,5% del PIL</p>
+                    <p><strong>Filosofia:</strong> "Tasse basse, ognuno si arrangia"</p>
+                    <p><strong>Risultati:</strong> Grande dinamismo economico, innovazione, libertà individuale</p>
+                    <p><strong>Critica:</strong> Enormi disuguaglianze, sanità costosa, debito studentesco insostenibile</p>
+                </div>
+                
+                <div class="modello-item">
+                    <h4>🇩🇪 Modello socialdemocratico (Germania)</h4>
+                    <p><strong>Pressione fiscale:</strong> 38,8% del PIL</p>
+                    <p><strong>Filosofia:</strong> "Equilibrio tra efficienza e solidarietà"</p>
+                    <p><strong>Risultati:</strong> Economia forte, buon welfare, partnership sociale</p>
+                    <p><strong>Punto di forza:</strong> Modello sostenibile che coniuga crescita e coesione</p>
+                </div>
+                
+                <div class="modello-item">
+                    <h4>🇮🇹 Modello italiano</h4>
+                    <p><strong>Pressione fiscale:</strong> 45,9% del PIL</p>
+                    <p><strong>Filosofia:</strong> "Tasse alte ma servizi inefficienti?"</p>
+                    <p><strong>Sfida:</strong> Migliorare la qualità della spesa pubblica e ridurre l'evasione</p>
+                    <p><strong>Opportunità:</strong> Digitalizzazione e semplificazione per un fisco più equo</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 L'evoluzione del pensiero fiscale</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1776</div>
+                    <div class="timeline-event">Adam Smith teorizza i principi della tassazione: certezza, comodità, proporzionalità, economia</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1848</div>
+                    <div class="timeline-event">John Stuart Mill propone la tassazione progressiva per ridurre le disuguaglianze</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1913</div>
+                    <div class="timeline-event">Nasce l'imposta federale sul reddito negli USA (16° emendamento)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1936</div>
+                    <div class="timeline-event">Keynes teorizza l'uso delle tasse per stabilizzare l'economia</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1980</div>
+                    <div class="timeline-event">"Reaganomics" - taglio delle tasse per stimolare la crescita</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2013</div>
+                    <div class="timeline-event">Thomas Piketty rilancia il dibattito sulla tassazione dei ricchi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-event">Accordo OCSE sulla tassazione minima globale delle multinazionali (15%)</div>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🔥 I punti caldi del dibattito contemporaneo</h3>
+                <p>Alcune questioni fiscali dominano il dibattito politico ed economico attuale:</p>
+                
+                <div class="warning-box">
+                    <p><strong>🏛️ "Flat tax" vs tassazione progressiva</strong></p>
+                    <p><strong>Proposta:</strong> Aliquota unica (es. 15%) per tutti i redditi</p>
+                    <p><strong>Pro:</strong> Semplicità, incentivi al lavoro, meno evasione</p>
+                    <p><strong>Contro:</strong> Aumenta le disuguaglianze, riduce il gettito, ingiusta per i poveri</p>
+                    <p><strong>Realtà:</strong> Applicata in alcuni paesi dell'Est Europa con risultati contrastanti</p>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>💰 Tassa sui ricchi e patrimoniale</strong></p>
+                    <p><strong>Proposta:</strong> Tassa aggiuntiva sui grandi patrimoni o redditi altissimi</p>
+                    <p><strong>Pro:</strong> Maggiore equità, risorse per investimenti pubblici</p>
+                    <p><strong>Contro:</strong> Fuga di capitali, difficoltà di valutazione, gettito limitato</p>
+                    <p><strong>Dibattito:</strong> Francia ha abolito l'ISF, USA discutono la "Billionaire tax"</p>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>🌐 Tassazione digitale</strong></p>
+                    <p><strong>Problema:</strong> Big Tech pagano pochissime tasse grazie a ottimizzazione fiscale</p>
+                    <p><strong>Soluzione UE:</strong> Digital Service Tax del 3% sui ricavi</p>
+                    <p><strong>Soluzione OCSE:</strong> Tassazione minima globale del 15%</p>
+                    <p><strong>Posta in gioco:</strong> Equità fiscale nell'era digitale</p>
+                </div>
+            </div>
+
+                           <div class="warning-box">
+                    <p><strong>💡 Competenze sviluppate:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Pensiero critico:</strong> Analisi dei trade-off tra equità ed efficienza</li>
+                        <li><strong>Cittadinanza attiva:</strong> Comprensione del legame tra tasse e qualità della democrazia</li>
+                        <li><strong>Problem solving:</strong> Progettazione di politiche fiscali sostenibili</li>
+                        <li><strong>Competenze digitali:</strong> Uso di strumenti di simulazione e data visualization</li>
+                        <li><strong>Perspective taking:</strong> Capacità di vedere la questione da diversi punti di vista</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>Secondo te, qual è il giusto equilibrio tra libertà individuale e solidarietà sociale?</li>
+                    <li>Preferiresti pagare più tasse e avere servizi migliori, o viceversa? Perché?</li>
+                    <li>È giusto che chi guadagna di più paghi percentualmente di più in tasse?</li>
+                    <li>Come convinceresti un evasore che pagare le tasse è un atto di civiltà?</li>
+                    <li>Qual è la differenza tra "tasse come costo" e "tasse come investimento"?</li>
+                    <li>Perché nei paesi nordici, nonostante le tasse alte, c'è grande soddisfazione dei cittadini?</li>
+                    <li>La flat tax è più giusta della tassazione progressiva? Argomenta la tua posizione.</li>
+                    <li>Come dovrebbe essere tassata l'economia digitale secondo te?</li>
+                    <li>È possibile un mondo senza tasse? Quali sarebbero le conseguenze?</li>
+                    <li>Se fossi ministro dell'Economia, quale sarebbe la tua prima riforma fiscale?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

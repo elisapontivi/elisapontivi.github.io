@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katherine Johnson - Hidden Figures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .katherine-quote {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+        }
+
+        .katherine-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .katherine-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .video-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .triple-discrimination {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .triple-discrimination h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .barrier-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .barrier-item h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .achievements {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .achievements h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .achievement-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .achievement-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .katherine-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇺🇸 Katherine Johnson</h1>
+            <p>Hidden Figures - Excellence Against All Odds</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Katherine Johnson in Educazione Civica?</h2>
+                <p>Katherine Johnson rappresenta l'esempio perfetto di come <strong>talento, determinazione e resilienza</strong> possano superare ogni forma di discriminazione. Il suo studio è essenziale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Tripla discriminazione:</strong> Ha superato barriere di razza, genere e campo professionale (STEM)</li>
+                    <li><strong>Meritocrazia:</strong> Ha dimostrato che l'eccellenza può abbattere i pregiudizi</li>
+                    <li><strong>Parità di genere:</strong> Pioniera delle donne nelle scienze e nella tecnologia</li>
+                    <li><strong>Diritti civili:</strong> Ha aperto la strada per le future generazioni di donne e minoranze</li>
+                    <li><strong>Servizio alla patria:</strong> Ha contribuito crucialmente al programma spaziale americano</li>
+                    <li><strong>Ispirazione:</strong> Modello per tutte le ragazze che sognano carriere STEM</li>
+                    <li><strong>Umiltà e professionalità:</strong> Ha mantenuto la dignità nonostante le discriminazioni</li>
+                </ul>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 Katherine Johnson: Hidden Figures</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/E4j_LpKzcZQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">La straordinaria storia di Katherine Johnson e delle "Hidden Figures" della NASA</p>
+            </div>
+
+            <div class="katherine-quote">
+                I was just doing my job. The work was challenging, and that made it exciting. I always liked solving problems and puzzles.
+            </div>
+
+            <div class="story-section">
+                <h3>🧮 La matematica che portò l'uomo nello spazio</h3>
+                <p>Katherine Coleman Goble Johnson (1918-2020) era una <strong>prodigio matematico</strong> fin dalla tenera età. Nata in West Virginia durante l'era della segregazione, mostrò un talento eccezionale per i numeri che la sua famiglia e i suoi insegnanti riconobbero immediatamente.</p>
+                
+                <p>A soli 14 anni si diplomò al liceo e a 18 si laureò <em>summa cum laude</em> in matematica e francese. Nel 1953, iniziò a lavorare per quello che sarebbe diventato la <strong>NASA</strong>, in un'epoca in cui le donne afroamericane erano praticamente invisibili nel mondo della scienza e della tecnologia.</p>
+                
+                <p>Il suo lavoro non era solo "fare calcoli" - Katherine Johnson era una <strong>matematica pura</strong> che risolveva problemi complessi di traiettorie spaziali, calcoli orbitali e navigazione astronomica che determinavano il successo o il fallimento delle missioni spaziali.</p>
+            </div>
+
+            <div class="triple-discrimination">
+                <h3>⚡ Le tre barriere che Katherine superò</h3>
+                
+                <div class="barrier-item">
+                    <h4>1. Barriera Razziale 🚫</h4>
+                    <p>Negli anni '50, la segregazione razziale era ancora legale. Katherine lavorava in edifici separati, usava bagni separati, e spesso non riceveva il riconoscimento per il suo lavoro.</p>
+                </div>
+                
+                <div class="barrier-item">
+                    <h4>2. Barriera di Genere 👩‍🔬</h4>
+                    <p>Le donne erano considerate inadatte per la matematica e l'ingegneria. Erano spesso chiamate "computers" (calcolatrici umane) invece di matematiche o ingegneri.</p>
+                </div>
+                
+                <div class="barrier-item">
+                    <h4>3. Barriera STEM 🔢</h4>
+                    <p>I campi scientifici e tecnologici erano dominati da uomini bianchi. Le donne di colore erano praticamente inesistenti in questi settori.</p>
+                </div>
+            </div>
+
+            <div class="achievements">
+                <h3>🚀 I suoi contributi storici</h3>
+                
+                <div class="achievement-item">
+                    <h4>Mercury Mission (1961)</h4>
+                    <p>Calcolò la traiettoria per il primo volo spaziale americano con equipaggio. John Glenn chiese specificamente che Katherine verificasse i calcoli del computer prima del lancio.</p>
+                </div>
+                
+                <div class="achievement-item">
+                    <h4>Apollo 11 Moon Landing (1969)</h4>
+                    <p>Contribuì ai calcoli che portarono Neil Armstrong e Buzz Aldrin sulla Luna. Il suo lavoro rese possibile "one small step for man, one giant leap for mankind."</p>
+                </div>
+                
+                <div class="achievement-item">
+                    <h4>Space Shuttle Program</h4>
+                    <p>Lavorò sui piani per una missione su Marte e contribuì al programma Space Shuttle, che avrebbe definito l'esplorazione spaziale per decenni.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎬 Hidden Figures: Dal silenzio al riconoscimento</h3>
+                <p>Per decenni, Katherine Johnson e le sue colleghe Dorothy Vaughan e Mary Jackson rimasero "figure nascoste" - i loro contributi erano essenziali ma non riconosciuti pubblicamente. Solo nel 2016, con il libro e il film <strong>"Hidden Figures"</strong>, il mondo scoprì il loro ruolo cruciale nella corsa allo spazio.</p>
+                
+                <p>Questo ritardo nel riconoscimento evidenzia un problema più ampio: <em>quante altre "Katherine Johnson" sono rimaste invisibili nella storia? Quanti contributi di donne e minoranze sono stati minimizzati o ignorati?</em></p>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #9b59b6; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>Riconoscimenti tardivi ma significativi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>2015: Medaglia Presidenziale della Libertà</li>
+                        <li>2017: La NASA dedica un edificio in suo onore</li>
+                        <li>2019: Viene intitolata una strada "Hidden Figures Way"</li>
+                        <li>2021: Un centro di ricerca NASA porta il suo nome</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>💪 La sua filosofia di vita</h3>
+            <div class="story-section">
+                <h3>💪 La sua filosofia di vita</h3>
+                <p>Katherine Johnson non si è mai considerata una "pioniera" o "rivoluzionaria". La sua filosofia era semplice ma potente:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>"Do your best work"</strong> - Fai sempre il tuo lavoro migliore</li>
+                    <li><strong>"Ask questions"</strong> - Non aver paura di fare domande</li>
+                    <li><strong>"Be confident"</strong> - Credi nelle tue capacità</li>
+                    <li><strong>"Persevere"</strong> - Non mollare mai di fronte alle difficoltà</li>
+                </ul>
+                
+                <p style="margin-top: 20px;">Katherine spesso diceva: <em>"I don't have a feeling of inferiority. Never had. I'm as good as anybody, but no better."</em> Questa sicurezza in se stessa, combinata con umiltà e professionalità, le permise di eccellere in un ambiente ostile.</p>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>How did Katherine Johnson overcome the "triple discrimination" of race, gender, and field?</li>
+                    <li>What does her story teach us about the importance of education and perseverance?</li>
+                    <li>Why do you think Katherine Johnson and her colleagues remained "hidden figures" for so long?</li>
+                    <li>How can we ensure that talented individuals from all backgrounds are recognized and supported?</li>
+                    <li>What barriers still exist today for women and minorities in STEM fields?</li>
+                    <li>How does Katherine's philosophy of "asking questions" relate to good citizenship?</li>
+                    <li>What would have happened to the space program without Katherine Johnson's contributions?</li>
+                    <li>How can her example inspire young people today to pursue careers in science and technology?</li>
+                </ol>
+            </div>
+
+            <div class="story-section">
+                <h3>🌟 L'eredità di Katherine Johnson</h3>
+                <p>Katherine Johnson morì nel 2020 all'età di 101 anni, avendo vissuto abbastanza per vedere il riconoscimento mondiale del suo contributo. La sua eredità va oltre i suoi calcoli matematici:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Ispirazione per le donne STEM:</strong> Ha dimostrato che le donne possono eccellere in matematica e scienze</li>
+                    <li><strong>Modello di resilienza:</strong> Ha mostrato come superare discriminazioni multiple</li>
+                    <li><strong>Importanza della diversità:</strong> Ha provato che team diversi sono più innovativi e creativi</li>
+                    <li><strong>Valore dell'educazione:</strong> Ha sottolineato l'importanza dell'apprendimento continuo</li>
+                    <li><strong>Servizio pubblico:</strong> Ha dedicato la sua carriera al progresso scientifico americano</li>
+                </ul>
+                
+                <p style="margin-top: 20px;"><strong>Oggi, grazie al suo esempio, sempre più ragazze e minoranze stanno scegliendo carriere STEM, creando un mondo più equo e innovativo.</strong></p>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

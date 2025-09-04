@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turismo: il petrolio d'Italia? — Mito vs Realtà</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; background: rgba(255,255,255,0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.6rem; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.15rem; opacity: 0.95; }
+        .nucleo-badge { background: #90EE90; color: #333; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0 0; }
+        .content { padding: 40px; }
+        .intro-quote { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 24px; border-radius: 14px; font-style: italic; font-size: 1.2rem; text-align: center; margin: 24px 0; position: relative; box-shadow: 0 5px 15px rgba(231,76,60,0.3); }
+        .intro-quote:before { content: '"'; font-size: 3rem; position: absolute; left: 16px; top: -10px; opacity: 0.5; }
+        .intro-quote:after { content: '"'; font-size: 3rem; position: absolute; right: 16px; bottom: -25px; opacity: 0.5; }
+        .perche-civica { background: linear-gradient(135deg, #e8f5e8, #f0f8f0); border-left: 5px solid #27ae60; padding: 28px; margin: 28px 0; border-radius: 0 15px 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .perche-civica h2 { color: #27ae60; margin-bottom: 14px; font-size: 1.6rem; display: flex; align-items: center; gap: 10px; }
+        .perche-civica ul { list-style: none; }
+        .perche-civica li { padding: 6px 0 6px 30px; position: relative; font-size: 1.05rem; color: #2c3e50; }
+        .perche-civica li:before { content: "✓"; color: #27ae60; font-weight: bold; font-size: 1.15rem; position: absolute; left: 0; }
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section, .mythfacts-section, .activities-section { background: white; border-radius: 15px; padding: 28px; margin: 28px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .section-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .badge { display: inline-block; background: #ecf0f1; color: #2c3e50; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; margin-left: 8px; }
+        .mythfacts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .card { background: #f8f9fa; border-left: 4px solid #8e44ad; padding: 16px; border-radius: 10px; }
+        .card h4 { margin-bottom: 8px; color: #8e44ad; }
+        .card p { color: #2c3e50; }
+        .impacts-section { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-left: 5px solid #f39c12; }
+        .impact-item { background: white; border-radius: 10px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); border-left: 4px solid #e67e22; }
+        .impact-item h4 { color: #d35400; margin-bottom: 6px; font-size: 1.1rem; }
+        .solutions-section { background: linear-gradient(135deg, #e8f4f8, #d6eaf8); border-left: 5px solid #3498db; }
+        .solution-item { background: white; border-radius: 10px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); border-left: 4px solid #3498db; }
+        .solution-item h4 { color: #2980b9; margin-bottom: 6px; font-size: 1.1rem; }
+        .discussion-questions { background: linear-gradient(135deg, #d5f4e6, #c8e6c9); border-left: 5px solid #27ae60; }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.05rem; padding-left: 18px; }
+        .resources-section { background: #f8f9fa; }
+        .resource-item { background: white; border-radius: 8px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: transform 0.2s ease; }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 600; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type { background: #3498db; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; margin-right: 10px; }
+        .back-btn { background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(52,152,219,0.3); text-decoration: none; display: inline-block; margin: 20px 0; }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52,152,219,0.4); }
+        .pill { display:inline-block; padding: 2px 10px; border-radius: 999px; font-size: .75rem; margin-left: 6px; background: #ecf0f1; color:#2c3e50; }
+        @media (max-width: 900px){ .mythfacts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇮🇹 Turismo: il petrolio d'Italia?</h1>
+            <p>Mito vs realtà tra lavoro, diritti, sostenibilità e sviluppo locale</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — SVILUPPO SOSTENIBILE • PATRIMONIO • LEGALITÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <ul>
+                    <li><strong>Diritti in equilibrio:</strong> libertà d'impresa e diritto al lavoro dignitoso <span class="pill">Costituzione artt. 1, 4, 36, 41</span></li>
+                    <li><strong>Sviluppo sostenibile:</strong> impatti su ambiente, patrimonio e comunità <span class="pill">Agenda 2030: 8, 11, 12, 13</span></li>
+                    <li><strong>Legalità e trasparenza:</strong> contrasto a lavoro irregolare e pratiche scorrette</li>
+                    <li><strong>Coesione sociale:</strong> evitare dipendenza monocolturale dal turismo, rafforzare filiere locali</li>
+                    <li><strong>Educazione al pensiero critico:</strong> smontare slogan e leggere i dati</li>
+                </ul>
+            </div>
+
+            <div class="intro-quote">
+                "Se il turismo è il petrolio d'Italia, chi controlla i pozzi? E chi beneficia davvero della rendita turistica?"
+            </div>
+
+            <section class="mythfacts-section">
+                <h3 class="section-title">🧩 Mito vs Realtà</h3>
+                <div class="mythfacts-grid">
+                    <div class="card">
+                        <h4>MITO: "Il turismo fa bene a tutti"</h4>
+                        <p><strong>Realtà:</strong> i benefici sono spesso concentrati (grandi catene, proprietà non locali), mentre i costi (affitti, congestione, degrado) ricadono sui residenti. Serve governance per redistribuire valore.</p>
+                    </div>
+                    <div class="card">
+                        <h4>MITO: "Più turisti = più ricchezza"</h4>
+                        <p><strong>Realtà:</strong> senza qualità del lavoro, innovazione e filiere locali, la crescita dei flussi può produrre <em>lavori stagionali, sottopagati o irregolari</em> e vulnerabilità dell'economia.</p>
+                    </div>
+                    <div class="card">
+                        <h4>MITO: "Il turismo è sempre sostenibile"</h4>
+                        <p><strong>Realtà:</strong> il turismo impatta su ambiente e patrimonio; servono limiti di carico, pianificazione, regole su affitti brevi e strumenti economici per gestire i flussi.</p>
+                    </div>
+                    <div class="card">
+                        <h4>MITO: "Basta promuovere di più"</h4>
+                        <p><strong>Realtà:</strong> promuovere senza gestire genera overtourism. Meglio <em>de-marketing</em>, stagionalità intelligente, diversificazione territoriale e turismo lento.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="story-section">
+                <h3 class="section-title">🏛 Quadro di riferimento</h3>
+                <p>Parlare di "petrolio d'Italia" è una <strong>metafora</strong> che rischia di semplificare. Il turismo può creare valore se integrato con: tutela del lavoro, legalità, innovazione, transizione ecologica, e partecipazione delle comunità. La letteratura critica evidenzia come narrazioni entusiastiche possano oscurare problemi strutturali: <em>lavoro irregolare, bassa produttività/innovazione, impatti sociali e ambientali</em>.</p>
+            </section>
+
+            <section class="impacts-section">
+                <h3 class="section-title">⚠ Impatti chiave</h3>
+                <div class="impact-item">
+                    <h4>💼 Lavoro e diritti</h4>
+                    <p>Rischio di <strong>irregolarità, stagionalità e salari bassi</strong>; importanza di contratti, ispezioni, formazione e qualità dell'occupazione.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏘 Territori e abitare</h4>
+                    <p>Pressione abitativa da affitti brevi, gentrificazione e perdita di servizi per residenti; necessarie politiche su locazioni turistiche e piani di quartiere.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🌿 Ambiente e patrimonio</h4>
+                    <p>Consumi e rifiuti, usura dei siti, congestione; servono limiti di carico, gestione dei flussi, ticket e investimenti in mobilità dolce.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>📉 Resilienza economica</h4>
+                    <p>La dipendenza monocolturale espone a shock (pandemie, crisi climatica). Diversificare l'economia locale e favorire filiere corte aiuta la resilienza.</p>
+                </div>
+            </section>
+
+            <section class="solutions-section">
+                <h3 class="section-title">💡 Leve di politica pubblica e pratiche efficaci</h3>
+                <div class="solution-item">
+                    <h4>🏛 Regolazione e governance</h4>
+                    <p>Piani di gestione dei flussi, <em>visitor cap</em> nei siti sensibili, regole chiare per gli affitti brevi, <em>destination stewardship</em> con partecipazione dei residenti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>💰 Strumenti economici</h4>
+                    <p>Imposta di soggiorno mirata, tariffe dinamiche, incentivi a turismo lento e distribuito, condizionalità sugli aiuti pubblici legata a contratti di qualità.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧑‍💼 Qualità del lavoro</h4>
+                    <p>Formazione, certificazioni di responsabilità sociale, controlli contro il lavoro nero, premi alle imprese che garantiscono diritti e stabilità.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🔗 Filiere e innovazione</h4>
+                    <p>Acquisti locali, economia circolare nel turismo (energia, rifiuti, acqua), digitalizzazione per monitorare flussi e prenotazioni intelligenti.</p>
+                </div>
+            </section>
+
+            <section class="activities-section">
+                <h3 class="section-title">🧪 Attività in classe (40–60 min)</h3>
+                <div class="card" style="border-left-color:#27ae60">
+                    <h4>Role-play: "Chi prende cosa dal turismo?"</h4>
+                    <p>Gruppi: residenti, lavoratori, imprese, amministrazione. Ognuno propone 2 misure per massimizzare benefici e minimizzare costi; discussione plenaria con compromesso finale.</p>
+                </div>
+                <div class="card" style="border-left-color:#f39c12">
+                    <h4>Fact-checking dello slogan</h4>
+                    <p>Analizzare la frase "il turismo è il petrolio d'Italia" alla luce delle fonti: quali dati supportano/contestano? Produrre una slide con <em>3 evidenze</em> e <em>1 raccomandazione</em>.</p>
+                </div>
+                <div class="card" style="border-left-color:#2980b9">
+                    <h4>Debate regolamentato</h4>
+                    <p>Mozione: "Le città d'arte dovrebbero limitare gli arrivi nei periodi di punta". Pro/Contro con tempi scanditi, giudici tra gli studenti.</p>
+                </div>
+            </section>
+
+            <section class="discussion-questions">
+                <h3 class="section-title">💭 Domande guida per il dibattito</h3>
+                <ol>
+                    <li>Chi guadagna e chi perde nella catena del valore turistica?</li>
+                    <li>Quali condizioni minime di <em>lavoro dignitoso</em> dovrebbero essere garantite nel turismo?</li>
+                    <li>Qual è il punto di equilibrio tra attrattività e vivibilità per i residenti?</li>
+                    <li>Gli affitti brevi vanno regolati, vietati o lasciati liberi? Con quali effetti collaterali?</li>
+                    <li>Quali indicatori useresti per misurare sostenibilità e benessere in una destinazione?</li>
+                </ol>
+            </section>
+
+            <section class="resources-section">
+                <h3 class="section-title">📚 Fonti e materiali</h3>
+                <div class="resource-item">
+                    <span class="resource-type">PODCAST</span>
+                    <a href="https://open.spotify.com/episode/7MqT4NQAjZf9VnK4eUgyBS?si=12a8f8e4322b4670" target="_blank" rel="noopener">DOI Podcast — Ep. 74</a>
+                    <p>Discussione critica sul turismo come "petrolio": spunti per smontare lo slogan e per ragionare su qualità, lavoro e sostenibilità.</p>
+                </div>
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://gliasinirivista.org/oltre-la-retorica-sul-turismo/" target="_blank" rel="noopener">Gli Asini — Oltre la retorica sul turismo</a>
+                    <p>Analisi che problematizza narrazioni semplicistiche, con attenzione a impatti sociali e culturali.</p>
+                </div>
+                <div class="resource-item">
+                    <span class="resource-type">INCHIESTA</span>
+                    <a href="https://www.ilfattoquotidiano.it/2024/05/30/il-governo-festeggia-loccupazione-ma-il-lavoro-e-sempre-piu-irregolare-i-dati-illeciti-nel-74-delle-aziende-77-nel-turismo-e-ristorazione/7564593/" target="_blank" rel="noopener">Il Fatto Quotidiano (30/05/2024)</a>
+                    <p>Dossier sui <em>profili di irregolarità</em> nel lavoro, con dati citati per il settore turismo/ristorazione: utile per il fact-checking in classe.</p>
+                </div>
+            </section>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

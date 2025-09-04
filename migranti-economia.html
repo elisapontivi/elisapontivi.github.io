@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migranti: risorsa economica vs costo sociale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #90EE90; color: #333; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #27ae60; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "✓"; color: #27ae60; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .overtourism-quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .overtourism-quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        /* —— Embed video responsivo —— */
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .overtourism-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧭 Migranti: risorsa economica vs costo sociale</h1>
+            <p>Dati, lavoro, welfare e coesione per capire oltre gli slogan</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — COSTITUZIONE • DIRITTI • LAVORO • WELFARE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il tema tocca <strong>uguaglianza (art. 3)</strong>, <strong>diritti umani</strong>, <strong>lavoro</strong>, <strong>welfare</strong> e convivenza democratica. Studiarlo aiuta a distinguere tra narrazioni e fatti, valutando <strong>costs & benefits</strong> nel breve e nel lungo periodo.</p>
+                <ul>
+                    <li><strong>Mercato del lavoro:</strong> carenze di manodopera, competenze, imprenditorialità</li>
+                    <li><strong>Welfare e finanza pubblica:</strong> contributi, tasse, spese per servizi e accoglienza</li>
+                    <li><strong>Demografia e scuola:</strong> invecchiamento, natalità, inclusione educativa</li>
+                    <li><strong>Coesione sociale:</strong> integrazione, contrasto a sfruttamento e marginalità</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Domanda-guida: chi paga e chi beneficia dell’immigrazione oggi e domani? Quali indicatori servono per valutarlo con onestà?
+            </div>
+
+            <div class="story-section">
+                <h3>🏛 Quadro: termini e leve</h3>
+                <p><strong>Migrazione</strong> include motivi diversi (lavoro, studio, famiglia, protezione). Le politiche pubbliche combinano canali d’ingresso, incontro tra domanda e offerta, formazione linguistica e professionale, tutela dei diritti e sicurezza.</p>
+                <!-- Video introduttivo -->
+                <div class="video-embed" style="margin-top:16px;">
+                    <iframe
+                        src="https://www.youtube.com/embed/DhIVoGm1ieQ"
+                        title="Video YouTube — Migranti e lavoro: quadro introduttivo"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚖ Argomenti a confronto</h3>
+                <div class="impact-item">
+                    <h4>💼 Lavoro: complementarità vs concorrenza</h4>
+                    <p>I migranti occupano spesso mansioni scoperte (agricoltura, cura, edilizia, ristorazione), ma possono creare pressioni in segmenti a bassa qualifica se mancano regole e ispezioni.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏦 Finanza pubblica</h4>
+                    <p>Entrate (tasse, contributi) e uscite (accoglienza, servizi). Il saldo dipende da età, occupazione, durata della permanenza e qualità dell’integrazione.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>📈 Crescita e imprenditorialità</h4>
+                    <p>Nuove imprese, domanda interna e diversificazione settoriale: effetti positivi se l’inserimento lavorativo è regolare e qualificato.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>👨‍👩‍👧 Demografia e scuola</h4>
+                    <p>Contrasto all’invecchiamento e supporto alla natalità; a scuola servono risorse per inclusione linguistica e prevenzione della dispersione.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏘 Territorio e coesione</h4>
+                    <p>Integrare significa politiche abitative, lotta allo sfruttamento, mediazione culturale e coinvolgimento delle comunità locali.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Politiche efficaci</h3>
+                <div class="solution-item">
+                    <h4>🎯 Programmazione degli ingressi e matching</h4>
+                    <p>Allineare i canali d’ingresso alle reali esigenze produttive e territoriali; procedure rapide e trasparenti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧑‍🏫 Lingua, formazione e riconoscimento titoli</h4>
+                    <p>Competenze spendibili e percorsi per valorizzare studi e qualifiche ottenuti all’estero.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>⚖ Legalità e qualità del lavoro</h4>
+                    <p>Ispezioni, contrasto a caporalato e lavoro nero, responsabilità nelle filiere, sportelli di tutela.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏫 Scuola e comunità</h4>
+                    <p>Mediazione, supporto linguistico, orientamento famiglie; progetti di vicinato contro segregazione e conflitti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧾 Valutazione e dati</h4>
+                    <p>Monitorare indicatori (occupazione, salari, saldo fiscale, esiti scolastici) per politiche basate su evidenze.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Quali indicatori useresti per misurare “risorsa” e “costo” dell’immigrazione?</li>
+                    <li>In quali settori la manodopera straniera è oggi necessaria? Con quali tutele minime?</li>
+                    <li>Come evitare che il lavoro migrante alimenti concorrenza al ribasso o sfruttamento?</li>
+                    <li>Qual è il ruolo della scuola nell’integrazione di bambini e famiglie?</li>
+                    <li>Come cambia il saldo tra entrate e spese nel breve vs lungo periodo?</li>
+                    <li>Quali politiche riducono i conflitti nei territori ad alta pressione abitativa?</li>
+                    <li>Che differenza c’è tra migrazione per lavoro, ricongiungimento e protezione?</li>
+                    <li>Quali dati servono al tuo Comune per programmare servizi e inclusione?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <p style="margin-bottom:10px;">Introduzione audiovisiva al tema lavoro–migrazione:</p>
+                    <div class="video-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed/DhIVoGm1ieQ"
+                            title="Video YouTube — Migranti e lavoro"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <p style="margin-bottom:10px;">Approfondimento su criticità e politiche:</p>
+                    <div class="video-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed/eCHRhmx41Hc"
+                            title="Video YouTube — Politiche di reclutamento e manodopera straniera"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.internazionale.it/magazine/sandrine-morel-2/2025/04/30/l-immigrazione-fa-bene-alla-crescita" target="_blank" rel="noopener">
+                        Internazionale — “L’immigrazione fa bene alla crescita” (30/04/2025)
+                    </a>
+                    <p>Ragioni economiche e demografiche a favore del contributo migrante alla crescita.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO ARTICOLO</span>
+                    <a href="https://www.internazionale.it/video/2025/03/12/il-piano-per-reclutare-piu-manodopera-straniera-in-italia-non-funziona" target="_blank" rel="noopener">
+                        Internazionale — “Il piano per reclutare più manodopera straniera in Italia non funziona” (12/03/2025)
+                    </a>
+                    <p>Criticità operative tra fabbisogni delle imprese e meccanismi di ingresso.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RICERCA</span>
+                    <a href="https://www.laboratoriofuturo.it/ricerche/gli-immigrati-nelleconomia-italiana-tra-necessita-e-opportunita/" target="_blank" rel="noopener">
+                        Laboratorio Futuro — “Gli immigrati nell’economia italiana: tra necessità e opportunità”
+                    </a>
+                    <p>Report di ricerca sui ruoli economici dei migranti e sulle opportunità di policy.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

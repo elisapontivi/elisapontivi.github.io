@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglese - Materiali di Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #764ba2;
+        }
+
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .thematic-area {
+            margin-bottom: 50px;
+        }
+
+        .area-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .area-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .area-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .topic-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 25px;
+            text-decoration: none;
+            color: #2c3e50;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .topic-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: #2c3e50;
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: #5a6c7d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .topic-period {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .topic-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .keyword {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .stats-bar {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .topic-card {
+                padding: 20px;
+            }
+            
+            .area-header {
+                padding: 20px;
+            }
+            
+            .area-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index1.html">← Torna alle materie</a>
+        </div>
+
+
+        <div class="header">
+            <div class="subject-icon">🇬🇧</div>
+            <h1>English Language</h1>
+            <p>Explore civic education themes through English language learning: human rights, social justice, and global challenges</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stats-number">2</div>
+                <div class="stats-label">Aree Tematiche</div>
+            </div>
+            <div class="stat-item">
+                <div class="stats-number">7</div>
+                <div class="stats-label">Argomenti Totali</div>
+            </div>
+            <div class="stat-item">
+                <div class="stats-number">100%</div>
+                <div class="stats-label">Contenuti in Inglese</div>
+            </div>
+        </div>
+
+        <!-- AREA TEMATICA 1: CIVIL RIGHTS HEROES -->
+        <div class="thematic-area">
+            <div class="area-header">
+                <h2>🏛️ Area Tematica 1: Civil Rights Heroes</h2>
+                <p>Discover the inspiring stories of individuals who fought for equality, justice, and human rights across different cultures and historical periods</p>
+            </div>
+
+            <div class="topics-grid">
+                <a href="rosa-parks.html" class="topic-card">
+                    <div class="topic-period">1913-2005</div>
+                    <div class="topic-icon">🚌</div>
+                    <div class="topic-title">Rosa Parks</div>
+                    <div class="topic-description">
+                        The "Mother of the Civil Rights Movement" who sparked the Montgomery Bus Boycott and challenged racial segregation in America.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">Civil Rights</span>
+                        <span class="keyword">Segregation</span>
+                        <span class="keyword">Montgomery Bus</span>
+                        <span class="keyword">Courage</span>
+                    </div>
+                </a>
+
+                <a href="martin-luther-king.html" class="topic-card">
+                    <div class="topic-period">1929-1968</div>
+                    <div class="topic-icon">✊</div>
+                    <div class="topic-title">Martin Luther King Jr.</div>
+                    <div class="topic-description">
+                        The charismatic leader who advocated for nonviolent resistance and delivered the famous "I Have a Dream" speech.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">I Have a Dream</span>
+                        <span class="keyword">Nonviolence</span>
+                        <span class="keyword">Equality</span>
+                        <span class="keyword">Leadership</span>
+                    </div>
+                </a>
+
+                <a href="gandhi.html" class="topic-card">
+                    <div class="topic-period">1869-1948</div>
+                    <div class="topic-icon">🕊️</div>
+                    <div class="topic-title">Mahatma Gandhi</div>
+                    <div class="topic-description">
+                        The Indian leader who pioneered nonviolent civil disobedience and inspired liberation movements worldwide.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">Nonviolence</span>
+                        <span class="keyword">Independence</span>
+                        <span class="keyword">Civil Disobedience</span>
+                        <span class="keyword">Peace</span>
+                    </div>
+                </a>
+
+                <a href="nelson-mandela.html" class="topic-card">
+                    <div class="topic-period">1918-2013</div>
+                    <div class="topic-icon">🌍</div>
+                    <div class="topic-title">Nelson Mandela</div>
+                    <div class="topic-description">
+                        The South African anti-apartheid revolutionary who became president and promoted racial reconciliation.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">Apartheid</span>
+                        <span class="keyword">Reconciliation</span>
+                        <span class="keyword">Freedom</span>
+                        <span class="keyword">Ubuntu</span>
+                    </div>
+                </a>
+
+                <a href="katherine-johnson.html" class="topic-card">
+                    <div class="topic-period">1918-2020</div>
+                    <div class="topic-icon">🚀</div>
+                    <div class="topic-title">Katherine Johnson</div>
+                    <div class="topic-description">
+                        The brilliant mathematician who calculated trajectories for NASA space missions and broke barriers for women and African Americans in STEM.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">NASA</span>
+                        <span class="keyword">Mathematics</span>
+                        <span class="keyword">Space Race</span>
+                        <span class="keyword">Hidden Figures</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- AREA TEMATICA 2: ENVIRONMENTAL CHALLENGES -->
+        <div class="thematic-area">
+            <div class="area-header">
+                <h2>🌍 Area Tematica 2: Global Environmental Challenges</h2>
+                <p>Examine contemporary environmental issues and their impact on communities, exploring sustainable solutions and responsible citizenship</p>
+            </div>
+
+            <div class="topics-grid">
+                <a href="overtourism.html" class="topic-card">
+                    <div class="topic-period">21st Century</div>
+                    <div class="topic-icon">✈️</div>
+                    <div class="topic-title">Overtourism</div>
+                    <div class="topic-description">
+                        The phenomenon of excessive tourism that threatens local communities, cultural heritage, and natural environments around the world.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">Sustainable Tourism</span>
+                        <span class="keyword">Local Communities</span>
+                        <span class="keyword">Heritage Protection</span>
+                        <span class="keyword">Responsible Travel</span>
+                    </div>
+                </a>
+
+                <a href="climate-challenges.html" class="topic-card">
+                    <div class="topic-period">Current Era</div>
+                    <div class="topic-icon">🌡️</div>
+                    <div class="topic-title">Climate Challenges</div>
+                    <div class="topic-description">
+                        Understanding climate change, its global impacts, and the collective action needed to address this urgent environmental crisis.
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">Global Warming</span>
+                        <span class="keyword">Sustainability</span>
+                        <span class="keyword">Green Energy</span>
+                        <span class="keyword">Climate Action</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="stats-bar" style="margin-top: 40px;">
+            <p style="color: #5a6c7d; font-size: 0.95rem; text-align: center;">
+                🎯 <strong>Learning Goals:</strong> Develop English language skills while exploring themes of social justice, human rights, and environmental responsibility
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Aggiungi effetti di interattività
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.topic-card');
+            
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+
+                // Animazione di entrata per le card
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esternalità Negative - Chi Paga l'Inquinamento?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 30%, #e74c3c 70%, #c0392b 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "🏭";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "🌍";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .economic-quote {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        .economic-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .economic-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #fff5f5, #ffebee);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .context-section h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #e74c3c;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #e74c3c;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .case-study-section {
+            background: linear-gradient(135deg, #fff3e0, #ffcc80);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .case-study-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .case-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #f39c12;
+        }
+
+        .case-item h4 {
+            color: #d68910;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .strumenti-section {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .strumenti-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .economia-section {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid #2196f3;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .economia-section h3 {
+            color: #1976d2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff0f0;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .formula-box {
+            background: #f0f8ff;
+            border: 2px solid #4682b4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .formula-box .formula {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .economic-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 Esternalità Negative</h1>
+            <p>Chi Paga Davvero l'Inquinamento?</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 3 - SVILUPPO SOSTENIBILE, EDUCAZIONE AMBIENTALE E SALUTE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare le Esternalità Negative in Educazione Civica?</h2>
+                <p>Le esternalità negative sono uno dei <strong>fallimenti del mercato</strong> più significativi e rappresentano un tema cruciale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Giustizia ambientale:</strong> Chi inquina spesso non paga i costi ambientali</li>
+                    <li><strong>Diritti delle future generazioni:</strong> L'ambiente è un bene comune da tutelare</li>
+                    <li><strong>Salute pubblica:</strong> L'inquinamento ha costi sanitari enormi per la collettività</li>
+                    <li><strong>Equità sociale:</strong> Le popolazioni più povere subiscono maggiormente gli effetti</li>
+                    <li><strong>Sviluppo sostenibile:</strong> Necessità di internalizare i costi ambientali</li>
+                    <li><strong>Politiche pubbliche:</strong> Serve intervento dello Stato per correggere il mercato</li>
+                    <li><strong>Cittadinanza responsabile:</strong> Ogni scelta ha conseguenze sulla collettività</li>
+                </ul>
+            </div>
+
+            <div class="economic-quote">
+                Il vero prezzo di ogni cosa è la fatica e il problema di acquisirla
+                <br><small>- Adam Smith, adattato al concetto di esternalità</small>
+            </div>
+
+            <div class="context-section">
+                <h3>💡 Cos'è un'esternalità negativa: definizione e caratteristiche</h3>
+                <p>Un'<strong>esternalità negativa</strong> si verifica quando l'attività economica di un soggetto impone costi involontari ad altri soggetti, senza che questi vengano compensati.</p>
+                
+                <div class="formula-box">
+                    <p><strong>Formula economica:</strong></p>
+                    <div class="formula">Costo Sociale = Costo Privato + Costo Esterno</div>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        Il costo che la società paga è maggiore di quello sostenuto dal produttore
+                    </p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Caratteristiche delle esternalità negative:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Involontarietà:</strong> Chi subisce il danno non ha scelto di subirlo</li>
+                        <li><strong>Assenza di compenso:</strong> Non c'è pagamento per il danno subito</li>
+                        <li><strong>Fallimento del mercato:</strong> Il prezzo non riflette il costo sociale reale</li>
+                        <li><strong>Inefficienza allocativa:</strong> Si produce troppo del bene inquinante</li>
+                        <li><strong>Iniquità distributiva:</strong> I costi ricadono spesso sui più deboli</li>
+                        <li><strong>Sostenibilità:</strong> Risorse naturali sovrasfruttate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="economia-section">
+                <h3>📊 Tipologie di esternalità negative</h3>
+                
+                <div class="case-item">
+                    <h4>🌫️ Inquinamento atmosferico</h4>
+                    <p><strong>Esempio:</strong> Un'acciaieria emette fumi tossici che causano malattie respiratorie alla popolazione circostante. L'azienda non paga le cure mediche né i giorni di malattia.</p>
+                    <p><strong>Costo esterno:</strong> Spese sanitarie, perdita di produttività, degrado ambientale</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>💧 Inquinamento idrico</h4>
+                    <p><strong>Esempio:</strong> Un'industria chimica scarica sostanze tossiche in un fiume, compromettendo la pesca e l'agricoltura a valle.</p>
+                    <p><strong>Costo esterno:</strong> Perdita di reddito per pescatori e agricoltori, costi di depurazione</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🔊 Inquinamento acustico</h4>
+                    <p><strong>Esempio:</strong> Un aeroporto genera rumore che riduce il valore degli immobili circostanti e causa stress agli abitanti.</p>
+                    <p><strong>Costo esterno:</strong> Perdita di valore immobiliare, costi sanitari per stress</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🚗 Traffico e congestione</h4>
+                    <p><strong>Esempio:</strong> Ogni auto in più aumenta i tempi di percorrenza per tutti gli altri automobilisti.</p>
+                    <p><strong>Costo esterno:</strong> Tempo perduto, maggiore consumo carburante, stress</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🌡️ Cambiamento climatico</h4>
+                    <p><strong>Esempio:</strong> Le emissioni di CO₂ di un'industria contribuiscono al riscaldamento globale che colpisce tutto il pianeta.</p>
+                    <p><strong>Costo esterno:</strong> Danni da eventi climatici estremi, perdite agricole, migrazioni climatiche</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 Storia del concetto di esternalità</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1920</div>
+                    <div class="timeline-event">Arthur Pigou formalizza il concetto di esternalità in "The Economics of Welfare"</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1960</div>
+                    <div class="timeline-event">Ronald Coase propone il "Teorema di Coase" per risolvere le esternalità tramite negoziazione</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1970</div>
+                    <div class="timeline-event">Prima Giornata della Terra - nasce la coscienza ambientale globale</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1990</div>
+                    <div class="timeline-event">Nascono i primi mercati delle emissioni (cap-and-trade) negli USA</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1997</div>
+                    <div class="timeline-event">Protocollo di Kyoto - primo accordo internazionale su riduzione emissioni</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2005</div>
+                    <div class="timeline-event">Nasce l'EU-ETS, il sistema europeo di scambio delle quote di emissione</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2015</div>
+                    <div class="timeline-event">Accordo di Parigi sul clima - impegno globale per limitare il riscaldamento</div>
+                </div>
+            </div>
+
+            <div class="case-study-section">
+                <h3>🔍 Casi studio: quando l'inquinamento costa alla società</h3>
+                
+                <div class="case-item">
+                    <h4>🏭 L'Ilva di Taranto</h4>
+                    <p>Il più grande stabilimento siderurgico d'Europa ha causato un drammatico aumento dei tumori e delle malattie respiratorie nella città di Taranto. I costi sanitari e ambientali sono stimati in <strong>oltre 8 miliardi di euro</strong>, mentre l'azienda per decenni non ha pagato questi costi esterni.</p>
+                    <p><strong>Lesson learned:</strong> Il costo sociale della produzione era enormemente superiore al profitto privato.</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🌊 La Marea Nera della BP (2010)</h4>
+                    <p>L'esplosione della piattaforma Deepwater Horizon nel Golfo del Messico ha causato il più grande disastro ambientale marino degli USA. BP ha pagato <strong>oltre 65 miliardi di dollari</strong> in risarcimenti e multe, ma i danni ecosistemici sono incalcolabili.</p>
+                    <p><strong>Lesson learned:</strong> Anche le grandi multinazionali possono essere costrette a pagare i costi esterni.</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🚭 L'industria del tabacco</h4>
+                    <p>Per decenni le compagnie del tabacco hanno scaricato sulla sanità pubblica i costi delle malattie fumo-correlate. Negli USA hanno pagato <strong>oltre 200 miliardi di dollari</strong> in risarcimenti agli Stati per i costi sanitari sostenuti.</p>
+                    <p><strong>Lesson learned:</strong> I costi sanitari delle esternalità negative possono essere recuperati legalmente.</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>🇨🇳 L'inquinamento cinese</h4>
+                    <p>La rapida industrializzazione cinese ha generato enormi esternalità negative: l'inquinamento dell'aria causa <strong>1,6 milioni di morti premature l'anno</strong> e costa il 10% del PIL cinese in danni sanitari e ambientali.</p>
+                    <p><strong>Lesson learned:</strong> La crescita economica senza controllo delle esternalità ha costi sociali insostenibili.</p>
+                </div>
+            </div>
+
+            <div class="strumenti-section">
+                <h3>🛠️ Come risolvere le esternalità negative</h3>
+                <p>Esistono diversi strumenti economici e normativi per <strong>"internalizzare"</strong> i costi esterni:</p>
+                
+                <div class="case-item">
+                    <h4>1. 💰 Tasse pigouviane</h4>
+                    <p>Imposte sui beni che generano esternalità negative, pari al costo sociale del danno.</p>
+                    <p><strong>Esempi:</strong> Carbon tax, tasse sui carburanti, tasse sui sacchetti di plastica</p>
+                    <p><strong>Pro:</strong> Semplice da implementare, genera entrate per lo Stato</p>
+                    <p><strong>Contro:</strong> Difficile calcolare l'esatto ammontare del danno</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>2. 📜 Regolamentazione diretta</h4>
+                    <p>Norme che vietano o limitano attività inquinanti.</p>
+                    <p><strong>Esempi:</strong> Limiti di emissione, divieti di scarico, zone a traffico limitato</p>
+                    <p><strong>Pro:</strong> Controllo diretto del livello di inquinamento</p>
+                    <p><strong>Contro:</strong> Rigidità, costi amministrativi elevati</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>3. 🏪 Mercati delle emissioni (Cap-and-Trade)</h4>
+                    <p>Si fissa un tetto massimo di emissioni e si distribuiscono permessi negoziabili.</p>
+                    <p><strong>Esempi:</strong> EU-ETS per le emissioni di CO₂, mercato delle quote per SO₂ negli USA</p>
+                    <p><strong>Pro:</strong> Efficienza economica, flessibilità per le imprese</p>
+                    <p><strong>Contro:</strong> Complessità nella progettazione, rischio di volatilità dei prezzi</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>4. 💵 Sussidi alle alternative pulite</h4>
+                    <p>Incentivi economici per tecnologie e comportamenti sostenibili.</p>
+                    <p><strong>Esempi:</strong> Incentivi per auto elettriche, pannelli solari, efficienza energetica</p>
+                    <p><strong>Pro:</strong> Promuove innovazione e crescita verde</p>
+                    <p><strong>Contro:</strong> Costo per la finanza pubblica</p>
+                </div>
+                
+                <div class="case-item">
+                    <h4>5. ⚖️ Responsabilità legale</h4>
+                    <p>Chi inquina può essere citato in giudizio e costretto a risarcire i danni.</p>
+                    <p><strong>Esempi:</strong> Class action contro aziende inquinanti, principio "chi inquina paga"</p>
+                    <p><strong>Pro:</strong> Deterrente forte, giustizia per le vittime</p>
+                    <p><strong>Contro:</strong> Processi lunghi e costosi, difficoltà nel dimostrare il nesso causale</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🇪🇺 L'approccio dell'Unione Europea</h3>
+                <p>L'UE ha sviluppato una strategia integrata per affrontare le esternalità negative:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>🌍 European Green Deal:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Obiettivo:</strong> Neutralità climatica entro il 2050</li>
+                        <li><strong>Strumenti:</strong> EU-ETS, tassazione verde, regolamentazione</li>
+                        <li><strong>Investimenti:</strong> 1.000 miliardi di euro in 10 anni per la transizione verde</li>
+                        <li><strong>Principio:</strong> "Chi inquina paga" e "Non lasciare nessuno indietro"</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>🏭 EU-ETS (Sistema di scambio delle quote di emissione):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Settori coperti:</strong> Energia, industria pesante, aviazione</li>
+                        <li><strong>Meccanismo:</strong> Cap (tetto) decrescente + Trade (scambio di permessi)</li>
+                        <li><strong>Risultati:</strong> Riduzione del 35% delle emissioni dal 2005</li>
+                        <li><strong>Ricavi:</strong> Oltre 100 miliardi di euro per investimenti verdi</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>⚖️ Principi guida UE:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Precauzione:</strong> Agire anche in assenza di certezza scientifica assoluta</li>
+                        <li><strong>Azione preventiva:</strong> Meglio prevenire che curare</li>
+                        <li><strong>Chi inquina paga:</strong> I costi ambientali devono essere sostenuti da chi li causa</li>
+                        <li><strong>Integrazione:</strong> Considerazioni ambientali in tutte le politiche</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📊 Progetto interdisciplinare: Matematica/Informatica </h3>
+                <p>Analisi quantitativa delle <strong>esternalità negative</strong> usando dati reali e strumenti matematici:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>🔗 Fonti dati suggerite:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>ISPRA:</strong> Dati inquinamento atmosferico e idrico Italia</li>
+                        <li><strong>ARPA regionali:</strong> Monitoraggio ambientale locale</li>
+                        <li><strong>EEA:</strong> Agenzia Europea dell'Ambiente</li>
+                        <li><strong>WHO:</strong> Dati sanitari su inquinamento e salute</li>
+                        <li><strong>Banca Mondiale:</strong> Costi economici dell'inquinamento</li>
+                    </ul>
+                </div>
+
+                <div class="case-item">
+                    <h4>📈 Proposta 1: Calcolatore dei Costi Sociali del Traffico</h4>
+                    <p><strong>Matematica:</strong> Calcolo di funzioni di costo (lineare, quadratica), elasticità della domanda, ottimizzazione</p>
+                    <p><strong>Informatica:</strong> App web che calcola i costi esterni del traffico (tempo, carburante, inquinamento, incidenti)</p>
+                    <p><strong>Educazione Civica:</strong> Analisi delle politiche urbane e dei trasporti pubblici</p>

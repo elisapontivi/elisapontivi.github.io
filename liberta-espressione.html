@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libertà di Espressione - Diritto Fondamentale della Democrazia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .freedom-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .freedom-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .freedom-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .dimensions-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .dimensions-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .dimension-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #f39c12;
+        }
+
+        .dimension-item h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .limits-section {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .limits-section h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .limit-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .limit-item h4 {
+            color: #c0392b;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .digital-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .digital-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .digital-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .digital-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .freedom-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗣️ Libertà di Espressione</h1>
+            <p>Diritto Fondamentale della Democrazia</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare la Libertà di Espressione in Educazione Civica?</h2>
+                <p>La libertà di espressione è il <strong>pilastro fondamentale</strong> di ogni società democratica e il prerequisito di tutti gli altri diritti civili. Il suo studio è essenziale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Democrazia partecipativa:</strong> Senza libera espressione non c'è vera democrazia</li>
+                    <li><strong>Controllo del potere:</strong> Permette ai cittadini di criticare e controllare i governi</li>
+                    <li><strong>Ricerca della verità:</strong> Il confronto di idee diverse porta alla conoscenza</li>
+                    <li><strong>Sviluppo personale:</strong> L'espressione è fondamentale per l'autorealizzazione individuale</li>
+                    <li><strong>Progresso sociale:</strong> Le idee nuove emergono solo in un clima di libertà</li>
+                    <li><strong>Tolleranza:</strong> Insegna a convivere con opinioni diverse dalle proprie</li>
+                    <li><strong>Responsabilità:</strong> Con la libertà viene anche la responsabilità delle proprie parole</li>
+                </ul>
+            </div>
+
+            <div class="freedom-quote">
+                I disapprove of what you say, but I will defend to the death your right to say it
+                <br><small>- Evelyn Beatrice Hall (spesso attribuito a Voltaire)</small>
+            </div>
+
+            <div class="story-section">
+                <h3>📜 Le radici filosofiche della libertà di espressione</h3>
+                <p>La libertà di espressione non è nata dal nulla, ma è il risultato di secoli di lotte e riflessioni filosofiche:</p>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #e74c3c; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">I Pensatori della Libertà:</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>John Milton (1644):</strong> "Areopagitica" - contro la censura preventiva</li>
+                        <li><strong>John Stuart Mill (1859):</strong> "Sulla Libertà" - il princippio del danno</li>
+                        <li><strong>Oliver Wendell Holmes:</strong> Il concetto di "marketplace of ideas"</li>
+                        <li><strong>Alexander Meiklejohn:</strong> La funzione democratica della libera espressione</li>
+                    </ul>
+                </div>
+                
+                <p>Questi pensatori hanno stabilito che la libertà di espressione non è solo un diritto individuale, ma una <strong>necessità sociale</strong> per il funzionamento della democrazia.</p>
+            </div>
+
+            <div class="dimensions-section">
+                <h3>🔍 Le dimensioni della libertà di espressione</h3>
+                
+                <div class="dimension-item">
+                    <h4>1. Libertà di Parola</h4>
+                    <p>Il diritto di esprimere verbalmente le proprie opinioni, critiche e idee in pubblico e in privato, senza timore di ritorsioni statali.</p>
+                </div>
+                
+                <div class="dimension-item">
+                    <h4>2. Libertà di Stampa</h4>
+                    <p>Il diritto dei media di informare, investigare e criticare senza censura preventiva. Include giornali, TV, radio e media digitali.</p>
+                </div>
+                
+                <div class="dimension-item">
+                    <h4>3. Libertà di Assemblea</h4>
+                    <p>Il diritto di riunirsi pacificamente per protestare, manifestare e esprimere collettivamente le proprie opinioni politiche.</p>
+                </div>
+                
+                <div class="dimension-item">
+                    <h4>4. Libertà Artistica e Culturale</h4>
+                    <p>Il diritto degli artisti, scrittori e creatori di esprimere la propria visione del mondo attraverso le arti e la cultura.</p>
+                </div>
+                
+                <div class="dimension-item">
+                    <h4>5. Libertà Accademica</h4>
+                    <p>Il diritto di ricercatori, professori e studenti di investigare, insegnare e discutere liberamente argomenti anche controversi.</p>
+                </div>
+            </div>
+
+            <div class="limits-section">
+                <h3>⚖️ I limiti necessari: quando la libertà diventa responsabilità</h3>
+                <p>Nessun diritto è assoluto. Anche la libertà di espressione ha dei limiti ragionevoli e necessari:</p>
+                
+                <div class="limit-item">
+                    <h4>🚫 Incitamento alla Violenza</h4>
+                    <p>Non si può incitare direttamente alla violenza contro persone o gruppi. Il famoso test: "Non puoi gridare 'al fuoco!' in un teatro affollato."</p>
+                </div>
+                
+                <div class="limit-item">
+                    <h4>📢 Diffamazione</h4>
+                    <p>Non si possono diffondere consapevolmente informazioni false che danneggiano la reputazione altrui. Bilanciamento tra libertà di critica e protezione dell'onore.</p>
+                </div>
+                
+                <div class="limit-item">
+                    <h4>🔒 Segreti di Stato</h4>
+                    <p>Alcune informazioni possono essere classificate per motivi di sicurezza nazionale, ma questo potere deve essere usato con estrema cautela.</p>
+                </div>
+                
+                <div class="limit-item">
+                    <h4>👶 Protezione dei Minori</h4>
+                    <p>Contenuti inappropriati per i minori possono essere regolamentati, ma senza diventare censura generalizzata.</p>
+                </div>
+                
+                <div class="limit-item">
+                    <h4>⚖️ Hate Speech</h4>
+                    <p>Il discorso d'odio basato su razza, religione, orientamento sessuale può essere limitato, ma la definizione deve essere precisa per evitare abusi.</p>
+                </div>
+            </div>
+
+            <div class="digital-section">
+                <h3>💻 Libertà di espressione nell'era digitale</h3>
+                <p>Internet e i social media hanno rivoluzionato la libertà di espressione, creando nuove opportunità ma anche nuove sfide:</p>
+                
+                <div class="digital-item">
+                    <h4>🌐 Democratizzazione della Voce</h4>
+                    <p>Ogni persona può ora raggiungere un pubblico globale attraverso blog, social media e piattaforme digitali. Il "cittadino giornalista" è una realtà.</p>
+                </div>
+                
+                <div class="digital-item">
+                    <h4>🤖 Algoritmi e Filter Bubbles</h4>
+                    <p>Gli algoritmi decidono cosa vediamo, creando "bolle informatiche" che limitano l'esposizione a idee diverse. È una nuova forma di censura?</p>
+                </div>
+                
+                <div class="digital-item">
+                    <h4>🏢 Potere delle Big Tech</h4>
+                    <p>Facebook, Twitter, Google hanno più potere censorio di molti governi. Chi controlla i controllori? Come bilanciare libertà e responsabilità privata?</p>
+                </div>
+                
+                <div class="digital-item">
+                    <h4>🔊 Amplificazione e Viralità</h4>
+                    <p>Le idee si diffondono istantaneamente, ma anche la disinformazione. Come distinguere informazione da manipolazione?</p>
+                </div>
+                
+                <div class="digital-item">
+                    <h4>🌍 Giurisdizioni Globali</h4>
+                    <p>Internet non ha confini, ma le leggi sì. Quale paese regola cosa? Il caso della "cancel culture" transnazionale.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>⚔️ Casi storici: quando la libertà di espressione fu messa alla prova</h3>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">📚 Il Caso Galileo (1633)</h4>
+                    <p>Galilei fu condannato dall'Inquisizione per aver sostenuto il sistema eliocentrico. Primo grande conflitto tra libertà scientifica e dogma religioso. "Eppur si muove" divenne il simbolo della ricerca libera.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">📰 Il Caso Pentagon Papers (1971)</h4>
+                    <p>Il New York Times pubblicò documenti classificati sulla Guerra del Vietnam. La Corte Suprema stabilì che il governo non può censurare preventivamente, anche per motivi di sicurezza nazionale.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">🎨 Il Caso Charlie Hebdo (2015)</h4>
+                    <p>L'attacco alla redazione parigina per le vignette su Maometto sollevò il dibattito globale sui limiti della libertà di espressione e il rispetto religioso. "Je suis Charlie" divenne un simbolo mondiale.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎭 Libertà di espressione vs Cancel Culture</h3>
+                <p>Il dibattito contemporaneo più acceso riguarda la <strong>cancel culture</strong> - la pratica di "cancellare" persone per opinioni considerate offensive:</p>
+                
+                <div style="background: #e8f4f8; border-left: 4px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>Le due prospettive:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Pro:</strong> È giusto che le azioni abbiano conseguenze sociali. La libertà di parola non include la libertà dalle conseguenze.</li>
+                        <li><strong>Contro:</strong> Crea autocensura e paura. Il "tribunal del popolo" può essere più oppressivo dello Stato.</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>La domanda centrale:</strong> Come bilanciare la protezione delle minoranze con la libertà di dibattito?</p>
+                </div>
+            </div>
+
+    ...
+    <div class="story-section">
+        <h3>🎭 Libertà di espressione vs Cancel Culture</h3>
+        <p>Il dibattito contemporaneo più acceso riguarda la <strong>cancel culture</strong> - la pratica di "cancellare" persone per opinioni considerate offensive:</p>
+        
+        <div style="background: #e8f4f8; border-left: 4px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+            <p><strong>Le due prospettive:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Pro:</strong> È giusto che le azioni abbiano conseguenze sociali. La libertà di parola non include la libertà dalle conseguenze.</li>
+                <li><strong>Contro:</strong> Crea autocensura e paura. Il "tribunal del popolo" può essere più oppressivo dello Stato.</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>La domanda centrale:</strong> Come bilanciare la protezione delle minoranze con la libertà di dibattito?</p>
+        </div>
+    </div>
+
+    <!-- 📌 NUOVO VIDEO -->
+    <div class="story-section">
+        <h3>🎥 Video di approfondimento</h3>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.2);">
+            <iframe src="https://www.youtube.com/embed/83deuVrx80w" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen 
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+            </iframe>
+        </div>
+    </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>La libertà di espressione deve essere assoluta o può avere limiti ragionevoli?</li>
+                    <li>Chi dovrebbe decidere cosa è "hate speech" e cosa è legittima opinione?</li>
+                    <li>I social media sono piattaforme pubbliche o aziende private? Che differenza fa per la libertà di espressione?</li>
+                    <li>Come si può combattere la disinformazione senza limitare la libertà di dibattito?</li>
+                    <li>È giusto "cancellare" persone per opinioni espresse anni fa quando erano considerate accettabili?</li>
+                    <li>Come bilanciare la libertà di satira con il rispetto religioso?</li>
+                    <li>Gli studenti universitari dovrebbero poter impedire conferenze di relatori controversi?</li>
+                    <li>Qual è la differenza tra censura statale e pressione sociale?</li>
+                    <li>Come può un giovane cittadino esercitare responsabilmente la propria libertà di espressione?</li>
+                    <li>La libertà di espressione online dovrebbe essere regolata diversamente da quella offline?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

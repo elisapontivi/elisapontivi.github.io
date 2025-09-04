@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nelson Mandela - From Prisoner to President</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mandela-quote {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .mandela-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .mandela-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .video-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .apartheid-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .apartheid-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #f39c12;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #f39c12;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e67e22;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .reconciliation-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .reconciliation-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .mandela-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇿🇦 Nelson Mandela</h1>
+            <p>From Prisoner to President - The Path to Reconciliation</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Nelson Mandela in Educazione Civica?</h2>
+                <p>Nelson Mandela rappresenta uno degli esempi più straordinari di <strong>transizione democratica</strong> e <strong>riconciliazione nazionale</strong> nella storia moderna. Il suo studio è fondamentale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Transizione democratica:</strong> Ha guidato il passaggio dall'apartheid alla democrazia multirazziale senza guerra civile</li>
+                    <li><strong>Riconciliazione nazionale:</strong> Ha scelto il perdono e l'unità invece della vendetta</li>
+                    <li><strong>Leadership morale:</strong> Ha dimostrato che il potere può essere usato per sanare invece che dividere</li>
+                    <li><strong>Sacrificio personale:</strong> Ha dedicato 27 anni della sua vita alla causa della libertà</li>
+                    <li><strong>Costituzionalismo:</strong> Ha costruito una delle costituzioni più progressiste al mondo</li>
+                    <li><strong>Diritti umani:</strong> Ha lottato contro ogni forma di discriminazione razziale</li>
+                    <li><strong>Diplomazia e pace:</strong> Ha risolto conflitti attraverso il dialogo invece della violenza</li>
+                </ul>
+            </div>
+
+            
+
+            <div class="mandela-quote">
+                I learned that courage was not the absence of fear, but the triumph over it. The brave man is not he who does not feel afraid, but he who conquers that fear.
+            </div>
+
+            <div class="apartheid-section">
+                <h3>⚫⚪ Cos'era l'Apartheid?</h3>
+                <p>L'<strong>apartheid</strong> (che in afrikaans significa "separazione") era un sistema legale di segregazione razziale istituzionalizzata che governò il Sudafrica dal 1948 al 1994. Questo sistema divideva la popolazione in quattro categorie razziali:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Whites (Bianchi):</strong> Minoranza privilegiata con tutti i diritti politici</li>
+                    <li><strong>Africans/Blacks (Neri):</strong> Maggioranza della popolazione, completamente privata dei diritti</li>
+                    <li><strong>Coloureds (Meticci):</strong> Popolazione di origine mista</li>
+                    <li><strong>Indians/Asians (Indiani):</strong> Discendenti di lavoratori immigrati</li>
+                </ul>
+                
+                <p style="margin-top: 15px;">Le leggi dell'apartheid controllavano ogni aspetto della vita: dove si poteva vivere, lavorare, studiare, sposarsi, viaggiare. Era un sistema di <strong>razzismo istituzionalizzato</strong> che violava i diritti umani fondamentali.</p>
+            </div>
+
+            <div class="story-section">
+                <h3>👨‍⚖️ Dal giovane avvocato al rivoluzionario</h3>
+                <p>Nelson Rolihlahla Mandela nacque il 18 luglio 1918 in un piccolo villaggio del Transkei. Il suo nome "Rolihlahla" in lingua Xhosa significa letteralmente "colui che tira il ramo dell'albero" - un presagio del suo futuro ruolo di "troublemaker" per il sistema razzista.</p>
+                
+                <p>Dopo aver studiato legge, Mandela aprì il primo studio legale nero del Sudafrica insieme a Oliver Tambo. Ma presto si rese conto che <strong>la legge da sola non bastava</strong> per combattere l'ingiustizia sistematica.</p>
+                
+                <p>Nel 1944, all'età di 26 anni, entrò nell'<strong>African National Congress (ANC)</strong> e fondò la Youth League, iniziando la sua lunga carriera di attivista per i diritti civili.</p>
+            </div>
+
+            <div class="timeline">
+                <h3>⏰ I 27 anni che cambiarono un uomo e una nazione</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1962</div>
+                    <div class="timeline-event">Arrestato e condannato per incitamento e uscita illegale dal paese</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1964</div>
+                    <div class="timeline-event">Processo di Rivonia - condannato all'ergastolo</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1964-1982</div>
+                    <div class="timeline-event">Detenzione a Robben Island - 18 anni di lavori forzati</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1982-1988</div>
+                    <div class="timeline-event">Trasferito alla prigione di Pollsmoor</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1988-1990</div>
+                    <div class="timeline-event">Ultimi anni al Victor Verster Prison - iniziano i negoziati segreti</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">11 febbraio 1990</div>
+                    <div class="timeline-event">Liberazione dopo 27 anni, 6 mesi e 6 giorni di prigionia</div>
+                </div>
+            </div>
+
+          
+
+            <div class="reconciliation-section">
+                <h3>🤝 La scelta del perdono: Truth and Reconciliation Commission</h3>
+                <p>Dopo la sua liberazione, Mandela dovette affrontare una scelta cruciale: <strong>vendetta o riconciliazione?</strong> Invece di cercare vendetta per 27 anni di prigionia e secoli di oppressione, Mandela scelse la via della riconciliazione.</p>
+                
+                <p>Come Presidente (1994-1999), istituì la <strong>Truth and Reconciliation Commission</strong> guidata dall'arcivescovo Desmond Tutu. Questa commissione offriva:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Amnistia</strong> a chi confessava pubblicamente i propri crimini</li>
+                    <li><strong>Verità</strong> sui crimini dell'apartheid</li>
+                    <li><strong>Riparazione</strong> per le vittime</li>
+                    <li><strong>Riconciliazione</strong> nazionale attraverso il confronto con il passato</li>
+                </ul>
+                
+                <p style="margin-top: 15px;">Mandela credeva che "<em>il perdono libera l'anima, rimuove la paura. Per questo il perdono è un'arma potente.</em>"</p>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 Nelson Mandela's Legacy</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/jsC4gUZL0Mc" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">L'eredità di Nelson Mandela e il suo impatto sulla democrazia sudafricana</p>
+            </div>
+
+            <div class="story-section">
+                <h3>🏆 Il Rugby e l'Unità Nazionale - Invictus</h3>
+                <p>Nel 1995, il Sudafrica ospitò la Coppa del Mondo di Rugby. Per i bianchi afrikaner, il rugby era molto più di uno sport - era simbolo della loro identità culturale. Mandela comprese l'opportunità: invece di boicottare l'evento, decise di usarlo per unire la nazione.</p>
+                
+                <p>Quando i Springboks (squadra nazionale) vinsero la finale, <strong>Mandela consegnò personalmente il trofeo al capitano Francois Pienaar</strong>, indossando la maglia verde e oro della squadra. Quel gesto simbolico trasformò i fischi della folla in applausi e dimostrò che un leader può usare anche lo sport per costruire ponti.</p>
+                
+                <p>Questo episodio, immortalato nel film "Invictus", rappresenta perfettamente l'approccio di Mandela: <em>trasformare i nemici in alleati attraverso gesti di rispetto e inclusione.</em></p>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>How did Nelson Mandela choose reconciliation over revenge? What does this teach us about leadership?</li>
+                    <li>What role did the Truth and Reconciliation Commission play in healing South Africa?</li>
+                    <li>How can Mandela's approach to conflict resolution be applied to modern disagreements?</li>
+                    <li>What does Mandela's famous quote about courage and fear mean in practice?</li>
+                    <li>How did 27 years in prison shape Mandela's character and worldview?</li>
+                    <li>What can we learn from South Africa's transition from apartheid to democracy?</li>
+                    <li>How does Mandela's story demonstrate the power of forgiveness in building a better society?</li>
+                    <li>What challenges did South Africa face after the end of apartheid, and how were they addressed?</li>
+                </ol>
+            </div>
+
+            <div class="story-section">
+                <h3>🌍 L'eredità universale di Mandela</h3>
+                <p>Nelson Mandela è morto nel 2013, ma la sua eredità continua a ispirare leader e cittadini in tutto il mondo. I suoi principi sono ancora rilevanti oggi:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Riconciliazione sopra vendetta:</strong> Scegliere la pace invece della guerra civile</li>
+                    <li><strong>Unità nella diversità:</strong> Costruire nazioni multiculturali e inclusive</li>
+                    <li><strong>Leadership serviziale:</strong> Usare il potere per servire, non per dominare</li>
+                    <li><strong>Pazienza strategica:</strong> Sapere quando lottare e quando negoziare</li>
+                    <li><strong>Dignità umana:</strong> Rispettare ogni persona, anche i propri avversari</li>
+                    <li><strong>Democrazia partecipativa:</strong> Coinvolgere tutti i cittadini nella costruzione del futuro</li>
+                </ul>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #f39c12; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0; font-style: italic;">
+                    <p><strong>La sua famosa riflessione sulla leadership:</strong></p>
+                    <p>"A leader is like a shepherd. He stays behind the flock, letting the most nimble go out ahead, whereupon the others follow, not realizing that all along they are being directed from behind."</p>
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>Mandela ha dimostrato che anche dopo le ingiustizie più gravi, è possibile costruire una società giusta e pacifica attraverso il dialogo, il rispetto reciproco e la volontà di perdono.</strong></p>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

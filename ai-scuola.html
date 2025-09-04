@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligenza Artificiale a Scuola - Strumenti, Etica e Cittadinanza Digitale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 70%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "🤖";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "🧠";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-quote {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .ai-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .ai-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .tecnologia-section {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid #2196f3;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .tecnologia-section h3 {
+            color: #1976d2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .rischi-section {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 5px solid #f44336;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .rischi-section h3 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .opportunita-section {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            border-left: 5px solid #4caf50;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .opportunita-section h3 {
+            color: #388e3c;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #667eea;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .tool-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .tool-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .pro-contro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pro-box {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .contro-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .pro-box h4 {
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+
+        .contro-box h4 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+
+        .detection-section {
+            background: linear-gradient(135deg, #fff3e0, #ffcc80);
+            border-left: 5px solid #ff9800;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .detection-section h3 {
+            color: #f57c00;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff0f0;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .tip-box {
+            background: #f0f8ff;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .ai-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+
+            .pro-contro {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Intelligenza Artificiale a Scuola</h1>
+            <p>Strumenti, Etica e Cittadinanza Digitale</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 2 - AGENDA 2030 E CITTADINANZA DIGITALE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare l'IA in Educazione Civica?</h2>
+                <p>L'Intelligenza Artificiale sta <strong>rivoluzionando la società</strong> e diventa cruciale per la formazione dei cittadini digitali del futuro:</p>
+                <ul>
+                    <li><strong>Alfabetizzazione digitale:</strong> Comprendere le tecnologie che ci circondano</li>
+                    <li><strong>Pensiero critico:</strong> Distinguere contenuti umani da quelli generati dall'IA</li>
+                    <li><strong>Uso etico:</strong> Sfruttare l'IA come strumento di apprendimento responsabile</li>
+                    <li><strong>Creatività potenziata:</strong> Combinare intelligenza umana e artificiale</li>
+                    <li><strong>Competenze future:</strong> Prepararsi ai lavori del domani</li>
+                    <li><strong>Diritti digitali:</strong> Privacy, bias, trasparenza degli algoritmi</li>
+                    <li><strong>Democrazia partecipativa:</strong> Capire l'impatto dell'IA sulla società</li>
+                </ul>
+            </div>
+
+            <div class="ai-quote">
+                L'intelligenza artificiale non sostituirà gli umani, ma gli umani che usano l'IA sostituiranno quelli che non la usano
+                <br><small>- Adattamento da una citazione di Kai-Fu Lee</small>
+            </div>
+
+            <div class="tecnologia-section">
+                <h3>🔬 Come funziona l'Intelligenza Artificiale?</h3>
+                <p>L'IA non è magia: è <strong>matematica applicata</strong> su larga scala. Ecco i concetti base:</p>
+                
+                <div class="tool-item">
+                    <h4>🧩 Machine Learning (Apprendimento Automatico)</h4>
+                    <p>Gli algoritmi imparano dai dati senza essere esplicitamente programmati. Come un bambino che impara a riconoscere i cani vedendo migliaia di foto di cani.</p>
+                    <p><strong>Esempio pratico:</strong> Spotify che suggerisce musica basandosi sui tuoi ascolti precedenti.</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>🕸️ Neural Networks (Reti Neurali)</h4>
+                    <p>Strutture matematiche ispirate al cervello umano, fatte di "neuroni" artificiali collegati tra loro.</p>
+                    <p><strong>Esempio pratico:</strong> Il riconoscimento facciale del tuo smartphone.</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>📝 Large Language Models (LLM)</h4>
+                    <p>IA addestrate su enormi quantità di testo per comprendere e generare linguaggio naturale.</p>
+                    <p><strong>Esempi:</strong> ChatGPT, Claude, Gemini - addestrati su miliardi di pagine web.</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>🎨 Generative AI</h4>
+                    <p>IA che creano contenuti nuovi: testi, immagini, video, musica partendo da descrizioni testuali.</p>
+                    <p><strong>Esempi:</strong> DALL-E per immagini, Suno per musica, RunwayML per video.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🛠️ Le applicazioni dell'IA (non c'è solo ChatGPT!)</h3>
+                <p>L'IA è ovunque nella nostra vita quotidiana, spesso <strong>senza che ce ne accorgiamo</strong>:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>💬 Assistenti di Scrittura:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>ChatGPT, Claude, Gemini:</strong> Conversazioni, spiegazioni, riassunti</li>
+                        <li><strong>Grammarly:</strong> Correzione grammaticale e di stile</li>
+                        <li><strong>DeepL:</strong> Traduzioni più accurate di Google Translate</li>
+                        <li><strong>Notion AI:</strong> Assistente integrato per note e documenti</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>🎨 Creazione Visiva:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>DALL-E 3:</strong> Immagini da descrizioni testuali</li>
+                        <li><strong>Midjourney:</strong> Arte digitale e illustrazioni professionali</li>
+                        <li><strong>Stable Diffusion:</strong> IA open-source per immagini</li>
+                        <li><strong>Canva AI:</strong> Design automatico per social e presentazioni</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>📹 Video e Audio:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>RunwayML:</strong> Creazione e editing video con IA</li>
+                        <li><strong>Lumen5:</strong> Trasforma testi in video automaticamente</li>
+                        <li><strong>Murf:</strong> Voci sintetiche realistiche in 120 lingue</li>
+                        <li><strong>Suno:</strong> Composizione musicale automatica</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>📚 Apprendimento e Ricerca:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Perplexity:</strong> Motore di ricerca potenziato dall'IA</li>
+                        <li><strong>Khan Academy AI:</strong> Tutor personalizzato per matematica</li>
+                        <li><strong>Socratic by Google:</strong> Aiuto per i compiti scolastici</li>
+                        <li><strong>Quizlet AI:</strong> Generazione automatica di flashcard</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>💻 Programmazione:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>GitHub Copilot:</strong> Assistente AI per scrivere codice</li>
+                        <li><strong>Replit AI:</strong> Programmazione collaborativa con IA</li>
+                        <li><strong>CodeWhisperer:</strong> Suggerimenti di codice di Amazon</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detection-section">
+                <h3>🕵️ Come riconoscere contenuti generati dall'IA</h3>
+                <p>Fondamentale sviluppare <strong>competenze detective</strong> per non essere ingannati:</p>
+                
+                <div class="tool-item">
+                    <h4>📝 Testi generati dall'IA - Segnali da riconoscere:</h4>
+                    <p><strong>Linguaggio troppo perfetto:</strong> Grammatica impeccabile ma mancanza di personalità</p>
+                    <p><strong>Ripetitività:</strong> Uso ricorrente di frasi come "È importante notare che..."</p>
+                    <p><strong>Genericità:</strong> Informazioni corrette ma superficiali, mancanza di dettagli specifici</p>
+                    <p><strong>Struttura prevedibile:</strong> Introduzione-sviluppo-conclusione sempre uguali</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>🖼️ Immagini AI - Cosa controllare:</h4>
+                    <p><strong>Dettagli anatomici:</strong> Mani con dita strane, occhi asimmetrici</p>
+                    <p><strong>Sfondi incongruenti:</strong> Elementi che non seguono la fisica (ombre sbagliate)</p>
+                    <p><strong>Texture innaturali:</strong> Capelli troppo perfetti, pelle "plastificata"</p>
+                    <p><strong>Testi illeggibili:</strong> Scritte che sembrano parole ma non hanno senso</p>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong>🛠️ Strumenti per verificare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>GPTZero:</strong> Detector per testi generati dall'IA</li>
+                        <li><strong>Originality.AI:</strong> Controllo plagiari e contenuti IA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="opportunita-section">
+                <h3>✅ Come usare l'IA correttamente a scuola</h3>
+                <p>L'IA può essere un <strong>potente alleato dell'apprendimento</strong> se usata eticamente:</p>
+                
+                <div class="tool-item">
+                    <h4>📖 Per lo Studio</h4>
+                    <p><strong>✅ Giusto:</strong> "Spiegami il teorema di Pitagora con esempi pratici"</p>
+                    <p><strong>❌ Sbagliato:</strong> "Scrivi il mio saggio di storia su Napoleone"</p>
+                    <p><strong>Principio:</strong> Usa l'IA per <em>capire</em>, non per <em>sostituire</em> il tuo pensiero</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>🎨 Per la Creatività</h4>
+                    <p><strong>✅ Giusto:</strong> Generare immagini di supporto per una presentazione</p>
+                    <p><strong>❌ Sbagliato:</strong> Consegnare un'opera d'arte AI come fosse tua</p>
+                    <p><strong>Principio:</strong> L'IA come <em>strumento creativo</em>, sempre indicando la fonte</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4>🔍 Per la Ricerca</h4>
+                    <p><strong>✅ Giusto:</strong> Brainstorming di idee e fonti da approfondire</p>
+                    <p><strong>❌ Sbagliato:</strong> Considerare le risposte dell'IA come verità assolute</p>
+                    <p><strong>Principio:</strong> Verifica sempre le informazioni con <em>fonti autorevoli</em></p>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>⚠️ Regola d'oro per l'uso etico dell'IA:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Trasparenza:</strong> Dichiara sempre quando usi l'IA</li>
+                        <li><strong>Responsabilità:</strong> Tu sei responsabile del risultato finale</li>
+                        <li><strong>Apprendimento:</strong> Usa l'IA per imparare, non per evitare di imparare</li>
+                        <li><strong>Originalità:</strong> Il tuo contributo umano deve essere centrale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎯 Pro e Contro dell'IA nell'Educazione</h3>
+                <p>Una valutazione bilanciata dei <strong>benefici e rischi</strong> dell'IA a scuola:</p>
+                
+                <div class="pro-contro">
+                    <div class="pro-box">
+                        <h4>✅ VANTAGGI</h4>
+                        <ul>
+                            <li><strong>Personalizzazione:</strong> Adatta il ritmo al singolo studente</li>
+                            <li><strong>Accessibilità:</strong> Aiuta studenti con DSA o difficoltà linguistiche</li>
+                            <li><strong>Creatività amplificata:</strong> Nuove forme di espressione artistica</li>
+                            <li><strong>Efficienza:</strong> Automatizza compiti ripetitivi (correzioni, riassunti)</li>
+                            <li><strong>Multilingualismo:</strong> Abbatte le barriere linguistiche</li>
+                            <li><strong>Disponibilità 24/7:</strong> Tutor sempre disponibile</li>
+                            <li><strong>Motivazione:</strong> Gamification e apprendimento interattivo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contro-box">
+                        <h4>❌ RISCHI</h4>
+                        <ul>
+                            <li><strong>Dipendenza:</strong> Perdita di capacità di pensiero critico</li>
+                            <li><strong>Disinformazione:</strong> L'IA può generare informazioni false</li>
+                            <li><strong>Plagio mascherato:</strong> Difficile distinguere lavoro originale</li>
+                            <li><strong>Bias algoritmici:</strong> L'IA può perpetuare stereotipi</li>
+                            <li><strong>Privacy:</strong> Dati degli studenti utilizzati per l'addestramento</li>
+                            <li><strong>Divario digitale:</strong> Non tutti hanno accesso agli strumenti IA</li>
+                            <li><strong>Perdita di competenze base:</strong> Scrittura, calcolo, memoria</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 Breve storia dell'Intelligenza Artificiale</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1950</div>
+                    <div class="timeline-event">Alan Turing propone il "Test di Turing" per valutare l'intelligenza delle macchine</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1956</div>
+                    <div class="timeline-event">Conferenza di Dartmouth: nasce ufficialmente l'Intelligenza Artificiale</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1997</div>
+                    <div class="timeline-event">Deep Blue di IBM batte il campione mondiale di scacchi Kasparov</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2011</div>
+                    <div class="timeline-event">Watson di IBM vince a Jeopardy!, dimostrando comprensione del linguaggio naturale</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2016</div>
+                    <div class="timeline-event">AlphaGo batte il campione mondiale di Go, gioco considerato impossibile per l'IA</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-event">Lancio di ChatGPT: l'IA generativa diventa mainstream</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-event">L'UE approva l'AI Act, prima legge al mondo per regolamentare l'IA</div>
+                </div>
+            </div>
+
+        
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>È giusto usare l'IA per fare i compiti? Dove tracciare il confine tra aiuto e imbroglio?</li>
+                    <li>Se un artista usa l'IA per creare un'opera, chi è il vero autore?</li>
+                    <li>Come possiamo proteggere la privacy in un mondo sempre più dominato dall'IA?</li>
+                    <li>L'IA può mai essere completamente neutrale o riflette sempre i bias dei suoi creatori?</li>
+                    <li>Dovremmo aver paura che l'IA ci sostituisca o dovremmo imparare a collaborare con essa?</li>
+                    <li>È etico creare deepfake per scopi artistici o educativi?</li>
+                    <li>Come cambierà il concetto di "intelligenza" quando l'IA supererà quella umana?</li>
+                    <li>Quali professioni sopravviveranno all'automazione e perché?</li>
+                    <li>È giusto che le aziende tech private controllino lo sviluppo dell'IA?</li>
+                    <li>Come possiamo garantire che i benefici dell'IA siano distribuiti equamente?</li>
+                </ol>
+            </div>
+
+<div class="story-section">
+                <h3>📚 Fonti e Approfondimenti</h3>
+                <p>Per approfondire i temi trattati, consulta queste <strong>risorse autorevoli</strong>:</p>
+                
+                <div class="tool-item">
+                    <h4>🎥 Video Educativi</h4>
+                    <p><strong><a href="https://www.youtube.com/watch?v=I-PldL2o1QM" target="_blank" style="color: #667eea; text-decoration: none;">Come funziona l'Intelligenza Artificiale - Video introduttivo</a></strong></p>
+                    <p>Spiegazione semplice e visuale dei meccanismi base dell'IA per studenti e insegnanti</p>
+                    
+                    <p><strong><a href="https://www.youtube.com/watch?v=7UAopwGbWL8" target="_blank" style="color: #667eea; text-decoration: none;">L'IA nell'Educazione - Opportunità e Sfide</a></strong></p>
+                    <p>Discussione approfondita sull'integrazione dell'IA nei processi educativi</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>📖 Risorse Didattiche Mondadori Education</h4>
+                    <p><strong><a href="https://www.mondadorieducation.it/content/uploads/2025/05/scrivere-con-lIA-7.pdf?x52314" target="_blank" style="color: #667eea; text-decoration: none;">Guida "Scrivere con l'IA" (PDF)</a></strong></p>
+                    <p>Manuale pratico per l'uso etico e produttivo dell'IA nella scrittura scolastica</p>
+                    
+                    <p><strong><a href="https://www.mondadorieducation.it/ia-a-scuola/" target="_blank" style="color: #667eea; text-decoration: none;">Portale "IA a Scuola" - Mondadori Education</a></strong></p>
+                    <p>Hub completo con articoli, strumenti e best practices per l'integrazione dell'IA in classe</p>
+                </div>
+                
+            
+            
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

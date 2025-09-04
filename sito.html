@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmazione Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nuclei-tematici {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .nucleo {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            flex: 1;
+            margin: 5px;
+            min-width: 250px;
+            transition: transform 0.3s ease;
+        }
+
+        .nucleo:hover {
+            transform: translateY(-3px);
+        }
+
+        .nucleo-1 {
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            color: #333;
+        }
+
+        .nucleo-2 {
+            background: linear-gradient(135deg, #90EE90, #32CD32);
+            color: #333;
+        }
+
+        .nucleo-3 {
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            color: white;
+        }
+
+        .nucleo h3 {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .nucleo p {
+            font-size: 0.85rem;
+        }
+
+        /* Menu delle classi */
+        .classi-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .classe-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .classe-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .classe-btn.active {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .classe-btn.afm {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+        }
+
+        .classe-btn.tur {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .classe-btn.afm:hover,
+        .classe-btn.afm.active {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .classe-btn.tur:hover,
+        .classe-btn.tur.active {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        /* Stili per le pagine delle classi */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .classe-dettaglio {
+            padding: 30px;
+        }
+
+        .classe-header-dettaglio {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .classe-header-dettaglio h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .classe-header-dettaglio p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .materie-grid {
+            display: grid;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .materia {
+            display: grid;
+            grid-template-columns: 3fr 1fr 2fr;
+            align-items: center;
+            padding: 18px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border-left: 6px solid;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .materia:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .materia-nome {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .materia-ore {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+
+        .materia-nucleo {
+            text-align: center;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .nucleo-1-bg {
+            background: #fff8dc;
+            border-color: #ffd700;
+            color: #856404;
+        }
+
+        .nucleo-1-bg .materia-nucleo {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .nucleo-2-bg {
+            background: #f0fff0;
+            border-color: #90EE90;
+            color: #155724;
+        }
+
+        .nucleo-2-bg .materia-nucleo {
+            background: #90EE90;
+            color: #333;
+        }
+
+        .nucleo-3-bg {
+            background: #f0f8ff;
+            border-color: #87CEEB;
+            color: #004085;
+        }
+
+        .nucleo-3-bg .materia-nucleo {
+            background: #87CEEB;
+            color: #333;
+        }
+
+        .voti-info {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+        }
+
+        .voti-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .voto-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .voto-item:last-child {
+            border-bottom: none;
+        }
+
+        .voto-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .totale-ore {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 10px 25px rgba(52, 73, 94, 0.3);
+        }
+
+        /* Pagina home vuota */
+        .home-content {
+            text-align: center;
+            padding: 100px 30px;
+            color: #7f8c8d;
+        }
+
+        .home-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nuclei-tematici {
+                flex-direction: column;
+            }
+            
+            .classi-menu {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .classe-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .materia {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .classe-header-dettaglio h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Programmazione Educazione Civica</h1>
+            <p>Anno Scolastico 2024-2025 • AFM e Turismo</p>
+        </div>
+
+        <div class="nuclei-tematici">
+            <div class="nucleo nucleo-1">
+                <h3>NUCLEO TEMATICO 1</h3>
+                <p>COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</p>
+            </div>
+            <div class="nucleo nucleo-2">
+                <h3>NUCLEO TEMATICO 2</h3>
+                <p>SVILUPPO SOSTENIBILE, EDUCAZIONE AMBIENTALE, CONOSCENZA E TUTELA DEL PATRIMONIO</p>
+            </div>
+            <div class="nucleo nucleo-3">
+                <h3>NUCLEO TEMATICO 3</h3>
+                <p>CITTADINANZA DIGITALE</p>
+            </div>
+        </div>
+
+        <!-- Menu delle classi -->
+        <div class="classi-menu">
+            <button class="classe-btn afm" onclick="mostraClasse('3afm')">3° AFM</button>
+            <button class="classe-btn tur" onclick="mostraClasse('3tur')">3° TUR</button>
+            <button class="classe-btn afm" onclick="mostraClasse('4afm')">4° AFM</button>
+            <button class="classe-btn tur" onclick="mostraClasse('4tur')">4° TUR</button>
+            <button class="classe-btn afm" onclick="mostraClasse('5afm')">5° AFM</button>
+            <button class="classe-btn tur" onclick="mostraClasse('5tur')">5° TUR</button>
+        </div>
+
+        <!-- Pagina home -->
+        <div id="home-page" class="page active">
+            <div class="home-content">
+                <h2>👆 Seleziona una classe</h2>
+                <p>Clicca su una delle classi sopra per visualizzare la programmazione di Educazione Civica</p>
+            </div>
+        </div>
+
+        <!-- Pagina 3 AFM -->
+        <div id="3afm-page" class="page">
+            <div class="classe-dettaglio">
+                <div class="classe-header-dettaglio" style="background: linear-gradient(135deg, #8e44ad, #7d3c98);">
+                    <h2>3° AFM - Amministrazione, Finanza e Marketing</h2>
+                    <p>Programmazione Educazione Civica</p>
+                </div>
+
+                <div class="materie-grid">
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Lingua e letteratura italiana</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Lingua inglese</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Storia</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Matematica</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Scienze motorie</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Seconda lingua comunitaria</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Informatica</div>
+                        <div class="materia-ore">2 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Economia aziendale</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Diritto</div>
+                        <div class="materia-ore">6 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Economia politica</div>
+                        <div class="materia-ore">5 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                </div>
+
+                <div class="voti-info">
+                    <h3>📋 Informazioni Valutazione</h3>
+                    <div class="voto-item">
+                        <span>Voto 1° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                    <div class="voto-item">
+                        <span>Voto 2° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                </div>
+                
+                <div class="totale-ore">Totale: 33 ore</div>
+            </div>
+        </div>
+
+        <!-- Pagina 3 TUR -->
+        <div id="3tur-page" class="page">
+            <div class="classe-dettaglio">
+                <div class="classe-header-dettaglio" style="background: linear-gradient(135deg, #27ae60, #229954);">
+                    <h2>3° TUR - Turismo</h2>
+                    <p>Programmazione Educazione Civica</p>
+                </div>
+
+                <div class="materie-grid">
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Lingua e letteratura italiana</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Lingua inglese</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Storia</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Matematica</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Scienze motorie</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Seconda lingua comunitaria</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Diritto e legislazione turistica</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Terza lingua straniera</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Dta</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Arte e territorio</div>
+                        <div class="materia-ore">2 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Geografia turistica</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                </div>
+
+                <div class="voti-info">
+                    <h3>📋 Informazioni Valutazione</h3>
+                    <div class="voto-item">
+                        <span>Voto 1° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                    <div class="voto-item">
+                        <span>Voto 2° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                </div>
+                
+                <div class="totale-ore">Totale: 33 ore</div>
+            </div>
+        </div>
+
+        <!-- Pagina 4 AFM -->
+        <div id="4afm-page" class="page">
+            <div class="classe-dettaglio">
+                <div class="classe-header-dettaglio" style="background: linear-gradient(135deg, #8e44ad, #7d3c98);">
+                    <h2>4° AFM - Amministrazione, Finanza e Marketing</h2>
+                    <p>Programmazione Educazione Civica</p>
+                </div>
+
+                <div class="materie-grid">
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Lingua e letteratura italiana</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Lingua inglese</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Storia</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Matematica</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Scienze motorie</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Seconda lingua comunitaria</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Informatica</div>
+                        <div class="materia-ore">2 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Economia aziendale</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Diritto</div>
+                        <div class="materia-ore">6 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Economia politica</div>
+                        <div class="materia-ore">5 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                </div>
+
+                <div class="voti-info">
+                    <h3>📋 Informazioni Valutazione</h3>
+                    <div class="voto-item">
+                        <span>Voto 1° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                    <div class="voto-item">
+                        <span>Voto 2° Quadrimestre:</span>
+                        <span class="voto-badge">✅ SÌ</span>
+                    </div>
+                </div>
+                
+                <div class="totale-ore">Totale: 33 ore</div>
+            </div>
+        </div>
+
+        <!-- Pagina 4 TUR -->
+        <div id="4tur-page" class="page">
+            <div class="classe-dettaglio">
+                <div class="classe-header-dettaglio" style="background: linear-gradient(135deg, #27ae60, #229954);">
+                    <h2>4° TUR - Turismo</h2>
+                    <p>Programmazione Educazione Civica</p>
+                </div>
+
+                <div class="materie-grid">
+                    <div class="materia nucleo-3-bg">
+                        <div class="materia-nome">Lingua e letteratura italiana</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 3</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Lingua inglese</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Storia</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Matematica</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Scienze motorie</div>
+                        <div class="materia-ore">1 ora</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Seconda lingua comunitaria</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Diritto e legislazione turistica</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Terza lingua straniera</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-1-bg">
+                        <div class="materia-nome">Dta</div>
+                        <div class="materia-ore">4 ore</div>
+                        <div class="materia-nucleo">Nucleo 1</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Arte e territorio</div>
+                        <div class="materia-ore">2 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                    <div class="materia nucleo-2-bg">
+                        <div class="materia-nome">Geografia turistica</div>
+                        <div class="materia-ore">3 ore</div>
+                        <div class="materia-nucleo">Nucleo 2</div>
+                    </div>
+                </div>
+
+                <div class="voti-info">
+                    <h3>📋 Informazioni Valutazione</h3>
+                    <div class="voto-item">
+                        <span>Voto 1°

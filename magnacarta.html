@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magna Carta - Le Origini dello Stato di Diritto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .magna-quote {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .magna-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .magna-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .context-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #8B4513;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #8B4513;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #A0522D;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .principles-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .principles-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .principle-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .principle-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .legacy-section {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .legacy-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .magna-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📜 Magna Carta</h1>
+            <p>Le Origini dello Stato di Diritto (1215)</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare la Magna Carta in Educazione Civica?</h2>
+                <p>La Magna Carta del 1215 rappresenta il <strong>primo documento costituzionale</strong> della storia occidentale e il fondamento dello stato di diritto moderno. Il suo studio è essenziale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Origine del costituzionalismo:</strong> È il primo documento a limitare il potere assoluto del sovrano</li>
+                    <li><strong>Stato di diritto:</strong> Stabilisce che anche i re sono soggetti alla legge</li>
+                    <li><strong>Due process:</strong> Introduce il principio del giusto processo legale</li>
+                    <li><strong>Libertà individuale:</strong> Pone le basi per i diritti fondamentali della persona</li>
+                    <li><strong>Consenso dei governati:</strong> Stabilisce che le tasse devono essere approvate dai rappresentanti</li>
+                    <li><strong>Eredità costituzionale:</strong> Ha ispirato tutte le costituzioni democratiche successive</li>
+                    <li><strong>Separazione dei poteri:</strong> Contiene i primi elementi di controllo del potere esecutivo</li>
+                </ul>
+            </div>
+
+            <div class="magna-quote">
+                Nullus liber homo capiatur, vel imprisonetur... nisi per legale judicium parium suorum vel per legem terrae
+                <br><small>(Nessun uomo libero sarà arrestato o imprigionato... se non per il legale giudizio dei suoi pari o per la legge del paese)</small>
+            </div>
+
+            <div class="context-section">
+                <h3>⚔️ Il contesto storico: Re Giovanni "Senza Terra"</h3>
+                <p>Nel 1215, l'Inghilterra era governata da <strong>Re Giovanni I</strong>, soprannominato "Senza Terra" per aver perso gran parte dei possedimenti francesi. Il re aveva imposto tasse sempre più pesanti per finanziare le guerre, senza consultare i nobili.</p>
+                
+                <p>La goccia che fece traboccare il vaso fu il <strong>fallimento militare in Francia</strong> e l'<strong>interdetto papale</strong> che aveva isolato l'Inghilterra. I baroni inglesi si ribellarono, non per rovesciare il re, ma per <strong>limitare i suoi poteri</strong>.</p>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #f39c12; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>La novità rivoluzionaria:</strong> Per la prima volta nella storia, un gruppo di sudditi costringeva il proprio sovrano a rispettare delle regole scritte. Il potere regale non era più assoluto.</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>⏰ I momenti chiave del 1215</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">Maggio 1215</div>
+                    <div class="timeline-event">I baroni si ribellano e occupano Londra</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 giugno 1215</div>
+                    <div class="timeline-event">Re Giovanni firma la Magna Carta a Runnymede</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Agosto 1215</div>
+                    <div class="timeline-event">Papa Innocenzo III dichiara nulla la Carta</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Ottobre 1215</div>
+                    <div class="timeline-event">Scoppia la Prima Guerra dei Baroni</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1216-1225</div>
+                    <div class="timeline-event">La Carta viene riconfermata più volte dai successori</div>
+                </div>
+            </div>
+
+            <div class="principles-section">
+                <h3>⚖️ I principi rivoluzionari della Magna Carta</h3>
+                
+                <div class="principle-item">
+                    <h4>1. Limitazione del potere regale</h4>
+                    <p>Il re non può agire arbitrariamente ma deve rispettare la legge. Questo principio è alla base di ogni costituzione moderna.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>2. Habeas Corpus (embrionale)</h4>
+                    <p>Nessun uomo libero può essere arrestato senza un giusto processo. È il fondamento dello stato di diritto.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>3. "No taxation without representation"</h4>
+                    <p>Le tasse straordinarie devono essere approvate dal "comune consiglio del regno" - il seme del Parlamento.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>4. Proporzionalità delle pene</h4>
+                    <p>Le punizioni devono essere proporzionate al reato commesso. Principio fondamentale del diritto penale moderno.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>5. Libertà della Chiesa</h4>
+                    <p>La Chiesa inglese deve essere libera dalle interferenze regali. Prime forme di separazione dei poteri.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🏛️ Dalla Magna Carta al costituzionalismo moderno</h3>
+                <p>La Magna Carta ha posto le basi concettuali per lo sviluppo del <strong>costituzionalismo moderno</strong>:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Diritto di petizione:</strong> I sudditi potevano presentare rimostranze formali al sovrano</li>
+                    <li><strong>Consultazione:</strong> Il re doveva consultare il "comune consiglio" per le decisioni importanti</li>
+                    <li><strong>Controlli istituzionali:</strong> Creazione di un comitato di 25 baroni per vigilare sull'applicazione della Carta</li>
+                    <li><strong>Giudizio dei pari:</strong> Ogni uomo aveva diritto di essere giudicato da persone del suo stesso rango</li>
+                    <li><strong>Supremazia della legge:</strong> Anche il sovrano è soggetto alle regole che governa</li>
+                </ul>
+                
+                <p style="margin-top: 20px;">Questi principi, nel corso dei secoli, si sono evoluti nel <strong>sistema parlamentare</strong>, nella <strong>divisione dei poteri</strong>, nel <strong>controllo costituzionale</strong> e in tutti i meccanismi di garanzia democratica che conosciamo oggi.</p>
+            </div>
+
+            <div class="legacy-section">
+                <h3>🌍 L'eredità globale della Magna Carta</h3>
+                <p>La Magna Carta ha influenzato direttamente:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Petition of Right (1628):</strong> Riafferma i principi della Magna Carta contro Carlo I</li>
+                    <li><strong>Bill of Rights inglese (1689):</strong> Stabilisce definitivamente la supremazia del Parlamento</li>
+                    <li><strong>Costituzione americana (1787):</strong> Riprende i principi del giusto processo e della limitazione del potere</li>
+                    <li><strong>Dichiarazione universale dei diritti umani (1948):</strong> Universalizza i principi di Runnymede</li>
+                    <li><strong>Costituzioni moderne:</strong> Tutti i paesi democratici incorporano questi principi</li>
+                </ul>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>Curiosità:</strong> Nel 2015, per il 800° anniversario, la Regina Elisabetta II ha dichiarato che la Magna Carta "rimane una pietra angolare della libertà, della democrazia, della giustizia e dello stato di diritto non solo in Gran Bretagna, ma in tutto il mondo."</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>⚖️ La Magna Carta oggi: giustizia e stato di diritto</h3>
+                <p>I principi della Magna Carta sono più attuali che mai nel mondo contemporaneo:</p>
+                
+                <div style="background: #e8f4f8; border-left: 4px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>Applicazioni moderne:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>I tribunali costituzionali controllano che le leggi rispettino la costituzione</li>
+                        <li>Il principio di habeas corpus protegge dalla detenzione arbitraria</li>
+                        <li>I parlamenti devono approvare tasse e spese pubbliche</li>
+                        <li>Nessuno, nemmeno i governanti, è al di sopra della legge</li>
+                        <li>Il giusto processo garantisce un processo equo per tutti</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>Perché i baroni del 1215 volevano limitare il potere del re invece di rovesciarlo?</li>
+                    <li>Come si collega il principio "nessuna tassa senza rappresentanza" alle moderne democrazie?</li>
+                    <li>Perché la Magna Carta è considerata il primo documento costituzionale della storia?</li>
+                    <li>In che modo i principi della Magna Carta si riflettono nella Costituzione italiana?</li>
+                    <li>Come i concetti di "giusto processo" e "habeas corpus" proteggono i cittadini oggi?</li>
+                    <li>Cosa significa "stato di diritto" e perché è così importante per la democrazia?</li>
+                    <li>Perché la Magna Carta è considerata più importante di molte vittorie militari?</li>
+                    <li>Come ha influenzato la Magna Carta lo sviluppo del sistema parlamentare?</li>
+                    <li>Quali sono i collegamenti tra la Magna Carta e i moderni diritti costituzionali?</li>
+                    <li>In che modo la limitazione del potere regale ha aperto la strada alla democrazia?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

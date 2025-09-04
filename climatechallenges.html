@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Challenges - Tourism and Global Responsibility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #90EE90;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .climate-quote {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .climate-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .climate-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .video-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tourism-impact {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .tourism-impact h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .impact-stat {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #e67e22;
+        }
+
+        .impact-stat h4 {
+            color: #d35400;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .impact-stat .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e67e22;
+            display: block;
+        }
+
+        .sdg-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .sdg-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sdg-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .sdg-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .actions-section {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .actions-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .action-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #27ae60;
+        }
+
+        .action-item h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .climate-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .sdg-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Climate Challenges</h1>
+            <p>"Tourism and Climate Change" - Global Responsibility</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 2 - SVILUPPO SOSTENIBILE E TUTELA DEL PATRIMONIO</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare i Climate Challenges in Educazione Civica?</h2>
+                <p>I cambiamenti climatici rappresentano la più grande sfida della <strong>cittadinanza globale</strong> del XXI secolo. Il loro studio è essenziale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Responsabilità globale:</strong> Le nostre azioni locali hanno conseguenze planetarie</li>
+                    <li><strong>Giustizia intergenerazionale:</strong> Dobbiamo lasciare un mondo vivibile alle future generazioni</li>
+                    <li><strong>Agenda 2030:</strong> Conoscere e implementare gli Obiettivi di Sviluppo Sostenibile</li>
+                    <li><strong>Cittadinanza attiva:</strong> Partecipare attivamente alla transizione ecologica</li>
+                    <li><strong>Interconnessione globale:</strong> Comprendere come siamo tutti collegati</li>
+                    <li><strong>Responsabilità del turismo:</strong> Il settore turistico ha un impatto significativo sul clima</li>
+                    <li><strong>Pensiero critico:</strong> Valutare informazioni e prendere decisioni consapevoli</li>
+                </ul>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 Climate Change - BBC Documentary</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/SLEenW2UiUw" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Documentario BBC sui cambiamenti climatici e le loro conseguenze globali</p>
+            </div>
+
+            <div class="climate-quote">
+                Climate change is not just an environmental issue. It's a human rights issue, an economic issue, a social justice issue, and ultimately a survival issue.
+            </div>
+
+            <div class="story-section">
+                <h3>🌡️ La Crisi Climatica: I Fatti</h3>
+                <p>Il <strong>cambiamento climatico</strong> non è più una minaccia futura - è una realtà presente. La temperatura media globale è aumentata di oltre 1°C rispetto ai livelli pre-industriali, e gli effetti sono già visibili:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Eventi meteorologici estremi</strong> più frequenti e intensi</li>
+                    <li><strong>Scioglimento dei ghiacciai</strong> e innalzamento del livello del mare</li>
+                    <li><strong>Desertificazione</strong> e perdita di biodiversità</li>
+                    <li><strong>Migrazioni climatiche</strong> - milioni di persone costrette a spostarsi</li>
+                    <li><strong>Crisi alimentare</strong> dovuta a siccità e alluvioni</li>
+                    <li><strong>Minacce alla salute pubblica</strong> - ondate di calore, malattie tropicali</li>
+                </ul>
+                
+                <p style="margin-top: 20px;">Gli scienziati sono concordi: abbiamo meno di un decennio per limitare il riscaldamento globale a 1,5°C e evitare conseguenze catastrofiche irreversibili.</p>
+            </div>
+
+            <div class="tourism-impact">
+                <h3>✈️ L'Impatto del Turismo sul Clima</h3>
+                <p>Il turismo è responsabile di una significativa parte delle emissioni globali di gas serra:</p>
+                
+                <div class="impact-stat">
+                    <h4>Emissioni Globali</h4>
+                    <span class="stat-number">8%</span>
+                    <p>Il turismo rappresenta l'8% delle emissioni globali di CO2</p>
+                </div>
+                
+                <div class="impact-stat">
+                    <h4>Trasporti Aerei</h4>
+                    <span class="stat-number">75%</span>
+                    <p>Il 75% delle emissioni turistiche deriva dai trasporti, principalmente aerei</p>
+                </div>
+                
+                <div class="impact-stat">
+                    <h4>Crescita Prevista</h4>
+                    <span class="stat-number">+25%</span>
+                    <p>Le emissioni del turismo potrebbero aumentare del 25% entro il 2030</p>
+                </div>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #e67e22; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>Il Paradosso del Turismo:</strong> Il settore dipende da ambienti naturali e patrimoni culturali che sono minacciati proprio dai cambiamenti climatici che contribuisce a causare.</p>
+                </div>
+            </div>
+
+            <div class="sdg-section">
+                <h3>🎯 Agenda 2030: Gli Obiettivi di Sviluppo Sostenibile</h3>
+                <p>Nel 2015, i 193 paesi membri dell'ONU hanno adottato l'<strong>Agenda 2030</strong> con 17 Obiettivi di Sviluppo Sostenibile (SDGs). Il turismo contribuisce direttamente o indirettamente a tutti gli SDGs:</p>
+                
+                <div class="sdg-grid">
+                    <div class="sdg-item">
+                        <h4>🌍 SDG 13: Climate Action</h4>
+                        <p>Prendere misure urgenti per combattere il cambiamento climatico e i suoi impatti</p>
+                    </div>
+                    
+                    <div class="sdg-item">
+                        <h4>🌊 SDG 14: Life Below Water</h4>
+                        <p>Conservare e utilizzare in modo sostenibile oceani, mari e risorse marine</p>
+                    </div>
+                    
+                    <div class="sdg-item">
+                        <h4>🌳 SDG 15: Life on Land</h4>
+                        <p>Proteggere, ripristinare e promuovere l'uso sostenibile degli ecosistemi terrestri</p>
+                    </div>
+                    
+                    <div class="sdg-item">
+                        <h4>💼 SDG 8: Decent Work</h4>
+                        <p>Promuovere una crescita economica inclusiva e sostenibile, e lavoro dignitoso per tutti</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 20px;">Il turismo sostenibile può essere un motore per raggiungere questi obiettivi, ma richiede una trasformazione radicale del settore.</p>
+            </div>
+
+            <div class="actions-section">
+                <h3>🚀 Azioni per un Turismo Climate-Friendly</h3>
+                
+                <div class="action-item">
+                    <h4>👤 Azioni Individuali</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Scegliere destinazioni più vicine o usare mezzi di trasporto a basso impatto</li>
+                        <li>Compensare le emissioni di carbonio dei voli</li>
+                        <li>Soggiornare più a lungo nelle destinazioni (turismo lento)</li>
+                        <li>Scegliere strutture con certificazioni ambientali</li>
+                        <li>Ridurre consumi di acqua ed energia durante i viaggi</li>
+                    </ul>
+                </div>
+                
+                <div class="action-item">
+                    <h4>🏢 Azioni delle Imprese</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Investire in energie rinnovabili e tecnologie pulite</li>
+                        <li>Implementare sistemi di gestione ambientale</li>
+                        <li>Promuovere il turismo locale e i prodotti a km zero</li>
+                        <li>Educare i clienti al turismo responsabile</li>
+                        <li>Misurare e ridurre l'impronta di carbonio</li>
+                    </ul>
+                </div>
+                
+                <div class="action-item">
+                    <h4>🏛️ Azioni dei Governi</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Politiche di carbon pricing per l'aviazione</li>
+                        <li>Investimenti in trasporti pubblici sostenibili</li>
+                        <li>Incentivi per il turismo verde e locale</li>
+                        <li>Regolamentazione delle emissioni turistiche</li>
+                        <li>Educazione ambientale nelle scuole</li>
+                    </ul>
+                </div>
+                
+                <div class="action-item">
+                    <h4>🌱 Innovazioni Tecnologiche</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Carburanti sostenibili per l'aviazione (SAF)</li>
+                        <li>Veicoli elettrici per il trasporto turistico</li>
+                        <li>Smart tourism per ottimizzare i flussi</li>
+                        <li>Realtà virtuale come alternativa ai viaggi</li>
+                        <li>Blockchain per tracciare la sostenibilità</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>💡 Case Study: Destinazioni Climate-Smart</h3>
+                <p>Alcuni esempi di destinazioni che stanno affrontando seriamente la sfida climatica:</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">🇳🇴 Norvegia - Tourism for Tomorrow</h4>
+                    <p>La Norvegia punta a diventare una destinazione turistica a emissioni zero entro il 2030. Investimenti massicci in trasporti elettrici, energie rinnovabili e turismo naturalistico sostenibile.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">🇨🇷 Costa Rica - Pura Vida Sostenible</h4>
+                    <p>Pioniera dell'ecoturismo, il Costa Rica genera il 99% della sua energia da fonti rinnovabili e ha fatto del turismo sostenibile il pilastro della sua economia.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">🇩🇰 Copenhagen - Green Capital</h4>
+                    <p>Copenaghen punta a diventare carbon-neutral entro il 2025. Promuove il cicloturismo, l'energia verde e l'architettura sostenibile.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>How does climate change affect tourism destinations you know?</li>
+                    <li>What is the ethical dilemma between traveling and protecting the environment?</li>
+                    <li>How can young people contribute to sustainable tourism?</li>
+                    <li>What role should governments play in regulating tourism's climate impact?</li>
+                    <li>How can technology help make tourism more sustainable?</li>
+                    <li>What does "climate justice" mean in the context of tourism?</li>
+                    <li>How can we balance economic benefits of tourism with environmental protection?</li>
+                    <li>What would tourism look like in a world limited to 1.5°C warming?</li>
+                    <li>How does climate change relate to social justice and human rights?</li>
+                    <li>What can we learn from indigenous communities about sustainable tourism?</li>
+                </ol>
+            </div>
+
+
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

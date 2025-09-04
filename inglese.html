@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa Parks - The Mother of Civil Rights Movement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .video-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #3498db;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇺🇸 Rosa Parks</h1>
+            <p>The Mother of the Civil Rights Movement</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Rosa Parks in Educazione Civica?</h2>
+                <p>Rosa Parks rappresenta un esempio perfetto di come <strong>cittadinanza attiva</strong> e <strong>coraggio individuale</strong> possano generare cambiamenti sociali profondi e duraturi. Il suo studio è fondamentale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Disobbedienza civile:</strong> Dimostra come si possa contestare leggi ingiuste in modo pacifico ma determinato</li>
+                    <li><strong>Diritti civili:</strong> Simboleggia la lotta contro ogni forma di discriminazione razziale e sociale</li>
+                    <li><strong>Coraggio civico:</strong> Insegna che ogni cittadino può fare la differenza, anche con un gesto apparentemente semplice</li>
+                    <li><strong>Giustizia sociale:</strong> Rappresenta l'ideale di una società basata sull'uguaglianza e la dignità umana</li>
+                    <li><strong>Partecipazione democratica:</strong> Mostra come i movimenti dal basso possano influenzare le politiche pubbliche</li>
+                    <li><strong>Solidarietà collettiva:</strong> Il boicottaggio dei bus dimostra la forza dell'azione collettiva organizzata</li>
+                </ul>
+            </div>
+
+            <div class="story-section">
+                <h3>📖 La storia che cambiò l'America</h3>
+                <p>Il <strong>1° dicembre 1955</strong>, a Montgomery, Alabama, Rosa Parks compie un gesto che entrerà nella storia. Dopo una lunga giornata di lavoro come sarta, sale sull'autobus per tornare a casa. Quando l'autista le ordina di cedere il posto a un passeggero bianco, Rosa dice semplicemente: <em>"No"</em>.</p>
+                
+                <p>Questo rifiuto non è casuale. Rosa Parks era già un'attivista per i diritti civili, segretaria della sezione locale della NAACP (National Association for the Advancement of Colored People). Sapeva che le sue azioni avrebbero avuto conseguenze, ma era stanca - non fisicamente, ma moralmente stanca delle ingiustizie.</p>
+                
+                <div class="quote">
+                    I was not tired physically, but I was tired of giving in
+                </div>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 Rosa Parks: The Story</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/7biKSNA58_c" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Video biografico su Rosa Parks e il suo impatto sul movimento per i diritti civili</p>
+            </div>
+
+            <div class="timeline">
+                <h3>⏰ Timeline: Dal gesto al cambiamento</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1° dicembre 1955</div>
+                    <div class="timeline-event">Rosa Parks rifiuta di cedere il posto sull'autobus a Montgomery</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">5 dicembre 1955</div>
+                    <div class="timeline-event">Inizia il boicottaggio degli autobus di Montgomery, guidato da Martin Luther King Jr.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">13 novembre 1956</div>
+                    <div class="timeline-event">La Corte Suprema dichiara incostituzionale la segregazione sui trasporti pubblici</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">20 dicembre 1956</div>
+                    <div class="timeline-event">Fine del boicottaggio dopo 381 giorni - vittoria del movimento</div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 The Montgomery Bus Boycott</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/RZBNkHwg5Bk" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Documentario sul boicottaggio degli autobus di Montgomery e le sue conseguenze</p>
+            </div>
+
+            <div class="story-section">
+                <h3>🌟 L'eredità di Rosa Parks</h3>
+                <p>L'atto di Rosa Parks non fu solo un gesto di ribellione personale, ma divenne il catalizzatore di un movimento che trasformò l'America. Il boicottaggio dei bus di Montgomery durò <strong>381 giorni</strong> e portò alla nascita del movimento moderno per i diritti civili.</p>
+                
+                <p>La sua eredità va oltre la lotta contro la segregazione razziale:</p>
+                <ul style="margin-left: 20px; color: #2c3e50;">
+                    <li>Ha dimostrato che la <strong>resistenza non violenta</strong> può essere più efficace della violenza</li>
+                    <li>Ha ispirato movimenti per i diritti in tutto il mondo</li>
+                    <li>Ha mostrato che il <strong>cambiamento sociale</strong> inizia spesso da gesti individuali coraggiosi</li>
+                    <li>Ha evidenziato l'importanza dell'<strong>organizzazione collettiva</strong> nel raggiungere obiettivi sociali</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>What would you have done in Rosa Parks' situation? Why?</li>
+                    <li>How can one person's action create such a massive social change?</li>
+                    <li>What forms of discrimination still exist today, and how can we address them?</li>
+                    <li>What is the difference between following the law and doing what is right?</li>
+                    <li>How can young people today show civic courage in their communities?</li>
+                    <li>What role did solidarity and community organization play in the success of the Montgomery Bus Boycott?</li>
+                    <li>How does Rosa Parks' story connect to the concept of human dignity in modern democratic societies?</li>
+                </ol>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 Rosa Parks in her own words</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/watch?v=76kS_7qanH8" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Intervista storica a Rosa Parks - Le sue parole sui diritti civili e la giustizia</p>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

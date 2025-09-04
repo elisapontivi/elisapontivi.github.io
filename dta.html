@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTA - Materiali di Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 30%, #e74c3c 70%, #c0392b 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #2980b9;
+        }
+
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .topic-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 30px;
+            text-decoration: none;
+            color: #2c3e50;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+        }
+
+        .topic-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            color: #2c3e50;
+        }
+
+        .topic-description {
+            font-size: 1rem;
+            color: #5a6c7d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .topic-period {
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(231, 76, 60, 0.1));
+            color: #3498db;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .topic-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .keyword {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .topic-card {
+                padding: 25px;
+            }
+        }
+
+        .stats-bar {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index1.html">← Torna alle materie</a>
+        </div>
+
+
+        <div class="header">
+            <div class="subject-icon">🎯</div>
+            <h1>DTA</h1>
+            <p>Discipline Turistiche e Aziendali per la cittadinanza responsabile: analizza l'impatto del turismo sulla società e sviluppa competenze per un settore sostenibile</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stats-number">4</div>
+            <div class="stats-label">Argomenti disponibili</div>
+        </div>
+
+        <div class="topics-grid">
+            <a href="turismo-petrolio-italia.html" class="topic-card">
+                <div class="topic-period">Economia turistica</div>
+                <div class="topic-icon">🇮🇹</div>
+                <div class="topic-title">Turismo Petrolio d'Italia</div>
+                <div class="topic-description">
+                    Il turismo come risorsa strategica dell'economia italiana: analisi del PIL turistico, occupazione nel settore e sfide per trasformare questa "materia prima" in sviluppo sostenibile.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">PIL turistico</span>
+                    <span class="keyword">Risorsa economica</span>
+                    <span class="keyword">Sviluppo territoriale</span>
+                </div>
+            </a>
+
+            <a href="turismo-sostenibile-como.html" class="topic-card">
+                <div class="topic-period">Caso studio</div>
+                <div class="topic-icon">🏔️</div>
+                <div class="topic-title">Turismo Sostenibile e Caso Studio Como</div>
+                <div class="topic-description">
+                    Modelli di turismo sostenibile attraverso l'analisi del territorio lombardo: overtourism, carrying capacity e strategie per bilanciare sviluppo economico e tutela ambientale.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Turismo sostenibile</span>
+                    <span class="keyword">Carrying capacity</span>
+                    <span class="keyword">Overtourism</span>
+                </div>
+            </a>
+
+            <a href="greenwashing-alberghiero.html" class="topic-card">
+                <div class="topic-period">Etica settoriale</div>
+                <div class="topic-icon">🏨</div>
+                <div class="topic-title">Greenwashing nel Settore Alberghiero</div>
+                <div class="topic-description">
+                    Riconoscere le false pratiche "green" nell'hospitality: analisi critica delle certificazioni, marketing sostenibile autentico vs. greenwashing e impatto reale delle strutture ricettive.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Hospitality sostenibile</span>
+                    <span class="keyword">Certificazioni green</span>
+                    <span class="keyword">Marketing ingannevole</span>
+                </div>
+            </a>
+
+            <a href="green-nudges.html" class="topic-card">
+                <div class="topic-period">Psicologia comportamentale</div>
+                <div class="topic-icon">🧠</div>
+                <div class="topic-title">Green Nudges</div>
+                <div class="topic-description">
+                    La "spinta gentile" verso comportamenti sostenibili nel turismo: tecniche di nudging per orientare le scelte dei turisti verso opzioni più ecologiche senza coercizione.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Behavioral economics</span>
+                    <span class="keyword">Scelte sostenibili</span>
+                    <span class="keyword">Psicologia turistica</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="stats-bar" style="margin-top: 50px;">
+            <p style="color: #5a6c7d; font-size: 0.95rem;">
+                Ogni argomento include casi studio del settore turistico, analisi di business plan sostenibili e attività per sviluppare competenze manageriali e civiche
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Aggiungi effetti di interattività
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.topic-card');
+            
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+
+                // Animazione di entrata per le card
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

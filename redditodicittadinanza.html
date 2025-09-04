@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddito di cittadinanza — Giustizia sociale o incentivo alla pigrizia?</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #90EE90; color: #333; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #27ae60; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "✓"; color: #27ae60; font-weight: bold; font-size: 1.2rem;
+            position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .overtourism-quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .overtourism-quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        /* —— Embed video responsivo —— */
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52,152,219,0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .overtourism-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💶 Reddito di cittadinanza</h1>
+            <p>Strumento di giustizia sociale o incentivo alla pigrizia?</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — COSTITUZIONE • DIRITTI SOCIALI • LAVORO</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il Reddito di cittadinanza (RdC) è stato una misura di sostegno al reddito con finalità sociali e occupazionali. Studiare il RdC aiuta a capire come lo Stato attua i <strong>diritti sociali</strong> (artt. 2, 3, 38 Cost.) e come bilancia <strong>equità</strong>, <strong>incentivi al lavoro</strong> e <strong>sostenibilità</strong> della spesa pubblica.</p>
+                <ul>
+                    <li><strong>Uguaglianza sostanziale:</strong> ridurre povertà e disuguaglianze</li>
+                    <li><strong>Mercato del lavoro:</strong> attivazione, servizi per l’impiego, formazione</li>
+                    <li><strong>Responsabilità individuale e collettiva:</strong> condizionalità e doveri dei beneficiari</li>
+                    <li><strong>Valutazione delle politiche:</strong> come si misurano efficacia ed effetti collaterali</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Domanda-guida: un sussidio al reddito può sostenere la dignità e l’inclusione senza disincentivare la ricerca di lavoro?
+            </div>
+
+            <div class="story-section">
+                <h3>🏛 Che cos’è (stato) il Reddito di cittadinanza</h3>
+                <p>Il RdC combinava un trasferimento monetario per famiglie a basso reddito con obblighi di disponibilità al lavoro e percorsi di inserimento. Il dibattito pubblico lo ha visto come <em>rete di sicurezza</em> per chi è in povertà o come misura che rischia di creare <em>trappole dell’inattività</em>.</p>
+                <p>Gli elementi chiave del confronto riguardano: platea dei beneficiari, adeguatezza dell’importo, condizionalità (es. accettazione offerte congrue), capacità dei servizi per l’impiego, impatti su povertà, lavoro e finanza pubblica.</p>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚖ Nodi critici e potenziali benefici</h3>
+                <div class="impact-item">
+                    <h4>🛡 Protezione dalla povertà</h4>
+                    <p>Può alleviare privazioni gravi e sostenere consumi essenziali, con effetti positivi su salute, istruzione e inclusione sociale.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏃 Incentivi al lavoro</h4>
+                    <p>Il disegno della misura (importo, durata, soglie, decrescenza al crescere del reddito) può favorire o frenare l’accettazione di lavori, specie se a bassa retribuzione.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏢 Servizi per l’impiego</h4>
+                    <p>L’efficacia dipende dalla capacità dei centri per l’impiego e dalla qualità dell’incontro domanda–offerta e della formazione.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>💶 Costi e sostenibilità</h4>
+                    <p>Valutare spesa pubblica, effetti macro (consumi locali) e il trade-off con altre politiche (formazione, incentivi alle imprese).</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🧭 Equità e targeting</h4>
+                    <p>Rischi di errori di inclusione/esclusione; importanza di criteri chiari e controlli per evitare abusi e stigmi.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Come si progetta un buon sussidio al reddito</h3>
+                <div class="solution-item">
+                    <h4>🎯 Targeting e importi calibrati</h4>
+                    <p>Parametri che proteggono i più fragili senza creare disincentivi; integrazioni <em>in-work</em> per chi accetta lavori.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🔗 Condizionalità efficaci e realistiche</h4>
+                    <p>Obblighi proporzionati alle caratteristiche del beneficiario; offerte “congrue” definite con criteri trasparenti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧑‍🏫 Servizi e politiche attive</h4>
+                    <p>Formazione mirata, orientamento, incentivi alle assunzioni, coordinamento tra scuole, CPI e imprese.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🧾 Monitoraggio e valutazione</h4>
+                    <p>Indicatori su povertà, occupazione, durata nei benefici, esiti lavorativi, e controlli anti-abuso.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione in classe</h3>
+                <ol>
+                    <li>Qual è la differenza tra un diritto sociale (art. 38) e un sussidio “condizionato” al lavoro?</li>
+                    <li>Quali caratteristiche rendono un sussidio al reddito “giusto” ed “efficace” allo stesso tempo?</li>
+                    <li>Le condizionalità aiutano l’inclusione o rischiano di escludere chi ha più barriere (cura, salute, trasporti)?</li>
+                    <li>Come si può evitare che il sussidio scoraggi l’accettazione di lavori, specie se mal pagati?</li>
+                    <li>Quali indicatori useresti per valutare il successo o il fallimento di una misura come il RdC?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.ilpost.it/2016/06/28/i-problemi-del-reddito-di-cittadinanza/" target="_blank" rel="noopener">
+                        Il Post — “I problemi del reddito di cittadinanza” (2016)
+                    </a>
+                    <p>Panoramica delle criticità concettuali e attuative: disegno, costi, incentivi e possibili effetti collaterali.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.ilpost.it/2023/08/02/reddito-di-cittadinanza-funzionato/" target="_blank" rel="noopener">
+                        Il Post — “Il reddito di cittadinanza ha funzionato?” (2023)
+                    </a>
+                    <p>Analisi critica di risultati e limiti, utile per il fact-checking e per impostare una valutazione basata su evidenze.</p>
+                </div>
+
+                <!-- —— VIDEO EMBED —— -->
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <p style="margin-bottom:10px;">Approfondimento video da usare come apertura del dibattito:</p>
+                    <div class="video-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed/N_tjMkoBHvM"
+                            title="Video YouTube — Reddito di cittadinanza"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <!-- —— /VIDEO EMBED —— -->
+
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

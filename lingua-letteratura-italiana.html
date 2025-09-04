@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingua e Letteratura Italiana - Materiali di Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #764ba2;
+        }
+
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .topic-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 30px;
+            text-decoration: none;
+            color: #2c3e50;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .topic-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            color: #2c3e50;
+        }
+
+        .topic-description {
+            font-size: 1rem;
+            color: #5a6c7d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .topic-period {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .topic-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .keyword {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .topic-card {
+                padding: 25px;
+            }
+        }
+
+        .stats-bar {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index1.html">← Torna alle materie</a>
+        </div>
+
+
+        <div class="header">
+            <div class="subject-icon">📚</div>
+            <h1>Lingua e Letteratura Italiana</h1>
+            <p>Sviluppa competenze linguistiche e spirito critico attraverso l'analisi dei testi, la comunicazione responsabile e la comprensione del mondo contemporaneo</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stats-number">5</div>
+            <div class="stats-label">Argomenti disponibili</div>
+        </div>
+
+        <div class="topics-grid">
+            <a href="fake-news-disinformazione.html" class="topic-card">
+                <div class="topic-period">Era digitale</div>
+                <div class="topic-icon">🕵️</div>
+                <div class="topic-title">Fake News e Disinformazione</div>
+                <div class="topic-description">
+                    Impara a riconoscere e analizzare criticamente le fonti di informazione, distinguendo tra notizie verificate e disinformazione nell'era dei social media e della comunicazione digitale.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Analisi critica</span>
+                    <span class="keyword">Verifica fonti</span>
+                    <span class="keyword">Media literacy</span>
+                </div>
+            </a>
+
+            <a href="teorie-complotto-narrazione.html" class="topic-card">
+                <div class="topic-period">Contemporaneo</div>
+                <div class="topic-icon">🌀</div>
+                <div class="topic-title">Teorie del Complotto e Narrazione</div>
+                <div class="topic-description">
+                    Analizza le strutture narrative delle teorie del complotto, comprendendo come si costruiscono e diffondono attraverso tecniche retoriche e meccanismi psicologici della persuasione.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Strutture narrative</span>
+                    <span class="keyword">Retorica</span>
+                    <span class="keyword">Pensiero critico</span>
+                </div>
+            </a>
+
+            <a href="ironia-satira-meme.html" class="topic-card">
+                <div class="topic-period">Tradizione e modernità</div>
+                <div class="topic-icon">😄</div>
+                <div class="topic-title">Ironia e Satira: dai Giornali ai Meme</div>
+                <div class="topic-description">
+                    Esplora l'evoluzione dell'ironia e della satira dalla tradizione letteraria ai moderni meme digitali, analizzando il loro ruolo nella critica sociale e nella comunicazione contemporanea.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Satira sociale</span>
+                    <span class="keyword">Comunicazione digitale</span>
+                    <span class="keyword">Linguaggi creativi</span>
+                </div>
+            </a>
+
+            <a href="ai-scuola.html" class="topic-card">
+                <div class="topic-period">Futuro presente</div>
+                <div class="topic-icon">🤖</div>
+                <div class="topic-title">AI a Scuola</div>
+                <div class="topic-description">
+                    Comprendi le potenzialità e le sfide dell'intelligenza artificiale nell'educazione: dall'uso etico degli strumenti AI alla riflessione sul futuro dell'apprendimento e della creatività umana.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Etica digitale</span>
+                    <span class="keyword">Apprendimento futuro</span>
+                    <span class="keyword">Creatività umana</span>
+                </div>
+            </a>
+
+            <a href="unioni-civili-famiglie-arcobaleno.html" class="topic-card">
+                <div class="topic-period">Società contemporanea</div>
+                <div class="topic-icon">👨‍👨‍👧‍👦</div>
+                <div class="topic-title">Unioni Civili, Famiglie Arcobaleno e Adozione</div>
+                <div class="topic-description">
+                    Esplora l'evoluzione del concetto di famiglia nella letteratura e nella società: dalle rappresentazioni tradizionali alle nuove forme familiari, analizzando testi, linguaggi e diritti civili.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Nuove famiglie</span>
+                    <span class="keyword">Diritti civili</span>
+                    <span class="keyword">Inclusività sociale</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="stats-bar" style="margin-top: 50px;">
+            <p style="color: #5a6c7d; font-size: 0.95rem;">
+                Ogni argomento include analisi testuali, attività pratiche e riflessioni per sviluppare competenze linguistiche e cittadinanza digitale
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Aggiungi effetti di interattività
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.topic-card');
+            
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+
+                // Animazione di entrata per le card
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

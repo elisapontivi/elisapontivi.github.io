@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donne e Patriarcato - Dalla Subordinazione all'Emancipazione</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 30%, #e91e63 70%, #f06292 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "♀️";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✊";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feminist-quote {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .feminist-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .feminist-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .context-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #e91e63;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #e91e63;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e91e63;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .pioniere-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .pioniere-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .pioniera-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .pioniera-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .concetti-section {
+            background: linear-gradient(135deg, #f8e8f8, #fbeeff);
+            border-left: 5px solid #9b59b6;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .concetti-section h3 {
+            color: #8e44ad;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .conquiste-section {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .conquiste-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #8e44ad;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: #fff0f0;
+            border-left: 4px solid #e91e63;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .feminist-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👩‍💼 Donne e Patriarcato</h1>
+            <p>Dalla Subordinazione all'Emancipazione</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 3 - SVILUPPO SOSTENIBILE, EDUCAZIONE AMBIENTALE E SALUTE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Donne e Patriarcato in Educazione Civica?</h2>
+                <p>Lo studio del rapporto tra donne e sistema patriarcale è <strong>fondamentale per l'educazione civica</strong> perché aiuta a comprendere le disuguaglianze di genere e il percorso verso la parità. È essenziale perché:</p>
+                <ul>
+                    <li><strong>Consapevolezza storica:</strong> Comprendere millenni di subordinazione femminile</li>
+                    <li><strong>Diritti umani:</strong> Le donne rappresentano la metà dell'umanità</li>
+                    <li><strong>Parità costituzionale:</strong> L'uguaglianza di genere è un principio costituzionale</li>
+                    <li><strong>Cittadinanza piena:</strong> Il percorso verso la parità politica, economica e sociale</li>
+                    <li><strong>Violenza di genere:</strong> Comprendere e prevenire stereotipi e discriminazioni</li>
+                    <li><strong>Sviluppo sostenibile:</strong> L'empowerment femminile è nell'Agenda 2030 ONU</li>
+                    <li><strong>Democrazia:</strong> Una società democratica richiede la piena partecipazione di tutti</li>
+                </ul>
+            </div>
+
+            <div class="feminist-quote">
+                I diritti delle donne sono diritti umani
+                <br><small>- Hillary Clinton, Conferenza di Pechino 1995</small>
+            </div>
+
+            <div class="context-section">
+                <h3>🏛️ Cos'è il patriarcato: definizione e caratteristiche</h3>
+                <p>Il <strong>patriarcato</strong> è un sistema sociale, politico ed economico basato sulla supremazia maschile e sulla subordinazione femminile. Non è solo una forma di governo, ma un'<strong>organizzazione sociale completa</strong>.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Caratteristiche del sistema patriarcale:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Autorità maschile:</strong> Il potere decisionale è concentrato negli uomini</li>
+                        <li><strong>Divisione sessuale del lavoro:</strong> Ruoli rigidamente definiti per genere</li>
+                        <li><strong>Controllo della sessualità:</strong> Norme che regolano il corpo e la sessualità femminile</li>
+                        <li><strong>Ideologia della "naturalità":</strong> Le differenze sono considerate biologicamente determinate</li>
+                        <li><strong>Trasmissione patrilineare:</strong> Nome, eredità e potere passano per linea maschile</li>
+                        <li><strong>Violenza legittimata:</strong> Uso della forza per mantenere l'ordine gerarchico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="concetti-section">
+                <h3>📚 Concetti chiave per comprendere le questioni di genere</h3>
+                
+                <div class="pioniera-item">
+                    <h4>🎭 Genere vs Sesso</h4>
+                    <p>Il <strong>sesso</strong> è biologico, il <strong>genere</strong> è la costruzione sociale e culturale dei ruoli, comportamenti e aspettative associate al maschile e femminile.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>🔍 Stereotipi di genere</h4>
+                    <p>Credenze rigide e semplificate su come dovrebbero comportarsi uomini e donne, che limitano le possibilità individuali di entrambi i sessi.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>🚫 Discriminazione di genere</h4>
+                    <p>Trattamento ineguale basato sul genere, che si manifesta in ambito lavorativo, politico, sociale ed economico.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>📈 Glass ceiling (Soffitto di cristallo)</h4>
+                    <p>Barriere invisibili che impediscono alle donne di raggiungere posizioni di vertice nelle organizzazioni.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>⚖️ Gap di genere</h4>
+                    <p>Differenze misurabili tra uomini e donne in termini di partecipazione, accesso alle risorse e opportunità in vari ambiti della vita.</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>📅 Tappe fondamentali dell'emancipazione femminile</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1792</div>
+                    <div class="timeline-event">Mary Wollstonecraft scrive "Rivendicazione dei diritti della donna"</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1848</div>
+                    <div class="timeline-event">Convenzione di Seneca Falls per i diritti delle donne (USA)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1893</div>
+                    <div class="timeline-event">La Nuova Zelanda è il primo paese a concedere il voto alle donne</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1946</div>
+                    <div class="timeline-event">Le donne italiane votano per la prima volta</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1975</div>
+                    <div class="timeline-event">Riforma del diritto di famiglia in Italia</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1981</div>
+                    <div class="timeline-event">Abolizione del matrimonio riparatore in Italia</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1995</div>
+                    <div class="timeline-event">Conferenza mondiale sulle donne a Pechino</div>
+                </div>
+            </div>
+
+            <div class="pioniere-section">
+                <h3>🦸‍♀️ Le pioniere dell'emancipazione femminile</h3>
+                
+                <div class="pioniera-item">
+                    <h4>Mary Wollstonecraft (1759-1797)</h4>
+                    <p>Scrittrice e filosofa inglese, autrice di "Rivendicazione dei diritti della donna" (1792), considerato il primo manifesto femminista moderno.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>Anna Maria Mozzoni (1837-1920)</h4>
+                    <p>Prima femminista italiana, si battè per il suffragio femminile e tradusse "La sottomissione delle donne" di John Stuart Mill.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>Emmeline Pankhurst (1858-1928)</h4>
+                    <p>Leader delle suffragette inglesi, fondò la Women's Social and Political Union e lottò con metodi anche radicali per il voto femminile.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>Simone de Beauvoir (1908-1986)</h4>
+                    <p>Filosofa francese, autrice de "Il secondo sesso" (1949), opera fondamentale per il femminismo del XX secolo.</p>
+                </div>
+                
+                <div class="pioniera-item">
+                    <h4>Tina Anselmi (1927-2016)</h4>
+                    <p>Prima donna ministro in Italia, partigiana e sindacalista, si batté per i diritti delle lavoratrici e contro le discriminazioni.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>⚖️ Le conquiste legislative in Italia</h3>
+                <p>Il percorso legislativo italiano verso la parità di genere è stato lungo e graduale:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Diritti politici:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>1946:</strong> Suffragio femminile - diritto di voto attivo e passivo</li>
+                        <li><strong>1963:</strong> Accesso alle magistrature (tranne quella militare)</li>
+                        <li><strong>1999:</strong> Legge sulla parità di accesso alle cariche elettive</li>
+                        <li><strong>2003:</strong> Prima donna Presidente della Camera (Irene Pivetti nel 1994)</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Diritti civili e familiari:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>1975:</strong> Riforma del diritto di famiglia - fine della patria potestà</li>
+                        <li><strong>1970:</strong> Legge sul divorzio</li>
+                        <li><strong>1978:</strong> Legge sull'interruzione volontaria di gravidanza</li>
+                        <li><strong>1981:</strong> Abolizione del delitto d'onore e matrimonio riparatore</li>
+                        <li><strong>1996:</strong> Violenza sessuale diventa reato contro la persona</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Diritti lavorativi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>1963:</strong> Divieto di licenziamento per matrimonio</li>
+                        <li><strong>1977:</strong> Parità di trattamento sul lavoro</li>
+                        <li><strong>1971:</strong> Congedo di maternità retribuito</li>
+                        <li><strong>2000:</strong> Congedo parentale per entrambi i genitori</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="conquiste-section">
+                <h3>🌍 Le sfide globali: donne nel mondo</h3>
+                <p>Nonostante i progressi, permangono significative disuguaglianze di genere a livello mondiale:</p>
+                
+                <div class="warning-box">
+                    <p><strong>Dati globali preoccupanti:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Istruzione:</strong> 130 milioni di ragazze non vanno a scuola nel mondo</li>
+                        <li><strong>Lavoro:</strong> Le donne guadagnano mediamente il 23% in meno degli uomini</li>
+                        <li><strong>Politica:</strong> Solo il 25% dei parlamentari mondiali sono donne</li>
+                        <li><strong>Violenza:</strong> 1 donna su 3 subisce violenza fisica o sessuale</li>
+                        <li><strong>Matrimoni precoci:</strong> 12 milioni di ragazze sposate prima dei 18 anni ogni anno</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Obiettivo 5 dell'Agenda 2030 ONU:</strong> "Raggiungere l'uguaglianza di genere e l'empowerment di tutte le donne e le ragazze" è uno dei 17 Obiettivi di Sviluppo Sostenibile.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📊 La situazione italiana oggi</h3>
+                <p>L'Italia ha fatto progressi significativi, ma restano <strong>divari importanti</strong> in molti ambiti:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Progressi positivi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Istruzione:</strong> Le donne rappresentano il 59% dei laureati</li>
+                        <li><strong>Magistratura:</strong> Il 51% dei magistrati sono donne</li>
+                        <li><strong>Medicina:</strong> Il 38% dei medici sono donne</li>
+                        <li><strong>Ricerca:</strong> Crescita delle ricercatrici in tutti i settori</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>Criticità persistenti:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Gender pay gap:</strong> Le donne guadagnano il 16% in meno</li>
+                        <li><strong>Occupazione:</strong> Tasso di occupazione femminile al 50% (UE: 67%)</li>
+                        <li><strong>Cura familiare:</strong> Le donne dedicano 2,5 volte più tempo ai lavori domestici</li>
+                        <li><strong>Posizioni apicali:</strong> Solo il 28% dei dirigenti sono donne</li>
+                        <li><strong>Violenza:</strong> 88 femminicidi nel 2023</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🔬 Nuove sfide: tecnologia e parità</h3>
+                <p>Il mondo digitale presenta nuove opportunità ma anche <strong>nuove forme di discriminazione</strong>:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Opportunità digitali:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Smart working:</strong> Maggiore flessibilità per conciliare lavoro e famiglia</li>
+                        <li><strong>E-commerce:</strong> Nuove opportunità imprenditoriali per le donne</li>
+                        <li><strong>STEM:</strong> Crescente presenza femminile in scienza e tecnologia</li>
+                        <li><strong>Social activism:</strong> I social media amplificano le voci femministe</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>Nuove sfide:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cyberbullismo:</strong> Molestie online sproporzionatamente contro le donne</li>
+                        <li><strong>Revenge porn:</strong> Diffusione non consensuale di immagini intime</li>
+                        <li><strong>AI bias:</strong> Gli algoritmi possono perpetuare pregiudizi di genere</li>
+                        <li><strong>Digital divide:</strong> Divario nell'accesso alle tecnologie</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📊 Progetto interdisciplinare: Matematica/Informatica + Educazione Civica</h3>
+                <p>Utilizzo dei <strong>dati ISTAT</strong> per analizzare statisticamente la condizione femminile in Italia:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>🔗 Fonte dati:</strong> <a href="https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,ZZ_FOCUS,1.0" target="_blank" style="color: #8e44ad; font-weight: bold;">ISTAT - Esplora Dati Focus Donne</a></p>
+                </div>
+
+                <div class="pioniera-item">
+                    <h4>📈 Proposta 1: Gender Gap Dashboard</h4>
+                    <p><strong>Matematica:</strong> Calcolo di percentuali, rapporti, variazioni temporali e indici statistici (media, mediana, deviazione standard)</p>
+                    <p><strong>Informatica:</strong> Creazione di grafici interattivi con Excel/Google Sheets o linguaggi come Python (matplotlib/seaborn)</p>
+                    <p><strong>Educazione Civica:</strong> Interpretazione critica dei dati su occupazione, salari, cariche politiche</p>
+                    <p><strong>Output:</strong> Dashboard digitale che visualizza l'evoluzione del gender gap in Italia dal 1990 a oggi</p>
+                </div>
+
+                <div class="pioniera-item">
+                    <h4>🎓 Proposta 2: Analisi del Percorso Formativo</h4>
+                    <p><strong>Matematica:</strong> Analisi dei tassi di abbandono scolastico, percentuali di laureate per facoltà, correlazioni tra titolo di studio e occupazione</p>
+                    <p><strong>Informatica:</strong> Database relazionale con query SQL per analizzare i dati educativi per genere e regione</p>
+                    <p><strong>Educazione Civica:</strong> Collegamento tra istruzione femminile e empowerment, diritto allo studio</p>
+                    <p><strong>Output:</strong> Infografica animata che mostra il "percorso a ostacoli" dell'istruzione femminile</p>
+                </div>
+
+                <div class="pioniera-item">
+                    <h4>💼 Proposta 3: Mercato del Lavoro al Femminile</h4>
+                    <p><strong>Matematica:</strong> Calcolo del pay gap, analisi della distribuzione delle donne nei settori lavorativi, indici di segregazione occupazionale</p>
+                    <p><strong>Informatica:</strong> Sviluppo di un'app web che permette di confrontare stipendi e posizioni per genere</p>
+                    <p><strong>Educazione Civica:</strong> Diritti lavorativi, maternità, conciliazione vita-lavoro</p>
+                    <p><strong>Output:</strong> Calcolatore interattivo del gender pay gap per professione e regione</p>
+                </div>
+
+                <div class="pioniera-item">
+                    <h4>🏛️ Proposta 4: Rappresentanza Politica Femminile</h4>
+                    <p><strong>Matematica:</strong> Analisi statistica della presenza femminile in Parlamento, Governo, Regioni, Comuni dal 1946 a oggi</p>
+                    <p><strong>Informatica:</strong> Visualizzazione con mappe interattive (GIS) della rappresentanza femminile per territorio</p>
+                    <p><strong>Educazione Civica:</strong> Democrazia paritaria, quote rosa, sistemi elettorali</p>
+                    <p><strong>Output:</strong> Timeline interattiva delle "prime volte" delle donne in politica</p>
+                </div>
+
+                <div class="pioniera-item">
+                    <h4>👨‍👩‍👧‍👦 Proposta 5: Famiglia e Società</h4>
+                    <p><strong>Matematica:</strong> Analisi demografica: età media del primo figlio, tasso di natalità, famiglie monoparentali</p>
+                    <p><strong>Informatica:</strong> Machine Learning per predire tendenze demografiche future</p>
+                    <p><strong>Educazione Civica:</strong> Evoluzione della famiglia, welfare, politiche per l'infanzia</p>
+                    <p><strong>Output:</strong> Simulatore che mostra l'evoluzione della famiglia italiana</p>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>💡 Competenze sviluppate:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Data literacy:</strong> Capacità di leggere, interpretare e comunicare con i dati</li>
+                        <li><strong>Pensiero critico:</strong> Analisi critica delle fonti e interpretazione dei risultati</li>
+                        <li><strong>Competenze digitali:</strong> Uso di software statistici e di visualizzazione</li>
+                        <li><strong>Comunicazione:</strong> Presentazione efficace di dati complessi</li>
+                        <li><strong>Cittadinanza attiva:</strong> Uso dei dati per il cambiamento sociale</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>🛠️ Strumenti suggeriti:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Base:</strong> Excel/Google Sheets per analisi e grafici semplici</li>
+                        <li><strong>Intermedio:</strong> Tableau Public per visualizzazioni avanzate</li>
+                        <li><strong>Avanzato:</strong> Python (pandas, matplotlib) o R per analisi statistiche</li>
+                        <li><strong>Web:</strong> D3.js o Chart.js per grafici interattivi online</li>
+                        <li><strong>Database:</strong> MySQL o PostgreSQL per gestione dati</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎥 Video di approfondimento</h3>
+                <p>Per approfondire i temi trattati, guarda questo documentario che esplora la condizione femminile attraverso storie, testimonianze e analisi:</p>
+                
+                <div class="highlight-box" style="text-align: center; padding: 30px;">
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; margin: 20px 0;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/uJIXUUx0WDA" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px;"
+                            title="Video su Donne e Patriarcato"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic; color: #666;">
+                        📺 <strong>Durata consigliata per la visione:</strong> Intera classe o a casa come approfondimento
+                    </p>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>💡 Attività didattiche post-visione:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Discussione guidata:</strong> Confronto tra contenuti del video e scheda didattica</li>
+                        <li><strong>Analisi critica:</strong> Identificare i punti chiave e le testimonianze più significative</li>
+                        <li><strong>Ricerca approfondita:</strong> Scegliere un tema dal video per un project work</li>
+                        <li><strong>Debate:</strong> Organizzare un dibattito sui temi emersi</li>
+                        <li><strong>Timeline personale:</strong> Creare una timeline delle conquiste femminili più significative</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>Qual è la differenza tra sesso biologico e genere sociale?</li>
+                    <li>Come si manifesta ancora oggi il "soffitto di cristallo" nel mondo del lavoro?</li>
+                    <li>Perché l'accesso all'istruzione è fondamentale per l'emancipazione femminile?</li>
+                    <li>Quale ruolo hanno avuto le suffragette nella conquista dei diritti politici?</li>
+                    <li>Come ha cambiato la famiglia italiana la riforma del diritto di famiglia del 1975?</li>
+                    <li>Perché la violenza di genere è considerata una violazione dei diritti umani?</li>
+                    <li>Quale relazione esiste tra empowerment femminile e sviluppo sostenibile?</li>
+                    <li>Come possono i social media essere strumenti di empowerment ma anche di oppressione?</li>
+                    <li>Perché è importante la presenza femminile nelle istituzioni e nei luoghi decisionali?</li>
+                    <li>Quali stereotipi di genere persistono ancora nella società contemporanea?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiali di Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #5a6c7d;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .subject-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 25px;
+            text-decoration: none;
+            color: #2c3e50;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+       
+
+        .subject-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .subject-description {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .subject-card.highlighted .subject-description {
+            opacity: 0.9;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .subject-card.highlighted .icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .subject-card {
+                padding: 20px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e6ed;
+            color: #5a6c7d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Materiali di Educazione Civica</h1>
+            <p>Seleziona la materia per accedere ai contenuti didattici</p>
+        </div>
+
+        <div class="subjects-grid">
+            <a href="lingua-letteratura-italiana.html" class="subject-card highlighted">
+                <div class="icon">📖</div>
+                <div class="subject-title">Lingua e letteratura italiana</div>
+            </a>
+
+            <a href="lingua-inglese.html" class="subject-card">
+                <div class="icon">🇬🇧</div>
+                <div class="subject-title">Lingua inglese</div>
+            </a>
+
+            <a href="storia.html" class="subject-card">
+                <div class="icon">🏛️</div>
+                <div class="subject-title">Storia</div>
+            </a>
+
+            <a href="matematica.html" class="subject-card">
+                <div class="icon">🧮</div>
+                <div class="subject-title">Matematica e informatica</div>
+            </a>
+
+            <a href="scienze-motorie.html" class="subject-card highlighted">
+                <div class="icon">🏃</div>
+                <div class="subject-title">Scienze motorie (da creare)</div>
+            </a>
+
+            <a href="seconda-lingua-comunitaria.html" class="subject-card highlighted">
+                <div class="icon">🌍</div>
+                <div class="subject-title">Seconda e terza lingua comunitaria</div>
+            </a>
+
+
+            <a href="economia-aziendale.html" class="subject-card highlighted">
+                <div class="icon">📊</div>
+                <div class="subject-title">Economia aziendale</div>
+            </a>
+
+
+            <a href="economia-politica.html" class="subject-card">
+                <div class="icon">🏦</div>
+                <div class="subject-title">Economia politica</div>
+            </a>
+
+            <a href="diritto-legislazione-turistica.html" class="subject-card highlighted">
+                <div class="icon">🏖️</div>
+                <div class="subject-title">Diritto e legislazione turistica e diritto </div>
+            </a>
+
+         
+            <a href="dta.html" class="subject-card">
+                <div class="icon">🎯</div>
+                <div class="subject-title">DTA</div>
+            </a>
+
+            <a href="arte-territorio.html" class="subject-card">
+                <div class="icon">🎨</div>
+                <div class="subject-title">Arte e territorio e Geografia turistica</div>
+            </a>
+
+         
+        </div>
+
+        <div class="footer">
+            <p>Piattaforma per la condivisione di materiali didattici di educazione civica</p>
+        </div>
+    </div>
+
+    <script>
+        // Aggiungi effetti di interattività
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.subject-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

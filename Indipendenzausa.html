@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dichiarazione di Indipendenza USA - La Nascita della Democrazia Moderna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #c31432 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "🇺🇸";
+            position: absolute;
+            font-size: 2rem;
+            top: 20px;
+            right: 30px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "⭐";
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .declaration-quote {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .declaration-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .declaration-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .context-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #c31432;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #c31432;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #c31432;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .principles-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .principles-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .principle-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .principle-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .jefferson-section {
+            background: linear-gradient(135deg, #f8e8d8, #fbeee6);
+            border-left: 5px solid #e67e22;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .jefferson-section h3 {
+            color: #d35400;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .legacy-section {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .legacy-section h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fadbd8, #f8d7da);
+            border-left: 5px solid #e74c3c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .declaration-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📜 Dichiarazione di Indipendenza USA</h1>
+            <p>La Nascita della Democrazia Moderna - Thomas Jefferson (1776)</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare la Dichiarazione di Indipendenza in Educazione Civica?</h2>
+                <p>La Dichiarazione di Indipendenza americana del 1776 rappresenta il <strong>manifesto fondativo della democrazia moderna</strong> e il primo documento a proclamare i diritti naturali dell'uomo. Il suo studio è essenziale perché:</p>
+                <ul>
+                    <li><strong>Diritti naturali:</strong> Prima affermazione dei diritti inalienabili alla vita, libertà e ricerca della felicità</li>
+                    <li><strong>Sovranità popolare:</strong> Il potere deriva dal consenso dei governati</li>
+                    <li><strong>Diritto di resistenza:</strong> I popoli possono cambiare governi oppressivi</li>
+                    <li><strong>Uguaglianza:</strong> "Tutti gli uomini sono creati uguali"</li>
+                    <li><strong>Autogoverno:</strong> Le comunità hanno diritto all'autodeterminazione</li>
+                    <li><strong>Costituzionalismo:</strong> Ha ispirato le costituzioni democratiche mondiali</li>
+                    <li><strong>Illuminismo applicato:</strong> Trasforma le idee filosofiche in principi politici concreti</li>
+                </ul>
+            </div>
+
+            <div class="declaration-quote">
+                We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness
+                <br><small>(Riteniamo queste verità evidenti di per sé: che tutti gli uomini sono creati uguali; che essi sono dotati dal loro Creatore di certi Diritti inalienabili; che tra questi sono la Vita, la Libertà e la ricerca della Felicità)</small>
+            </div>
+
+            <div class="context-section">
+                <h3>⚔️ Il contesto storico: dalla tassazione alla rivoluzione</h3>
+                <p>Nel 1776, le <strong>tredici colonie americane</strong> erano in conflitto con la Gran Bretagna da oltre un decennio. La crisi iniziò con la <strong>Guerra dei Sette Anni</strong> (1756-1763), che lasciò l'Inghilterra pesantemente indebitata.</p>
+                
+                <p>Il Parlamento britannico iniziò ad imporre <strong>nuove tasse alle colonie</strong> senza concedere loro rappresentanza parlamentare. Il principio "No taxation without representation" divenne il grido di battaglia dei coloni americani.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Le tasse che scatenarono la rivoluzione:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Sugar Act (1764):</strong> Tassa sullo zucchero e melassa</li>
+                        <li><strong>Stamp Act (1765):</strong> Tassa sui documenti ufficiali</li>
+                        <li><strong>Townshend Acts (1767):</strong> Tasse su tè, vetro, carta e piombo</li>
+                        <li><strong>Tea Act (1773):</strong> Monopolio del tè alla Compagnia delle Indie Orientali</li>
+                        <li><strong>Coercive Acts (1774):</strong> Le "Leggi Intollerabili" dopo il Boston Tea Party</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>⏰ La strada verso l'indipendenza (1773-1776)</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">16 dicembre 1773</div>
+                    <div class="timeline-event">Boston Tea Party - I coloni gettano il tè nel porto</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">5 settembre 1774</div>
+                    <div class="timeline-event">Primo Congresso Continentale a Filadelfia</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">19 aprile 1775</div>
+                    <div class="timeline-event">Battaglia di Lexington e Concord - Inizia la guerra</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10 maggio 1775</div>
+                    <div class="timeline-event">Secondo Congresso Continentale</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">7 giugno 1776</div>
+                    <div class="timeline-event">Richard Henry Lee propone l'indipendenza</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">4 luglio 1776</div>
+                    <div class="timeline-event">Approvazione della Dichiarazione di Indipendenza</div>
+                </div>
+            </div>
+
+            <div class="jefferson-section">
+                <h3>✍️ Thomas Jefferson: l'autore della libertà</h3>
+                <p><strong>Thomas Jefferson</strong> (1743-1826) fu scelto per redigere la Dichiarazione perché considerato il miglior scrittore del Congresso. Filosofo, architetto, scienziato e futuro presidente, Jefferson sintetizzò le idee dell'Illuminismo in un documento rivoluzionario.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Le influenze filosofiche di Jefferson:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>John Locke:</strong> Diritti naturali e contratto sociale</li>
+                        <li><strong>Montesquieu:</strong> Separazione dei poteri</li>
+                        <li><strong>Voltaire:</strong> Tolleranza religiosa e libertà di pensiero</li>
+                        <li><strong>Rousseau:</strong> Sovranità popolare e volontà generale</li>
+                    </ul>
+                </div>
+                
+                <p>Jefferson scrisse la prima bozza in soli <strong>due giorni</strong>, trasformando le teorie filosofiche in un programma politico concreto che avrebbe cambiato il mondo.</p>
+            </div>
+
+            <div class="principles-section">
+                <h3>⚖️ I principi rivoluzionari della Dichiarazione</h3>
+                
+                <div class="principle-item">
+                    <h4>1. Diritti naturali inalienabili</h4>
+                    <p>Vita, libertà e ricerca della felicità sono diritti che ogni persona possiede per natura, non concessi dal governo.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>2. Uguaglianza fondamentale</h4>
+                    <p>"Tutti gli uomini sono creati uguali" - principio rivoluzionario in un'epoca di monarchie assolute.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>3. Consenso dei governati</h4>
+                    <p>I governi derivano il loro giusto potere dal consenso dei governati, non dal diritto divino.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>4. Diritto di rivoluzione</h4>
+                    <p>Quando un governo diventa oppressivo, il popolo ha il diritto di cambiarlo o abolirlo.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>5. Autogoverno democratico</h4>
+                    <p>Le comunità hanno il diritto di governarsi secondo i propri principi e interessi.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📜 La struttura della Dichiarazione</h3>
+                <p>Jefferson organizzò la Dichiarazione in <strong>quattro parti logiche</strong>, creando un argomento filosofico e politico perfetto:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>1. Preambolo filosofico:</strong></p>
+                    <p>"Riteniamo queste verità evidenti di per sé..." - Stabilisce i principi universali sui diritti umani.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>2. Lista delle lamentele:</strong></p>
+                    <p>27 specifiche accuse contro Re Giorgio III, dimostrando la violazione sistematica dei diritti coloniali.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>3. Tentativi di riconciliazione:</strong></p>
+                    <p>Documenta gli sforzi falliti dei coloni per risolvere pacificamente le controversie.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>4. Dichiarazione di indipendenza:</strong></p>
+                    <p>"Queste Colonie Unite sono, e per diritto devono essere, Stati Liberi e Indipendenti."</p>
+                </div>
+            </div>
+
+            <div class="legacy-section">
+                <h3>🌍 L'eredità globale della Dichiarazione</h3>
+                <p>La Dichiarazione di Indipendenza ha ispirato movimenti democratici in tutto il mondo:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Rivoluzione Francese (1789):</strong> Dichiarazione dei Diritti dell'Uomo e del Cittadino</li>
+                    <li><strong>Rivoluzioni latinoamericane (1810-1830):</strong> Indipendenza di Argentina, Colombia, Messico</li>
+                    <li><strong>Unificazione italiana (1861):</strong> Ispira i movimenti risorgimentali</li>
+                    <li><strong>Movimento per i diritti civili (1960s):</strong> Martin Luther King cita i principi jeffersoniani</li>
+                    <li><strong>Primavera Araba (2011):</strong> Richiami ai diritti inalienabili e all'autogoverno</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><strong>Lincoln e la Dichiarazione:</strong> Abraham Lincoln definì la Dichiarazione "la pietra angolare" della democrazia americana, utilizzandola per giustificare l'abolizione della schiavitù durante la Guerra Civile.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎭 Le contraddizioni della libertà</h3>
+                <p>La Dichiarazione contiene una <strong>contraddizione fondamentale</strong> che ha segnato la storia americana:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Il paradosso della schiavitù:</strong> Mentre proclamava che "tutti gli uomini sono creati uguali", l'America manteneva la schiavitù. Jefferson stesso possedeva schiavi.</p>
+                    
+                    <p style="margin-top: 15px;"><strong>La clausola rimossa:</strong> Jefferson aveva incluso nella bozza originale una condanna alla schiavitù, ma il Congresso la rimosse per ottenere l'appoggio degli stati del Sud.</p>
+                    
+                    <p style="margin-top: 15px;"><strong>L'eredità del conflitto:</strong> Questa contraddizione portò alla Guerra Civile (1861-1865) e alle lotte per i diritti civili che continuano oggi.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📱 La Dichiarazione nell'era digitale</h3>
+                <p>I principi del 1776 restano attuali nelle sfide democratiche contemporanee:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Domande moderne:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Come si applica il "consenso dei governati" nell'era della disinformazione?</li>
+                        <li>I diritti digitali sono "diritti naturali inalienabili"?</li>
+                        <li>Quando è legittimo resistere a decisioni governative in democrazia?</li>
+                        <li>Come bilanciare sicurezza nazionale e diritti individuali?</li>
+                        <li>L'autogoverno è possibile in società sempre più complesse?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>Perché Jefferson scrisse "ricerca della felicità" invece di "proprietà" come diritto fondamentale?</li>
+                    <li>Come si concilia l'affermazione "tutti gli uomini sono creati uguali" con la schiavitù del 1776?</li>
+                    <li>Qual è la differenza tra i diritti naturali di Jefferson e i diritti costituzionali moderni?</li>
+                    <li>In che modo la Dichiarazione ha influenzato la Costituzione italiana del 1948?</li>
+                    <li>Perché il principio del "consenso dei governati" è così importante per la democrazia?</li>
+                    <li>Quando è legittimo il "diritto di rivoluzione" in una società democratica?</li>
+                    <li>Come hanno interpretato la Dichiarazione i movimenti per i diritti civili?</li>
+                    <li>Quali sono le contraddizioni tra ideali jeffersoniani e realtà storica americana?</li>
+                    <li>Perché la Dichiarazione è considerata più importante della stessa Costituzione americana?</li>
+                    <li>Come si applicano oggi i principi di autogoverno e sovranità popolare?</li>
+                </ol>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

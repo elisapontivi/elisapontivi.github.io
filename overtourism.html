@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overtourism - When Tourism Becomes Too Much</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #90EE90;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .overtourism-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .overtourism-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .impacts-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .impact-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .impact-item h4 {
+            color: #c0392b;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .solutions-section h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .solution-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .solution-item h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .resources-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .resources-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .resource-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .resource-item:hover {
+            transform: translateX(5px);
+        }
+
+        .resource-item a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resource-item a:hover {
+            text-decoration: underline;
+        }
+
+        .resource-type {
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .overtourism-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Overtourism</h1>
+            <p>"When Tourism Becomes Too Much" - Sostenibilità e Responsabilità</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 2 - SVILUPPO SOSTENIBILE E TUTELA DEL PATRIMONIO</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare l'Overtourism in Educazione Civica?</h2>
+                <p>L'overtourism rappresenta una delle sfide più complesse della <strong>cittadinanza globale</strong> moderna, dove diritti individuali e collettivi entrano in tensione. Il suo studio è fondamentale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Diritti in conflitto:</strong> Diritto al turismo vs. diritto alla vivibilità delle comunità locali</li>
+                    <li><strong>Responsabilità individuale:</strong> Come le nostre scelte di viaggio impattano sugli altri</li>
+                    <li><strong>Sviluppo sostenibile:</strong> Equilibrio tra crescita economica e protezione ambientale</li>
+                    <li><strong>Partecipazione democratica:</strong> Come le comunità possono influenzare le decisioni turistiche</li>
+                    <li><strong>Giustizia sociale:</strong> Chi beneficia del turismo e chi ne paga i costi</li>
+                    <li><strong>Etica professionale:</strong> Responsabilità degli operatori turistici verso territorio e comunità</li>
+                    <li><strong>Cittadinanza attiva:</strong> Come essere turisti responsabili e consapevoli</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Tourism is like fire. It can cook your food and warm your house. But it can also burn down your house.
+                <br><small>- Local saying from overtouristed destinations</small>
+            </div>
+
+            <div class="story-section">
+                <h3>🏛️ Che cos'è l'Overtourism?</h3>
+                <p><strong>Overtourism</strong> si verifica quando il numero di visitatori in una destinazione supera la sua capacità di gestirli in modo sostenibile. Non è solo una questione di numeri, ma di <strong>impatto</strong>: quando il turismo inizia a degradare l'esperienza sia per i visitatori che per i residenti.</p>
+                
+                <p>Il fenomeno è esploso negli ultimi decenni per diverse ragioni:</p>
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Voli low-cost</strong> che hanno reso il viaggio accessibile a milioni di persone</li>
+                    <li><strong>Social media</strong> che promuovono destinazioni "instagrammabili"</li>
+                    <li><strong>Concentrazione</strong> di visitatori in pochi luoghi iconici</li>
+                    <li><strong>Turismo di massa</strong> senza controllo o pianificazione</li>
+                    <li><strong>Piattaforme come Airbnb</strong> che trasformano quartieri residenziali in zone turistiche</li>
+                </ul>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚠️ Gli Impatti dell'Overtourism</h3>
+                
+                <div class="impact-item">
+                    <h4>🏠 Impatto Sociale</h4>
+                    <p><strong>Gentrificazione:</strong> I residenti sono costretti a lasciare le loro case perché i prezzi aumentano. I quartieri perdono la loro identità culturale e diventano "musei a cielo aperto".</p>
+                </div>
+                
+                <div class="impact-item">
+                    <h4>🌱 Impatto Ambientale</h4>
+                    <p><strong>Degrado:</strong> Inquinamento, sovraffollamento, usura dei siti storici, produzione eccessiva di rifiuti, consumo insostenibile di risorse idriche ed energetiche.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <h4>💰 Impatto Economico</h4>
+                    <p><strong>Economia distorta:</strong> Dipendenza totale dal turismo, aumento dei prezzi per i residenti, perdita di attività locali tradizionali, lavori stagionali e precari.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <h4>🎭 Impatto Culturale</h4>
+                    <p><strong>Perdita di autenticità:</strong> La cultura locale viene "mercificata", le tradizioni diventano spettacolo per turisti, perdita delle lingue e costumi locali.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>📍 Case Studies: Quando il turismo diventa troppo</h3>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">🇮🇹 Venezia, Italia</h4>
+                    <p><strong>Il Problema:</strong> 50,000 residenti vs. 30 milioni di turisti all'anno. La città si sta svuotando: nel 1951 aveva 175,000 abitanti.</p>
+                    <p><strong>Le Soluzioni:</strong> Tassa di accesso, limitazione delle navi da crociera, controllo degli Airbnb.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">🇪🇸 Barcellona, Spagna</h4>
+                    <p><strong>Il Problema:</strong> I residenti protestano con slogan "Tourists go home". Aumento del 51% degli affitti in 10 anni nei quartieri turistici.</p>
+                    <p><strong>Le Soluzioni:</strong> Moratoria su nuovi hotel, limitazione licenze Airbnb, promozione di quartieri alternativi.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Soluzioni per un Turismo Sostenibile</h3>
+                
+                <div class="solution-item">
+                    <h4>🏛️ Governance e Pianificazione</h4>
+                    <p>Pianificazione turistica partecipata, coinvolgimento delle comunità locali, limiti ai visitatori, diversificazione dell'offerta turistica.</p>
+                </div>
+                
+                <div class="solution-item">
+                    <h4>💰 Strumenti Economici</h4>
+                    <p>Tasse turistiche, tariffe differenziate per stagione, incentivi per turismo responsabile, sostegno alle attività locali.</p>
+                </div>
+                
+                <div class="solution-item">
+                    <h4>🎓 Educazione e Sensibilizzazione</h4>
+                    <p>Campagne per turisti responsabili, educazione nelle scuole, formazione per operatori turistici, promozione del turismo lento.</p>
+                </div>
+                
+                <div class="solution-item">
+                    <h4>🌐 Tecnologia e Innovazione</h4>
+                    <p>App per gestire flussi turistici, sistemi di prenotazione intelligenti, monitoraggio in tempo reale, promozione di destinazioni alternative.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>What is the difference between tourism as a right and tourism as a responsibility?</li>
+                    <li>How can we balance economic benefits of tourism with environmental protection?</li>
+                    <li>What role should local communities play in tourism planning decisions?</li>
+                    <li>How does social media influence overtourism? What can be done about it?</li>
+                    <li>Should there be limits on the number of tourists allowed in certain destinations?</li>
+                    <li>How can young travelers become more responsible tourists?</li>
+                    <li>What is the relationship between overtourism and gentrification?</li>
+                    <li>How can technology help solve overtourism problems?</li>
+                    <li>What does "authentic" tourism mean in the modern world?</li>
+                    <li>How can tourism contribute to sustainable development goals?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Risorse Didattiche</h3>
+                <div class="resource-item">
+                    <span class="resource-type">LESSON PLAN</span>
+                    <a href="https://yourenglishpal.com/wp-content/uploads/2022/02/Your-English-Pal-ESL-Lesson-Plan-Overtourism-v2.pdf" target="_blank">Complete Overtourism Lesson Plan</a>
+                    <p>Lesson plan completo con attività, discussioni e materiali per studenti di inglese</p>
+                </div>
+                <div class="resource-item">
+                    <span class="resource-type">REPORT</span>
+                    <a href="https://smart-tourism-capital.ec.europa.eu/system/files/2024-02/GreenPioneer_BestPractices_2024.pdf" target="_blank">Green Pioneer Best Practices 2024</a>
+                    <p>Esempi europei di turismo sostenibile per analisi e presentazioni studentesche</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

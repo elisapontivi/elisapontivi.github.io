@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concentrazione della ricchezza — 1% vs 99%</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #90EE90; color: #333; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "✓"; color: #27ae60; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .overtourism-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .overtourism-quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .overtourism-quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52,152,219,0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .overtourism-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Concentrazione della ricchezza: 1% vs 99%</h1>
+            <p>Potere economico, disuguaglianze e democrazia</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — COSTITUZIONE • FISCO • LAVORO • GIUSTIZIA SOCIALE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Capire come si distribuisce la ricchezza aiuta a leggere <strong>diritti e doveri</strong> (artt. 2, 3, 53 Cost.), il rapporto tra <strong>crescita</strong> e <strong>equità</strong>, gli effetti su <strong>rappresentanza democratica</strong>, <strong>welfare</strong> e <strong>opportunità</strong> per giovani e famiglie.</p>
+                <ul>
+                    <li><strong>Misurare la disuguaglianza:</strong> quota del top 1%, ricchezza vs reddito, indici (Gini, Palma)</li>
+                    <li><strong>Fisco e regole del gioco:</strong> progressività, elusione, paradisi fiscali, antitrust</li>
+                    <li><strong>Impatto su lavoro e servizi:</strong> salari, contrattazione, scuola, sanità</li>
+                    <li><strong>Potere e responsabilità:</strong> lobbying, filantropia, impatto ambientale dello stile di vita</li>
+                </ul>
+            </div>
+
+            <div class="overtourism-quote">
+                Domanda-guida: quanta concentrazione di ricchezza è compatibile con merito, mobilità sociale e democrazia sostanziale?
+            </div>
+
+            <div class="story-section">
+                <h3>🏛 Che cosa intendiamo per “concentrazione della ricchezza”</h3>
+                <p>È la quota di patrimonio detenuta dalle fasce più ricche della popolazione rispetto al resto. Non coincide col reddito annuale: include <em>asset</em> (case, azioni, aziende), debiti e rendite. Si studia con indicatori che confrontano l’<strong>estremo superiore</strong> (top 1%, top 0,1%) con il resto.</p>
+                <p>Tra i fattori: ritorni del capitale, vantaggi fiscali e patrimoniali, posizioni dominanti nei mercati, eredità, reti e accesso al credito. La discussione pubblica riguarda gli effetti su economia reale, innovazione, qualità della democrazia e sostenibilità ambientale.</p>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚠ Impatti e questioni aperte</h3>
+
+                <div class="impact-item">
+                    <h4>🏦 Economia: investimenti o rendite?</h4>
+                    <p>Grandi patrimoni possono finanziare innovazione e rischio, ma la concentrazione eccessiva può favorire <em>rendite</em>, speculazione e potere di mercato che ostacolano concorrenza e salari.</p>
+                </div>
+
+                <div class="impact-item">
+                    <h4>🧾 Fisco ed equità</h4>
+                    <p>Struttura delle imposte, vantaggi su capital gains e patrimoni, pratiche di elusione incidono sul contributo effettivo dei più ricchi al finanziamento dei servizi pubblici.</p>
+                </div>
+
+                <div class="impact-item">
+                    <h4>🗳 Democrazia e potere</h4>
+                    <p>La concentrazione di ricchezza può tradursi in influenza politica, lobbying e cattura regolatoria, alterando la parità di voce tra cittadini.</p>
+                </div>
+
+                <div class="impact-item">
+                    <h4>🌍 Ambiente e stili di vita</h4>
+                    <p>Consumi di lusso ad alta intensità di emissioni (jet privati, turismo estremo) sollevano interrogativi di <em>giustizia climatica</em> e responsabilità.</p>
+                </div>
+
+                <div class="impact-item">
+                    <h4>🧬 Merito, eredità e mobilità</h4>
+                    <p>Quanto pesa l’<strong>eredità</strong> rispetto al “self-made”? La risposta incide su meritocrazia, ascensore sociale e consenso verso il sistema.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🔎 Focus tematici</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:10px;margin:20px 0;border-left:4px solid #e74c3c;">
+                    <h4 style="color:#c0392b;margin-bottom:10px;">Fisco dei super-ricchi</h4>
+                    <p>Il dibattito riguarda livelli effettivi di tassazione, differenze tra redditi da lavoro e da capitale, strumenti anti-elusione e cooperazione internazionale.</p>
+                </div>
+                <div style="background:#f8f9fa;padding:20px;border-radius:10px;margin:20px 0;border-left:4px solid #e74c3c;">
+                    <h4 style="color:#c0392b;margin-bottom:10px;">Monopoli &amp; Big Tech</h4>
+                    <p>Posizioni dominanti possono generare extra-profitti e barriere all’entrata. Antitrust e interoperabilità sono leve per riaprire i mercati.</p>
+                </div>
+                <div style="background:#f8f9fa;padding:20px;border-radius:10px;margin:20px 0;border-left:4px solid #e74c3c;">
+                    <h4 style="color:#c0392b;margin-bottom:10px;">Filantropia e sfera pubblica</h4>
+                    <p>La filantropia può innovare e colmare lacune ma solleva temi di accountability: chi decide priorità e a chi risponde?</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Strumenti di policy (cassetta degli attrezzi)</h3>
+                <div class="solution-item">
+                    <h4>🧾 Fisco progressivo e basi imponibili</h4>
+                    <p>Progressività effettiva, contrasto a elusione e paradisi fiscali, trasparenza sui beneficiari effettivi, cooperazione internazionale.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>⚖ Concorrenza e antitrust</h4>
+                    <p>Limitare concentrazioni, regolare piattaforme dominanti, tutelare lavoratori e fornitori nelle filiere.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>💼 Lavoro e mobilità sociale</h4>
+                    <p>Salari minimi adeguati, contrattazione, accesso a istruzione di qualità, borse e orientamento per ridurre divari di partenza.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📊 Dati e trasparenza</h4>
+                    <p>Migliorare statistiche su ricchezza e patrimoni, open data su agevolazioni e spesa pubblica, valutazione di impatto ex-ante ed ex-post.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🌱 Ambiente e responsabilità</h4>
+                    <p>Prezzo al carbonio, standard su trasporti di lusso ad alta impronta, incentivi a investimenti green.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione in classe</h3>
+                <ol>
+                    <li>Quali indicatori useresti per descrivere la concentrazione della ricchezza nel tuo Paese/comune?</li>
+                    <li>È possibile conciliare alta ricchezza privata con alta mobilità sociale? Come?</li>
+                    <li>Qual è il confine tra “merito” ed “eredità” nel successo economico?</li>
+                    <li>Che ruolo hanno fisco e antitrust nel ridurre disuguaglianze senza frenare innovazione?</li>
+                    <li>La filantropia può sostituire il welfare pubblico? Con quali rischi/benefici democratici?</li>
+                    <li>In che modo gli stili di vita dell’1% incidono sul clima rispetto al resto della popolazione?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">REPORT</span>
+                    <a href="https://www.oxfam.org/en/press-releases/billionaire-wealth-surges-2-trillion-2024-three-times-faster-year-while-number" target="_blank" rel="noopener">
+                        Oxfam — Billionaire wealth surges (2024)
+                    </a>
+                    <p>Comunicato sul trend della ricchezza miliardaria e il confronto con salari e tassazione.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.internazionale.it/magazine/2023/10/26/i-miliardari-non-pagano-le-tasse" target="_blank" rel="noopener">
+                        Internazionale — “I miliardari non pagano le tasse” (2023)
+                    </a>
+                    <p>Panoramica sul tema del prelievo effettivo ai vertici della distribuzione.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.ilpost.it/2023/06/28/turismo-estremo-miliardari/" target="_blank" rel="noopener">
+                        Il Post — “Il turismo estremo dei miliardari” (2023)
+                    </a>
+                    <p>Spunto per discutere su consumi di lusso, rischi e impatto simbolico/sociale.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">COMMENTO</span>
+                    <a href="https://www.internazionale.it/magazine/rebecca-solnit/2023/11/30/perche-i-miliardari-fanno-male-al-pianeta" target="_blank" rel="noopener">
+                        Rebecca Solnit su Internazionale — “Perché i miliardari fanno male al pianeta” (2023)
+                    </a>
+                    <p>Punto di vista critico su ricchezza estrema e crisi climatica.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">DATI</span>
+                    <a href="https://www.idealista.it/news/finanza/economia/2025/07/14/254117-la-maggior-parte-dei-miliardari-del-mondo-sono-nati-ricchi-o-si-sono-fatti-da-soli" target="_blank" rel="noopener">
+                        idealista/news — Nati ricchi o self-made? (2025)
+                    </a>
+                    <p>Elemento per ragionare su ereditarietà, “self-made” e narrativa del merito.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

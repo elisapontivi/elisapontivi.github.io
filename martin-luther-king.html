@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Luther King Jr. - I Have a Dream</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dream-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .dream-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .dream-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .video-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .principles-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .principles-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .principle-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .principle-item h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #e74c3c;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #e74c3c;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .dream-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇺🇸 Martin Luther King Jr.</h1>
+            <p>"I Have a Dream" - Il sogno di uguaglianza</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Martin Luther King Jr. in Educazione Civica?</h2>
+                <p>Martin Luther King Jr. rappresenta uno dei più grandi leader della <strong>democrazia partecipativa</strong> del XX secolo. Il suo studio è essenziale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Leadership democratica:</strong> Ha dimostrato come guidare un movimento sociale attraverso metodi pacifici e democratici</li>
+                    <li><strong>Resistenza non violenta:</strong> Ha applicato i principi gandhiani di satyagraha al contesto americano</li>
+                    <li><strong>Oratore e comunicatore:</strong> Ha mostrato il potere della parola nel mobilitare le coscienze e promuovere il cambiamento</li>
+                    <li><strong>Giustizia sociale:</strong> Ha lottato per una società più equa basata sui principi costituzionali di uguaglianza</li>
+                    <li><strong>Solidarietà interrazziale:</strong> Ha promosso l'unità tra diverse comunità etniche</li>
+                    <li><strong>Cittadinanza attiva:</strong> Ha coinvolto milioni di cittadini nella lotta per i diritti civili</li>
+                    <li><strong>Eredità universale:</strong> I suoi principi ispirano ancora oggi movimenti per la giustizia in tutto il mondo</li>
+                </ul>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 "I Have a Dream" - Il discorso che cambiò l'America</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/vP4iY1TtS3s" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Il discorso completo di Martin Luther King Jr. del 28 agosto 1963 a Washington D.C.</p>
+            </div>
+
+            <div class="dream-quote">
+                I have a dream that one day this nation will rise up and live out the true meaning of its creed: "We hold these truths to be self-evident, that all men are created equal."
+            </div>
+
+            <div class="story-section">
+                <h3>📖 Il pastore che sognava l'uguaglianza</h3>
+                <p>Martin Luther King Jr. (1929-1968) non era solo un attivista per i diritti civili, ma un <strong>pastore battista</strong>, un <strong>filosofo</strong> e un <strong>leader visionario</strong>. Cresciuto nel segregato Sud degli Stati Uniti, ha trasformato la sua esperienza personale di discriminazione in una missione universale per la giustizia.</p>
+                
+                <p>La sua filosofia si basava su tre pilastri fondamentali:</p>
+                <ul style="margin-left: 20px; color: #2c3e50;">
+                    <li><strong>Non-violenza attiva:</strong> Ispirata da Gandhi, credeva che il male si dovesse combattere con la forza dell'amore</li>
+                    <li><strong>Giustizia attraverso la legge:</strong> Lavorava per cambiare le leggi ingiuste attraverso metodi legali</li>
+                    <li><strong>Unità nella diversità:</strong> Immaginava un'America dove il colore della pelle non determinasse le opportunità</li>
+                </ul>
+            </div>
+
+            <div class="principles-section">
+                <h3>⭐ I principi di King per la cittadinanza attiva</h3>
+                
+                <div class="principle-item">
+                    <h4>1. Nonviolent Resistance (Resistenza Non-Violenta)</h4>
+                    <p>"Nonviolence is a powerful and just weapon, which cuts without wounding. It is a sword that heals."</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>2. Agape Love (Amore Incondizionato)</h4>
+                    <p>L'amore per l'umanità che va oltre le differenze personali - amare anche i propri nemici.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>3. Justice and Equality (Giustizia e Uguaglianza)</h4>
+                    <p>"Injustice anywhere is a threat to justice everywhere."</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>4. Moral Courage (Coraggio Morale)</h4>
+                    <p>Il coraggio di fare ciò che è giusto anche quando è difficile o pericoloso.</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h3>⏰ Momenti chiave della vita di MLK</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">1955</div>
+                    <div class="timeline-event">Guida il boicottaggio degli autobus di Montgomery dopo l'arresto di Rosa Parks</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1957</div>
+                    <div class="timeline-event">Fonda la Southern Christian Leadership Conference (SCLC)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1963</div>
+                    <div class="timeline-event">Letter from Birmingham Jail - manifesto della resistenza non-violenta</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">28 agosto 1963</div>
+                    <div class="timeline-event">Pronuncia il discorso "I Have a Dream" alla Marcia su Washington</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1964</div>
+                    <div class="timeline-event">Vince il Premio Nobel per la Pace a 35 anni</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">4 aprile 1968</div>
+                    <div class="timeline-event">Assassinato a Memphis, Tennessee, all'età di 39 anni</div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 MLK Biography - The Man Behind the Dream</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Oehry1JC9Rk" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Biografia completa di Martin Luther King Jr. - la sua vita, i suoi principi, la sua eredità</p>
+            </div>
+
+            <div class="story-section">
+                <h3>💌 Letter from Birmingham Jail - Il manifesto della disobbedienza civile</h3>
+                <p>Nel 1963, mentre era imprigionato per aver partecipato a proteste pacifiche, King scrisse una delle lettere più importanti del movimento per i diritti civili. In risposta ai critici che lo accusavano di essere un "estremista", King spiegò perché le leggi ingiuste devono essere disobbedite:</p>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0; font-style: italic;">
+                    "One has not only a legal but a moral responsibility to obey just laws. Conversely, one has a moral responsibility to disobey unjust laws."
+                </div>
+                
+                <p>Questa lettera è diventata un testo fondamentale per comprendere la <strong>disobbedienza civile</strong> e il rapporto tra <strong>legalità e moralità</strong> in una democrazia.</p>
+            </div>
+
+            <div class="video-container">
+                <h3>🎥 The Power of Nonviolence</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/YmpXNkzNZc0" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">Come Martin Luther King Jr. applicò i principi della non-violenza al movimento per i diritti civili</p>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>What does King mean when he says "Injustice anywhere is a threat to justice everywhere"?</li>
+                    <li>How can nonviolent resistance be more powerful than violence in creating social change?</li>
+                    <li>What would King think about social justice movements today? How would he use social media?</li>
+                    <li>How does the concept of "moral responsibility to disobey unjust laws" apply in modern democracies?</li>
+                    <li>What role does education play in fighting prejudice and discrimination?</li>
+                    <li>How can young people today practice King's principles of love, justice, and nonviolence?</li>
+                    <li>What is the difference between a protest and a revolution? Which approach did King choose and why?</li>
+                    <li>How does King's "Dream" connect to the American Constitution and Declaration of Independence?</li>
+                </ol>
+            </div>
+
+            <div class="story-section">
+                <h3>🌍 L'eredità universale di King</h3>
+                <p>Martin Luther King Jr. non ha influenzato solo l'America, ma movimenti per la giustizia in tutto il mondo. I suoi principi hanno ispirato:</p>
+                <ul style="margin-left: 20px; color: #2c3e50;">
+                    <li><strong>Nelson Mandela</strong> nella lotta contro l'apartheid in Sudafrica</li>
+                    <li><strong>Aung San Suu Kyi</strong> nella resistenza democratica in Myanmar</li>
+                    <li><strong>I movimenti per i diritti LGBTQ+</strong> per l'uguaglianza matrimoniale</li>
+                    <li><strong>Gli attivisti ambientalisti</strong> per la giustizia climatica</li>
+                    <li><strong>I movimenti studenteschi</strong> per l'educazione accessibile</li>
+                </ul>
+                
+                <p style="margin-top: 20px;">Il suo messaggio rimane attuale: <em>il cambiamento sociale duraturo avviene attraverso l'amore, la non-violenza e l'azione collettiva organizzata.</em></p>
+            </div>

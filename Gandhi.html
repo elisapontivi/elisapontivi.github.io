@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahatma Gandhi - Satyagraha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-line: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .nucleo-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .perche-civica h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perche-civica p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .perche-civica ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .perche-civica li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .perche-civica li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .story-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gandhi-quote {
+            background: linear-gradient(135deg, #ff9933, #138808);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(255, 153, 51, 0.3);
+        }
+
+        .gandhi-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            opacity: 0.5;
+        }
+
+        .gandhi-quote:after {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            right: 20px;
+            bottom: -30px;
+            opacity: 0.5;
+        }
+
+        .satyagraha-section {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .satyagraha-section h3 {
+            color: #d68910;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .principle-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #f39c12;
+        }
+
+        .principle-item h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .discussion-questions ol {
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .discussion-questions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .gandhi-quote {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇮🇳 Mahatma Gandhi</h1>
+            <p>Satyagraha - The Force of Truth</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO 1 - COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché studiare Mahatma Gandhi in Educazione Civica?</h2>
+                <p>Mahatma Gandhi rappresenta il modello più completo di <strong>leadership etica</strong> e <strong>resistenza non-violenta</strong> nella storia moderna. Il suo studio è fondamentale per l'educazione civica perché:</p>
+                <ul>
+                    <li><strong>Disobbedienza civile:</strong> Ha teorizzato e praticato la resistenza pacifica alle leggi ingiuste</li>
+                    <li><strong>Leadership morale:</strong> Ha guidato attraverso l'esempio personale e l'integrità</li>
+                    <li><strong>Giustizia sociale:</strong> Ha lottato contro ogni forma di discriminazione e oppressione</li>
+                    <li><strong>Autodeterminazione:</strong> Ha guidato l'India verso l'indipendenza dal colonialismo britannico</li>
+                    <li><strong>Unità nella diversità:</strong> Ha promosso la convivenza pacifica tra diverse religioni e caste</li>
+                    <li><strong>Semplicità e coerenza:</strong> Ha vissuto secondo i principi che predicava</li>
+                    <li><strong>Influenza globale:</strong> I suoi metodi hanno ispirato movimenti per i diritti civili in tutto il mondo</li>
+                </ul>
+            </div>
+
+            <div class="gandhi-quote">
+                Be the change you wish to see in the world
+            </div>
+
+            <div class="story-section">
+                <h3>🙏 Il piccolo avvocato che sfidò un impero</h3>
+                <p>Mohandas Karamchand Gandhi (1869-1948) nacque in una famiglia benestante del Gujarat. Il soprannome <strong>"Mahatma"</strong> (Grande Anima) gli fu dato dal popolo indiano per riconoscere la sua santità e saggezza.</p>
+                
+                <p>Gandhi studiò legge a Londra, ma fu in <strong>Sudafrica</strong> (1893-1915) che sviluppò la sua filosofia politica. Là sperimentò personalmente il razzismo: fu buttato fuori da un treno di prima classe nonostante avesse un biglietto regolare, solo perché era indiano.</p>
+                
+                <p>Questa esperienza lo trasformò da timido avvocato a leader del movimento per i diritti degli indiani in Sudafrica, dove sviluppò per la prima volta il concetto di <strong>Satyagraha</strong>.</p>
+            </div>
+
+            <div class="satyagraha-section">
+                <h3>☯️ Satyagraha: La forza della verità</h3>
+                <p><strong>Satyagraha</strong> significa letteralmente "insistere sulla verità" o "forza della verità". Non è semplice resistenza passiva, ma un'azione attiva e coraggiosa basata su principi morali chiari:</p>
+                
+                <div class="principle-item">
+                    <h4>1. Satya (Verità)</h4>
+                    <p>La verità è il fondamento di tutto. Un satyagrahi deve essere assolutamente onesto in parole e azioni.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>2. Ahimsa (Non-violenza)</h4>
+                    <p>Non solo evitare la violenza fisica, ma anche non nutrire odio nel cuore verso i propri avversari.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>3. Tapasya (Auto-sacrificio)</h4>
+                    <p>Essere pronti a soffrire per la causa giusta, accettando le conseguenze delle proprie azioni.</p>
+                </div>
+                
+                <div class="principle-item">
+                    <h4>4. Satyagraha come ultima risorsa</h4>
+                    <p>Prima di ricorrere alla disobbedienza civile, bisogna tentare ogni forma di dialogo e negoziazione.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🧂 The Salt March (1930) - Il cammino verso la libertà</h3>
+                <p>L'esempio più famoso di Satyagraha fu la <strong>Marcia del Sale</strong> del 1930. Gli inglesi avevano il monopolio del sale e tassavano pesantemente questo bene essenziale, rendendo illegale per gli indiani produrlo.</p>
+                
+                <p>Gandhi, all'età di 61 anni, camminò per <strong>385 chilometri</strong> fino al mare, seguito da migliaia di persone. Arrivato sulla spiaggia di Dandi, raccolse una manciata di sale naturale, violando simbolicamente la legge britannica.</p>
+                
+                <p>Questo gesto semplice ma potente scatenò un movimento di disobbedienza civile in tutto il paese. <strong>60,000 indiani furono arrestati</strong>, incluso Gandhi, ma la loro dignità nella sofferenza toccò la coscienza mondiale.</p>
+                
+                <div style="background: #f8f9fa; border-left: 4px solid #ff9933; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0; font-style: italic;">
+                    <p><strong>Gandhi spiegò la strategia:</strong></p>
+                    <p>"First they ignore you, then they laugh at you, then they fight you, then you win."</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🕊️ Il prezzo della libertà</h3>
+                <p>L'India ottenne l'indipendenza il 15 agosto 1947, ma Gandhi pagò un prezzo personale altissimo. La divisione dell'India in due nazioni (India e Pakistan) causò violenze interreligiose che lo addolorarono profondamente.</p>
+                
+                <p>Gandhi si dedicò instancabilmente alla riconciliazione tra indù e musulmani. <strong>Il 30 gennaio 1948</strong>, mentre si recava a una preghiera pubblica, fu assassinato da un estremista indù che lo considerava troppo favorevole ai musulmani.</p>
+                
+                <p>Le sue ultime parole furono <strong>"Hey Ram"</strong> (Oh Dio) - un messaggio di perdono anche verso il suo assassino.</p>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la riflessione e discussione in classe</h3>
+                <ol>
+                    <li>How does Gandhi's concept of Satyagraha differ from passive resistance?</li>
+                    <li>What does "Be the change you wish to see in the world" mean in practice?</li>
+                    <li>How can non-violence be more powerful than violence in creating social change?</li>
+                    <li>What role did personal sacrifice play in Gandhi's leadership?</li>
+                    <li>How did the Salt March demonstrate the power of symbolic action?</li>
+                    <li>What can we learn from Gandhi about leadership in diverse, multi-religious societies?</li>
+                    <li>How do Gandhi's principles apply to modern conflicts and social movements?</li>
+                    <li>What does Gandhi's assassination teach us about the challenges of promoting peace?</li>
+                </ol>
+            </div>
+
+            <div class="story-section">
+                <h3>🌍 L'eredità globale di Gandhi</h3>
+                <p>I metodi di Gandhi hanno influenzato leader e movimenti in tutto il mondo:</p>
+                
+                <ul style="margin-left: 20px; color: #2c3e50; margin-top: 15px;">
+                    <li><strong>Martin Luther King Jr.</strong> applicò la non-violenza al movimento per i diritti civili americani</li>
+                    <li><strong>Nelson Mandela</strong> si ispirò a Gandhi nella lotta contro l'apartheid</li>
+                    <li><strong>César Chávez</strong> usò metodi gandhiani per i diritti dei lavoratori agricoli</li>
+                    <li><strong>Il Dalai Lama</strong> promuove la resistenza non-violenta per il Tibet</li>
+                    <li><strong>Movimenti ambientalisti</strong> moderni usano la disobbedienza civile per la giustizia climatica</li>
+                </ul>
+                
+                <p style="margin-top: 20px;"><strong>Gandhi ha dimostrato che è possibile sconfiggere l'ingiustizia senza diventare ingiusti, e che la vera forza viene dalla verità e dall'amore, non dalla violenza.</strong></p>
+                
+                <div style="background: #e8f5e8; border-left: 4px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0;">
+                    <p><strong>La sua eredità per i giovani:</strong> Gandhi dimostra che ogni persona, indipendentemente dalla sua origine, può diventare una forza per il cambiamento positivo se ha il coraggio di vivere secondo i propri principi morali.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>
