@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equità, inclusione e genere nello sport contemporaneo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; background: rgba(255,255,255,0.96); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.12); overflow: hidden; }
+    .header { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 40px; text-align: center; }
+    .header h1 { font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .header p { font-size: 1.15rem; opacity: 0.9; }
+    .nucleo-badge { background: #90EE90; color: #333; padding: 8px 15px; border-radius: 20px; font-size: .9rem; font-weight: 700; display: inline-block; margin: 18px 0; }
+
+    .content { padding: 40px; }
+
+    .why-civics { background: linear-gradient(135deg, #e8f5e8, #f0f8f0); border-left: 6px solid #27ae60; padding: 28px; border-radius: 0 16px 16px 0; box-shadow: 0 5px 16px rgba(0,0,0,0.08); margin: 28px 0; }
+    .why-civics h2 { color: #27ae60; margin-bottom: 14px; font-size: 1.8rem; }
+    .why-civics p, .why-civics li { color: #263238; font-size: 1.05rem; }
+    .why-civics ul { list-style: none; padding-left: 0; }
+    .why-civics li { padding: 8px 0 8px 30px; position: relative; }
+    .why-civics li:before { content: "✓"; position: absolute; left: 0; color: #27ae60; font-weight: 800; }
+
+    .section { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.07); margin: 28px 0; }
+    .section h3 { color: #2c3e50; font-size: 1.55rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .section h4 { color: #37474f; margin: 14px 0 6px; }
+
+    .callout { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-left: 5px solid #f39c12; padding: 20px; border-radius: 0 14px 14px 0; margin: 16px 0; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #eceff1; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .card h4 { margin-bottom: 8px; color: #263238; }
+
+    .quote { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; padding: 26px; border-radius: 14px; font-style: italic; font-size: 1.2rem; text-align: center; margin: 18px 0; position: relative; box-shadow: 0 8px 20px rgba(231, 76, 60, 0.25); }
+    .quote small { display: block; margin-top: 6px; opacity: 0.9; font-style: normal; }
+
+    .resources { background: #f8f9fa; border-radius: 16px; padding: 26px; }
+    .resources h3 { color: #263238; margin-bottom: 12px; }
+    .resource-item { background: #fff; border-radius: 10px; padding: 14px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #2a5298; }
+    .resource-link { color: #1565c0; text-decoration: none; font-weight: 600; }
+    .resource-link:hover { text-decoration: underline; }
+
+    .back-btn { background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none; display: inline-block; margin: 20px 0; }
+    .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+    /* Mini attività: dibattito strutturato */
+    .debate { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-left: 6px solid #2e7d32; padding: 28px; border-radius: 0 16px 16px 0; }
+    .debate h3 { color: #2e7d32; margin-bottom: 10px; }
+    .debate ul { margin-left: 18px; }
+    .badge { display:inline-block; padding: 4px 10px; border-radius: 999px; font-size: .8rem; background:#3498db; color:#fff; margin-right:6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚖ Equità, inclusione e genere nello sport</h1>
+      <p>Diritti, regole e partecipazione nello sport contemporaneo</p>
+      <div class="nucleo-badge">NUCLEO TEMATICO — COSTITUZIONE, DIRITTO, LEGALITÀ E SOLIDARIETÀ</div>
+    </div>
+
+    <div class="content">
+      <section class="why-civics">
+        <h2>🎯 Perché affrontarlo in Educazione Civica?</h2>
+        <p>Lo sport è un terreno dove si incontrano <strong>diritti fondamentali</strong> (non discriminazione, salute, partecipazione) e <strong>regole di equità competitiva</strong>. Discutere di genere e inclusione significa sviluppare <strong>competenze civiche</strong>: argomentare in modo informato, rispettoso e basato su fonti.</p>
+        <ul>
+          <li><strong>Costituzione:</strong> uguaglianza formale e sostanziale, tutela della salute, contrasto alle discriminazioni.</li>
+          <li><strong>Etica sportiva:</strong> fair play, sicurezza e integrità delle competizioni.</li>
+          <li><strong>Cittadinanza digitale:</strong> saper leggere media, social e studi scientifici senza cadere in polarizzazioni.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h3>🧭 Lessico di base</h3>
+        <div class="grid">
+          <div class="card"><h4>Sesso biologico</h4><p>Caratteristiche biologiche (cromosomi, ormoni, anatomia) che contribuiscono alla classificazione alla nascita.</p></div>
+          <div class="card"><h4>Identità di genere</h4><p>Vissuto personale del proprio genere. Può coincidere o meno con il sesso assegnato alla nascita.</p></div>
+          <div class="card"><h4>Equità competitiva</h4><p>Condizioni di gara che riducano vantaggi indebiti e tutelino la sicurezza di tutte e tutti.</p></div>
+          <div class="card"><h4>Inclusione</h4><p>Partecipazione significativa di tutte le persone, con adattamenti proporzionati e non discriminatori.</p></div>
+        </div>
+        <div class="callout"><strong>Nota:</strong> Le <span class="badge">policy sportive</span> variano tra federazioni e nel tempo. È importante leggere <em>cosa</em> dicono, <em>perché</em> e <em>con quali evidenze</em>.</div>
+      </section>
+
+      <section class="section">
+        <h3>🎬 Media per avviare il confronto</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Video (YouTube)</h4>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
+              <iframe src="https://www.youtube.com/embed/f9yXJ9r3CgI" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+            </div>
+            <p style="margin-top:8px; font-size:.95rem; color:#455a64;">Ascolto/visione guidata: annota claim, prove citate, punti controversi.</p>
+          </div>
+          <div class="card">
+            <h4>Articoli e commenti</h4>
+            <ul style="margin-left:18px;">
+              <li><a class="resource-link" target="_blank" href="https://www.wired.it/article/olimpiadi-persone-transgender-gare/">Wired — Olimpiadi e atlete/i transgender</a></li>
+              <li><a class="resource-link" target="_blank" href="https://www.vanityfair.it/article/le-atlete-transgender-sono-svantaggiate-rispetto-alle-donne-per-nascita-lo-dice-un-nuovo-studio">Vanity Fair — Nuovo studio sulle atlete trans</a></li>
+              <li><a class="resource-link" target="_blank" href="https://www.ilfattoquotidiano.it/2025/02/06/donald-trump-ordine-esecutivo-atlete-transgender-sport-femminile-notizie-oggi-caso-khelif-perche-non-centra-nulla/7866648/">il Fatto Quotidiano — Policy e dibattito USA</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote">“Parlare di sport e genere significa tenere insieme <em>inclusione</em> ed <em>equità</em>: obiettivi complementari, non nemici.”<small>Linee guida per un confronto rispettoso</small></div>
+      </section>
+
+      <section class="section">
+        <h3>🔎 Che cosa valutare quando leggiamo le fonti</h3>
+        <div class="grid">
+          <div class="card"><h4>Metodi</h4><p>Come è stato condotto lo studio? campione, durata, indicatori (forza, resistenza, infortuni...).</p></div>
+          <div class="card"><h4>Generalizzazioni</h4><p>Un risultato vale per tutte le discipline? per tutte le età e i livelli (scuola, agonismo, élite)?</p></div>
+          <div class="card"><h4>Policy</h4><p>La regola persegue equità e sicurezza? prevede percorsi individuali e tutele da abusi?</p></div>
+          <div class="card"><h4>Impatto sociale</h4><p>Come incidono le scelte su partecipazione femminile, benessere, inclusione scolastica?</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>📌 Punti di discussione</h3>
+        <ol style="margin-left: 18px; color:#263238;">
+          <li>Qual è il confine tra inclusione e vantaggi competitivi indebiti? Chi lo definisce e con quali prove?</li>
+          <li>Le regole dovrebbero essere uguali per tutti gli sport o differenziate per disciplina e livello?</li>
+          <li>Quali tutele servono contro abusi, molestie e hate speech nel dibattito pubblico e a scuola?</li>
+          <li>È utile sperimentare categorie alternative (open/miste) accanto alle categorie femminili e maschili?</li>
+          <li>Come dialogano scienza, diritti e decisioni politiche nello sport?</li>
+        </ol>
+      </section>
+
+      <section class="debate">
+        <h3>💬 Attività: Dibattito strutturato in classe (Fishbowl)</h3>
+        <p><span class="badge">Obiettivo:</span> esercitare argomentazione basata su fonti, ascolto attivo e rispetto.</p>
+        <ul>
+          <li><strong>Ruoli:</strong> Proposta A (regole restrittive), Proposta B (inclusione con valutazioni caso per caso), Moderatori, Fact-checkers.</li>
+          <li><strong>Materiali:</strong> articoli linkati, appunti dal video, scheda di valutazione (chiarezza, uso di prove, rispetto dei turni).</li>
+          <li><strong>Output:</strong> redigere in gruppo 3 raccomandazioni per una scuola/associazione sportiva locale.</li>
+        </ul>
+      </section>
+
+      <section class="resources">
+        <h3>📚 Fonti e risorse</h3>
+        <div class="resource-item"><a class="resource-link" target="_blank" href="https://www.wired.it/article/olimpiadi-persone-transgender-gare/">Wired — Olimpiadi e persone transgender nello sport</a></div>
+        <div class="resource-item"><a class="resource-link" target="_blank" href="https://www.youtube.com/watch?v=f9yXJ9r3CgI">YouTube — Video di approfondimento</a></div>
+        <div class="resource-item"><a class="resource-link" target="_blank" href="https://www.vanityfair.it/article/le-atlete-transgender-sono-svantaggiate-rispetto-alle-donne-per-nascita-lo-dice-un-nuovo-studio">Vanity Fair — Studio su atlete transgender</a></div>
+        <div class="resource-item"><a class="resource-link" target="_blank" href="https://www.ilfattoquotidiano.it/2025/02/06/donald-trump-ordine-esecutivo-atlete-transgender-sport-femminile-notizie-oggi-caso-khelif-perche-non-centra-nulla/7866648/">il Fatto Quotidiano — Ordine esecutivo e dibattito</a></div>
+      </section>
+
+      <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+    </div>
+  </div>
+</body>
+</html>

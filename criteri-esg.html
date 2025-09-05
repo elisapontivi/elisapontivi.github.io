@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESG e Sostenibilità Aziendale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #9c27b0 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #9c27b0; color: white; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #9c27b0; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "📊"; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section, .progetto-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3, .progetto-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+        }
+        .quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .timeline {
+            border-left: 3px solid #9c27b0;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+        }
+        .timeline-item h4 { color: #7b1fa2; margin-bottom: 5px; }
+
+        .esg-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .esg-item {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .esg-environmental { background: #c8e6c9; }
+        .esg-social { background: #bbdefb; }
+        .esg-governance { background: #ffe0b2; }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #9c27b0;
+        }
+        .impact-item h4 { color: #7b1fa2; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .progetto-section {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+        }
+        .progetto-section h3 { color: #7b1fa2; }
+        .progetto-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #9c27b0;
+        }
+        .progetto-item h4 { color: #7b1fa2; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .quote { font-size: 1.1rem; padding: 20px; }
+            .esg-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 ESG e Sostenibilità Aziendale</h1>
+            <p>Environmental, Social, Governance: i criteri per investimenti responsabili</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — AGENDA 2030 • INVESTIMENTI SOSTENIBILI • GOVERNANCE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Gli ESG rappresentano l'evoluzione della <strong>responsabilità sociale d'impresa</strong> verso un approccio sistematico e misurabile. Comprendere questi criteri è fondamentale per valutare l'impatto delle aziende su <strong>ambiente</strong>, <strong>società</strong> e <strong>governance democratica</strong>.</p>
+                <ul>
+                    <li><strong>Ambiente:</strong> cambiamento climatico, inquinamento, gestione delle risorse</li>
+                    <li><strong>Società:</strong> diritti umani, condizioni di lavoro, impatto sulle comunità</li>
+                    <li><strong>Governance:</strong> trasparenza, etica, strutture decisionali democratiche</li>
+                    <li><strong>Investimenti responsabili:</strong> orientare i capitali verso la sostenibilità</li>
+                </ul>
+            </div>
+
+            <div class="quote">
+                Domanda-guida: come possono gli investitori e i consumatori orientare le scelte aziendali verso la sostenibilità? Quali strumenti di misurazione garantiscono trasparenza e accountability?
+            </div>
+
+            <div class="story-section">
+                <h3>📖 Storia della Sostenibilità</h3>
+                
+                <div style="margin: 20px 0; padding: 20px; background: #fce4ec; border-radius: 10px; border-left: 4px solid #9c27b0;">
+                    <h4 style="color: #7b1fa2; margin-bottom: 15px;">🔤 Etimologia di "Sostenibilità"</h4>
+                    <p><strong>Dal latino "sustinēre":</strong> "sus" (sotto) + "tenere" (tenere) = "tenere su, sostenere, supportare"</p>
+                    <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong style="color: #7b1fa2;">Definizione moderna:</strong> <em>"Lo sviluppo sostenibile è quello che soddisfa i bisogni del presente senza compromettere la capacità delle future generazioni di soddisfare i propri bisogni."</em> (Rapporto Brundtland, 1987)
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>1953 - Bowen</h4>
+                        <p>H.R. Bowen pubblica "Social Responsibilities of the Businessman" - primo studio sistematico sulla responsabilità sociale d'impresa</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>1972 - Club di Roma</h4>
+                        <p>Rapporto "I Limiti dello Sviluppo" e Dichiarazione di Stoccolma - prima conferenza ONU sull'ambiente umano</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>1987 - Rapporto Brundtland</h4>
+                        <p>"Our Common Future" definisce ufficialmente lo sviluppo sostenibile</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2015 - Agenda 2030</h4>
+                        <p>17 Obiettivi di Sviluppo Sostenibile (SDGs) e Accordo di Parigi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>🔍 Cosa sono gli ESG</h3>
+                
+                <div class="esg-grid">
+                    <div class="esg-item esg-environmental">
+                        <strong style="color: #2e7d32;">🌍 ENVIRONMENTAL</strong><br>
+                        Cambiamento climatico, inquinamento, biodiversità, efficienza energetica, gestione rifiuti
+                    </div>
+                    <div class="esg-item esg-social">
+                        <strong style="color: #1976d2;">👥 SOCIAL</strong><br>
+                        Diritti umani, condizioni lavorative, diversità e inclusione, impatto sulla comunità
+                    </div>
+                    <div class="esg-item esg-governance">
+                        <strong style="color: #f57c00;">⚖️ GOVERNANCE</strong><br>
+                        Trasparenza, etica aziendale, struttura del CdA, politiche anticorruzione
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <h4>📈 ESG come criterio di investimento</h4>
+                    <p>Gli ESG rappresentano i criteri che investitori, banche e fondi utilizzano per valutare la sostenibilità e l'impatto etico degli investimenti in un'azienda, orientando i capitali verso imprese responsabili.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>📊 Misurazione e rating</h4>
+                    <p>Agenzie specializzate (MSCI, Sustainalytics, Refinitiv) assegnano rating ESG basati su dati quantitativi e qualitativi per valutare le performance di sostenibilità.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>💰 Finanza sostenibile</h4>
+                    <p>Green bonds, social bonds, fondi ESG: strumenti finanziari che convogliano investimenti verso progetti con impatto positivo su ambiente e società.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>🎯 Applicazioni pratiche degli ESG</h3>
+                <div class="solution-item">
+                    <h4>🏭 Settore manifatturiero</h4>
+                    <p>Riduzione emissioni CO2, economia circolare, condizioni di lavoro sicure, supply chain responsabile, governance trasparente.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏦 Settore finanziario</h4>
+                    <p>Prestiti verdi, esclusione settori dannosi, inclusione finanziaria, trasparenza dei prodotti, strutture di governance indipendenti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🛒 Retail e consumi</h4>
+                    <p>Packaging sostenibile, filiere etiche, diversità nei team, trasparenza sui prezzi, coinvolgimento stakeholder.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>💻 Tecnologia</h4>
+                    <p>Data center green, privacy e sicurezza dati, digital divide, etica dell'intelligenza artificiale, board diversificati.</p>
+                </div>
+            </div>
+
+            <div class="progetto-section">
+                <h3>🎯 Progetto 1: SDGs Aziendali</h3>
+                
+                <div class="progetto-item">
+                    <h4>📋 Obiettivo</h4>
+                    <p>Identificare e analizzare gli Obiettivi di Sviluppo Sostenibile (SDGs) che possono essere concretamente perseguiti da un'azienda, sviluppando proposte operative specifiche.</p>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>🚀 Metodologia</h4>
+                    <p><strong>Ogni gruppo sceglie un settore e identifica 4-5 SDGs prioritari:</strong></p>
+                    <ul style="font-size: 14px; margin: 8px 0;">
+                        <li><strong>Selezione SDGs:</strong> Quali obiettivi 2030 può perseguire un'azienda del vostro settore?</li>
+                        <li><strong>Azioni concrete:</strong> Cosa può fare praticamente l'azienda per contribuire?</li>
+                        <li><strong>Indicatori:</strong> Come misurare il progresso verso questi obiettivi?</li>
+                        <li><strong>Timeline:</strong> Obiettivi a breve (2025) e medio termine (2030)</li>
+                    </ul>
+                    <p style="font-size: 14px; margin-top: 10px; color: #7b1fa2;"><strong>Presentazione:</strong> 8 minuti per gruppo + discussione su fattibilità e impatto</p>
+                </div>
+            </div>
+
+            <div class="progetto-section">
+                <h3>📑 Progetto 2: Analisi Bilanci Integrati</h3>
+                
+                <div class="progetto-item">
+                    <h4>📊 Bilanci integrati disponibili</h4>
+                    <div style="font-size: 14px; line-height: 1.8; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        
+                        <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.benettongroup.com/site/assets/files/7902/it-2023-bilancio_integrato_01.pdf" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>Benetton Group 2023</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Moda e sostenibilità | Focus: Strategia ESG, materiali sostenibili, catena di fornitura responsabile</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.leonardo.com/documents/15646808/28608810/Bilancio+Integrato+2024.pdf?t=1741973485310" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>Leonardo 2024</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Aerospazio e difesa | Focus: Innovazione tecnologica, sicurezza, impatti ambientali</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/it/sustainability/sustainability-reporting/2023/UniCredit_Bilancio_Integrato_2023.pdf" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>UniCredit 2023</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Bancario | Focus: Finanza sostenibile, inclusione finanziaria, governance</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.fsitaliane.it/content/dam/fsitaliane/Documents/investor-relations/2025_07_02_Report_Integrato_2024.pdf" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>FS Italiane 2024</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Trasporti ferroviari | Focus: Mobilità sostenibile, efficienza energetica, accessibilità</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.generali.com/doc/jcr:259c5d6e-46f7-4a43-9512-58e5dcbd2a56/Relazione%20Annuale%20Integrata%20e%20Bilancio%20Consolidato%202024_Gruppo%20Generali_finale_interattiva.pdf/lang:it/Relazione_Annuale_Integrata_e_Bilancio_Consolidato_2024_Gruppo_Generali_finale_interattiva.pdf" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>Generali 2024</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Assicurazioni | Focus: Gestione rischi climatici, investimenti responsabili, protezione sociale</span>
+                        </div>
+                        
+                        <div style="padding: 10px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            📄 <a href="https://www.juventus.com/it/sostenibilita/i-nostri-report" target="_blank" style="color: #9c27b0; font-weight: bold;"><strong>Juventus FC - Report Sostenibilità</strong></a><br>
+                            <span style="color: #666; font-size: 13px;">Settore: Sport e intrattenimento | Focus: Impatto sociale, sviluppo giovanile, comunità locali</span>
+                        </div>
+                        
+                        <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 6px; border-left: 4px solid #2196f3;">
+                            <strong style="color: #1976d2;">💡 Suggerimento:</strong> 
+                            <span style="color: #555; font-size: 13px;">I documenti sono in formato PDF. Per l'analisi, concentratevi su: Executive Summary, Strategia ESG, KPI di sostenibilità, Obiettivi futuri e Collegamenti agli SDGs.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>🔍 Analisi richiesta</h4>
+                    <p><strong>Ogni gruppo analizza un bilancio integrato e presenta:</strong></p>
+                    <ol style="font-size: 14px; margin: 8px 0;">
+                        <li><strong>Strategia ESG dell'azienda:</strong> Quali sono le priorità dichiarate?</li>
+                        <li><strong>Azioni concrete realizzate:</strong> Progetti, investimenti, risultati raggiunti</li>
+                        <li><strong>Collegamento agli SDGs:</strong> Quali obiettivi 2030 l'azienda sta perseguendo?</li>
+                        <li><strong>Metriche e KPI:</strong> Come misura i progressi in sostenibilità?</li>
+                        <li><strong>Obiettivi futuri:</strong> Target 2025-2030 e roadmap</li>
+                        <li><strong>Valutazione critica:</strong> Sostanza reale o possibile greenwashing?</li>
+                    </ol>
+                    <div style="background-color: #fff9c4; padding: 10px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ff9800;">
+                        <strong style="color: #e65100;">Presentazione finale:</strong> <span style="font-size: 13px; color: #ef6c00;">10-12 minuti + confronto tra i diversi approcci settoriali alla sostenibilità</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Gli ESG possono davvero orientare le scelte aziendali o sono solo un esercizio di marketing?</li>
+                    <li>Come bilanciare profitto e sostenibilità nell'economia di mercato?</li>
+                    <li>Qual è il ruolo degli investitori nel promuovere la sostenibilità aziendale?</li>
+                    <li>I rating ESG sono sufficientemente standardizzati e affidabili?</li>
+                    <li>Come possono le PMI implementare criteri ESG senza risorse eccessive?</li>
+                    <li>Gli SDGs sono realistici o troppo ambiziosi per essere raggiunti entro il 2030?</li>
+                    <li>Quale ruolo hanno i consumatori nel premiare le aziende sostenibili?</li>
+                    <li>Come evitare che la sostenibilità diventi un privilegio delle aziende più ricche?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">GUIDA</span>
+                    <a href="https://www.esg360.it/environmental/esg-tutto-quello-che-ce-da-sapere-per-orientarsi-su-environmental-social-governance/" target="_blank" rel="noopener">
+                        ESG360 — "Guida completa agli ESG"
+                    </a>
+                    <p>Panoramica dettagliata sui criteri Environmental, Social and Governance per investimenti responsabili.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">AGENDA 2030</span>
+                    <a href="https://unric.org/it/agenda-2030/" target="_blank" rel="noopener">
+                        ONU — "Agenda 2030 e Obiettivi di Sviluppo Sostenibile"
+                    </a>
+                    <p>I 17 SDGs delle Nazioni Unite con target specifici e indicatori di progresso.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">PIATTAFORMA</span>
+                    <a href="https://www.msci.com/our-solutions/esg-investing" target="_blank" rel="noopener">
+                        MSCI ESG Research
+                    </a>
+                    <p>Metodologie e database per rating ESG utilizzati da investitori istituzionali globali.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RICERCA</span>
+                    <a href="https://www.sustainalytics.com/" target="_blank" rel="noopener">
+                        Sustainalytics — ESG Risk Ratings
+                    </a>
+                    <p>Agenzia di rating ESG che valuta i rischi di sostenibilità delle aziende pubbliche.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">REGOLAMENTAZIONE</span>
+                    <a href="https://ec.europa.eu/info/business-economy-euro/banking-and-finance/sustainable-finance_en" target="_blank" rel="noopener">
+                        Commissione Europea — Finanza Sostenibile
+                    </a>
+                    <p>Regolamentazione europea su disclosure di sostenibilità e tassonomia verde.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">BILANCI</span>
+                    <p><strong>Bilanci di sostenibilità delle aziende italiane</strong></p>
+
+ <h4 style="color: #6a1b9a; margin-top: 0;">📊 BILANCI INTEGRATI DISPONIBILI</h4>
+                                <div style="font-size: 14px; line-height: 1.6;">
+                                    <div>📄 <a href="https://www.benettongroup.com/site/assets/files/7902/it-2023-bilancio_integrato_01.pdf" target="_blank" style="color: #9c27b0;"><strong>Benetton Group 2023</strong></a> - Moda e sostenibilità</div>
+                                    <div>📄 <a href="https://www.leonardo.com/documents/15646808/28608810/Bilancio+Integrato+2024.pdf?t=1741973485310" target="_blank" style="color: #9c27b0;"><strong>Leonardo 2024</strong></a> - Aerospazio e difesa</div>
+                                    <div>📄 <a href="https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/it/sustainability/sustainability-reporting/2023/UniCredit_Bilancio_Integrato_2023.pdf" target="_blank" style="color: #9c27b0;"><strong>UniCredit 2023</strong></a> - Settore bancario</div>
+                                    <div>📄 <a href="https://www.fsitaliane.it/content/dam/fsitaliane/Documents/investor-relations/2025_07_02_Report_Integrato_2024.pdf" target="_blank" style="color: #9c27b0;"><strong>FS Italiane 2024</strong></a> - Trasporti ferroviari</div>
+                                    <div>📄 <a href="https://www.generali.com/doc/jcr:259c5d6e-46f7-4a43-9512-58e5dcbd2a56/Relazione%20Annuale%20Integrata%20e%20Bilancio%20Consolidato%202024_Gruppo%20Generali_finale_interattiva.pdf/lang:it/Relazione_Annuale_Integrata_e_Bilancio_Consolidato_2024_Gruppo_Generali_finale_interattiva.pdf" target="_blank" style="color: #9c27b0;"><strong>Generali 2024</strong></a> - Assicurazioni</div>
+                                    <div>📄 <a href="https://www.juventus.com/it/sostenibilita/i-nostri-report" target="_blank" style="color: #9c27b0;"><strong>Juventus FC</strong></a> - Sport e intrattenimento</div>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px;">
+
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

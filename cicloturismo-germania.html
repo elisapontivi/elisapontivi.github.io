@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicloturismo in Germania: modello europeo di mobilità sostenibile</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #16a085 0%, #2ecc71 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #f1c40f; color: #333; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f6f0, #f0f8f4);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #27ae60; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "🚴"; color: #27ae60; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .ciclovie-quote {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        .ciclovie-quote:before {
+            content: '🚲'; font-size: 3rem; position: absolute; left: 20px; top: 15px; opacity: 0.7;
+        }
+        .ciclovie-quote:after {
+            content: '🌍'; font-size: 3rem; position: absolute; right: 20px; bottom: 15px; opacity: 0.7;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #e8f8f5, #d5f4e6);
+            border-left: 5px solid #2ecc71;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #27ae60;
+        }
+        .impact-item h4 { color: #27ae60; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid #2196f3;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #2196f3;
+        }
+        .solution-item h4 { color: #1976d2; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 5px solid #ff9800;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #2196f3; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #2196f3; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .ciclovia-highlight {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white; padding: 20px; border-radius: 12px; margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        .ciclovia-highlight h4 { margin-bottom: 10px; font-size: 1.3rem; }
+
+        .back-btn {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .ciclovie-quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚴‍♂️ Cicloturismo in Germania: modello europeo di mobilità sostenibile</h1>
+            <p>Infrastrutture, economia green e qualità della vita attraverso le due ruote</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — AMBIENTE • MOBILITÀ SOSTENIBILE • CITTADINANZA EUROPEA</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il cicloturismo tedesco rappresenta un <strong>modello di cittadinanza sostenibile</strong> che integra ambiente, economia e salute pubblica. Studiarlo aiuta a comprendere come le <strong>politiche di mobilità</strong> influenzino sviluppo economico locale e tutela ambientale.</p>
+                <ul>
+                    <li><strong>Sostenibilità ambientale:</strong> riduzione CO₂, protezione paesaggi, turismo rispettoso</li>
+                    <li><strong>Sviluppo economico locale:</strong> turismo diffuso, microimprese, valorizzazione borghi</li>
+                    <li><strong>Salute e qualità della vita:</strong> attività fisica, benessere mentale, socialità</li>
+                    <li><strong>Cittadinanza europea:</strong> libertà di movimento, patrimoni condivisi, cooperazione transfrontaliera</li>
+                </ul>
+            </div>
+
+            <div class="ciclovie-quote">
+                La Germania ha trasformato la bicicletta da mezzo di trasporto a strumento di sviluppo sostenibile: 70.000 km di ciclovie per 4 miliardi di euro di fatturato annuo
+            </div>
+
+            <div class="story-section">
+                <h3>🗺 Il sistema cicloturistico tedesco</h3>
+                <p>Con oltre <strong>70.000 chilometri di ciclovie segnalate</strong> e una rete di servizi dedicati, la Germania è leader mondiale nel cicloturismo. Il modello si basa su <strong>pianificazione integrata</strong> tra trasporti, turismo e protezione ambientale.</p>
+                
+                <div class="ciclovia-highlight">
+                    <h4>🌊 Elberadweg - La più amata d'Europa</h4>
+                    <p>1.300 km dal confine ceco al Mare del Nord: attraversa Dresda, vigneti sassoni e città medievali. Un esempio di come valorizzare patrimonio culturale e paesaggistico attraverso la mobilità lenta.</p>
+                </div>
+
+                <div class="ciclovia-highlight">
+                    <h4>🏰 Romantic Road Cycle Route</h4>
+                    <p>460 km da Würzburg a Füssen, collegando castelli medievali e città patrimonio UNESCO. Dimostra come il cicloturismo possa sostenere economie rurali e conservazione dei beni culturali.</p>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>💡 Impatti del modello tedesco</h3>
+                <div class="impact-item">
+                    <h4>🌱 Impatto ambientale</h4>
+                    <p>Ogni km percorso in bici evita 150g di CO₂. I cicloturisti tedeschi risparmiano 2,3 milioni di tonnellate di CO₂ l'anno, contribuendo agli obiettivi climatici UE 2030.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>💰 Economia del cicloturismo</h4>
+                    <p>4 miliardi di euro di fatturato annuo, 280.000 posti di lavoro diretti e indiretti. Spesa media: 55€/giorno, con permanenze di 6-8 giorni.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏘 Rivitalizzazione territoriale</h4>
+                    <p>Le ciclovie portano turisti in aree rurali e borghi minori, sostenendo bed&breakfast familiari, ristoranti tipici e artigianato locale.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🚲 Infrastrutture per tutti</h4>
+                    <p>Le ciclovie turistiche migliorano la mobilità quotidiana dei residenti, con benefici per salute pubblica e qualità urbana.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🤝 Coesione sociale</h4>
+                    <p>Il cicloturismo favorisce incontri interculturali, comprensione europea e valorizzazione delle identità locali.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>🛠 Elementi del successo tedesco</h3>
+                <div class="solution-item">
+                    <h4>📋 Pianificazione integrata</h4>
+                    <p>Coordinamento tra Länder, comuni e stakeholders privati. Standard uniformi per segnaletica, sicurezza e qualità dei servizi.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏨 Sistema ricettivo specializzato</h4>
+                    <p>Certificazione "Bett+Bike" per hotel bike-friendly. Depositi sicuri, kit riparazione, lavanderie, transfer bagagli.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📱 Digitalizzazione</h4>
+                    <p>App unificate, GPS tracking, prenotazioni online, info real-time su meteo e condizioni percorsi.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🚄 Intermodalità</h4>
+                    <p>Integrazione bici-treno perfetta: trasporto gratuito o a prezzo simbolico, vagoni dedicati, stazioni attrezzate.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📊 Monitoraggio continuo</h4>
+                    <p>ADFC (Associazione Ciclistica Tedesca) pubblica ogni 2 anni il ranking delle ciclovie più apprezzate, guidando investimenti e miglioramenti.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Quali elementi del modello tedesco potrebbero essere applicati in Italia?</li>
+                    <li>Come il cicloturismo può contribuire al Green Deal europeo?</li>
+                    <li>Perché investire in ciclovie è una scelta economicamente vantaggiosa?</li>
+                    <li>Come bilanciare sviluppo turistico e protezione ambientale?</li>
+                    <li>Che ruolo hanno le tecnologie digitali nel cicloturismo moderno?</li>
+                    <li>Come il cicloturismo può combattere lo spopolamento delle aree interne?</li>
+                    <li>Quali competenze servono ai giovani per lavorare nel cicloturismo?</li>
+                    <li>Come promuovere la cultura ciclistica nelle scuole?</li>
+                    <li>Che relazione c'è tra mobilità ciclistica e diritto alla salute?</li>
+                    <li>Come misurare l'impatto sociale ed ambientale del cicloturismo?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">SITO WEB</span>
+                    <a href="https://www.adfc.de/" target="_blank" rel="noopener">
+                        ADFC - Allgemeiner Deutscher Fahrrad-Club
+                    </a>
+                    <p>Sito ufficiale dell'associazione ciclistica tedesca con classifiche ciclovie, guide e dati statistici.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RAPPORTO</span>
+                    <a href="https://www.adfc.de/artikel/adfc-radreiseanalyse" target="_blank" rel="noopener">
+                        ADFC Radreiseanalyse 2024
+                    </a>
+                    <p>Analisi annuale del cicloturismo tedesco: tendenze, preferenze, impatto economico.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">PORTALE</span>
+                    <a href="https://www.germany.travel/it/transport-and-traffic/cycling-in-germany.html" target="_blank" rel="noopener">
+                        Germany Travel - Ciclismo in Germania
+                    </a>
+                    <p>Portale ufficiale del turismo tedesco con itinerari, mappe e informazioni pratiche.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">DATABASE</span>
+                    <a href="https://www.eurovelo.com/" target="_blank" rel="noopener">
+                        EuroVelo - Rete Ciclabile Europea
+                    </a>
+                    <p>15 percorsi cicloturistici che attraversano l'Europa, molti passanti per la Germania.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RICERCA</span>
+                    <a href="https://ec.europa.eu/environment/integration/research/newsalert/pdf/cycling_tourism_economic_environmental_benefits_536na4_en.pdf" target="_blank" rel="noopener">
+                        UE - Economic and Environmental Benefits of Cycling Tourism
+                    </a>
+                    <p>Studio della Commissione Europea sui benefici economici e ambientali del cicloturismo.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">APP</span>
+                    <a href="https://www.bikemap.net/" target="_blank" rel="noopener">
+                        Bikemap - Mappe Ciclistiche
+                    </a>
+                    <p>Piattaforma per pianificare percorsi cicloturistici con community di cicloviaggiatori.</p>
+                </div>
+
+             
+
+            <a href="#" class="back-btn" onclick="history.back()">🚴‍♂️ Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

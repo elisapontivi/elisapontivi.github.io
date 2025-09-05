@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliviero Toscani: comunicazione, provocazione e responsabilità sociale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #f39c12; color: #333; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #2980b9; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "📸"; color: #3498db; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section, .debate-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3, .debate-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .toscani-quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .toscani-quote:before {
+            content: '📷'; font-size: 3rem; position: absolute; left: 20px; top: 15px; opacity: 0.7;
+        }
+        .toscani-quote:after {
+            content: '💭'; font-size: 3rem; position: absolute; right: 20px; bottom: 15px; opacity: 0.7;
+        }
+
+        .campaign-showcase {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .campaign-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            max-width: 600px;
+        }
+        .campaign-item:hover { transform: translateY(-5px); }
+
+        .campaign-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ecf0f1, #bdc3c7);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #7f8c8d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campaign-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .campaign-year {
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .debate-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 5px solid #ff9800;
+        }
+
+        .debate-sides {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .debate-pro, .debate-contro {
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .debate-pro {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 4px solid #27ae60;
+        }
+
+        .debate-contro {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .debate-pro h4 { color: #27ae60; margin-bottom: 15px; font-size: 1.3rem; }
+        .debate-contro h4 { color: #e74c3c; margin-bottom: 15px; font-size: 1.3rem; }
+
+        .debate-punto {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .impact-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #e74c3c; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #e74c3c; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .toscani-quote { font-size: 1.1rem; padding: 20px; }
+            .debate-sides { grid-template-columns: 1fr; }
+            .campaign-showcase { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📸 Oliviero Toscani: comunicazione, provocazione e responsabilità sociale</h1>
+            <p>Quando l'arte fotografica incontra l'etica pubblicitaria e i diritti umani</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — COMUNICAZIONE • ETICA • DIRITTI • ARTE</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Oliviero Toscani rappresenta un caso studio perfetto per esplorare <strong>libertà di espressione</strong>, <strong>responsabilità sociale</strong> della comunicazione e <strong>diritti umani</strong>. Le sue campagne sollevano questioni fondamentali sui limiti etici della pubblicità e sul ruolo dell'arte nel sensibilizzare l'opinione pubblica.</p>
+                <ul>
+                    <li><strong>Libertà di espressione:</strong> diritto di comunicare vs responsabilità sociale</li>
+                    <li><strong>Etica pubblicitaria:</strong> confini tra provocazione e rispetto della dignità</li>
+                    <li><strong>Sensibilizzazione sociale:</strong> arte come strumento di educazione civica</li>
+                    <li><strong>Dibattito democratico:</strong> confronto tra posizioni diverse nella società</li>
+                </ul>
+            </div>
+
+            <div class="toscani-quote">
+                "La pubblicità è l'anima più sporca del mondo, ma può diventare un potente strumento di educazione sociale"
+            </div>
+
+            <div class="story-section">
+                <h3>📚 Chi è Oliviero Toscani</h3>
+                <p><strong>Oliviero Toscani (1942-2025)</strong> è stato uno dei fotografi più influenti e controversi del panorama pubblicitario mondiale. Nato a Milano, ha rivoluzionato la comunicazione commerciale trasformandola in strumento di riflessione sociale.</p>
+                
+                <div class="campaign-showcase">
+                    <div class="campaign-item">
+                        <img src="sentencetoscani.jpg" alt="Campagna Benetton sulla pena di morte" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                        <div class="campaign-year">1999</div>
+                        <div class="campaign-title">Pena di Morte</div>
+                        <p>La controversa campagna di Benetton con i ritratti di condannati nel braccio della morte per denunciare la pena capitale negli USA. Un esempio emblematico del dibattito tra arte, provocazione e responsabilità sociale.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="debate-section">
+                <h3>⚖️ Il Grande Dibattito: Arte o Sfruttamento?</h3>
+                <p>Le campagne di Toscani hanno diviso l'opinione pubblica mondiale. Da un lato sostenitori dell'arte come denuncia sociale, dall'altro critici che accusano di sfruttamento del dolore umano per fini commerciali.</p>
+                
+                <div class="debate-sides">
+                    <div class="debate-pro">
+                        <h4>👍 Sostenitori - "Arte per il Cambiamento"</h4>
+                        
+                        <div class="debate-punto">
+                            <strong>Sensibilizzazione efficace:</strong> Le immagini shock attirano l'attenzione su temi ignorati dai media tradizionali.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Educazione civica:</strong> Stimola il dibattito pubblico su questioni fondamentali come razzismo, AIDS, pena di morte.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Libertà artistica:</strong> L'arte deve poter provocare, disturbare, far riflettere senza censure.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Risultati concreti:</strong> Alcune campagne hanno contribuito a cambiamenti legislativi e sociali reali.
+                        </div>
+                    </div>
+                    
+                    <div class="debate-contro">
+                        <h4>👎 Critici - "Sfruttamento del Dolore"</h4>
+                        
+                        <div class="debate-punto">
+                            <strong>Mercificazione del dolore:</strong> Usare sofferenza umana per vendere prodotti viola la dignità delle persone.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Mancanza di consenso:</strong> Molte immagini utilizzate senza il pieno consenso informato dei soggetti.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Inefficacia reale:</strong> La provocazione fine a se stessa non porta a cambiamenti sociali duraturi.
+                        </div>
+                        
+                        <div class="debate-punto">
+                            <strong>Trauma secondario:</strong> Immagini disturbanti possono traumatizzare il pubblico, specialmente i minori.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>🌍 Impatto sulla Società e Comunicazione</h3>
+                <div class="impact-item">
+                    <h4>📺 Rivoluzione pubblicitaria</h4>
+                    <p>Ha trasformato la pubblicità da strumento puramente commerciale a veicolo di messaggi sociali, influenzando intere generazioni di creativi.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏛️ Dibattito legislativo</h4>
+                    <p>Le sue campagne hanno portato a discussioni parlamentari e modifiche alle normative pubblicitarie in diversi Paesi.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🎓 Educazione e università</h4>
+                    <p>Caso studio in corsi di comunicazione, etica, sociologia per discutere limiti e potenzialità della comunicazione sociale.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🌐 Influenza globale</h4>
+                    <p>Ha ispirato fotografi e pubblicitari in tutto il mondo a utilizzare la propria professione per cause sociali.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per il Dibattito in Classe</h3>
+                <ol>
+                    <li><strong>Limiti della libertà di espressione:</strong> Esistono temi che l'arte non dovrebbe mai affrontare?</li>
+                    <li><strong>Consenso informato:</strong> È etico utilizzare immagini di persone vulnerabili per fini commerciali?</li>
+                    <li><strong>Efficacia vs etica:</strong> Il fine (sensibilizzazione) giustifica i mezzi (shock)?</li>
+                    <li><strong>Responsabilità dell'artista:</strong> Chi decide cosa è "socialmente utile" nella comunicazione?</li>
+                    <li><strong>Protezione dei minori:</strong> Come bilanciare educazione e protezione dall'esposizione a contenuti disturbanti?</li>
+                    <li><strong>Ruolo del pubblico:</strong> Siamo noi consumatori complici se non boicottiamo comunicazioni che riteniamo scorrette?</li>
+                    <li><strong>Alternative possibili:</strong> Esistono modi meno controversi per sensibilizzare su temi importanti?</li>
+                    <li><strong>Diritto all'oblio:</strong> Le persone ritratte hanno diritto a non essere più associate a quelle campagne?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.imagery.academy/blog/oliviero-toscani-lo-sguardo-non-convenzionale-che-sfida-il-mondo-attraverso-la-fotografia" target="_blank" rel="noopener">
+                        "Oliviero Toscani: lo sguardo non convenzionale che sfida il mondo attraverso la fotografia"
+                    </a>
+                    <p>Analisi approfondita della filosofia artistica di Toscani e del suo approccio rivoluzionario alla comunicazione visiva.</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #e8f5e8, #f0f8f0); border-left: 5px solid #27ae60; padding: 25px; border-radius: 0 15px 15px 0; margin: 30px 0;">
+                <h4 style="color: #27ae60; margin-bottom: 15px; font-size: 1.3rem;">🎯 Attività Didattica Proposta</h4>
+                <p style="color: #2c3e50; margin-bottom: 15px;">
+                    <strong>Simulazione di Comitato Etico:</strong> Dividere la classe in gruppi che rappresentano diverse posizioni (artisti, pubblicitari, associazioni familiari, legislatori, psicologi) per valutare una campagna pubblicitaria controversa.
+                </p>
+                <p style="color: #2c3e50; font-size: 0.95rem;">
+                    Ogni gruppo deve argomentare la propria posizione usando principi etici, normative esistenti e considerazioni sui diritti umani, simulando un vero processo decisionale democratico.
+                </p>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">📸 Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economia Circolare: da spreco a risorsa</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #27ae60 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #27ae60; color: white; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #27ae60; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "🌱"; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section, .progetto-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3, .progetto-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #27ae60, #2e7d32);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        .quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #27ae60;
+        }
+        .impact-item h4 { color: #2e7d32; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .progetto-section {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #27ae60;
+        }
+        .progetto-section h3 { color: #2e7d32; }
+        .progetto-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #27ae60;
+        }
+        .progetto-item h4 { color: #2e7d32; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin: 15px 0;
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Economia Circolare: da spreco a risorsa</h1>
+            <p>Trasformare il modello economico verso la sostenibilità</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — SVILUPPO SOSTENIBILE • INNOVAZIONE • IMPRENDITORIALITÀ</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>L'economia circolare tocca <strong>sviluppo sostenibile</strong>, <strong>responsabilità ambientale</strong>, <strong>innovazione tecnologica</strong> e <strong>nuovi modelli di business</strong>. Comprendere questi principi è fondamentale per formare cittadini consapevoli delle sfide ambientali e delle opportunità economiche del futuro.</p>
+                <ul>
+                    <li><strong>Sostenibilità ambientale:</strong> riduzione sprechi, riuso, riciclaggio</li>
+                    <li><strong>Innovazione economica:</strong> nuovi modelli di business e value proposition</li>
+                    <li><strong>Responsabilità sociale:</strong> impatto delle scelte di consumo e produzione</li>
+                    <li><strong>Competenze imprenditoriali:</strong> riconoscere opportunità nel cambiamento</li>
+                </ul>
+            </div>
+
+            <div class="quote">
+                Domanda-guida: come trasformare quello che oggi è considerato "scarto" in una risorsa di valore? Quali modelli di business possono rendere la sostenibilità economicamente vantaggiosa?
+            </div>
+
+            <div class="story-section">
+                <h3>♻️ Cos'è l'Economia Circolare</h3>
+                <p>L'economia circolare è un modello economico rigenerativo che mira a mantenere i materiali in uso il più a lungo possibile, estraendo il massimo valore durante l'utilizzo, per poi recuperarli e rigenerarli alla fine del loro ciclo di vita.</p>
+                
+                <div style="margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <h4 style="color: #2e7d32; margin-bottom: 15px;">📊 Modello Lineare vs Modello Circolare</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: #ffe6e6; padding: 15px; border-radius: 8px;">
+                            <strong style="color: #c62828;">❌ Modello Lineare</strong><br>
+                            <span style="font-size: 14px;">Prendi → Produci → Getta</span>
+                        </div>
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px;">
+                            <strong style="color: #2e7d32;">✅ Modello Circolare</strong><br>
+                            <span style="font-size: 14px;">Riduci → Riusa → Ricicla → Rigenera</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/ni8-BuHUzUg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>💡 Principi dell'Economia Circolare</h3>
+                <div class="impact-item">
+                    <h4>🔄 Design per la circolarità</h4>
+                    <p>Progettare prodotti pensando fin dall'inizio al loro intero ciclo di vita: durabilità, riparabilità, aggiornabilità, riciclabilità.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>⏳ Estendere la vita utile</h4>
+                    <p>Mantenere prodotti e materiali in uso il più a lungo possibile attraverso riparazione, riutilizzo, ricondizionamento.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🔄 Rigenerare i sistemi naturali</h4>
+                    <p>Restituire nutrienti agli ecosistemi e utilizzare energie rinnovabili per alimentare l'economia circolare.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>💼 Nuovi modelli di business</h4>
+                    <p>Sviluppare servizi di condivisione, noleggio, "product-as-a-service" che massimizzano l'utilizzo delle risorse.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🌐 Collaborazione sistemica</h4>
+                    <p>Creare reti in cui i rifiuti di un'azienda diventano input per un'altra, formando ecosistemi industriali.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>🚀 Esempi di Economia Circolare</h3>
+                <div class="solution-item">
+                    <h4>👕 Moda sostenibile</h4>
+                    <p>Patagonia ripara gratuitamente i suoi prodotti, H&M raccoglie vestiti usati per riciclarli, Eileen Fisher ricompra i propri capi per rigenerarli.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📱 Elettronica ricondizionata</h4>
+                    <p>Apple recupera materiali preziosi dai dispositivi usati, Fairphone progetta smartphone modulari e riparabili.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🚗 Mobilità condivisa</h4>
+                    <p>Car sharing, bike sharing, scooter elettrici: massimizzare l'uso dei veicoli riducendo la proprietà individuale.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏭 Simbiosi industriale</h4>
+                    <p>Kalundborg (Danimarca): il vapore della centrale elettrica riscalda le case, i rifiuti di un'azienda alimentano un'altra.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🌾 Agricoltura rigenerativa</h4>
+                    <p>Compostaggio, agricoltura verticale, coltivazione idroponica che restituisce nutrienti al suolo.</p>
+                </div>
+            </div>
+
+            <div class="progetto-section">
+                <h3>🎯 Progetto: Startup Economia Circolare</h3>
+                
+                <div class="progetto-item">
+                    <h4>📋 Obiettivo</h4>
+                    <p>Progettare una startup che trasformi uno scarto specifico in una risorsa di valore, sviluppando un modello di business sostenibile ed economicamente viabile.</p>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>🎲 Lista prodotti di scarto (1 per gruppo)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <div>1. <strong>Fondi di caffè</strong> ☕</div>
+                        <div>9. <strong>Bottiglie di vetro</strong> 🍷</div>
+                        <div>2. <strong>Bucce d'arancia</strong> 🍊</div>
+                        <div>10. <strong>Cartoni della pizza</strong> 🍕</div>
+                        <div>3. <strong>Pneumatici usati</strong> 🚗</div>
+                        <div>11. <strong>Capsule del caffè</strong> ☕</div>
+                        <div>4. <strong>Libri scolastici dismessi</strong> 📚</div>
+                        <div>12. <strong>Jeans strappati</strong> 👖</div>
+                        <div>5. <strong>Cassette di legno della frutta</strong> 📦</div>
+                        <div>13. <strong>Tappi di sughero</strong> 🍷</div>
+                        <div>6. <strong>Gusci d'uovo</strong> 🥚</div>
+                        <div>14. <strong>Carta da giornale</strong> 📰</div>
+                        <div>7. <strong>Vestiti fast fashion</strong> 👕</div>
+                        <div>15. <strong>Mobili IKEA dismessi</strong> 🪑</div>
+                        <div>8. <strong>Scarti di potatura</strong> 🌳</div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>📋 Metodologia di lavoro</h4>
+                    <p><strong>Fase 1 - Identificazione produttori:</strong> Chi genera questo scarto? Dove? In che quantità? Costi attuali di smaltimento.</p>
+                    <p><strong>Fase 2 - Ricerca online:</strong> Best practice italiane ed europee, tecnologie disponibili, mercati di sbocco, esempi di startup simili.</p>
+                    <p><strong>Fase 3 - Progettazione startup:</strong> Nome, mission, processo di trasformazione, prodotto finale, modello di ricavi, team necessario.</p>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>📊 Presentazione finale (10 minuti)</h4>
+                    <ol style="font-size: 14px;">
+                        <li><strong>Il problema:</strong> il nostro scarto e chi lo produce</li>
+                        <li><strong>La soluzione:</strong> come lo trasformiamo</li>
+                        <li><strong>Il mercato:</strong> a chi vendiamo il prodotto finale</li>
+                        <li><strong>Il modello di business:</strong> come funziona e guadagna la startup</li>
+                        <li><strong>I primi passi:</strong> cosa fare per iniziare davvero</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Quali vantaggi economici può offrire l'economia circolare rispetto al modello lineare?</li>
+                    <li>Come possono le aziende tradizionali trasformare i loro modelli di business verso la circolarità?</li>
+                    <li>Qual è il ruolo dei consumatori nel promuovere l'economia circolare?</li>
+                    <li>Quali sono le principali barriere all'adozione dell'economia circolare?</li>
+                    <li>Come può la tecnologia accelerare la transizione verso modelli circolari?</li>
+                    <li>L'economia circolare può davvero ridurre la disoccupazione creando nuovi posti di lavoro?</li>
+                    <li>Quali politiche pubbliche potrebbero incentivare l'economia circolare?</li>
+                    <li>Come misurare il successo di un'iniziativa di economia circolare?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.sfridoo.com/blog/esempi-economia-circolare/" target="_blank" rel="noopener">
+                        Sfridoo — "Esempi di Aziende che Fanno Economia Circolare"
+                    </a>
+                    <p>Casi concreti di imprese che hanno implementato strategie di economia circolare con successo.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">APPROFONDIMENTO</span>
+                    <a href="https://esgnews.it/environmental/economia-circolare-esempi/" target="_blank" rel="noopener">
+                        ESG News — "Economia Circolare: Esempi e Best Practice"
+                    </a>
+                    <p>Analisi delle strategie innovative e dei benefici economici e ambientali dell'economia circolare.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RISORSA</span>
+                    <a href="https://ellenmacarthurfoundation.org/" target="_blank" rel="noopener">
+                        Ellen MacArthur Foundation
+                    </a>
+                    <p>Fondazione leader mondiale nella promozione dell'economia circolare, con ricerche e casi studio.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">PIATTAFORMA</span>
+                    <a href="https://circulareconomy.europa.eu/" target="_blank" rel="noopener">
+                        Circular Economy Platform EU
+                    </a>
+                    <p>Piattaforma europea con strumenti, casi studio e politiche per l'economia circolare.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

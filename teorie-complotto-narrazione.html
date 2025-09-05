@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complottismo e disinformazione: tra pensiero critico e manipolazione</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #e74c3c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #f39c12; color: white; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #f39c12; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "⚠️"; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+            border-left: 5px solid #e74c3c;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #d5f4e6, #c8e6c9);
+            border-left: 5px solid #27ae60;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        /* —— Embed video responsivo —— */
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Complottismo e disinformazione: tra pensiero critico e manipolazione</h1>
+            <p>Come distinguere fatti da finzioni nell'era digitale</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — CITTADINANZA DIGITALE • DIRITTI • DEMOCRAZIA • MEDIA LITERACY</div>
+        </div>
+
+        <div class="content">
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il fenomeno del complottismo tocca <strong>libertà di informazione (art. 21)</strong>, <strong>partecipazione democratica</strong>, <strong>cittadinanza digitale</strong> e <strong>spirito critico</strong>. Comprenderlo aiuta a distinguere tra legittimi dubbi e derive paranoiche, proteggendo la democrazia dalla manipolazione.</p>
+                <ul>
+                    <li><strong>Pensiero critico:</strong> distinguere tra scetticismo sano e complottismo distruttivo</li>
+                    <li><strong>Media literacy:</strong> riconoscere fonti attendibili e tecniche di manipolazione</li>
+                    <li><strong>Partecipazione democratica:</strong> combattere la sfiducia sistemica nelle istituzioni</li>
+                    <li><strong>Cittadinanza digitale:</strong> navigare responsabilmente nell'ecosistema informativo</li>
+                </ul>
+            </div>
+
+            <div class="quote">
+                Domanda-guida: come distinguere un complotto reale da una teoria complottista? Quali sono le conseguenze della disinformazione per la società democratica?
+            </div>
+
+            <div class="story-section">
+                <h3>🧠 Complotti vs Complottismo: le differenze</h3>
+                <p>I <strong>complotti</strong> sono accordi segreti realmente esistiti (Watergate, MK-Ultra, operazioni Stay Behind). Il <strong>complottismo</strong> è invece la tendenza patologica a vedere trame nascoste ovunque, creando narrazioni che semplificano la complessità del reale attraverso la logica del "nemico occulto".</p>
+                
+                <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px;">📊 Le caratteristiche del pensiero complottista:</h4>
+                    <p><strong>Monoideismo:</strong> riduzione di problemi complessi a una singola causa</p>
+                    <p><strong>Nemico assoluto:</strong> identificazione di un "male" che spiega tutto</p>
+                    <p><strong>Inconfutabilità:</strong> ogni prova contraria diventa parte del complotto</p>
+                    <p><strong>Senso di elezione:</strong> chi crede si sente depositario di "verità segrete"</p>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>⚖ Le radici del complottismo</h3>
+                <div class="impact-item">
+                    <h4>🧠 Radici psicologiche</h4>
+                    <p>Bisogno di significato e controllo, senso di irrilevanza sociale, desiderio di appartenenza a una comunità "speciale" che possiede conoscenze segrete.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🌍 Radici socio-culturali</h4>
+                    <p>Crisi delle "grandi narrazioni" tradizionali (religione, ideologie), complessità crescente del mondo moderno, bisogno di spiegazioni semplici per fenomeni complessi.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🏛 Strumento politico</h4>
+                    <p>Il complottismo come "diversivo" per distrarre da problemi reali e responsabilità concrete, usato sia dal potere che dalle opposizioni per mobilitare consenso.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>📱 Amplificazione digitale</h4>
+                    <p>Gli algoritmi dei social media premiano contenuti coinvolgenti e divisivi, creando "bolle informative" e radicalizzando progressivamente gli utenti.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>😴 Pigrizia cognitiva</h4>
+                    <p>È più comodo sentirsi "vittime" di complotti che mobilitarsi concretamente per cambiare la realtà attraverso l'impegno politico e civico.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>💡 Come contrastare la disinformazione</h3>
+                <div class="solution-item">
+                    <h4>🎓 Educazione al pensiero critico</h4>
+                    <p>Insegnare a valutare fonti, riconoscere bias cognitivi, distinguere tra correlazione e causalità, sviluppare immunità mentale alla disinformazione.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🔍 Verifica delle fonti</h4>
+                    <p>Fact-checking, controllo incrociato delle informazioni, consultazione di fonti primarie e autorevoli, attenzione a conflitti di interesse.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>📚 Media literacy</h4>
+                    <p>Comprendere come funzionano algoritmi e bias di conferma, riconoscere tecniche di manipolazione emotiva, diversificare le fonti informative.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏛 Trasparenza istituzionale</h4>
+                    <p>Le istituzioni devono comunicare chiaramente, ammettere errori, spiegare processi decisionali, ridurre la segretezza non necessaria.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🤝 Dialogo e confronto</h4>
+                    <p>Evitare la polarizzazione, creare spazi di discussione costruttiva, decostruire narrazioni complottiste traducendole in termini politici concreti.</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Come distinguere uno scetticismo sano dal complottismo distruttivo?</li>
+                    <li>Quali sono i tuoi bias cognitivi e come influenzano le tue opinioni?</li>
+                    <li>Come verifichi l'attendibilità di una notizia prima di condividerla?</li>
+                    <li>Perché le teorie del complotto sono così coinvolgenti emotivamente?</li>
+                    <li>Come cambiano le dinamiche della disinformazione sui social media?</li>
+                    <li>Qual è la responsabilità delle piattaforme digitali nel contrastare le fake news?</li>
+                    <li>Come possono le istituzioni riconquistare fiducia senza limitare il dissenso?</li>
+                    <li>Quale ruolo ha l'educazione nel prevenire la manipolazione informativa?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://www.istitutoeuroarabo.it/DM/quando-il-complottismo-distrae-dai-complotti-effettivi/" target="_blank" rel="noopener">
+                        Istituto Euroarabo — "Quando il complottismo distrae dai complotti effettivi"
+                    </a>
+                    <p>Analisi critica del libro di Tobia Savoca "Narrazioni diversive", sui rapporti tra complotti reali e complottismo paranoico.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <a href="https://www.youtube.com/watch?v=TS7SiCIXcrc" target="_blank" rel="noopener">
+                        Video YouTube — Le dinamiche della disinformazione
+                    </a>
+                    <p>Approfondimento sui meccanismi psicologici e sociali alla base della diffusione delle fake news.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">VIDEO</span>
+                    <a href="https://www.youtube.com/watch?v=fWRnaPMlIBk" target="_blank" rel="noopener">
+                        Video YouTube — Algoritmi e polarizzazione
+                    </a>
+                    <p>Come le piattaforme digitali amplificano la disinformazione attraverso i loro algoritmi di raccomandazione.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">SOCIAL</span>
+                    <a href="https://www.instagram.com/nonelazebra/" target="_blank" rel="noopener">
+                        Non è la Zebra (@nonelazebra) — Divulgazione Scientifica
+                    </a>
+                    <p>Progetto di divulgazione su bias cognitivi e processi decisionali, gestito da Lorenzo Gagliardi e Greta Durante.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">STUDIO</span>
+                    <a href="https://www.stateofmind.it/2024/01/complottismo-psicologia/" target="_blank" rel="noopener">
+                        State of Mind — "Complottismo: pensieri e tratti personologici dei complottisti"
+                    </a>
+                    <p>Analisi psicologica delle caratteristiche personali e cognitive di chi aderisce alle teorie del complotto.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RISORSA</span>
+                    <a href="https://www.agcom.it/disinformazione" target="_blank" rel="noopener">
+                        AGCOM — Disinformazione: come riconoscerla e contrastarla
+                    </a>
+                    <p>Guida ufficiale dell'Autorità per le garanzie nelle comunicazioni su come identificare e segnalare la disinformazione.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">RICERCA</span>
+                    <a href="https://www.idmo.it/2021/12/29/i-10-siti-di-disinformazione-piu-influenti-del-2021/" target="_blank" rel="noopener">
+                        IDMO — "I 10 siti di disinformazione più influenti del 2021"
+                    </a>
+                    <p>Report di NewsGuard sui principali diffusori di disinformazione in Italia, con analisi delle loro strategie.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>

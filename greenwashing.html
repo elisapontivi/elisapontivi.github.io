@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenwashing: tra comunicazione e realtà</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #f39c12 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3rem; opacity: 0.9; }
+
+        .nucleo-badge {
+            background: #e74c3c; color: white; padding: 8px 15px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 20px 0;
+        }
+
+        .content { padding: 40px; }
+
+        .collegamenti-section {
+            background: linear-gradient(135deg, #fff3e0, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 20px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .collegamenti-section h2 {
+            color: #e65100; margin-bottom: 15px; font-size: 1.5rem;
+        }
+        .collegamenti-section p { font-size: 1rem; color: #bf360c; }
+
+        .perche-civica {
+            background: linear-gradient(135deg, #fff3e0, #ffeaa7);
+            border-left: 5px solid #f39c12;
+            padding: 30px; margin: 30px 0; border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .perche-civica h2 {
+            color: #f39c12; margin-bottom: 20px; font-size: 1.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .perche-civica p { font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; }
+        .perche-civica ul { list-style: none; padding-left: 0; }
+        .perche-civica li {
+            padding: 8px 0 8px 30px; position: relative; font-size: 1.1rem; color: #2c3e50;
+        }
+        .perche-civica li:before {
+            content: "🎭"; font-size: 1.2rem; position: absolute; left: 0;
+        }
+
+        .story-section, .impacts-section, .solutions-section, .discussion-questions, .resources-section, .progetto-section {
+            background: white; border-radius: 15px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section h3, .impacts-section h3, .solutions-section h3,
+        .discussion-questions h3, .resources-section h3, .progetto-section h3 {
+            color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white; padding: 30px; border-radius: 15px;
+            font-style: italic; font-size: 1.4rem; text-align: center;
+            margin: 20px 0; position: relative;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+        .quote:before {
+            content: '"'; font-size: 4rem; position: absolute; left: 20px; top: -10px; opacity: 0.5;
+        }
+        .quote:after {
+            content: '"'; font-size: 4rem; position: absolute; right: 20px; bottom: -30px; opacity: 0.5;
+        }
+
+        .impacts-section {
+            background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+            border-left: 5px solid #e74c3c;
+        }
+        .impact-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #e74c3c;
+        }
+        .impact-item h4 { color: #c0392b; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .solutions-section {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+        }
+        .solution-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #3498db;
+        }
+        .solution-item h4 { color: #2980b9; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #fdf2e9, #fbeee6);
+            border-left: 5px solid #e67e22;
+        }
+        .discussion-questions ol { color: #2c3e50; font-size: 1.1rem; }
+        .discussion-questions li { margin-bottom: 10px; padding-left: 10px; }
+
+        .progetto-section {
+            background: linear-gradient(135deg, #fff3e0, #ffeaa7);
+            border-left: 5px solid #f39c12;
+        }
+        .progetto-section h3 { color: #e65100; }
+        .progetto-item {
+            background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #f39c12;
+        }
+        .progetto-item h4 { color: #e65100; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .resources-section { background: #f8f9fa; border-radius: 15px; }
+        .resources-section .resource-item {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;
+        }
+        .resource-item:hover { transform: translateX(5px); }
+        .resource-item a { color: #3498db; text-decoration: none; font-weight: 500; }
+        .resource-item a:hover { text-decoration: underline; }
+        .resource-type {
+            background: #3498db; color: white; padding: 4px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 10px;
+        }
+
+        .video-embed {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin: 15px 0;
+        }
+        .video-embed iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); text-decoration: none;
+            display: inline-block; margin: 20px 0;
+        }
+        .back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .content { padding: 20px; }
+            .quote { font-size: 1.1rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 Greenwashing: tra comunicazione e realtà</h1>
+            <p>Riconoscere la sostenibilità autentica da quella apparente</p>
+            <div class="nucleo-badge">NUCLEO TEMATICO — RESPONSABILITÀ SOCIALE • COMUNICAZIONE • ETICA AZIENDALE</div>
+        </div>
+
+        <div class="content">
+            <div class="collegamenti-section">
+                <h2>📚 Collegamenti curriculari</h2>
+                <p>Questo tema si collega direttamente agli argomenti già studiati: <strong>Responsabilità Sociale dell'Impresa (CSR)</strong>, <strong>Comunicazione Sociale e Ambientale</strong> e <strong>Rendiconto Sociale e Ambientale</strong>.</p>
+            </div>
+
+            <div class="perche-civica">
+                <h2>🎯 Perché in Educazione Civica</h2>
+                <p>Il greenwashing tocca <strong>etica della comunicazione</strong>, <strong>trasparenza aziendale</strong>, <strong>tutela dei consumatori</strong> e <strong>responsabilità sociale d'impresa</strong>. Riconoscere queste pratiche è fondamentale per formare cittadini e consumatori consapevoli.</p>
+                <ul>
+                    <li><strong>Trasparenza:</strong> diritto a informazioni veritiere su prodotti e servizi</li>
+                    <li><strong>Responsabilità sociale:</strong> distinguere impegno autentico da marketing</li>
+                    <li><strong>Consumo consapevole:</strong> scelte informate e critiche</li>
+                    <li><strong>Etica aziendale:</strong> coerenza tra comunicazione e azioni</li>
+                </ul>
+            </div>
+
+            <div class="quote">
+                Domanda-guida: come distinguere un'azienda davvero sostenibile da una che fa solo greenwashing? Quali strumenti abbiamo per verificare la coerenza tra comunicazione e realtà?
+            </div>
+
+            <div class="story-section">
+                <h3>🎭 Cos'è il Greenwashing</h3>
+                <p>Il greenwashing è una strategia di comunicazione o marketing perseguita da aziende, istituzioni, enti che presentano come ecosostenibili le proprie attività, cercando di occultarne l'impatto ambientale negativo.</p>
+                
+                <div style="margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px;">🚨 Caratteristiche del Greenwashing</h4>
+                    <ul style="font-size: 14px; line-height: 1.6;">
+                        <li><strong>Appropriazione indebita:</strong> di virtù ambientaliste non reali</li>
+                        <li><strong>Diversione dell'attenzione:</strong> dagli effetti negativi reali</li>
+                        <li><strong>Creazione di immagine:</strong> positiva ma non basata sui fatti</li>
+                        <li><strong>Comunicazione ingannevole:</strong> che non rispecchia le pratiche effettive</li>
+                    </ul>
+                </div>
+
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/Bpw5krNtrBU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="impacts-section">
+                <h3>🚩 Come riconoscere il Greenwashing</h3>
+                <div class="impact-item">
+                    <h4>📢 Claim vaghi e generici</h4>
+                    <p>"Eco-friendly", "naturale", "sostenibile" senza specificare cosa, come, quanto. Mancanza di dati concreti e misurabili.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🎨 Comunicazione vs realtà</h4>
+                    <p>Investimenti massicci in pubblicità "verde" ma minimi in ricerca e sviluppo sostenibile. Focus su packaging green ma non sul prodotto.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>📊 Mancanza di certificazioni</h4>
+                    <p>Assenza di standard riconosciuti (ISO 14001, EMAS, FSC, ecc.) o autocertificazioni non verificabili da terzi.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>🎯 Selezione dei dati</h4>
+                    <p>Evidenziare solo gli aspetti positivi nascondendo quelli negativi. Un prodotto "riciclabile" in un'azienda altamente inquinante.</p>
+                </div>
+                <div class="impact-item">
+                    <h4>⚖️ Contraddizioni evidenti</h4>
+                    <p>Campagne ambientali da aziende che operano in settori intrinsecamente non sostenibili senza cambiamenti strutturali.</p>
+                </div>
+            </div>
+
+            <div class="solutions-section">
+                <h3>✅ Come verificare la sostenibilità autentica</h3>
+                <div class="solution-item">
+                    <h4>📋 Analizzare i bilanci di sostenibilità</h4>
+                    <p>Cercare dati quantitativi, obiettivi specifici, investimenti documentati, risultati misurabili nel tempo.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🏆 Verificare certificazioni esterne</h4>
+                    <p>Standard internazionali riconosciuti, audit indipendenti, rating ESG da agenzie specializzate.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>🔍 Coerenza comunicativa</h4>
+                    <p>Confrontare messaggi pubblicitari con documenti ufficiali, trasparenza sui processi produttivi, ammissione dei limiti.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>💰 Investimenti reali</h4>
+                    <p>Budget destinati a R&D sostenibile, partnership con enti ambientali, progetti a lungo termine con risultati verificabili.</p>
+                </div>
+                <div class="solution-item">
+                    <h4>👥 Coinvolgimento stakeholder</h4>
+                    <p>Dialogo con ONG, comunità locali, dipendenti. Apertura a critiche costruttive e miglioramento continuo.</p>
+                </div>
+            </div>
+
+            <div class="progetto-section">
+                <h3>🔍 Progetto: "Sostenibili o Greenwashing?"</h3>
+                
+                <div class="progetto-item">
+                    <h4>📋 Obiettivo</h4>
+                    <p>Analizzare la comunicazione e le pratiche di sostenibilità di un'azienda per valutare l'autenticità del suo impegno ambientale e sociale.</p>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>🎲 Lista aziende da analizzare (1 per gruppo)</h4>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; font-size: 14px;">
+                        <div style="margin-bottom: 10px;"><strong style="color: #d84315;">Aziende "Sospette":</strong><br>
+                        1. H&M • 2. Ryanair • 3. McDonald's • 4. Coca-Cola • 5. Shell • 6. Volkswagen • 7. Nestlé • 8. Amazon</div>
+                        
+                        <div style="margin-bottom: 10px;"><strong style="color: #2e7d32;">Aziende "Virtuose":</strong><br>
+                        9. Patagonia • 10. Unilever • 11. Interface • 12. Illy • 13. Ferrero • 14. Enel • 15. Barilla</div>
+                        
+                        <div><strong style="color: #ff6f00;">Aziende "Miste" (casi complessi):</strong><br>
+                        16. Tesla • 17. IKEA • 18. Apple • 19. Microsoft • 20. Nike</div>
+                    </div>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>📋 Metodologia di ricerca</h4>
+                    <p><strong>Step 1 - Analisi del bilancio:</strong> Consultare bilancio di sostenibilità, investimenti concreti, dati e risultati, certificazioni.</p>
+                    <p><strong>Step 2 - Analisi della comunicazione:</strong> Sito web, pubblicità, social media. Coerenza tra comunicazione e dati del bilancio.</p>
+                    <p><strong>Step 3 - Valutazione finale:</strong> Sostenibilità autentica vs red flags greenwashing, confronto aspetti positivi e negativi.</p>
+                </div>
+
+                <div class="progetto-item">
+                    <h4>📊 Presentazione finale (10-12 minuti)</h4>
+                    <ol style="font-size: 14px;">
+                        <li><strong>L'azienda:</strong> settore, dimensioni, contesto</li>
+                        <li><strong>Aspetti positivi:</strong> progetti, investimenti, risultati concreti</li>
+                        <li><strong>Aspetti negativi:</strong> limiti, contraddizioni, criticità</li>
+                        <li><strong>Confronto bilancio vs comunicazione:</strong> coerenza?</li>
+                        <li><strong>Conclusione personale:</strong> punteggio da 1 a 10 motivato</li>
+                    </ol>
+                    <p style="font-size: 14px; margin-top: 10px; color: #e65100;"><strong>Formato libero:</strong> slide, infografiche, video, confronti grafici</p>
+                </div>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>💭 Domande per la discussione</h3>
+                <ol>
+                    <li>Perché le aziende ricorrono al greenwashing invece di investire in vera sostenibilità?</li>
+                    <li>Qual è la responsabilità dei consumatori nel "premiare" o "punire" il greenwashing?</li>
+                    <li>Come possono le istituzioni regolare meglio le comunicazioni aziendali sulla sostenibilità?</li>
+                    <li>Il greenwashing è sempre intenzionale o può essere dovuto a incompetenza?</li>
+                    <li>Quali settori sono più esposti al rischio di greenwashing?</li>
+                    <li>Come può un'azienda comunicare onestamente i propri limiti in sostenibilità?</li>
+                    <li>Il greenwashing danneggia le aziende veramente sostenibili?</li>
+                    <li>Quali strumenti digitali possono aiutare i consumatori a verificare la sostenibilità?</li>
+                </ol>
+            </div>
+
+            <div class="resources-section">
+                <h3>📚 Fonti e materiali</h3>
+
+                <div class="resource-item">
+                    <span class="resource-type">ARTICOLO</span>
+                    <a href="https://sustrain.com/esempi-greenwashing/" target="_blank" rel="noopener">
+                        Sustrain — "Esempi di Greenwashing"
+                    </a>
+                    <p>Casi concreti di greenwashing con analisi delle strategie di comunicazione ingannevole.</p>
+                </div>
+
+           
+
+                <div class="resource-item">
+                    <span class="resource-type">RICERCA</span>
+                    <a href="https://www.greenpeace.org/international/act/greenwashing/" target="_blank" rel="noopener">
+                        Greenpeace — "What is Greenwashing?"
+                    </a>
+                    <p>Definizioni, esempi e strumenti per riconoscere il greenwashing secondo Greenpeace.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">PIATTAFORMA</span>
+                    <a href="https://www.csrhub.com/" target="_blank" rel="noopener">
+                        CSRHub — Rating di sostenibilità aziendale
+                    </a>
+                    <p>Database con rating ESG di migliaia di aziende basati su fonti multiple.</p>
+                </div>
+
+                <div class="resource-item">
+                    <span class="resource-type">GUIDA</span>
+                    <a href="https://www.oecd.org/investment/due-diligence-guidance-for-responsible-business-conduct.htm" target="_blank" rel="noopener">
+                        OCSE — Guida per la condotta responsabile d'impresa
+                    </a>
+                    <p>Standard internazionali per valutare la responsabilità sociale delle aziende.</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" onclick="history.back()">← Torna al Repository</a>
+        </div>
+    </div>
+</body>
+</html>
