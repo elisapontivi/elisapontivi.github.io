@@ -93,8 +93,6 @@
             border-color: #667eea;
         }
 
-       
-
         .subject-title {
             font-size: 1.3rem;
             font-weight: 600;
@@ -156,6 +154,114 @@
             color: #5a6c7d;
             font-size: 0.9rem;
         }
+
+        .resources-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0 20px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-category {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .resource-category h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resource-link {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .topics-section {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-category {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .topic-category.nucleo1 { border-left: 5px solid #e74c3c; }
+        .topic-category.nucleo2 { border-left: 5px solid #27ae60; }
+        .topic-category.nucleo3 { border-left: 5px solid #3498db; }
+
+        .topic-category h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .nucleo1 h3 { color: #e74c3c; }
+        .nucleo2 h3 { color: #27ae60; }
+        .nucleo3 h3 { color: #3498db; }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .topic-list li {
+            margin-bottom: 6px;
+            color: #2c3e50;
+        }
+
+        .films-section {
+            background: linear-gradient(135deg, #e8f4f8, #d1ecf1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .films-section h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -196,12 +302,10 @@
                 <div class="subject-title">Seconda e terza lingua comunitaria</div>
             </a>
 
-
             <a href="economia-aziendale.html" class="subject-card highlighted">
                 <div class="icon">📊</div>
                 <div class="subject-title">Economia aziendale</div>
             </a>
-
 
             <a href="economia-politica.html" class="subject-card">
                 <div class="icon">🏦</div>
@@ -210,10 +314,9 @@
 
             <a href="diritto-legislazione-turistica.html" class="subject-card highlighted">
                 <div class="icon">🏖️</div>
-                <div class="subject-title">Diritto e legislazione turistica e diritto </div>
+                <div class="subject-title">Diritto e legislazione turistica e diritto</div>
             </a>
 
-         
             <a href="dta.html" class="subject-card">
                 <div class="icon">🎯</div>
                 <div class="subject-title">DTA</div>
@@ -223,8 +326,94 @@
                 <div class="icon">🎨</div>
                 <div class="subject-title">Arte e territorio e Geografia turistica</div>
             </a>
+        </div>
 
-         
+        <!-- Sezione Fonti e Link Utili -->
+        <div class="resources-section">
+            <h2 class="section-title">📚 Fonti e link utili per approfondimenti o idee</h2>
+            
+            <div class="resources-grid">
+                <!-- Canali YouTube -->
+                <div class="resource-category">
+                    <h3 style="color: #e74c3c;">🎥 Canali YouTube</h3>
+                    <a href="https://www.youtube.com/@jubilee" target="_blank" class="resource-link">Jubilee</a>
+                    <a href="https://www.youtube.com/@CARTONIMORTI" target="_blank" class="resource-link">Cartoni Morti</a>
+                    <a href="https://www.youtube.com/playlist?list=PLTDRWjDw7X3B_DOGBIXauvizf28X_skVL" target="_blank" class="resource-link">Playlist Educazione Civica</a>
+                </div>
+
+                <!-- Podcast -->
+                <div class="resource-category">
+                    <h3 style="color: #27ae60;">🎧 Podcast</h3>
+                    <a href="https://open.spotify.com/show/5KgK0OqcrgNFckMY2KZWF5?si=1db2a0936f5f4fbb" target="_blank" class="resource-link">Podcast 1</a>
+                    <a href="https://open.spotify.com/show/4HAxuHe75m4b1Wq0sAtBkV?si=a77ff5bc85ee43ab" target="_blank" class="resource-link">Podcast 2</a>
+                    <a href="https://open.spotify.com/show/5ce203SDLHVa4UWGv5j6pV?si=12ab74d239ad4310" target="_blank" class="resource-link">Podcast 3</a>
+                </div>
+
+                <!-- Siti per Insegnanti -->
+                <div class="resource-category">
+                    <h3 style="color: #9b59b6;">👩‍🏫 Siti per Insegnanti</h3>
+                    <a href="https://www.hubscuola.it/app_primaria/la-costituzione-italiana/index.html" target="_blank" class="resource-link">Hub Scuola - Costituzione</a>
+                    <a href="https://www.paroleostili.it/scuola" target="_blank" class="resource-link">Parole O_Stili</a>
+                    <a href="https://www.ancheioinsegno.it/" target="_blank" class="resource-link">Anch'io Insegno</a>
+                    <a href="https://sanoma.it/secondaria-secondo-grado" target="_blank" class="resource-link">Sanoma Italia</a>
+                    <a href="https://www.generazioniconnesse.it/site/" target="_blank" class="resource-link">Generazioni Connesse</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Altri Argomenti -->
+        <div class="topics-section">
+            <h2 class="section-title">🎯 Altri argomenti non collegati ai programmi delle materie</h2>
+            
+            <div class="topics-grid">
+                <!-- Nucleo 1 -->
+                <div class="topic-category nucleo1">
+                    <h3>⚖️ Costituzione, Diritto, Legalità</h3>
+                    <ul class="topic-list">
+                        <li>• Uso di droghe leggere: legalizzazione o proibizione?</li>
+                        <li>• Pena di morte: giustizia o vendetta?</li>
+                        <li>• Carcere minorile: punizione o recupero?</li>
+                        <li>• Obiezione di coscienza: diritto individuale o violazione del dovere pubblico?</li>
+                        <li>• Voto ai 16 anni: sì o no?</li>
+                        <li>• La laicità dello stato</li>
+                    </ul>
+                </div>
+
+                <!-- Nucleo 2 -->
+                <div class="topic-category nucleo2">
+                    <h3>🌱 Sviluppo Sostenibile e Ambiente</h3>
+                    <ul class="topic-list">
+                        <li>• Cambiamento climatico: responsabilità dei singoli o dei governi?</li>
+                        <li style="margin-left: 15px; font-size: 0.8rem; color: #7f8c8d;">
+                            <a href="https://www.youtube.com/watch?v=ALp4Cl31iM8" target="_blank" style="color: #3498db;">Fonte video</a>
+                        </li>
+                        <li>• Energia nucleare: soluzione sostenibile o pericolo?</li>
+                        <li>• Veganismo: scelta etica o imposizione culturale?</li>
+                        <li>• Immigrazione: accoglienza senza limiti o gestione restrittiva?</li>
+                        <li style="margin-left: 15px; font-size: 0.8rem; color: #7f8c8d;">
+                            <a href="https://www.youtube.com/watch?v=DhIVoGm1ieQ" target="_blank" style="color: #3498db;">Fonte video</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Nucleo 3 -->
+                <div class="topic-category nucleo3">
+                    <h3>💻 Cittadinanza Digitale</h3>
+                    <ul class="topic-list">
+                        <li>• Intelligenza artificiale: opportunità o minaccia per il lavoro?</li>
+                        <li>• Social media: strumento di libertà o di controllo?</li>
+                        <li>• Umani potenziati: progresso o rischio?</li>
+                        <li>• Libertà di espressione vs discorsi d'odio: dove mettere il limite?</li>
+                        <li>• Social media e immagine corporea: rischi e disinformazione</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sezione Film -->
+        <div class="films-section">
+            <h3>🎬 FILM</h3>
+            <p style="color: #5a6c7d; font-style: italic;">Sezione in sviluppo - Raccolta di film educativi per temi di educazione civica</p>
         </div>
 
         <div class="footer">
@@ -250,3 +439,4 @@
     </script>
 </body>
 </html>
+
