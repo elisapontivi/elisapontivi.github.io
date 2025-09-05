@@ -127,6 +127,21 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* Stile speciale per la card Film */
+        .subject-card.film-card {
+            background: linear-gradient(145deg, #e8f5e8, #f0f8f0);
+            border: 2px solid #27ae60;
+        }
+
+        .subject-card.film-card .icon {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .subject-card.film-card:hover {
+            background: linear-gradient(145deg, #d5eddb, #e8f5e8);
+            border-color: #219a52;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -242,20 +257,6 @@
             color: #2c3e50;
         }
 
-        .films-section {
-            background: linear-gradient(135deg, #e8f4f8, #d1ecf1);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .films-section h3 {
-            color: #2980b9;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
         .section-title {
             color: #2c3e50;
             margin-bottom: 25px;
@@ -325,6 +326,13 @@
             <a href="arte-territorio.html" class="subject-card">
                 <div class="icon">🎨</div>
                 <div class="subject-title">Arte e territorio e Geografia turistica</div>
+            </a>
+
+            <!-- NUOVA SEZIONE FILM -->
+            <a href="film-educazione-civica.html" class="subject-card film-card">
+                <div class="icon">🎬</div>
+                <div class="subject-title">Film</div>
+                <div class="subject-description">Raccolta di film educativi per l'educazione civica</div>
             </a>
         </div>
 
@@ -410,12 +418,6 @@
             </div>
         </div>
 
-        <!-- Sezione Film -->
-        <a href="film-educazione-civica.html" class="subject-card" style="text-decoration: none; color: inherit; cursor: pointer; transition: transform 0.3s ease;">
-            <h3>🎬 FILM</h3>
-            <p style="color: #5a6c7d; font-style: italic;">Raccolta di film educativi organizzati per tematiche di educazione civica</p>
-        </a>
-
         <div class="footer">
             <p>Piattaforma per la condivisione di materiali didattici di educazione civica</p>
         </div>
@@ -439,8 +441,3 @@
     </script>
 </body>
 </html>
-</body>
-</html>
-
-
-
