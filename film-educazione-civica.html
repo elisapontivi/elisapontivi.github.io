@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film per l'Educazione Civica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+        }
+
+        .category {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .film-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+
+        .film-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .film-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .film-description {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .series-section {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid #9c27b0;
+        }
+
+        .series-section .category-title {
+            border-bottom-color: #9c27b0;
+        }
+
+        .series-section .film-card {
+            border-left-color: #9c27b0;
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+            border-left: 5px solid #3498db;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .intro-text p {
+            color: #2c3e50;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .films-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Film per l'Educazione Civica</h1>
+            <p>Cinema come strumento educativo per riflettere sui temi della cittadinanza</p>
+        </div>
+
+        <div class="content">
+            <a href="index1.html" class="back-btn">← Torna alla homepage</a>
+
+            <div class="intro-text">
+                <p><strong>Il cinema come strumento pedagogico</strong> offre un potente mezzo per esplorare temi complessi di educazione civica, stimolando riflessioni critiche su società, diritti umani, etica e cittadinanza attiva.</p>
+                <p>I film selezionati sono organizzati per aree tematiche e possono essere utilizzati per dibattiti, analisi critiche e approfondimenti interdisciplinari.</p>
+            </div>
+
+            <!-- Identità e Crescita Personale -->
+            <div class="category">
+                <h2 class="category-title">🌱 Identità e Crescita Personale</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Billy Elliot</div>
+                        <div class="film-description">Un ragazzo sfida le convenzioni sociali per seguire la sua passione per la danza, affrontando stereotipi di genere e pressioni familiari in un contesto di conflitto sociale.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Wonder</div>
+                        <div class="film-description">La storia di un bambino con una deformità facciale che affronta il bullismo e l'esclusione, promuovendo temi di inclusione, empatia e accettazione delle diversità.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">The Breakfast Club</div>
+                        <div class="film-description">Cinque studenti di background diversi scoprono di avere più in comune di quanto pensassero, esplorando temi di pregiudizio, stereotipi sociali e comprensione reciproca.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Ovosodo</div>
+                        <div class="film-description">Film italiano che racconta la crescita in un contesto difficile, affrontando temi di marginalità sociale, famiglia disfunzionale e ricerca di identità.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educazione e Potenziale Umano -->
+            <div class="category">
+                <h2 class="category-title">🎓 Educazione e Potenziale Umano</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">L'attimo fuggente</div>
+                        <div class="film-description">Un insegnante non convenzionale ispira i suoi studenti a pensare liberamente e a cogliere le opportunità della vita, sfidando l'educazione tradizionale e repressiva.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Good Will Hunting</div>
+                        <div class="film-description">La storia di un giovane genio con un passato difficile che scopre il suo potenziale attraverso l'aiuto di un terapeuta, esplorando temi di talento, trauma e riscatto sociale.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Coach Carter</div>
+                        <div class="film-description">Un allenatore di basket pone l'educazione prima dello sport, lottando contro un sistema che non valorizza l'istruzione nelle comunità svantaggiate.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">A Beautiful Mind</div>
+                        <div class="film-description">La vita del matematico John Nash, che lotta contro la schizofrenia mentre contribuisce alla scienza, affrontando temi di malattia mentale e genialità.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Società e Controllo -->
+            <div class="category">
+                <h2 class="category-title">🕹️ Società e Controllo</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Matrix</div>
+                        <div class="film-description">Riflessione filosofica sulla realtà, il controllo sociale e la libertà di scelta in un mondo dominato dalla tecnologia e dall'illusione.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">The Truman Show</div>
+                        <div class="film-description">Un uomo scopre di vivere in un reality show, esplorando temi di manipolazione mediatica, privacy e autenticità nell'era della comunicazione di massa.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Arancia meccanica</div>
+                        <div class="film-description">Distopia che esplora violenza, libero arbitrio e condizionamento sociale, ponendo questioni etiche sulla punizione e la riabilitazione.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">The Platform</div>
+                        <div class="film-description">Allegoria sulla disuguaglianza sociale e la distribuzione delle risorse, che critica l'egoismo umano e i sistemi economici iniqui.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questioni Sociali e Razzismo -->
+            <div class="category">
+                <h2 class="category-title">✊ Questioni Sociali e Razzismo</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Get Out</div>
+                        <div class="film-description">Thriller psicologico che denuncia il razzismo contemporaneo e le forme sottili di sfruttamento, esplorando le dinamiche di potere razziali nella società moderna.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">This is England</div>
+                        <div class="film-description">Giovane inglese viene influenzato da gruppi di estrema destra, esplorando temi di radicalizzazione, nazionalismo e influenza sociale negativa.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">The Millionaire</div>
+                        <div class="film-description">Un ragazzo di strada partecipa a un quiz show, rivelando le disuguaglianze sociali e la povertà urbana in India attraverso flashback della sua vita.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crisi e Resilienza -->
+            <div class="category">
+                <h2 class="category-title">💪 Crisi e Resilienza</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">La vita è bella</div>
+                        <div class="film-description">Durante l'Olocausto, un padre protegge il figlio dalla realtà del campo di concentramento attraverso l'immaginazione, esplorando temi di amore, sacrificio e resilienza umana.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Quasi amici</div>
+                        <div class="film-description">L'amicizia tra un ricco tetraplegico e il suo badante, che supera le barriere sociali e culturali, affrontando temi di disabilità, pregiudizio e solidarietà.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Patch Adams</div>
+                        <div class="film-description">Medico non convenzionale che usa l'umorismo per curare i pazienti, sfidando il sistema sanitario tradizionale e promuovendo un approccio umano alla medicina.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Violenza e Alienazione -->
+            <div class="category">
+                <h2 class="category-title">⚡ Violenza e Alienazione</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Taxi Driver</div>
+                        <div class="film-description">Ritratto dell'alienazione urbana e della violenza, esplorando temi di isolamento sociale, salute mentale e radicalizzazione individuale.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Fight Club</div>
+                        <div class="film-description">Critica al consumismo e alla società moderna attraverso la storia di un uomo che crea un club di combattimento, esplorando temi di mascolinità tossica e ribellione sociale.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storia e Cinema d'Autore -->
+            <div class="category">
+                <h2 class="category-title">🎨 Storia e Cinema d'Autore</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Barry Lyndon</div>
+                        <div class="film-description">Capolavoro di Kubrick che ritrae l'ascesa e la caduta di un uomo nel XVIII secolo, esplorando temi di ambizione, classe sociale e destino.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">The Imitation Game</div>
+                        <div class="film-description">La vita di Alan Turing e il suo contributo nella Seconda Guerra Mondiale, affrontando temi di genialità, omofobia e persecuzione sociale.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">La grande scommessa</div>
+                        <div class="film-description">Analisi della crisi finanziaria del 2008, esplorando temi di corruzione nel sistema bancario, disuguaglianza economica e responsabilità sociale.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Miniserie -->
+            <div class="category series-section">
+                <h2 class="category-title">📺 Miniserie</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-title">Unbelievable</div>
+                        <div class="film-description">Serie che affronta il tema delle aggressioni sessuali e dei pregiudizi nel sistema giudiziario, esplorando la vittimizzazione secondaria e l'importanza di credere alle vittime.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Adolescence</div>
+                        <div class="film-description">Esplorazione delle sfide dell'adolescenza contemporanea, affrontando temi come identità, sessualità, pressioni sociali e crescita personale.</div>
+                    </div>
+                    <div class="film-card">
+                        <div class="film-title">Strappare lungo i bordi</div>
+                        <div class="film-description">Serie animata italiana che affronta temi di ansia, depressione e difficoltà relazionali con un approccio ironico ma profondo alla salute mentale.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #e8f5e8, #f0f8f0); border-left: 5px solid #27ae60; padding: 25px; border-radius: 15px; margin: 30px 0;">
+                <h4 style="color: #27ae60; margin-bottom: 15px; font-size: 1.3rem;">💡 Suggerimenti Didattici</h4>
+                <p style="color: #2c3e50; margin-bottom: 10px;">
+                    <strong>Prima della visione:</strong> Contestualizzare il film, presentare i temi principali e preparare domande guida.
+                </p>
+                <p style="color: #2c3e50; margin-bottom: 10px;">
+                    <strong>Durante la visione:</strong> Incoraggiare l'osservazione critica di dialoghi, simboli e situazioni significative.
+                </p>
+                <p style="color: #2c3e50;">
+                    <strong>Dopo la visione:</strong> Organizzare dibattiti, analisi comparative e riflessioni scritte sui temi emersi.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
