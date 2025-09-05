@@ -105,7 +105,13 @@
             cursor: pointer;
         }
 
-        .topic-card::before {
+        .topic-card.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .topic-card:not(.disabled)::before {
             content: '';
             position: absolute;
             top: 0;
@@ -117,11 +123,11 @@
             transition: transform 0.4s ease;
         }
 
-        .topic-card:hover::before {
+        .topic-card:not(.disabled):hover::before {
             transform: scaleX(1);
         }
 
-        .topic-card:hover {
+        .topic-card:not(.disabled):hover {
             transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             border-color: rgba(255, 94, 98, 0.3);
@@ -242,6 +248,18 @@
             color: #5a6c7d;
             font-size: 0.9rem;
         }
+
+        .disabled-badge {
+            background: #95a5a6;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
     </style>
 </head>
 <body>
@@ -250,7 +268,6 @@
             <a href="index1.html">← Torna alle materie</a>
         </div>
 
-
         <div class="header">
             <div class="subject-icon">🌍</div>
             <h1>Arte, Territorio e Geografia Turistica</h1>
@@ -258,12 +275,12 @@
         </div>
 
         <div class="stats-bar">
-            <div class="stats-number">3</div>
+            <div class="stats-number">4</div>
             <div class="stats-label">Argomenti disponibili</div>
         </div>
 
         <div class="topics-grid">
-            <a href="reel-itinerario-turistico.html" class="topic-card">
+            <div class="topic-card disabled">
                 <div class="topic-period">Creatività digitale</div>
                 <div class="topic-icon">🎬</div>
                 <div class="topic-title">Creazione di Reel con Itinerario Turistico o Enogastronomico</div>
@@ -275,9 +292,9 @@
                     <span class="keyword">Promozione territoriale</span>
                     <span class="keyword">Enogastronomia</span>
                 </div>
-            </a>
+            </div>
 
-            <a href="reel-overtourism-como.html" class="topic-card">
+            <div class="topic-card disabled">
                 <div class="topic-period">Sfide contemporanee</div>
                 <div class="topic-icon">🌐</div>
                 <div class="topic-title">Creazione di Reel con Soluzione per l'Overtourism a Como</div>
@@ -289,7 +306,7 @@
                     <span class="keyword">Overtourism</span>
                     <span class="keyword">Como</span>
                 </div>
-            </a>
+            </div>
 
             <a href="graffiti-arte-vandalismo.html" class="topic-card">
                 <div class="topic-period">Arte urbana</div>
@@ -304,11 +321,26 @@
                     <span class="keyword">Spazio pubblico</span>
                 </div>
             </a>
+
+            <a href="oliviero-toscani.html" class="topic-card">
+                <div class="topic-period">Comunicazione e arte</div>
+                <div class="topic-icon">📸</div>
+                <div class="topic-title">Oliviero Toscani: comunicazione, provocazione e responsabilità sociale</div>
+                <div class="topic-description">
+                    Esplora il lavoro del fotografo e pubblicitario che ha rivoluzionato la comunicazione commerciale trasformandola in strumento di riflessione sociale, analizzando il dibattito tra libertà di espressione e responsabilità etica.
+                </div>
+                <div class="topic-keywords">
+                    <span class="keyword">Fotografia</span>
+                    <span class="keyword">Pubblicità sociale</span>
+                    <span class="keyword">Etica comunicazione</span>
+                    <span class="keyword">Libertà espressione</span>
+                </div>
+            </a>
         </div>
 
         <div class="stats-bar" style="margin-top: 50px;">
             <p style="color: #5a6c7d; font-size: 0.95rem;">
-                Ogni argomento unisce creatività, analisi critica e riflessione sul ruolo del turismo e dell’arte nello sviluppo sostenibile delle comunità
+                Ogni argomento unisce creatività, analisi critica e riflessione sul ruolo del turismo e dell'arte nello sviluppo sostenibile delle comunità
             </p>
         </div>
     </div>
@@ -316,7 +348,7 @@
     <script>
         // Aggiungi effetti di interattività
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.topic-card');
+            const cards = document.querySelectorAll('.topic-card:not(.disabled)');
             
             cards.forEach((card, index) => {
                 card.addEventListener('mouseenter', function() {
@@ -337,7 +369,24 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+
+            // Animazione anche per le card disabilitate
+            const disabledCards = document.querySelectorAll('.topic-card.disabled');
+            disabledCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
         });
     </script>
 </body>
 </html>
+    </script>
+</body>
+</html>
+
