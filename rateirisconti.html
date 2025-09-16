@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratei e Risconti - Economia Aziendale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #2980b9;
+            position: relative;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            background: #1a5490;
+        }
+        
+        .header h1 {
+            color: #2980b9;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            color: #34495e;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .definition-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .definition-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .codice-box {
+            background-color: #f5f5f5;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .codice-box .title {
+            color: #2980b9;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .example-box {
+            background-color: #f0f8ff;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .example-box .title {
+            color: #3498db;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .accounting-entry .date {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .accounting-entry th {
+            background-color: #e9ecef;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .accounting-entry td {
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .accounting-entry .dare {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .accounting-entry .avere {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .timeline {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .timeline .title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .timeline-date {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .formula {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+        
+        .important {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .important .title {
+            color: #c0392b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 2px solid #fff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .ratei-attivi {
+            background: linear-gradient(135deg, #d5f4e6, #c6f6d5);
+        }
+        
+        .ratei-passivi {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+        }
+        
+        .risconti-attivi {
+            background: linear-gradient(135deg, #e8f4fd, #bee3f8);
+        }
+        
+        .risconti-passivi {
+            background: linear-gradient(135deg, #fdf2f8, #f3e8ff);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="5afm.html" class="back-button">← Torna Indietro</a>
+            <h1>RATEI E RISCONTI</h1>
+            <div class="subtitle">Registrazioni di Assestamento - Prof.ssa Elisa Pontivi</div>
+        </div>
+
+        <h2 class="section-title">1. Introduzione al Principio della Competenza Economica</h2>
+        
+        <div class="definition-box">
+            <div class="title">PRINCIPIO DELLA COMPETENZA ECONOMICA</div>
+            Il <strong>principio della competenza economica</strong> stabilisce che i costi e i ricavi devono essere attribuiti all'esercizio in cui si manifestano i relativi effetti economici, indipendentemente dal momento in cui avvengono le manifestazioni finanziarie (incassi e pagamenti).
+        </div>
+
+        <div class="important">
+            <div class="title">PROBLEMA DA RISOLVERE</div>
+            <p>Spesso i costi e i ricavi non coincidono perfettamente con l'anno solare. È necessario:</p>
+            <ul>
+                <li><strong>Stornare</strong> dall'esercizio le quote di competenza di esercizi futuri</li>
+                <li><strong>Aggiungere</strong> all'esercizio le quote di competenza già maturate ma non ancora registrate</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">2. Classificazione di Ratei e Risconti</h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">TIPO</th>
+                    <th style="width: 37.5%;">DEFINIZIONE</th>
+                    <th style="width: 37.5%;">QUANDO SI USA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="ratei-attivi"><strong>RATEI ATTIVI</strong></td>
+                    <td class="ratei-attivi">Ricavi di competenza dell'esercizio che verremo incassati nell'esercizio successivo</td>
+                    <td class="ratei-attivi">Ricavo già maturato ma non ancora incassato (es. interessi attivi su depositi bancari)</td>
+                </tr>
+                <tr>
+                    <td class="ratei-passivi"><strong>RATEI PASSIVI</strong></td>
+                    <td class="ratei-passivi">Costi di competenza dell'esercizio che verremo pagati nell'esercizio successivo</td>
+                    <td class="ratei-passivi">Costo già maturato ma non ancora pagato (es. stipendi, interessi passivi)</td>
+                </tr>
+                <tr>
+                    <td class="risconti-attivi"><strong>RISCONTI ATTIVI</strong></td>
+                    <td class="risconti-attivi">Costi già pagati ma di competenza dell'esercizio successivo</td>
+                    <td class="risconti-attivi">Pagamento già effettuato per servizi futuri (es. assicurazioni, affitti anticipati)</td>
+                </tr>
+                <tr>
+                    <td class="risconti-passivi"><strong>RISCONTI PASSIVI</strong></td>
+                    <td class="risconti-passivi">Ricavi già incassati ma di competenza dell'esercizio successivo</td>
+                    <td class="risconti-passivi">Incasso già ricevuto per servizi da prestare (es. affitti anticipati ricevuti)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">3. RATEI ATTIVI</h2>
+
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE</div>
+            I <strong>ratei attivi</strong> rappresentano ricavi di competenza dell'esercizio in corso che verranno incassati nell'esercizio successivo. Si tratta di crediti già maturati ma non ancora esigibili.
+        </div>
+
+        <div class="formula">
+            RATEO ATTIVO = (Ricavo Totale ÷ Periodo Totale) × Periodo di Competenza dell'Esercizio
+        </div>
+
+        <div class="example-box">
+            <div class="title">ESEMPIO - INTERESSI ATTIVI SU TITOLI DI STATO</div>
+            <p><strong>Situazione:</strong> Il 15 settembre 2023 l'azienda ha acquistato Buoni del Tesoro Poliennali (BTP) per un valore nominale di €80.000 al tasso annuo del 4,2%. Gli interessi (cedole) vengono liquidati il 15 settembre di ogni anno.</p>
+            
+            <div class="timeline">
+                <div class="title">CRONOLOGIA OPERAZIONE</div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 Set 2023</div>
+                    <div>Acquisto BTP €80.000 al 4,2% annuo</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">31 Dic 2023</div>
+                    <div>Fine esercizio - Maturati 3 mesi e 16 giorni di interessi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 Set 2024</div>
+                    <div>Liquidazione cedola per l'intero anno</div>
+                </div>
+            </div>
+            
+            <p><strong>Calcoli:</strong></p>
+            <ul>
+                <li>Interessi annui (cedola) = €80.000 × 4,2% = €3.360</li>
+                <li>Dal 15 settembre al 31 dicembre 2023 = 107 giorni</li>
+                <li>Interessi di competenza 2023 = €3.360 × 107/365 = €985,42</li>
+                <li>Interessi di competenza 2024 = €3.360 × 258/365 = €2.374,58</li>
+            </ul>
+        </div>
+
+        <h3 class="subsection-title">Scritture Contabili per Ratei Attivi</h3>
+
+        <div class="accounting-entry">
+            <div class="date">31 dicembre 2023 - Rilevazione rateo attivo</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ratei attivi</td>
+                    <td class="dare">985,42</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Interessi attivi su titoli</td>
+                    <td class="dare">-</td>
+                    <td class="avere">985,42</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">1° gennaio 2024 - Storno rateo (riapertura)</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Interessi attivi su titoli</td>
+                    <td class="dare">985,42</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Ratei attivi</td>
+                    <td class="dare">-</td>
+                    <td class="avere">985,42</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">15 settembre 2024 - Incasso cedola</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">3.360,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Interessi attivi su titoli</td>
+                    <td class="dare">-</td>
+                    <td class="avere">3.360,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">4. RATEI PASSIVI</h2>
+
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE</div>
+            I <strong>ratei passivi</strong> rappresentano costi di competenza dell'esercizio in corso che verranno pagati nell'esercizio successivo. Si tratta di debiti già maturati ma non ancora esigibili.
+        </div>
+
+        <div class="example-box">
+            <div class="title">ESEMPIO - INTERESSI PASSIVI SU MUTUO</div>
+            <p><strong>Situazione:</strong> L'azienda ha acceso un mutuo ipotecario di €200.000 al tasso fisso del 5,4% annuo. Gli interessi vengono pagati trimestralmente il 15° giorno di gennaio, aprile, luglio e ottobre.</p>
+            
+            <div class="timeline">
+                <div class="title">CRONOLOGIA OPERAZIONE</div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 Ott 2023</div>
+                    <div>Ultimo pagamento interessi trimestre luglio-settembre</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">31 Dic 2023</div>
+                    <div>Fine esercizio - Maturati interessi ottobre-dicembre (non ancora pagati)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 Gen 2024</div>
+                    <div>Pagamento interessi trimestre ottobre-dicembre 2023</div>
+                </div>
+            </div>
+            
+            <p><strong>Calcoli:</strong></p>
+            <ul>
+                <li>Interessi annui = €200.000 × 5,4% = €10.800</li>
+                <li>Interessi trimestrali = €10.800 ÷ 4 = €2.700</li>
+                <li>Dal 16 ottobre al 31 dicembre 2023 = 76 giorni</li>
+                <li>Interessi maturati = €2.700 × 76/92 = €2.230,43</li>
+            </ul>
+            <p><strong>Il costo è di competenza del 2023 ma il pagamento avverrà il 15 gennaio 2024</strong></p>
+        </div>
+
+        <h3 class="subsection-title">Scritture Contabili per Ratei Passivi</h3>
+
+        <div class="accounting-entry">
+            <div class="date">31 dicembre 2023 - Rilevazione rateo passivo</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Interessi passivi su mutui</td>
+                    <td class="dare">2.230,43</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Ratei passivi</td>
+                    <td class="dare">-</td>
+                    <td class="avere">2.230,43</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">1° gennaio 2024 - Storno rateo (riapertura)</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ratei passivi</td>
+                    <td class="dare">2.230,43</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Interessi passivi su mutui</td>
+                    <td class="dare">-</td>
+                    <td class="avere">2.230,43</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">15 gennaio 2024 - Pagamento interessi</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Interessi passivi su mutui</td>
+                    <td class="dare">2.700,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">-</td>
+                    <td class="avere">2.700,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">5. RISCONTI ATTIVI</h2>
+
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE</div>
+            I <strong>risconti attivi</strong> rappresentano costi già sostenuti (e quindi già registrati) nell'esercizio corrente, ma che sono di competenza dell'esercizio successivo. Devono essere "stornati" dal conto economico dell'anno in corso.
+        </div>
+
+        <div class="example-box">
+            <div class="title">ESEMPIO - PREMIO ASSICURAZIONE</div>
+            <p><strong>Situazione:</strong> Il 1° ottobre 2023 l'azienda paga il premio assicurazione annuale di €3.600 per il periodo 1° ottobre 2023 - 30 settembre 2024.</p>
+            
+            <div class="timeline">
+                <div class="title">CRONOLOGIA OPERAZIONE</div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1° Ott 2023</div>
+                    <div>Pagamento premio assicurazione €3.600 (12 mesi)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">31 Dic 2023</div>
+                    <div>Fine esercizio - Competenza solo 3 mesi (ott-dic)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">30 Set 2024</div>
+                    <div>Fine copertura assicurativa</div>
+                </div>
+            </div>
+            
+            <p><strong>Calcoli:</strong></p>
+            <ul>
+                <li>Premio mensile = €3.600 ÷ 12 = €300</li>
+                <li>Competenza 2023 (3 mesi) = €300 × 3 = €900</li>
+                <li>Competenza 2024 (9 mesi) = €300 × 9 = €2.700</li>
+            </ul>
+        </div>
+
+        <h3 class="subsection-title">Scritture Contabili per Risconti Attivi</h3>
+
+        <div class="accounting-entry">
+            <div class="date">1° ottobre 2023 - Pagamento premio assicurazione</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Premi di assicurazione</td>
+                    <td class="dare">3.600,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">-</td>
+                    <td class="avere">3.600,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">31 dicembre 2023 - Rilevazione risconto attivo</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Risconti attivi</td>
+                    <td class="dare">2.700,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Premi di assicurazione</td>
+                    <td class="dare">-</td>
+                    <td class="avere">2.700,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">1° gennaio 2024 - Storno risconto (riapertura)</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Premi di assicurazione</td>
+                    <td class="dare">2.700,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Risconti attivi</td>
+                    <td class="dare">-</td>
+                    <td class="avere">2.700,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">6. RISCONTI PASSIVI</h2>
+
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE</div>
+            I <strong>risconti passivi</strong> rappresentano ricavi già incassati nell'esercizio corrente ma che sono di competenza dell'esercizio successivo. Devono essere "stornati" dal conto economico dell'anno in corso.
+        </div>
+
+        <div class="example-box">
+            <div class="title">ESEMPIO - AFFITTO ATTIVO ANTICIPATO</div>
+            <p><strong>Situazione:</strong> Il 1° novembre 2023 l'azienda riceve €6.000 come canone di affitto per 6 mesi (novembre 2023 - aprile 2024).</p>
+            
+            <div class="timeline">
+                <div class="title">CRONOLOGIA OPERAZIONE</div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1° Nov 2023</div>
+                    <div>Incasso affitto €6.000 per 6 mesi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">31 Dic 2023</div>
+                    <div>Fine esercizio - Competenza solo 2 mesi (nov-dic)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">30 Apr 2024</div>
+                    <div>Fine periodo affitto</div>
+                </div>
+            </div>
+            
+            <p><strong>Calcoli:</strong></p>
+            <ul>
+                <li>Affitto mensile = €6.000 ÷ 6 = €1.000</li>
+                <li>Competenza 2023 (2 mesi) = €1.000 × 2 = €2.000</li>
+                <li>Competenza 2024 (4 mesi) = €1.000 × 4 = €4.000</li>
+            </ul>
+        </div>
+
+        <h3 class="subsection-title">Scritture Contabili per Risconti Passivi</h3>
+
+  <div class="accounting-entry">
+            <div class="date">1° novembre 2023 - Incasso affitto attivo </div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Banca</td>
+                    <td class="dare">6.000,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fitti attivi c/c</td>
+                    <td class="dare">-</td>
+                    <td class="avere">6.000,00</td>
+                </tr>
+            </table>
+        </div>
+
+
+
+     <div class="accounting-entry">
+            <div class="date">31 dicembre 2023 - Rilevazione risconto passivo</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Fitti attivi</td>
+                    <td class="dare">4.000,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Risconti passivi</td>
+                    <td class="dare">-</td>
+                    <td class="avere">4.000,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">1° gennaio 2024 - Storno risconto (riapertura)</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Risconti passivi</td>
+                    <td class="dare">4.000,00</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fitti attivi</td>
+                    <td class="dare">-</td>
+                    <td class="avere">4.000,00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">7. Riepilogo e Posizione nei Prospetti di Bilancio</h2>
+
+        <div class="important">
+            <div class="title">COLLOCAZIONE NEL BILANCIO</div>
+            <ul>
+                <li><strong>Ratei attivi e Risconti attivi:</strong> STATO PATRIMONIALE - ATTIVO (Crediti)</li>
+                <li><strong>Ratei passivi e Risconti passivi:</strong> STATO PATRIMONIALE - PASSIVO (Debiti)</li>
+            </ul>
+        </div>
+
+       
+</body>
+</html>

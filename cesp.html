@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Classificazione Contabile - Dare e Avere</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    body {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height:100vh; padding:10px; overflow-x:hidden;
+    }
+    .container{max-width:100%;margin:0 auto;}
+    .header{text-align:center;color:white;margin-bottom:20px;}
+    .header h1{font-size:1.6rem;margin-bottom:5px;text-shadow:2px 2px 4px rgba(0,0,0,0.3);}
+    .header p{font-size:0.9rem;opacity:0.9;}
+    .score-board{background:rgba(255,255,255,0.2);padding:15px;border-radius:20px;margin-bottom:15px;
+      backdrop-filter:blur(10px);color:white;}
+    .score-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+    .score-item{font-weight:bold;font-size:1rem;}
+    .progress-bar{background:rgba(255,255,255,0.3);height:8px;border-radius:10px;margin:8px 0;overflow:hidden;}
+    .progress-fill{background:#2ed573;height:100%;transition:width 0.5s;border-radius:10px;}
+    .reset-btn{background:#ff4757;color:white;border:none;padding:12px 20px;border-radius:25px;
+      cursor:pointer;font-weight:bold;font-size:0.9rem;width:100%;margin-top:8px;transition:all 0.3s;
+      border:2px solid transparent;}
+    .reset-btn:active{transform:scale(0.95);border:2px solid white;}
+    .instructions{background:rgba(255,255,255,0.15);color:white;padding:12px;border-radius:15px;
+      margin-bottom:15px;text-align:center;font-size:0.85rem;}
+    .documents-container{display:flex;flex-direction:column;gap:15px;margin-bottom:20px;}
+    .document{background:white;border-radius:15px;padding:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+    .document h2{text-align:center;margin-bottom:15px;color:#333;font-size:1.2rem;
+      border-bottom:3px solid #667eea;padding-bottom:8px;}
+    .sections{display:flex;flex-direction:row;gap:12px;justify-content:space-between;}
+    .section{flex:1;min-height:100px;border:3px dashed #ddd;border-radius:12px;padding:12px;
+      transition:all 0.3s;background:#f8f9fa;cursor:pointer;}
+    .section h3{text-align:center;margin-bottom:8px;color:#555;font-size:1rem;background:white;
+      padding:6px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .items-pool{background:white;border-radius:15px;padding:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+    .items-pool h2{text-align:center;margin-bottom:12px;color:#333;font-size:1.1rem;}
+    .items-container{display:flex;flex-direction:column;gap:10px;}
+    .item{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:16px;border-radius:12px;
+      cursor:pointer;user-select:none;transition:all 0.3s;font-weight:500;font-size:0.9rem;text-align:center;}
+    .item.selected{background:linear-gradient(135deg,#ffa502,#ff6348);transform:scale(1.05);}
+    .item.placed{cursor:not-allowed;opacity:0.8;}
+    .item.correct-placed{background:linear-gradient(135deg,#2ed573,#17a085);}
+    .item.incorrect-placed{background:linear-gradient(135deg,#ff4757,#c44569);}
+    .status-message{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,0.8);color:white;padding:10px 16px;border-radius:20px;font-size:0.85rem;z-index:500;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📚 Classificazione Contabile - Dare e Avere</h1>
+      <p>Classifica correttamente SP e CE!</p>
+    </div>
+
+    <div class="score-board">
+      <div class="score-row">
+        <div class="score-item">Punteggio: <span id="score">0</span></div>
+        <div class="score-item">Corrette: <span id="correct">0</span>/<span id="total">16</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <button class="reset-btn" onclick="resetGame()">🔄 Ricomincia Gioco</button>
+    </div>
+
+    <div class="instructions">
+      1️⃣ Tocca una voce<br>
+      2️⃣ Decidi se va in Dare o Avere<br>
+      3️⃣ Scegli se è SP o CE<br>
+      4️⃣ Classifica tutte le 16 voci!
+    </div>
+
+    <div class="documents-container">
+      <div class="document">
+        <h2>📊 STATO PATRIMONIALE</h2>
+        <div class="sections">
+          <div class="section" data-category="dare" data-document="SP" onclick="handleSectionClick(this)">
+            <h3>⬆️ DARE</h3>
+          </div>
+          <div class="section" data-category="avere" data-document="SP" onclick="handleSectionClick(this)">
+            <h3>⬇️ AVERE</h3>
+          </div>
+        </div>
+      </div>
+      <div class="document">
+        <h2>💰 CONTO ECONOMICO</h2>
+        <div class="sections">
+          <div class="section" data-category="dare" data-document="CE" onclick="handleSectionClick(this)">
+            <h3>⬆️ DARE</h3>
+          </div>
+          <div class="section" data-category="avere" data-document="CE" onclick="handleSectionClick(this)">
+            <h3>⬇️ AVERE</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="items-pool">
+      <h2>🎲 Voci da classificare</h2>
+      <div class="items-container" id="itemsContainer"></div>
+    </div>
+  </div>
+
+  <div class="status-message" id="statusMessage"></div>
+
+<script>
+  const allGameData = [
+    { name: "🏢 Immobilizzazioni materiali", category: "dare", document: "SP", points: 10 },
+    { name: "👥 Crediti verso clienti", category: "dare", document: "SP", points: 10 },
+    { name: "📦 Rimanenze di magazzino", category: "dare", document: "SP", points: 10 },
+    { name: "💰 Disponibilità liquide", category: "dare", document: "SP", points: 10 },
+    { name: "📝 Ratei attivi", category: "dare", document: "SP", points: 10 },
+    { name: "🏛️ Capitale sociale", category: "avere", document: "SP", points: 10 },
+    { name: "🚚 Debiti verso fornitori", category: "avere", document: "SP", points: 10 },
+    { name: "🏦 Debiti verso banche", category: "avere", document: "SP", points: 10 },
+    { name: "💎 Riserve", category: "avere", document: "SP", points: 10 },
+    { name: "📝 Ratei passivi", category: "avere", document: "SP", points: 10 },
+    { name: "📝 Ratei passivi", category: "avere", document: "SP", points: 10 },
+    { name: "🔧 Costi per materie prime", category: "dare", document: "CE", points: 10 },
+    { name: "⚙️ Costi per servizi", category: "dare", document: "CE", points: 10 },
+    { name: "👨‍💼 Costi del personale", category: "dare", document: "CE", points: 10 },
+    { name: "📉 Ammortamenti", category: "dare", document: "CE", points: 10 },
+    { name: "🏭 Fitti passivi", category: "dare", document: "CE", points: 10 },
+    { name: "💵 Ricavi delle vendite", category: "avere", document: "CE", points: 10 },
+    { name: "💹 Proventi finanziari", category: "avere", document: "CE", points: 10 },
+    { name: "➕ Altri ricavi", category: "avere", document: "CE", points: 10 },
+    { name: "📈 Plusvalenze", category: "avere", document: "CE", points: 10 },
+    { name: "🏠 Fitti attivi", category: "avere", document: "CE", points: 10 }
+  ];
+
+  let score = 0;
+  let correctAnswers = 0;
+  const totalItems = 16;
+  let selectedItem = null;
+
+  function initGame() {
+    score = 0;
+    correctAnswers = 0;
+    selectedItem = null;
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("correct").textContent = correctAnswers;
+    document.getElementById("total").textContent = totalItems;
+    document.getElementById("progressFill").style.width = "0%";
+
+    const container = document.getElementById("itemsContainer");
+    container.innerHTML = "";
+
+    const shuffled = [...allGameData].sort(() => Math.random() - 0.5).slice(0, totalItems);
+
+    shuffled.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "item";
+      el.textContent = item.name;
+      el.dataset.category = item.category;
+      el.dataset.document = item.document;
+      el.dataset.points = item.points;
+      el.addEventListener("click", () => handleItemClick(el));
+      container.appendChild(el);
+    });
+  }
+
+  function handleItemClick(el) {
+    if (el.classList.contains("placed")) return;
+    document.querySelectorAll(".item.selected").forEach(it => it.classList.remove("selected"));
+    el.classList.add("selected");
+    selectedItem = el;
+  }
+
+  function handleSectionClick(section) {
+    if (!selectedItem) return;
+    processPlacement(selectedItem, section);
+    selectedItem.classList.remove("selected");
+    selectedItem = null;
+  }
+
+  function processPlacement(item, section) {
+    const itemCat = item.dataset.category;
+    const itemDoc = item.dataset.document;
+    const secCat = section.dataset.category;
+    const secDoc = section.dataset.document;
+    let pts = parseInt(item.dataset.points);
+
+    item.classList.add("placed");
+
+    if (itemCat === secCat && itemDoc === secDoc) {
+      item.classList.add("correct-placed");
+      score += pts;
+      correctAnswers++;
+      showStatus(`✅ Corretto! +${pts} punti`);
+    } else {
+      item.classList.add("incorrect-placed");
+      pts = Math.max(1, Math.floor(pts / 2));
+      item.dataset.points = pts;
+      showStatus(`❌ Sbagliato! Ora vale ${pts} punti`);
+      setTimeout(() => {
+        item.classList.remove("incorrect-placed", "placed");
+      }, 1500);
+      return;
+    }
+
+    updateScore();
+  }
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("correct").textContent = correctAnswers;
+    const progress = (correctAnswers / totalItems) * 100;
+    document.getElementById("progressFill").style.width = progress + "%";
+  }
+
+  function showStatus(msg) {
+    const s = document.getElementById("statusMessage");
+    s.textContent = msg;
+    s.style.opacity = 1;
+    setTimeout(() => {
+      s.style.opacity = 0;
+    }, 2000);
+  }
+
+  function resetGame() {
+    initGame();
+  }
+
+  window.onload = initGame;
+</script>
+</body>
+</html>
+

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 1 - Imprenditore, Impresa, Azienda, Società</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  padding: 40px 20px; /* margine interno più ampio */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px; /* margine interno al contenitore */
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+        
+        .header {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+       .back-button {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .teacher-notes {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.3);
+        }
+        
+        .teacher-notes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.4);
+        }
+        
+        .teacher-notes h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .teacher-notes p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .content-block {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #38a169;
+            transition: all 0.3s ease;
+        }
+        
+        .content-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .content-block h3 {
+            color: #2d3748;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .definition-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .definition-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .codice-box {
+            background-color: #f5f5f5;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .codice-box .title {
+            color: #2980b9;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tooltip {
+            position: relative;
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            z-index: 1000;
+            font-size: 0.9em;
+            font-weight: normal;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tooltip:hover::before {
+            content: "";
+            position: absolute;
+            bottom: 92%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c3e50;
+            z-index: 1000;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: #81e6d9;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="5afm.html" class="back-button">← Torna Indietro</a>
+            <h1>Modulo 1: Imprenditore, Impresa, Azienda, Società</h1>
+            <p>Economia Aziendale - Prof.ssa Elisa Pontivi</p>
+        </div>
+        
+      <div class="content">
+    <!-- Pulsante Appunti Insegnante -->
+    <div class="teacher-notes" onclick="window.location.href='imprenditore.html'" style="cursor:pointer;">
+        <h3>📝 APPUNTI INSEGNANTE</h3>
+        <p>Clicca qui per scaricare gli appunti presi in aula</p>
+    </div>
+</div>
+
+            
+            <!-- 1. L'IMPRENDITORE -->
+            <h2 class="section-title">1. L'Imprenditore</h2>
+        
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                L'<strong>imprenditore</strong> è colui che esercita <span class="tooltip" data-tooltip="In modo abituale, continuativo e non occasionale">professionalmente</span> un'<span class="tooltip" data-tooltip="Attività che ha come scopo la copertura dei costi con i ricavi">attività economica</span> <span class="tooltip" data-tooltip="Coordinamento sistematico di fattori produttivi (lavoro, capitale, tecnologia)">organizzata</span> al fine della <span class="tooltip" data-tooltip="Creazione o scambio di beni materiali o servizi">produzione o dello scambio di beni o di servizi</span>.
+            </div>
+            
+            <div class="codice-box">
+                <div class="title">CODICE CIVILE ITALIANO</div>
+                <strong>Art. 2082 del Codice Civile - Imprenditore</strong><br>
+                "È imprenditore chi esercita professionalmente un'attività economica organizzata al fine della produzione o dello scambio di beni o di servizi."
+            </div>
+            
+            <div class="explanation-box">
+                <div class="title">SPIEGAZIONE</div>
+                <strong>Elementi caratteristici dell'imprenditore:</strong>
+                <ul>
+                    <li><strong>Economicità</strong>: coprire i costi con i ricavi</li>
+                    <li><strong>Professionalità</strong>: esercitata in modo abituale e continuativo</li>
+                    <li><strong>Organizzazione</strong>: coordinamento di fattori produttivi (lavoro, capitale, tecnologia)</li>
+                    <li><strong>Finalità produttiva</strong>: produzione o scambio di beni/servizi</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 2. L'IMPRESA -->
+            <h2 class="section-title">2. L'Impresa</h2>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                L'<strong>impresa</strong> è l'attività economica organizzata dall'imprenditore per la produzione o lo scambio di beni o servizi. È strettamente collegata alla definizione di imprenditore.
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 3. L'AZIENDA -->
+            <h2 class="section-title">3. L'Azienda</h2>
+            
+            <div class="codice-box">
+                <div class="title">CODICE CIVILE ITALIANO</div>
+                <strong>Art. 2555 del Codice Civile - Azienda</strong><br>
+                "L'azienda è il complesso dei beni organizzati dall'imprenditore per l'esercizio dell'impresa."
+            </div>
+            
+            <div class="explanation-box">
+                <div class="title">SPIEGAZIONE</div>
+                L'azienda è il mezzo attraverso il quale l'imprenditore svolge attività d'impresa.
+                <br><br>
+                <strong>Distinzione importante:</strong>
+                <ul>
+                    <li><strong>Imprenditore</strong>: il soggetto che esercita l'attività</li>
+                    <li><strong>Impresa</strong>: l'attività svolta dall'imprenditore</li>
+                    <li><strong>Azienda</strong>: il complesso di beni organizzati per l'esercizio dell'impresa</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 4. LE SOCIETÀ -->
+            <h2 class="section-title">4. Le Società</h2>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                La <strong>società</strong> è il contratto con il quale due o più persone conferiscono beni o servizi per l'esercizio in comune di un'attività economica allo scopo di dividerne gli utili.
+            </div>
+            
+            <div class="codice-box">
+                <div class="title">CODICE CIVILE ITALIANO</div>
+                <strong>Art. 2247 del Codice Civile - Contratto di società</strong><br>
+                "Con il contratto di società due o più persone conferiscono beni o servizi per l'esercizio in comune di un'attività economica allo scopo di dividerne gli utili."
+            </div>
+
+            <!-- 5. CLASSIFICAZIONE DELLE SOCIETÀ -->
+            <h3 class="subsection-title">4.1 Classificazione delle Società</h3>
+            
+            <div class="explanation-box">
+                <div class="title">DIFFERENZA PRINCIPALE: RESPONSABILITÀ DEI SOCI</div>
+                
+                <p><strong>SOCIETÀ DI PERSONE</strong></p>
+                <ul>
+                    <li>I soci rispondono <strong>illimitatamente</strong> e <strong>solidalmente</strong> per i debiti sociali</li>
+                    <li>Il patrimonio personale dei soci può essere aggredito dai creditori della società</li>
+                </ul>
+                
+                <p><strong>SOCIETÀ DI CAPITALI</strong></p>
+                <ul>
+                    <li>I soci rispondono <strong>limitatamente</strong> alla quota conferita</li>
+                    <li>Il patrimonio personale dei soci non può essere aggredito dai creditori della società</li>
+                </ul>
+            </div>
+            
+            <div class="definition-box">
+                <div class="title">TIPOLOGIE DI SOCIETÀ</div>
+                
+                <p><strong>SOCIETÀ DI PERSONE:</strong></p>
+                <ul>
+                    <li><strong>Società semplice (S.s.)</strong>: per attività non commerciali</li>
+                    <li><strong>Società in nome collettivo (S.n.c.)</strong>: per attività commerciali</li>
+                    <li><strong>Società in accomandita semplice (S.a.s.)</strong>: con soci accomandatari (responsabilità illimitata) e accomandanti (responsabilità limitata)</li>
+                </ul>
+                
+                <p><strong>SOCIETÀ DI CAPITALI:</strong></p>
+                <ul>
+                    <li><strong>Società per azioni (S.p.A.)</strong>: capitale diviso in azioni, può ricorrere al mercato dei capitali</li>
+                    <li><strong>Società a responsabilità limitata (S.r.l.)</strong>: capitale diviso in quote, struttura più semplificata</li>
+                    <li><strong>Società in accomandita per azioni (S.a.p.a.)</strong>: con soci accomandatari e accomandanti, capitale in azioni</li>
+                </ul>
+                
+                <p><strong>SOCIETÀ COOPERATIVE:</strong></p>
+                <ul>
+                    <li><strong>Società cooperativa</strong>: scopo mutualistico anziché lucrativo</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 6. L'IMPRESA COMMERCIALE -->
+            <h2 class="section-title">5. L'Impresa Commerciale</h2>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                L'<strong>impresa commerciale</strong> è quella che ha per oggetto una o più delle seguenti attività <strong>(Art. 2195 C.C.)</strong>:
+                <ul>
+                    <li><span class="tooltip" data-tooltip="Produzione di beni materiali o erogazione di servizi">Attività industriale diretta alla produzione di beni o servizi</span></li>
+                    <li><span class="tooltip" data-tooltip="Compravendita di beni senza trasformazione">Attività intermediaria nella circolazione dei beni</span></li>
+                    <li><span class="tooltip" data-tooltip="Trasporto di persone o merci">Attività di trasporto per terra, per acqua o per aria</span></li>
+                    <li><span class="tooltip" data-tooltip="Raccolta di risparmio e concessione di crediti / copertura di rischi">Attività bancaria o assicurativa</span></li>
+                    <li><span class="tooltip" data-tooltip="Attività di supporto alle precedenti (es. pubblicità, consulenza)">Altre attività ausiliarie delle precedenti</span></li>
+                </ul>
+            </div>
+            
+            <div class="codice-box">
+                <div class="title">CODICE CIVILE ITALIANO</div>
+                <strong>Art. 2195 del Codice Civile - Imprenditori soggetti a registrazione</strong><br>
+                "Sono soggetti all'obbligo dell'iscrizione nel registro delle imprese gli imprenditori che esercitano un'attività commerciale."
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Prof.ssa Elisa Pontivi | <a href="mailto:elisa.pontivi@istituto-pascoli.it">elisa.pontivi@istituto-pascoli.it</a></p>
+        </div>
+    </div>
+    
+    <script>
+        function downloadNotes() {
+            // Qui puoi implementare il download degli appunti
+            // Per ora mostra un alert
+            alert('Gli appunti dell\'insegnante saranno disponibili a breve. Controlla la tua email o chiedi alla prof.ssa Pontivi.');
+            
+            // In alternativa, puoi aprire un link diretto al file:
+            // window.open('appunti-modulo1.pdf', '_blank');
+        }
+    </script>
+</body>
+</html>

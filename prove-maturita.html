@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prove di Maturità Anni Precedenti - Economia Aziendale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .exam-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #e53e3e;
+            transition: all 0.3s ease;
+        }
+        
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .exam-card h3 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .exam-info {
+            margin-bottom: 20px;
+        }
+        
+        .exam-info p {
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+        
+        .exam-info strong {
+            color: #2d3748;
+        }
+        
+        .exam-content {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .exam-content h4 {
+            color: #e53e3e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .case-study {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3182ce;
+        }
+        
+        .case-study h5 {
+            color: #2c5aa0;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .questions-list {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .questions-list h5 {
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .questions-list ol {
+            padding-left: 20px;
+        }
+        
+        .questions-list li {
+            margin: 8px 0;
+            color: #4a5568;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .download-section h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .download-section p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .indicators {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .indicators h5 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+        
+        .indicators table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .indicators th, .indicators td {
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .indicators th {
+            background: #fed7d7;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: #81e6d9;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="5afm.html" class="back-button">← Torna Indietro</a>
+            <h1>📚 Prove di Maturità Anni Precedenti</h1>
+            <p>Economia Aziendale - AFM - Prof.ssa Elisa Pontivi</p>
+        </div>
+        
+        <div class="content">
+            <div class="intro">
+                <p>Qui troverete le tracce ufficiali delle prove di Economia Aziendale degli ultimi anni per prepararvi al meglio all'Esame di Stato. Ogni prova include la situazione operativa e i quesiti della seconda parte.</p>
+            </div>
+            
+                   <!-- Sezione Download -->
+<div class="download-section">
+    <h3>📥 Download Tracce Complete</h3>
+    <p>Scarica i file PDF originali delle prove per studiare nel dettaglio ogni traccia</p>
+    <a href="2025.pdf" class="download-btn" download>📄 Prova 2025 PDF</a><br>
+    <a href="2024.pdf" class="download-btn" download>📄 Prova 2024 PDF</a><br>
+    <a href="2023.pdf" class="download-btn" download>📄 Prova 2023 PDF</a>
+</div>
+
+        
+        <div class="footer">
+            <p>Prof.ssa Elisa Pontivi | <a href="mailto:elisa.pontivi@istituto-pascoli.it">elisa.pontivi@istituto-pascoli.it</a></p>
+        </div>
+    </div>
+    
+    </body>
+</html>
