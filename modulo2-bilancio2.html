@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 2 - Introduzione al Bilancio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  padding: 40px 20px; /* margine interno più ampio */
+}
+
+@media (max-width: 768px) {
+  .comparison-table {
+    font-size: 0.9em;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px; /* margine interno al contenitore */
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+        
+        .header {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+      .back-button {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .teacher-notes {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.3);
+        }
+        
+        .teacher-notes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.4);
+        }
+        
+        .teacher-notes h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .teacher-notes p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .definition-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .definition-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .codice-box {
+            background-color: #f5f5f5;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .codice-box .title {
+            color: #2980b9;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stato-patrimoniale-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 1em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stato-patrimoniale-table th,
+        .stato-patrimoniale-table td {
+            border: 2px solid #fff;
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        .stato-patrimoniale-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        
+        .attivo-row {
+            background: linear-gradient(135deg, #e8f8f5, #d5f4e6);
+        }
+        
+        .passivo-row {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+        }
+        
+        .voce-principale {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .conto-economico-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .conto-economico-table th,
+        .conto-economico-table td {
+            border: 2px solid #fff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .conto-economico-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .ricavi-section {
+            background: linear-gradient(135deg, #e8f8f5, #d5f4e6);
+        }
+        
+        .costi-section {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+        }
+        
+        .tooltip {
+            position: relative;
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            z-index: 1000;
+            font-size: 0.9em;
+            font-weight: normal;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tooltip:hover::before {
+            content: "";
+            position: absolute;
+            bottom: 92%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c3e50;
+            z-index: 1000;
+        }
+        
+        .formula {
+            color: #2980b9;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .codice-link {
+            color: #2980b9;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        .codice-link:hover {
+            color: #1a5490;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: #81e6d9;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="3afm.html" class="back-button">← Torna Indietro</a>
+            <h1>Modulo 2: Introduzione al Bilancio</h1>
+            <p>Economia Aziendale - Prof.ssa Elisa Pontivi</p>
+        </div>
+        
+        
+            
+            <!-- 1. IL BILANCIO D'ESERCIZIO -->
+            <h2 class="section-title">6. Il Bilancio d'Esercizio</h2>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE E COMPOSIZIONE</div>
+                Il <strong>bilancio d'esercizio</strong> è il <span class="tooltip" data-tooltip="Insieme di prospetti contabili che riassumono la gestione aziendale">documento contabile</span> che rappresenta la <span class="tooltip" data-tooltip="Composizione e valore del patrimonio aziendale">situazione patrimoniale</span>, <span class="tooltip" data-tooltip="Capacità di far fronte agli impegni finanziari">finanziaria</span> ed <span class="tooltip" data-tooltip="Capacità di generare reddito">economica</span> dell'impresa al termine di ciascun <span class="tooltip" data-tooltip="Generalmente un anno solare o fiscale">periodo amministrativo</span>.
+                
+                <p><strong>Il bilancio d'esercizio è composto da <em>(<a href="https://www.brocardi.it/codice-civile/libro-quinto/titolo-v/capo-v/sezione-ix/art2423.html" target="_blank" class="codice-link">Art. 2423 C.C.</a>)</em>:</strong></p>
+                <ul>
+                    <li><strong>Stato Patrimoniale</strong></li>
+                    <li><strong>Conto Economico</strong></li>
+                    <li><strong>Rendiconto Finanziario</strong> <em>(per determinate società)</em></li>
+                    <li><strong>Nota Integrativa</strong></li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 2. LO STATO PATRIMONIALE -->
+            <h3 class="subsection-title">6.1 Lo Stato Patrimoniale</h3>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                Lo <strong>Stato Patrimoniale</strong> è il documento che rappresenta la composizione del patrimonio aziendale in un determinato momento, evidenziando <strong>(<a href="https://www.brocardi.it/codice-civile/libro-quinto/titolo-v/capo-v/sezione-ix/art2424.html" target="_blank" class="codice-link">Art. 2424 C.C.</a>)</strong>:
+                <ul>
+                    <li>Le <strong>attività</strong> (investimenti) nella sezione di sinistra</li>
+                    <li>Le <strong>passività</strong> e il <strong>patrimonio netto</strong> (fonti di finanziamento) nella sezione di destra</li>
+                </ul>
+                <p><strong>Relazione fondamentale:</strong> ATTIVITÀ - PASSIVITÀ = PATRIMONIO NETTO</p>
+            </div>
+            
+            <div class="explanation-box">
+                <div class="title">STATO PATRIMONIALE - VOCI PRINCIPALI</div>
+                
+                <table class="stato-patrimoniale-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">ATTIVO</th>
+                            <th style="width: 50%;">PASSIVO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="attivo-row">
+                                <div class="voce-principale">A) CREDITI VERSO SOCI</div>
+                            </td>
+                            <td class="passivo-row">
+                                <div class="voce-principale">A) PATRIMONIO NETTO</div>
+                                <ul style="margin: 8px 0;">
+                                    <li>Capitale sociale</li>
+                                    <li>Riserve</li>
+                                    <li>Utile/Perdita d'esercizio</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="attivo-row">
+                                <div class="voce-principale">B) IMMOBILIZZAZIONI</div>
+                                <ul style="margin: 8px 0;">
+                                    <li><strong>Immateriali:</strong> brevetti, marchi, avviamento</li>
+                                    <li><strong>Materiali:</strong> terreni, fabbricati, impianti</li>
+                                    <li><strong>Finanziarie:</strong> partecipazioni, titoli</li>
+                                </ul>
+                            </td>
+                            <td class="passivo-row">
+                                <div class="voce-principale">B) FONDI PER RISCHI E ONERI</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="attivo-row">
+                                <div class="voce-principale">C) ATTIVO CIRCOLANTE</div>
+                                <ul style="margin: 8px 0;">
+                                    <li><strong>Rimanenze:</strong> materie prime, prodotti finiti</li>
+                                    <li><strong>Crediti:</strong> verso clienti, verso altri</li>
+                                    <li><strong>Disponibilità liquide:</strong> cassa, banche</li>
+                                </ul>
+                            </td>
+                            <td class="passivo-row">
+                                <div class="voce-principale">C) TRATTAMENTO DI FINE RAPPORTO</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="attivo-row">
+                                <div class="voce-principale">D) RATEI E RISCONTI</div>
+                            </td>
+                            <td class="passivo-row">
+                                <div class="voce-principale">D) DEBITI</div>
+                                <ul style="margin: 8px 0;">
+                                    <li>Verso banche</li>
+                                    <li>Verso fornitori</li>
+                                    <li>Tributari e previdenziali</li>
+                                    <li>Altri debiti</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="attivo-row"></td>
+                            <td class="passivo-row">
+                                <div class="voce-principale">E) RATEI E RISCONTI</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="formula">TOTALE ATTIVO = TOTALE PASSIVO</div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 3. IL CONTO ECONOMICO -->
+            <h3 class="subsection-title">6.2 Il Conto Economico</h3>
+            
+            <div class="definition-box">
+                <div class="title">DEFINIZIONE</div>
+                Il <strong>Conto Economico</strong> è il documento che rileva i costi e i ricavi di competenza dell'esercizio, determinando il risultato economico conseguito dall'impresa in un determinato periodo <strong>(<a href="https://www.brocardi.it/codice-civile/libro-quinto/titolo-v/capo-v/sezione-ix/art2425.html" target="_blank" class="codice-link">Art. 2425 C.C.</a>)</strong>.
+                <br><br>
+                <strong>IMPORTANTE:</strong> Il Conto Economico deve essere redatto in <strong>forma scalare</strong>, non a sezioni contrapposte come mostrato nella tabella seguente (che è utilizzata solo a scopo didattico). La forma scalare prevede la presentazione progressiva di ricavi, costi e risultati intermedi.
+            </div>
+            
+            <div class="explanation-box">
+                <div class="title">CONTO ECONOMICO A SEZIONI CONTRAPPOSTE - SCHEMA CODICE CIVILE</div>
+                
+                <table class="conto-economico-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">COSTI</th>
+                            <th style="width: 50%;">RICAVI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="costi-section">
+                                <strong>B) COSTI DELLA PRODUZIONE</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>6) per materie prime, sussidiarie, di consumo e merci</li>
+                                    <li>7) per servizi</li>
+                                    <li>8) per godimento di beni di terzi</li>
+                                    <li>9) per il personale</li>
+                                    <li>10) ammortamenti e svalutazioni</li>
+                                    <li>11) variazioni delle rimanenze</li>
+                                    <li>12) accantonamenti per rischi</li>
+                                    <li>13) altri accantonamenti</li>
+                                    <li>14) oneri diversi di gestione</li>
+                                </ul>
+                            </td>
+                            <td class="ricavi-section">
+                                <strong>A) VALORE DELLA PRODUZIONE</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>1) ricavi delle vendite e delle prestazioni</li>
+                                    <li>2) variazioni delle rimanenze di prodotti in corso di lavorazione, semilavorati e finiti</li>
+                                    <li>3) variazioni dei lavori in corso su ordinazione</li>
+                                    <li>4) incrementi di immobilizzazioni per lavori interni</li>
+                                    <li>5) altri ricavi e proventi</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costi-section">
+                                <strong>C) PROVENTI E ONERI FINANZIARI</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>17) interessi e altri oneri finanziari</li>
+                                    <li>17-bis) utili e perdite su cambi</li>
+                                </ul>
+                            </td>
+                            <td class="ricavi-section">
+                                <strong>C) PROVENTI E ONERI FINANZIARI</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>15) proventi da partecipazioni</li>
+                                    <li>16) altri proventi finanziari</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costi-section">
+                                <strong>D) RETTIFICHE DI VALORE DI ATTIVITÀ E PASSIVITÀ FINANZIARIE</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>19) svalutazioni</li>
+                                </ul>
+                            </td>
+                            <td class="ricavi-section">
+                                <strong>D) RETTIFICHE DI VALORE DI ATTIVITÀ E PASSIVITÀ FINANZIARIE</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>18) rivalutazioni</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costi-section">
+                                <strong>E) PROVENTI E ONERI STRAORDINARI</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>21) oneri straordinari</li>
+                                </ul>
+                            </td>
+                            <td class="ricavi-section">
+                                <strong>E) PROVENTI E ONERI STRAORDINARI</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>20) proventi straordinari</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costi-section">
+                                <strong>22) IMPOSTE SUL REDDITO DELL'ESERCIZIO</strong><br>
+                                <ul style="margin: 8px 0; padding-left: 15px;">
+                                    <li>imposte correnti, differite e anticipate</li>
+                                </ul>
+                            </td>
+                            <td class="ricavi-section" style="text-align: center; vertical-align: middle;">
+                                <strong style="color: #2c3e50; font-size: 1.1em;">RISULTATO D'ESERCIZIO</strong><br>
+                                <em style="color: #27ae60;">(23) Utile o Perdita dell'esercizio</em>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="formula">RICAVI - COSTI = RISULTATO D'ESERCIZIO</div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 4. PRINCIPI DI REDAZIONE DEL BILANCIO -->
+            <h2 class="section-title">7. Principi di Redazione del Bilancio</h2>
+
+            <div class="definition-box">
+                <div class="title">PRINCIPI GENERALI (<a href="https://www.brocardi.it/codice-civile/libro-quinto/titolo-v/capo-v/sezione-ix/art2423bis.html" target="_blank" class="codice-link">ART. 2423-BIS C.C.</a>)</div>
+                <ul>
+                    <li><strong>Chiarezza</strong>: il bilancio deve essere redatto con chiarezza</li>
+                    <li><strong>Verità</strong>: deve rappresentare in modo veritiero la situazione patrimoniale e finanziaria</li>
+                    <li><strong>Correttezza</strong>: deve rappresentare in modo corretto il risultato economico dell'esercizio</li>
+                </ul>
+            </div>
+
+            <div class="explanation-box">
+                <div class="title">PRINCIPI SPECIFICI DI REDAZIONE</div>
+                <ul>
+                    <li><strong>Prudenza</strong>: non iscrivere utili non realizzati, tenere conto di perdite anche se non definitivamente realizzate</li>
+                    <li><strong>Continuità</strong>: valutazione delle voci nell'ipotesi di continuazione dell'attività</li>
+                    <li><strong>Competenza economica</strong>: rilevare ricavi e costi nell'esercizio di competenza</li>
+                    <li><strong>Costanza nei criteri di valutazione</strong>: non modificare i criteri da un esercizio all'altro</li>
+                    <li><strong>Rilevanza e materialità</strong>: considerare solo gli aspetti significativi</li>
+                    <li><strong>Comparabilità</strong>: presentare i dati dell'esercizio precedente</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- 5. FINALITÀ E DESTINATARI DEL BILANCIO -->
+            <h2 class="section-title">8. Finalità e Destinatari del Bilancio</h2>
+
+            <div class="definition-box">
+                <div class="title">FINALITÀ DEL BILANCIO</div>
+                <ul>
+                    <li><strong>Informativa esterna</strong>: comunicare la situazione aziendale a soggetti esterni</li>
+                    <li><strong>Tutela dei creditori</strong>: proteggere gli interessi dei terzi</li>
+                    <li><strong>Determinazione del reddito distribuibile</strong>: calcolare gli utili distribuibili ai soci</li>
+                    <li><strong>Base per il calcolo delle imposte</strong>: determinare il reddito imponibile</li>
+                    <li><strong>Controllo della gestione</strong>: valutare l'operato degli amministratori</li>
+                </ul>
+            </div>
+
+            <div class="explanation-box">
+                <div class="title">DESTINATARI DEL BILANCIO</div>
+                <p><strong>SOGGETTI INTERNI:</strong></p>
+                <ul>
+                    <li><strong>Soci/Azionisti</strong>: per valutare l'investimento e decidere sulla distribuzione degli utili</li>
+                    <li><strong>Amministratori</strong>: per valutare l'andamento della gestione</li>
+                    <li><strong>Sindaci/Revisori</strong>: per il controllo contabile</li>
+                </ul>
+                
+                <p><strong>SOGGETTI ESTERNI:</strong></p>
+                <ul>
+                    <li><strong>Creditori e Fornitori</strong>: per valutare la solvibilità dell'impresa</li>
+                    <li><strong>Banche e Finanziatori</strong>: per decidere sulla concessione di crediti</li>
+                    <li><strong>Clienti</strong>: per valutare la continuità aziendale</li>
+                    <li><strong>Concorrenti</strong>: per analisi competitive</li>
+                    <li><strong>Investitori potenziali</strong>: per decisioni di investimento</li>
+                    <li><strong>Dipendenti e Sindacati</strong>: per la contrattazione collettiva</li>
+                    <li><strong>Stato e Enti pubblici</strong>: per il controllo fiscale e statistico</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Prof.ssa Elisa Pontivi | <a href="mailto:elisa.pontivi@istituto-pascoli.it">elisa.pontivi@istituto-pascoli.it</a></p>
+        </div>
+    </div>
+    
+    <script>
+        function downloadNotes() {
+            alert('Gli appunti dell\'insegnante saranno disponibili a breve. Controlla la tua email o chiedi alla prof.ssa Pontivi.');
+        }
+    </script>
+</body>
+</html>

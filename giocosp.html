@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Stato Patrimoniale - Classificazione</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    body {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height:100vh; padding:10px; overflow-x:hidden;
+    }
+    .container{max-width:100%;margin:0 auto;}
+    .header{text-align:center;color:white;margin-bottom:20px;}
+    .header h1{font-size:1.6rem;margin-bottom:5px;text-shadow:2px 2px 4px rgba(0,0,0,0.3);}
+    .header p{font-size:0.9rem;opacity:0.9;}
+    .score-board{background:rgba(255,255,255,0.2);padding:15px;border-radius:20px;margin-bottom:15px;
+      backdrop-filter:blur(10px);color:white;}
+    .score-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+    .score-item{font-weight:bold;font-size:1rem;}
+    .progress-bar{background:rgba(255,255,255,0.3);height:8px;border-radius:10px;margin:8px 0;overflow:hidden;}
+    .progress-fill{background:#2ed573;height:100%;transition:width 0.5s;border-radius:10px;}
+    .reset-btn{background:#ff4757;color:white;border:none;padding:12px 20px;border-radius:25px;
+      cursor:pointer;font-weight:bold;font-size:0.9rem;width:100%;margin-top:8px;transition:all 0.3s;
+      border:2px solid transparent;}
+    .reset-btn:active{transform:scale(0.95);border:2px solid white;}
+    .instructions{background:rgba(255,255,255,0.15);color:white;padding:12px;border-radius:15px;
+      margin-bottom:15px;text-align:center;font-size:0.85rem;}
+    
+    .stato-patrimoniale{background:white;border-radius:15px;padding:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);margin-bottom:20px;}
+    .sp-header{text-align:center;margin-bottom:15px;color:#333;font-size:1.2rem;
+      border-bottom:3px solid #667eea;padding-bottom:8px;}
+    .sp-content{display:flex;gap:15px;}
+    .sp-side{flex:1;}
+    .sp-side h3{text-align:center;margin-bottom:12px;color:#555;font-size:1.1rem;background:#f8f9fa;
+      padding:8px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    
+    .macro-class{background:#f8f9fa;border:2px dashed #ddd;border-radius:10px;margin-bottom:10px;
+      padding:10px;transition:all 0.3s;cursor:pointer;min-height:80px;}
+    .macro-class:hover{border-color:#667eea;background:#e8f0ff;}
+    .macro-class.highlight{border-color:#2ed573;background:#e8f8f0;transform:scale(1.02);}
+    .macro-class-title{font-weight:bold;color:#333;font-size:0.9rem;margin-bottom:5px;text-align:center;}
+    .macro-class-subtitle{font-size:0.8rem;color:#666;text-align:center;margin-bottom:8px;}
+    .placed-items{display:flex;flex-direction:column;gap:4px;}
+    
+    .items-pool{background:white;border-radius:15px;padding:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+    .items-pool h2{text-align:center;margin-bottom:12px;color:#333;font-size:1.1rem;}
+    .items-container{display:flex;flex-direction:column;gap:10px;}
+    .item{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:16px;border-radius:12px;
+      cursor:pointer;user-select:none;transition:all 0.3s;font-weight:500;font-size:0.9rem;text-align:center;}
+    .item.selected{background:linear-gradient(135deg,#ffa502,#ff6348);transform:scale(1.05);}
+    .item.placed{cursor:not-allowed;opacity:0.8;font-size:0.8rem;padding:8px;margin:2px 0;border-radius:6px;}
+    .item.correct-placed{background:linear-gradient(135deg,#2ed573,#17a085);}
+    .item.incorrect-placed{background:linear-gradient(135deg,#ff4757,#c44569);}
+    .status-message{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,0.8);color:white;padding:10px 16px;border-radius:20px;font-size:0.85rem;z-index:500;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Stato Patrimoniale - Classificazione</h1>
+      <p>Classifica le voci nelle macroclassi corrette!</p>
+    </div>
+
+    <div class="score-board">
+      <div class="score-row">
+        <div class="score-item">Punteggio: <span id="score">0</span></div>
+        <div class="score-item">Corrette: <span id="correct">0</span>/<span id="total">16</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <button class="reset-btn" onclick="resetGame()">🔄 Ricomincia Gioco</button>
+    </div>
+
+    <div class="instructions">
+      1️⃣ Tocca una voce<br>
+      2️⃣ Clicca sulla macroclasse corretta (A, B, C, D, E)<br>
+      3️⃣ Classifica tutte le voci dello Stato Patrimoniale!
+    </div>
+
+    <div class="stato-patrimoniale">
+      <h2 class="sp-header">📊 STATO PATRIMONIALE</h2>
+      <div class="sp-content">
+        <!-- ATTIVO -->
+        <div class="sp-side">
+          <h3>⬆️ ATTIVO</h3>
+          
+          <div class="macro-class" data-class="A" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">A) Crediti verso soci</div>
+            <div class="placed-items" id="items-A"></div>
+          </div>
+          
+          <div class="macro-class" data-class="B" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">B) Immobilizzazioni</div>
+            <div class="placed-items" id="items-B"></div>
+          </div>
+          
+          <div class="macro-class" data-class="C" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">C) Attivo circolante</div>
+            <div class="placed-items" id="items-C"></div>
+          </div>
+          
+          <div class="macro-class" data-class="D" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">D) Ratei e risconti</div>
+            <div class="placed-items" id="items-D"></div>
+          </div>
+        </div>
+        
+        <!-- PASSIVO -->
+        <div class="sp-side">
+          <h3>⬇️ PASSIVO</h3>
+          
+          <div class="macro-class" data-class="A_PASS" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">A) Patrimonio netto</div>
+            <div class="placed-items" id="items-A_PASS"></div>
+          </div>
+          
+          <div class="macro-class" data-class="B_PASS" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">B) Fondi rischi e oneri</div>
+            <div class="placed-items" id="items-B_PASS"></div>
+          </div>
+          
+          <div class="macro-class" data-class="C_PASS" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">C) TFR</div>
+            <div class="placed-items" id="items-C_PASS"></div>
+          </div>
+          
+          <div class="macro-class" data-class="D_PASS" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">D) Debiti</div>
+            <div class="placed-items" id="items-D_PASS"></div>
+          </div>
+          
+          <div class="macro-class" data-class="E_PASS" onclick="handleMacroClassClick(this)">
+            <div class="macro-class-title">E) Ratei e risconti</div>
+            <div class="placed-items" id="items-E_PASS"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="items-pool">
+      <h2>🎲 Voci da classificare</h2>
+      <div class="items-container" id="itemsContainer"></div>
+    </div>
+  </div>
+
+  <div class="status-message" id="statusMessage"></div>
+
+<script>
+  const gameData = [
+    { name: "💰 Crediti verso soci per versamenti dovuti", class: "A", points: 10 },
+    { name: "🏭 Macchinari", class: "B", points: 10 },
+    { name: "🏢 Fabbricati", class: "B", points: 10 },
+    { name: "🚛 Automezzi", class: "B", points: 10 },
+    { name: "💡 Brevetti", class: "B", points: 10 },
+    { name: "💎 Partecipazioni (immobilizzazioni finanziarie)", class: "B", points: 10 },
+    { name: "📦 Rimanenze", class: "C", points: 10 },
+    { name: "👥 Crediti vs clienti", class: "C", points: 10 },
+    { name: "🏦 Banca", class: "C", points: 10 },
+    { name: "💰 Cassa", class: "C", points: 10 },
+    { name: "📝 Ratei attivi", class: "D", points: 10 },
+    { name: "🏛️ Capitale sociale", class: "A_PASS", points: 10 },
+    { name: "💎 Riserve", class: "A_PASS", points: 10 },
+    { name: "📈 Utile d'esercizio", class: "A_PASS", points: 10 },
+    { name: "⚠️ Fondi per rischi ed oneri", class: "B_PASS", points: 10 },
+    { name: "👨‍💼 TFR", class: "C_PASS", points: 10 },
+    { name: "🚚 Debiti verso fornitori", class: "D_PASS", points: 10 },
+    { name: "🏦 Debiti verso banche", class: "D_PASS", points: 10 },
+    { name: "📝 Ratei passivi", class: "E_PASS", points: 10 }
+  ];
+
+  let score = 0;
+  let correctAnswers = 0;
+  const totalItems = 16;
+  let selectedItem = null;
+
+  function initGame() {
+    score = 0;
+    correctAnswers = 0;
+    selectedItem = null;
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("correct").textContent = correctAnswers;
+    document.getElementById("total").textContent = totalItems;
+    document.getElementById("progressFill").style.width = "0%";
+
+    // Pulisci tutte le macroclassi
+    document.querySelectorAll(".placed-items").forEach(container => {
+      container.innerHTML = "";
+    });
+
+    const container = document.getElementById("itemsContainer");
+    container.innerHTML = "";
+
+    const shuffled = [...gameData].sort(() => Math.random() - 0.5).slice(0, totalItems);
+
+    shuffled.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "item";
+      el.textContent = item.name;
+      el.dataset.class = item.class;
+      el.dataset.points = item.points;
+      el.addEventListener("click", () => handleItemClick(el));
+      container.appendChild(el);
+    });
+  }
+
+  function handleItemClick(el) {
+    if (el.classList.contains("placed")) return;
+    document.querySelectorAll(".item.selected").forEach(it => it.classList.remove("selected"));
+    document.querySelectorAll(".macro-class.highlight").forEach(mc => mc.classList.remove("highlight"));
+    
+    el.classList.add("selected");
+    selectedItem = el;
+    
+    // Evidenzia tutte le macroclassi
+    document.querySelectorAll(".macro-class").forEach(mc => mc.classList.add("highlight"));
+  }
+
+  function handleMacroClassClick(macroClass) {
+    if (!selectedItem) return;
+    processPlacement(selectedItem, macroClass);
+    selectedItem.classList.remove("selected");
+    selectedItem = null;
+    
+    // Rimuovi evidenziazione
+    document.querySelectorAll(".macro-class.highlight").forEach(mc => mc.classList.remove("highlight"));
+  }
+
+  function processPlacement(item, macroClass) {
+    const itemClass = item.dataset.class;
+    const targetClass = macroClass.dataset.class;
+    let pts = parseInt(item.dataset.points);
+
+    item.classList.add("placed");
+
+    if (itemClass === targetClass) {
+      item.classList.add("correct-placed");
+      score += pts;
+      correctAnswers++;
+      showStatus(`✅ Corretto! +${pts} punti`);
+      
+      // Aggiungi l'item alla macroclasse corretta
+      const targetContainer = document.getElementById(`items-${targetClass}`);
+      targetContainer.appendChild(item);
+      
+      if (correctAnswers === totalItems) {
+        setTimeout(() => {
+          showStatus(`🏆 Complimenti! Hai classificato tutto lo Stato Patrimoniale!`);
+        }, 1000);
+      }
+    } else {
+      item.classList.add("incorrect-placed");
+      pts = Math.max(1, Math.floor(pts / 2));
+      item.dataset.points = pts;
+      showStatus(`❌ Sbagliato! Ora vale ${pts} punti`);
+      setTimeout(() => {
+        item.classList.remove("incorrect-placed", "placed");
+      }, 1500);
+      return;
+    }
+
+    updateScore();
+  }
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("correct").textContent = correctAnswers;
+    const progress = (correctAnswers / totalItems) * 100;
+    document.getElementById("progressFill").style.width = progress + "%";
+  }
+
+  function showStatus(msg) {
+    const s = document.getElementById("statusMessage");
+    s.textContent = msg;
+    s.style.opacity = 1;
+    setTimeout(() => {
+      s.style.opacity = 0;
+    }, 2000);
+  }
+
+  function resetGame() {
+    initGame();
+  }
+
+  window.onload = initGame;
+</script>
+</body>
+</html>

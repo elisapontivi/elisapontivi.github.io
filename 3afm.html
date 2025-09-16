@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classe 3 AFM - Economia Aziendale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .content-block {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+      
+        .content-block.modulo1 {
+            border-left-color: #3182ce;
+            background: linear-gradient(135deg, #bee3f8 0%, #f8f9fa 50%);
+        }
+        
+        .content-block.modulo2 {
+            border-left-color: #3182ce;
+            background: linear-gradient(135deg, #bee3f8 0%, #f8f9fa 50%);
+        }
+        
+        .content-block h3 {
+            color: #2d3748;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .block-content {
+            color: #4a5568;
+        }
+        
+        .block-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .content-block ul {
+            margin-left: 25px;
+            margin-top: 15px;
+        }
+        
+        .content-block li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .content-block ul ul {
+            margin-top: 8px;
+            margin-left: 20px;
+        }
+        
+        .content-block ul ul li {
+            margin-bottom: 6px;
+            font-size: 0.95em;
+            color: #666;
+        }
+        
+        .content-block strong {
+            color: #2d3748;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: #81e6d9;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+                        <h1>Classe 3 AFM</h1>
+            <p>Economia Aziendale - Prof.ssa Elisa Pontivi</p>
+        </div>
+        
+        <div class="content">
+            <div class="intro">
+                <p>Benvenuti nella pagina dedicata alla classe 3 AFM. Qui troverete tutti i materiali, 
+                le prove d'esame e i moduli di studio per prepararvi al meglio.</p>
+            </div>
+            
+         
+            
+            <!-- Blocco Modulo 1 -->
+            <div class="content-block modulo1" onclick="window.open('modulo1-imprese-societa.html', '_blank')">
+                <h3> Modulo 1: Imprenditore, Impresa, Azienda, Società</h3>
+            </div>
+            
+            <!-- Blocco Modulo 2 -->
+            <div class="content-block modulo2" onclick="window.open('modulo2-bilancio2.html', '_blank')">
+                <h3> Modulo 2: Introduzione al Bilancio</h3>
+            </div>
+
+<!-- Blocco Gioco Voci SP (Versione facile) -->
+<div class="content-block modulo2" onclick="window.open('giocosp.html', '_blank')">
+    <h3>🎮 Gioco: Voci Stato Patrimoniale </h3>
+    <div class="block-content">
+        <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere dello Stato Patrimoniale.</p>
+    </div>
+
+
+</div>
+
+     <!-- Blocco Modulo 3 -->
+            <div class="content-block modulo2" onclick="window.open('partitadoppiaintroduzione.html', '_blank')">
+                <h3> Modulo 3: Introduzione Partita doppia</h3>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Prof.ssa Elisa Pontivi | <a href="mailto:elisa.pontivi@istituto-pascoli.it">elisa.pontivi@istituto-pascoli.it</a></p>
+        </div>
+    </div>
+</body>
+</html>
