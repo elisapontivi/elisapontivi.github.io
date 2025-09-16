@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pianificazione Strategica e Programmazione</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            color: #4a5568;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin: 20px 0 15px 0;
+            font-size: 1.3em;
+        }
+
+        .greek-term {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .flow-chart {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 15px;
+        }
+
+        .flow-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-box:hover {
+            transform: scale(1.05);
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .smart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .smart-item {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .smart-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .objectives-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .objective-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .expansion {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        .conservation {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+        }
+
+        .recovery {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .strategy {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .tactics {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+        }
+
+        .environment-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 15px;
+        }
+
+        .macro-env, .micro-env {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .macro-env {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .micro-env {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        .curiosity-box {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #e17055;
+            box-shadow: 0 5px 15px rgba(225, 112, 85, 0.2);
+        }
+
+        .curiosity-box h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .case-study-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+        }
+
+        .case-study-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .assignment-box {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.3);
+        }
+
+        .assignment-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .example-box h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .flow-chart {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>📊 Pianificazione Strategica e Programmazione</h1>
+            <p style="color: white; font-size: 1.2em;">Gestione strategica nel settore turistico</p>
+        </header>
+
+        <section class="section fade-in">
+            <h2>🎯 Definizione di Strategia</h2>
+            
+            <div class="curiosity-box">
+                <h4>💡 Lo sapevi che...</h4>
+                <div class="greek-term">
+                    <strong>στρατηγία (strateghía)</strong><br>
+                    <em>Significato:</em> Arte del condurre l'esercito
+                </div>
+                <p>La parola "strategia" deriva dal greco antico <strong>στρατηγία</strong>, che significa "arte del condurre l'esercito". Nel contesto aziendale moderno, indica l'insieme delle decisioni e azioni volte a ottenere un vantaggio competitivo sostenibile nel lungo termine.</p>
+            </div>
+
+            <div class="case-study-box">
+                <h4>📚 CASE STUDY: Blockbuster vs Netflix</h4>
+                <p>Un esempio perfetto di gestione strategica vincente vs fallimentare è rappresentato dalla sfida tra Blockbuster e Netflix. Blockbuster, leader mondiale del noleggio video fisico, non riuscì a prevedere e adattarsi ai cambiamenti tecnologici. Nel 2000, Netflix propose una partnership per gestire la presenza online di Blockbuster, ma l'offerta fu rifiutata. Mentre Netflix investiva nello streaming e nell'analisi dei dati per personalizzare l'esperienza utente, Blockbuster rimase ancorata al modello tradizionale dei negozi fisici. La mancanza di visione strategica e di capacità di adattamento portò Blockbuster al fallimento nel 2010, mentre Netflix divenne il gigante dello streaming che conosciamo oggi. Questo caso dimostra l'importanza della previsione, dell'innovazione e della capacità di reinventare il proprio business model.</p>
+            </div>
+
+            <div class="assignment-box">
+                <h4>📝 COMPITO PER CASA</h4>
+                <p><strong>Identificate aziende che sono state capaci/non sono state capaci di avere una gestione strategica efficace.</strong></p>
+                <p>Analizzate le decisioni strategiche prese, i risultati ottenuti e le lezioni apprese. Potete presentare il vostro lavoro:</p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>💬 <strong>Presentazione orale</strong></li>
+                    <li>📊 <strong>Slide PowerPoint</strong> </li>
+                    <li>📄 <strong>Elaborato scritto</strong></li>
+                </ul>
+                <p><strong>Suggerimenti di aziende:</strong></p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                    <div><strong>Successi:</strong> Apple, Amazon, Tesla, Zara</div>
+                    <div><strong>Fallimenti:</strong> Nokia, Kodak, Toys"R"Us, Blackberry</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🔄 I Quattro Step della Gestione Strategica</h2>
+            <div class="flow-chart">
+                <div class="flow-box">
+                    <strong>1. PREVISIONE</strong><br>
+                    <small>Valutare in modo anticipato fenomeni ed eventi che potrebbero verificarsi</small>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-box">
+                    <strong>2. PIANIFICAZIONE STRATEGICA</strong><br>
+                    <small>Insieme di decisioni che permettono di definire strategie e obiettivi</small>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-box">
+                    <strong>3. PROGRAMMAZIONE OPERATIVA</strong><br>
+                    <small>Traduzione delle strategie in azioni concrete</small>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-box">
+                    <strong>4. CONTROLLO</strong><br>
+                    <small>Monitoraggio e verifica dei risultati ottenuti</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🎯 Obiettivi SMART</h2>
+            <p>Durante la pianificazione definiamo gli obiettivi da raggiungere. Un obiettivo deve essere <strong>SMART</strong>:</p>
+            <div class="smart-grid">
+                <div class="smart-item">
+                    <strong>S</strong>PECIFIC<br>
+                    <small>Specifico</small>
+                </div>
+                <div class="smart-item">
+                    <strong>M</strong>EASURABLE<br>
+                    <small>Misurabile</small>
+                </div>
+                <div class="smart-item">
+                    <strong>A</strong>CHIEVABLE<br>
+                    <small>Raggiungibile</small>
+                </div>
+                <div class="smart-item">
+                    <strong>R</strong>EALISTIC<br>
+                    <small>Realistico</small>
+                </div>
+                <div class="smart-item">
+                    <strong>T</strong>IME-BOUND<br>
+                    <small>Realizzabile nel tempo</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🚀 Obiettivi del Settore Turistico</h2>
+            <div class="objectives-container">
+                <div class="objective-card expansion">
+                    <h3>📈 ESPANSIONE</h3>
+                    <p>Entrare in nuovi mercati o offrire nuovi prodotti/servizi</p>
+                </div>
+                <div class="objective-card conservation">
+                    <h3>🛡️ CONSERVAZIONE</h3>
+                    <p>Mantenere la posizione attuale all'interno del mercato</p>
+                </div>
+                <div class="objective-card recovery">
+                    <h3>🔧 RISANAMENTO</h3>
+                    <p>Garantire la sopravvivenza nel mercato</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>⚔️ Strategia vs Tattica</h2>
+            <p>Due termini molto simili che descrivono la capacità dell'imprenditore o manager di raggiungere risultati attraverso l'impiego delle risorse disponibili:</p>
+            <div class="comparison-table">
+                <div class="comparison-item strategy">
+                    <h3>STRATEGIA</h3>
+                    <p><strong>Lungo Periodo</strong><br>
+                    Visione complessiva e obiettivi di ampio respiro</p>
+                </div>
+                <div class="comparison-item tactics">
+                    <h3>TATTICA</h3>
+                    <p><strong>Breve Periodo</strong><br>
+                    Azioni immediate e risultati nel breve termine</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🌍 Analisi dell'Ambiente Esterno</h2>
+            <div class="environment-diagram">
+                <div class="macro-env">
+                    <h3>🏛️ MACRO AMBIENTE</h3>
+                    <p>Contesto Economico • Politico • Sociale</p>
+                </div>
+                <div class="arrow" style="color: #667eea; transform: rotate(90deg);">↓</div>
+                <div class="micro-env">
+                    <h3>🎯 MICRO AMBIENTE</h3>
+                    <p>Clienti • Fornitori • Concorrenza</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <h3>📖 Spiegazione dettagliata:</h3>
+                <p><strong>Macro Ambiente:</strong> Comprende tutti i fattori esterni che influenzano l'azienda ma sui quali essa ha poco o nessun controllo diretto. Include le condizioni economiche generali (PIL, inflazione, tassi di interesse), il contesto politico e normativo (leggi, regolamentazioni, stabilità politica), e i cambiamenti sociali e culturali (demografici, stili di vita, valori della società).</p>
+                
+                <p style="margin-top: 15px;"><strong>Micro Ambiente:</strong> Rappresenta l'ambiente competitivo immediato dell'azienda, formato da attori con cui l'impresa interagisce direttamente. I <em>clienti</em> sono il cuore del business e le loro preferenze guidano le decisioni strategiche; i <em>fornitori</em> influenzano la qualità, i costi e la tempestività della produzione; la <em>concorrenza</em> determina le dinamiche competitive del mercato e spinge all'innovazione continua.</p>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🍽️ Esempio Pratico: Ristorante e Menu Inclusivo</h2>
+            <div class="example-box">
+                <h4>📍 Caso di Studio</h4>
+                <p><strong>Situazione:</strong> Un ristorante decide di introdurre un menu inclusivo</p>
+                <p><strong>Motivazione:</strong> Crescente presenza di vegani e vegetariani nel mercato</p>
+                <p><strong>Analisi Macro Ambiente:</strong> Cambiamenti sociali e culturali nelle abitudini alimentari</p>
+                <p><strong>Analisi Micro Ambiente:</strong> Nuovi segmenti di clientela, possibile vantaggio competitivo</p>
+                <p><strong>Strategia:</strong> Diversificazione dell'offerta per includere nuovi target</p>
+                <p><strong>Obiettivo SMART:</strong> Aumentare del 20% la clientela entro 6 mesi dall'introduzione del menu inclusivo</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Animazione al scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Osserva tutte le sezioni
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Effetti hover sui box del flusso
+        document.querySelectorAll('.flow-box').forEach(box => {
+            box.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(-2deg)';
+                this.style.boxShadow = '0 10px 25px rgba(102, 126, 234, 0.4)';
+            });
+            
+            box.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+                this.style.boxShadow = '0 5px 15px rgba(102, 126, 234, 0.3)';
+            });
+        });
+
+        // Effetto click sui box SMART
+        document.querySelectorAll('.smart-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Aggiunta animazione pulse
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
