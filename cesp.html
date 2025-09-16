@@ -32,17 +32,21 @@
     .document h2{text-align:center;margin-bottom:15px;color:#333;font-size:1.2rem;
       border-bottom:3px solid #667eea;padding-bottom:8px;}
     .sections{display:flex;flex-direction:row;gap:12px;justify-content:space-between;}
-    .section{flex:1;min-height:100px;border:3px dashed #ddd;border-radius:12px;padding:12px;
+    .section{flex:1;min-height:120px;border:3px dashed #ddd;border-radius:12px;padding:12px;
       transition:all 0.3s;background:#f8f9fa;cursor:pointer;}
     .section h3{text-align:center;margin-bottom:8px;color:#555;font-size:1rem;background:white;
       padding:6px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .section.highlight{border-color:#2ed573;background:#e8f8f0;}
+    .placed-items{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+    .placed-item{background:linear-gradient(135deg,#2ed573,#17a085);color:white;padding:8px 12px;
+      border-radius:8px;font-size:0.8rem;text-align:center;font-weight:500;}
     .items-pool{background:white;border-radius:15px;padding:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
     .items-pool h2{text-align:center;margin-bottom:12px;color:#333;font-size:1.1rem;}
     .items-container{display:flex;flex-direction:column;gap:10px;}
     .item{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:16px;border-radius:12px;
       cursor:pointer;user-select:none;transition:all 0.3s;font-weight:500;font-size:0.9rem;text-align:center;}
     .item.selected{background:linear-gradient(135deg,#ffa502,#ff6348);transform:scale(1.05);}
-    .item.placed{cursor:not-allowed;opacity:0.8;}
+    .item.placed{display:none;}
     .item.correct-placed{background:linear-gradient(135deg,#2ed573,#17a085);}
     .item.incorrect-placed{background:linear-gradient(135deg,#ff4757,#c44569);}
     .status-message{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
@@ -78,9 +82,11 @@
         <div class="sections">
           <div class="section" data-category="dare" data-document="SP" onclick="handleSectionClick(this)">
             <h3>⬆️ DARE</h3>
+            <div class="placed-items" id="sp-dare-items"></div>
           </div>
           <div class="section" data-category="avere" data-document="SP" onclick="handleSectionClick(this)">
             <h3>⬇️ AVERE</h3>
+            <div class="placed-items" id="sp-avere-items"></div>
           </div>
         </div>
       </div>
@@ -89,9 +95,11 @@
         <div class="sections">
           <div class="section" data-category="dare" data-document="CE" onclick="handleSectionClick(this)">
             <h3>⬆️ DARE</h3>
+            <div class="placed-items" id="ce-dare-items"></div>
           </div>
           <div class="section" data-category="avere" data-document="CE" onclick="handleSectionClick(this)">
             <h3>⬇️ AVERE</h3>
+            <div class="placed-items" id="ce-avere-items"></div>
           </div>
         </div>
       </div>
@@ -116,7 +124,6 @@
     { name: "🚚 Debiti verso fornitori", category: "avere", document: "SP", points: 10 },
     { name: "🏦 Debiti verso banche", category: "avere", document: "SP", points: 10 },
     { name: "💎 Riserve", category: "avere", document: "SP", points: 10 },
-    { name: "📝 Ratei passivi", category: "avere", document: "SP", points: 10 },
     { name: "📝 Ratei passivi", category: "avere", document: "SP", points: 10 },
     { name: "🔧 Costi per materie prime", category: "dare", document: "CE", points: 10 },
     { name: "⚙️ Costi per servizi", category: "dare", document: "CE", points: 10 },
@@ -145,6 +152,12 @@
     document.getElementById("total").textContent = totalItems;
     document.getElementById("progressFill").style.width = "0%";
 
+    // Pulisci tutte le sezioni del bilancio
+    document.getElementById("sp-dare-items").innerHTML = "";
+    document.getElementById("sp-avere-items").innerHTML = "";
+    document.getElementById("ce-dare-items").innerHTML = "";
+    document.getElementById("ce-avere-items").innerHTML = "";
+
     const container = document.getElementById("itemsContainer");
     container.innerHTML = "";
 
@@ -164,9 +177,17 @@
 
   function handleItemClick(el) {
     if (el.classList.contains("placed")) return;
+    
+    // Rimuovi selezione precedente e highlights
     document.querySelectorAll(".item.selected").forEach(it => it.classList.remove("selected"));
+    document.querySelectorAll(".section.highlight").forEach(sec => sec.classList.remove("highlight"));
+    
+    // Seleziona nuovo item
     el.classList.add("selected");
     selectedItem = el;
+    
+    // Evidenzia tutte le sezioni disponibili
+    document.querySelectorAll(".section").forEach(sec => sec.classList.add("highlight"));
   }
 
   function handleSectionClick(section) {
@@ -174,6 +195,9 @@
     processPlacement(selectedItem, section);
     selectedItem.classList.remove("selected");
     selectedItem = null;
+    
+    // Rimuovi highlights
+    document.querySelectorAll(".section.highlight").forEach(sec => sec.classList.remove("highlight"));
   }
 
   function processPlacement(item, section) {
@@ -183,20 +207,37 @@
     const secDoc = section.dataset.document;
     let pts = parseInt(item.dataset.points);
 
-    item.classList.add("placed");
-
     if (itemCat === secCat && itemDoc === secDoc) {
-      item.classList.add("correct-placed");
+      // Risposta corretta - aggiungi alla sezione corretta
+      item.classList.add("placed");
       score += pts;
       correctAnswers++;
       showStatus(`✅ Corretto! +${pts} punti`);
+      
+      // Crea elemento nella sezione bilancio
+      const placedEl = document.createElement("div");
+      placedEl.className = "placed-item";
+      placedEl.textContent = item.textContent;
+      
+      // Determina quale container usare
+      const containerId = `${itemDoc.toLowerCase()}-${itemCat}-items`;
+      const container = document.getElementById(containerId);
+      container.appendChild(placedEl);
+      
+      // Controlla se gioco completato
+      if (correctAnswers === totalItems) {
+        setTimeout(() => {
+          showStatus(`🏆 Complimenti! Hai completato il bilancio! Punteggio: ${score}`);
+        }, 1000);
+      }
     } else {
+      // Risposta sbagliata
       item.classList.add("incorrect-placed");
       pts = Math.max(1, Math.floor(pts / 2));
       item.dataset.points = pts;
       showStatus(`❌ Sbagliato! Ora vale ${pts} punti`);
       setTimeout(() => {
-        item.classList.remove("incorrect-placed", "placed");
+        item.classList.remove("incorrect-placed");
       }, 1500);
       return;
     }
@@ -217,7 +258,7 @@
     s.style.opacity = 1;
     setTimeout(() => {
       s.style.opacity = 0;
-    }, 2000);
+    }, 3000);
   }
 
   function resetGame() {
@@ -228,4 +269,3 @@
 </script>
 </body>
 </html>
-
