@@ -142,6 +142,51 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        .days-calculation {
+            background-color: #fff8dc;
+            border-left: 5px solid #daa520;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .days-calculation .title {
+            color: #b8860b;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .days-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .days-table th,
+        .days-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .days-table th {
+            background: linear-gradient(135deg, #daa520, #b8860b);
+            color: white;
+            font-weight: bold;
+        }
+
+        .days-table .month-row {
+            background-color: #fffacd;
+        }
+
+        .days-table .total-row {
+            background-color: #f0e68c;
+            font-weight: bold;
+        }
         
         .accounting-entry {
             background-color: #f8f9fa;
@@ -387,7 +432,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">31 Dic 2023</div>
-                    <div>Fine esercizio - Maturati 3 mesi e 16 giorni di interessi</div>
+                    <div>Fine esercizio - Maturati interessi dal 15 settembre</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">15 Set 2024</div>
@@ -398,9 +443,55 @@
             <p><strong>Calcoli:</strong></p>
             <ul>
                 <li>Interessi annui (cedola) = €80.000 × 4,2% = €3.360</li>
-                <li>Dal 15 settembre al 31 dicembre 2023 = 107 giorni</li>
-                <li>Interessi di competenza 2023 = €3.360 × 107/365 = €985,42</li>
-                <li>Interessi di competenza 2024 = €3.360 × 258/365 = €2.374,58</li>
+                <li>Interessi giornalieri = €3.360 ÷ 365 = €9,21</li>
+            </ul>
+        </div>
+
+        <div class="days-calculation">
+            <div class="title">CALCOLO DETTAGLIATO DEI GIORNI - PERIODO 15 SETTEMBRE - 31 DICEMBRE 2023</div>
+            <p><strong>Regola:</strong> Si conta dal giorno di inizio (incluso) fino al giorno di fine (incluso)</p>
+            
+            <table class="days-table">
+                <tr>
+                    <th>Mese</th>
+                    <th>Periodo</th>
+                    <th>Calcolo</th>
+                    <th>Giorni</th>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Settembre</strong></td>
+                    <td>15 - 30 settembre</td>
+                    <td>30 - 15 + 1</td>
+                    <td>16 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Ottobre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>31 giorni</td>
+                    <td>31 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Novembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>30 giorni</td>
+                    <td>30 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Dicembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>31 giorni</td>
+                    <td>31 giorni</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3"><strong>TOTALE GIORNI</strong></td>
+                    <td><strong>108 giorni</strong></td>
+                </tr>
+            </table>
+            
+            <p><strong>Calcolo finale:</strong></p>
+            <ul>
+                <li>Interessi di competenza 2023 = €3.360 × 108/365 = €994,19</li>
+                <li>Interessi di competenza 2024 = €3.360 × 257/365 = €2.365,81</li>
             </ul>
         </div>
 
@@ -416,13 +507,13 @@
                 </tr>
                 <tr>
                     <td>Ratei attivi</td>
-                    <td class="dare">985,42</td>
+                    <td class="dare">994,19</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
                     <td>Interessi attivi su titoli</td>
                     <td class="dare">-</td>
-                    <td class="avere">985,42</td>
+                    <td class="avere">994,19</td>
                 </tr>
             </table>
         </div>
@@ -437,13 +528,13 @@
                 </tr>
                 <tr>
                     <td>Interessi attivi su titoli</td>
-                    <td class="dare">985,42</td>
+                    <td class="dare">994,19</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
                     <td>Ratei attivi</td>
                     <td class="dare">-</td>
-                    <td class="avere">985,42</td>
+                    <td class="avere">994,19</td>
                 </tr>
             </table>
         </div>
@@ -469,6 +560,117 @@
             </table>
         </div>
 
+        <h3 class="subsection-title">Mastrini - Ratei Attivi</h3>
+
+        <div class="explanation-box">
+            <div class="title">MASTRINI COINVOLTI</div>
+            <p>Per i ratei attivi abbiamo tre conti che si movimentano:</p>
+            <ul>
+                <li><strong>Ratei Attivi</strong> (Conto di Stato Patrimoniale - Attivo)</li>
+                <li><strong>Interessi Attivi su Titoli</strong> (Conto Economico 2023 e 2024 - Ricavi)</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">
+                    <strong>RATEI ATTIVI</strong><br>
+                    <small>(Stato Patrimoniale - Attivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #d5f4e6;">DARE</th>
+                        <th style="width: 50%; background: #d5f4e6;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #27ae60; height: 120px;">
+                            <strong>31/12/2023</strong><br>
+                            a) Interessi attivi su titoli<br>
+                            <strong>€ 994,19</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #27ae60;">
+                            <div style="text-align: center; font-weight: bold; color: #27ae60;">€ 994,19</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>01/01/2024</strong><br>
+                            a) Interessi attivi su titoli<br>
+                            <strong>€ 994,19</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #27ae60;">
+                            <div style="text-align: center; font-weight: bold; color: #27ae60;">€ 994,19</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #e8f5e8; padding: 10px; font-weight: bold;">
+                            Saldo al 31/12/2023: € 994,19 (DARE) - Saldo dal 01/01/2024: € 0,00
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                    <strong>INTERESSI ATTIVI SU TITOLI</strong><br>
+                    <small>(Conto Economico 2023)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #e8f4fd;">DARE</th>
+                        <th style="width: 50%; background: #e8f4fd;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #3498db; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>31/12/2023</strong><br>
+                            a) Ratei attivi<br>
+                            <strong>€ 994,19</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #3498db;">
+                            <div style="text-align: center; font-weight: bold; color: #3498db;">€ 994,19</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #f0f8ff; padding: 10px; font-weight: bold;">
+                            Saldo 2023: € 994,19 (AVERE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                    <strong>INTERESSI ATTIVI SU TITOLI</strong><br>
+                    <small>(Conto Economico 2024)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #e8f4fd;">DARE</th>
+                        <th style="width: 50%; background: #e8f4fd;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #3498db; height: 120px;">
+                            <strong>01/01/2024</strong><br>
+                            a) Ratei attivi<br>
+                            <strong>€ 994,19</strong>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>15/09/2024</strong><br>
+                            a) Banca c/c<br>
+                            <strong>€ 3.360,00</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #3498db;">
+                            <div style="text-align: center; font-weight: bold; color: #3498db;">€ 2.365,81</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #f0f8ff; padding: 10px; font-weight: bold;">
+                            Saldo 2024: € 2.365,81 (AVERE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
         <div class="page-break"></div>
 
         <h2 class="section-title">4. RATEI PASSIVI</h2>
@@ -476,6 +678,7 @@
         <div class="definition-box">
             <div class="title">DEFINIZIONE</div>
             I <strong>ratei passivi</strong> rappresentano costi di competenza dell'esercizio in corso che verranno pagati nell'esercizio successivo.
+        </div>
 
         <div class="example-box">
             <div class="title">ESEMPIO - INTERESSI PASSIVI SU MUTUO</div>
@@ -485,15 +688,15 @@
                 <div class="title">CRONOLOGIA OPERAZIONE</div>
                 <div class="timeline-item">
                     <div class="timeline-date">15 Ott 2023</div>
-                    <div> Pagamento interessi trimestre 15 luglio- 15 ottobre</div>
+                    <div>Pagamento interessi trimestre 15 luglio - 15 ottobre</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">31 Dic 2023</div>
-                    <div>Fine esercizio - Maturati interessi 16 ottobre- 31 dicembre (non ancora pagati)</div>
+                    <div>Fine esercizio - Maturati interessi dal 16 ottobre</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">15 Gen 2024</div>
-                    <div>Pagamento interessi trimestre 16 ottobre 2023 - 15 gennaio 2024 </div>
+                    <div>Pagamento interessi trimestre 16 ottobre 2023 - 15 gennaio 2024</div>
                 </div>
             </div>
             
@@ -501,10 +704,87 @@
             <ul>
                 <li>Interessi annui = €200.000 × 5,4% = €10.800</li>
                 <li>Interessi trimestrali = €10.800 ÷ 4 = €2.700</li>
-                <li>Dal 16 ottobre al 31 dicembre 2023 = 76 giorni</li>
-                <li>Interessi maturati = €2.700 × 76/92 = €2.230,43</li>
             </ul>
-            <p><strong>Il costo è di competenza del 2023 ma il pagamento avverrà il 15 gennaio 2024</strong></p>
+        </div>
+
+        <div class="days-calculation">
+            <div class="title">CALCOLO DETTAGLIATO DEI GIORNI</div>
+            
+            <h4>Periodo di competenza 2023 (16 ottobre - 31 dicembre 2023):</h4>
+            <table class="days-table">
+                <tr>
+                    <th>Mese</th>
+                    <th>Periodo</th>
+                    <th>Calcolo</th>
+                    <th>Giorni</th>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Ottobre</strong></td>
+                    <td>16 - 31 ottobre</td>
+                    <td>31 - 16 + 1</td>
+                    <td>16 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Novembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>30 giorni</td>
+                    <td>30 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Dicembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>31 giorni</td>
+                    <td>31 giorni</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3"><strong>TOTALE PERIODO 2023</strong></td>
+                    <td><strong>77 giorni</strong></td>
+                </tr>
+            </table>
+
+            <h4>Periodo trimestrale completo (16 ottobre 2023 - 15 gennaio 2024):</h4>
+            <table class="days-table">
+                <tr>
+                    <th>Mese</th>
+                    <th>Periodo</th>
+                    <th>Calcolo</th>
+                    <th>Giorni</th>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Ottobre</strong></td>
+                    <td>16 - 31 ottobre</td>
+                    <td>31 - 16 + 1</td>
+                    <td>16 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Novembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>30 giorni</td>
+                    <td>30 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Dicembre</strong></td>
+                    <td>Tutto il mese</td>
+                    <td>31 giorni</td>
+                    <td>31 giorni</td>
+                </tr>
+                <tr class="month-row">
+                    <td><strong>Gennaio</strong></td>
+                    <td>1 - 15 gennaio</td>
+                    <td>15 giorni</td>
+                    <td>15 giorni</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3"><strong>TOTALE TRIMESTRE</strong></td>
+                    <td><strong>92 giorni</strong></td>
+                </tr>
+            </table>
+            
+            <p><strong>Calcolo finale:</strong></p>
+            <ul>
+                <li>Interessi maturati nel 2023 = €2.700 × 77/92 = €2.259,78</li>
+                <li><strong>Il costo è di competenza del 2023 ma il pagamento avverrà il 15 gennaio 2024</strong></li>
+            </ul>
         </div>
 
         <h3 class="subsection-title">Scritture Contabili per Ratei Passivi</h3>
@@ -519,13 +799,13 @@
                 </tr>
                 <tr>
                     <td>Interessi passivi su mutui</td>
-                    <td class="dare">2.230,43</td>
+                    <td class="dare">2.259,78</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
                     <td>Ratei passivi</td>
                     <td class="dare">-</td>
-                    <td class="avere">2.230,43</td>
+                    <td class="avere">2.259,78</td>
                 </tr>
             </table>
         </div>
@@ -540,13 +820,13 @@
                 </tr>
                 <tr>
                     <td>Ratei passivi</td>
-                    <td class="dare">2.230,43</td>
+                    <td class="dare">2.259,78</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
                     <td>Interessi passivi su mutui</td>
                     <td class="dare">-</td>
-                    <td class="avere">2.230,43</td>
+                    <td class="avere">2.259,78</td>
                 </tr>
             </table>
         </div>
@@ -572,8 +852,135 @@
             </table>
         </div>
 
-        <div class="page-break"></div>
+        <h3 class="subsection-title">Mastrini - Ratei Passivi</h3>
 
+        <div class="explanation-box">
+            <div class="title">MASTRINI COINVOLTI</div>
+            <p>Per i ratei passivi abbiamo tre conti che si movimentano:</p>
+            <ul>
+                <li><strong>Ratei Passivi</strong> (Conto di Stato Patrimoniale - Passivo)</li>
+                <li><strong>Interessi Passivi su Mutui</strong> (Conto Economico 2023 e 2024 - Costi)</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px;">
+                    <strong>RATEI PASSIVI</strong><br>
+                    <small>(Stato Patrimoniale - Passivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #fef9e7;">DARE</th>
+                        <th style="width: 50%; background: #fef9e7;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #e67e22; height: 120px;">
+                            <strong>01/01/2024</strong><br>
+                            a) Interessi passivi su mutui<br>
+                            <strong>€ 2.259,78</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #e67e22;">
+                            <div style="text-align: center; font-weight: bold; color: #e67e22;">€ 2.259,78</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>31/12/2023</strong><br>
+                            a) Interessi passivi su mutui<br>
+                            <strong>€ 2.259,78</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #e67e22;">
+                            <div style="text-align: center; font-weight: bold; color: #e67e22;">€ 2.259,78</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #fef4e6; padding: 10px; font-weight: bold;">
+                            Saldo al 31/12/2023: € 2.259,78 (AVERE) - Saldo dal 01/01/2024: € 0,00
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #c0392b; border-bottom: 2px solid #c0392b; padding-bottom: 10px;">
+                    <strong>INTERESSI PASSIVI SU MUTUI</strong><br>
+                    <small>(Conto Economico 2023)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #ffebee;">DARE</th>
+                        <th style="width: 50%; background: #ffebee;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #c0392b; height: 120px;">
+                            <strong>31/12/2023</strong><br>
+                            a) Ratei passivi<br>
+                            <strong>€ 2.259,78</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #c0392b;">
+                            <div style="text-align: center; font-weight: bold; color: #c0392b;">€ 2.259,78</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #ffe6e6; padding: 10px; font-weight: bold;">
+                            Saldo 2023: € 2.259,78 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #c0392b; border-bottom: 2px solid #c0392b; padding-bottom: 10px;">
+                    <strong>INTERESSI PASSIVI SU MUTUI</strong><br>
+                    <small>(Conto Economico 2024)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #ffebee;">DARE</th>
+                        <th style="width: 50%; background: #ffebee;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #c0392b; height: 120px;">
+                            <strong>15/01/2024</strong><br>
+                            a) Banca c/c<br>
+                            <strong>€ 2.700,00</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #c0392b;">
+                            <div style="text-align: center; font-weight: bold; color: #c0392b;">€ 440,22</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>01/01/2024</strong><br>
+                            a) Ratei passivi<br>
+                            <strong>€ 2.259,78</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #ffe6e6; padding: 10px; font-weight: bold;">
+                            Saldo 2024: € 440,22 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="important">
+            <div class="title">SPIEGAZIONE DETTAGLIATA DEI MASTRINI</div>
+            <p><strong>Ratei Attivi:</strong></p>
+            <ul>
+                <li>Il conto "Ratei Attivi" si apre in DARE a fine 2023 con €994,19 (credito verso il debitore degli interessi)</li>
+                <li>Si chiude completamente con lo storno a inizio 2024</li>
+                <li>Il conto "Interessi Attivi" nel 2023 registra solo il ricavo di competenza (€994,19)</li>
+                <li>Nel 2024 prima viene stornato il rateo, poi registra l'intero incasso (€3.360), dando un saldo finale di €2.365,81 (competenza 2024)</li>
+            </ul>
+            
+            <p><strong>Ratei Passivi:</strong></p>
+            <ul>
+                <li>Il conto "Ratei Passivi" si apre in AVERE a fine 2023 con €2.259,78 (debito verso il creditore degli interessi)</li>
+                <li>Si chiude completamente con lo storno a inizio 2024</li>
+                <li>Il conto "Interessi Passivi" nel 2023 registra solo il costo di competenza (€2.259,78)</li>
+                <li>Nel 2024 prima viene stornato il rateo, poi registra l'intero pagamento (€2.700), dando un saldo finale di €440,22 (competenza 2024)</li>
+            </ul>
+        </div>
         <h2 class="section-title">5. RISCONTI ATTIVI</h2>
 
         <div class="definition-box">
@@ -727,7 +1134,7 @@
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Fitti attivi </td>
+                    <td>Fitti attivi c/c</td>
                     <td class="dare">-</td>
                     <td class="avere">6.000,00</td>
                 </tr>
@@ -785,19 +1192,11 @@
         <div class="important">
             <div class="title">COLLOCAZIONE NEL BILANCIO</div>
             <ul>
-                <li><strong>Ratei attivi e Risconti attivi:</strong> STATO PATRIMONIALE - ATTIVO </li>
-                <li><strong>Ratei passivi e Risconti passivi:</strong> STATO PATRIMONIALE - PASSIVO </li>
+                <li><strong>Ratei attivi e Risconti attivi:</strong> STATO PATRIMONIALE - ATTIVO (Crediti)</li>
+                <li><strong>Ratei passivi e Risconti passivi:</strong> STATO PATRIMONIALE - PASSIVO (Debiti)</li>
             </ul>
         </div>
 
        
 </body>
 </html>
-
-
-
-
-
-
-
-
