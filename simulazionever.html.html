@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Simulazione Verifica – Q2 & Q3</title>
+<style>
+  body{margin:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#eef2ff,#fdfdfd);color:#1f2937}
+  .app{max-width:1200px;margin:20px auto;padding:0 16px}
+  .header{background:#fff;border-radius:18px;padding:18px;box-shadow:0 8px 20px rgba(0,0,0,.08);margin-bottom:20px}
+  .header h1{margin:0 0 8px;color:#2563eb;font-size:1.5rem}
+  .pill{display:inline-block;background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:999px;padding:6px 12px;margin:2px;font-weight:600}
+  .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.06);margin-bottom:20px}
+  h2{color:#2563eb;margin:0 0 10px}
+  h3{margin:14px 0 8px;color:#111827}
+  .muted{color:#6b7280;font-size:.9rem}
+  table{width:100%;border-collapse:collapse;margin:8px 0}
+  th,td{border:1px solid #e5e7eb;padding:8px}
+  th{background:#f9fafb;text-align:left}
+  input{width:100%;padding:6px;border:1px solid #d1d5db;border-radius:8px}
+  .btn{background:#2563eb;color:#fff;border:none;border-radius:12px;padding:10px 16px;font-weight:600;cursor:pointer;margin-top:8px;display:inline-block}
+  .btn:hover{background:#1e40af}
+  .btn-green{background:#10b981}
+  .result{margin-top:8px;font-weight:700}
+  .ok{color:#10b981}.no{color:#ef4444}.warn{color:#f59e0b}
+  .center{text-align:center}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
+  .modal .box{background:#fff;padding:20px;border-radius:16px;max-width:520px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  .score{font-size:2rem;font-weight:900;text-align:center;margin:10px 0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+  .chip{background:#f1f5f9;border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>Simulazione Verifica – Parte pratica</h1>
+    <div class="chips">
+      <span class="pill">⏱ Tempo: <span id="timer">00:00</span></span>
+      <span class="pill">Q2: <span id="pQ2">0</span>%</span>
+      <span class="pill">Q3: <span id="pQ3">0</span>%</span>
+      <span class="pill">Bilancio: <span id="pBIL">0</span>%</span>
+      <button class="btn btn-green" id="regenAll">🔁 Rigenera verifica</button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="card">
+    <h2>Quesito 2 – Codice Civile</h2>
+    <p class="muted">Indica <b>SP/CE</b> e <b>Dare/Avere</b> (70%). Poi, se presenti, <b>Macroclasse</b>, <b>Numero romano</b>, <b>Numero arabo</b> (30%). Se lasci vuoto romano/arabo va bene.</p>
+    <div id="q2Table"></div>
+    <button class="btn" id="checkQ2">Controlla Q2</button>
+    <div id="fbQ2" class="result"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card">
+    <h2>Quesito 3 – Scritture contabili & Bilancio</h2>
+    <p class="muted">Compila le scritture in partita doppia: <i>inserisci il nome del conto e l’importo</i> nelle caselle.</p>
+    <div id="scenario"></div>
+    <div class="chips"><span class="chip">Conti utili: Banca c/c • Capitale sociale • Macchinari • Debiti v/fornitori • Materie prime • Crediti v/clienti • Ricavi vendite</span></div>
+    <div id="journals"></div>
+    <button class="btn" id="checkQ3">Controlla scritture</button>
+    <div id="fbQ3" class="result"></div>
+
+    <h3>Bilancio finale</h3>
+    <p class="muted">Inserisci le <b>voci</b> e gli <b>importi</b> nello Stato Patrimoniale (a sezioni contrapposte) e nel Conto Economico.</p>
+
+    <div style="display:flex;gap:20px">
+      <div style="flex:1">
+        <h4>Attivo</h4>
+        <table><tbody>
+          <tr><td><input placeholder="Inserisci nome conto" id="att1_v"></td><td><input placeholder="Importo" type="number" id="att1_x"></td></tr>
+          <tr><td><input placeholder="Inserisci nome conto" id="att2_v"></td><td><input placeholder="Importo" type="number" id="att2_x"></td></tr>
+          <tr><td><input placeholder="Inserisci nome conto" id="att3_v"></td><td><input placeholder="Importo" type="number" id="att3_x"></td></tr>
+        </tbody></table>
+      </div>
+      <div style="flex:1">
+        <h4>Passivo/PN</h4>
+        <table><tbody>
+          <tr><td><input placeholder="Inserisci nome conto" id="pas1_v"></td><td><input placeholder="Importo" type="number" id="pas1_x"></td></tr>
+          <tr><td><input placeholder="Inserisci nome conto" id="pas2_v"></td><td><input placeholder="Importo" type="number" id="pas2_x"></td></tr>
+          <tr><td><input placeholder="Inserisci nome conto" id="pas3_v"></td><td><input placeholder="Importo" type="number" id="pas3_x"></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <h4>Conto Economico</h4>
+    <div style="display:flex;gap:20px">
+      <div style="flex:1"><table><tbody><tr><td><input placeholder="Inserisci nome costo" id="ce_c1_v"></td><td><input placeholder="Importo" type="number" id="ce_c1_x"></td></tr></tbody></table></div>
+      <div style="flex:1"><table><tbody><tr><td><input placeholder="Inserisci nome ricavo" id="ce_r1_v"></td><td><input placeholder="Importo" type="number" id="ce_r1_x"></td></tr></tbody></table></div>
+    </div>
+    <button class="btn" id="checkBilancio">Controlla bilancio</button>
+    <div id="fbBIL" class="result"></div>
+  </div>
+
+  <div class="card center">
+    <button class="btn" id="finalize">✅ Consegna e calcola voto</button>
+  </div>
+</div>
+
+<!-- Modale voto -->
+<div id="modal" class="modal"><div class="box">
+  <h3>Riepilogo</h3>
+  <p id="timeLine"></p>
+  <div><b>Q2:</b> <span id="sQ2"></span></div>
+  <div><b>Q3:</b> <span id="sQ3"></span></div>
+  <div><b>Bilancio:</b> <span id="sBIL"></span></div>
+  <div class="score" id="grade"></div>
+  <p id="gradeNote" class="muted"></p>
+  <button class="btn" onclick="document.getElementById('modal').style.display='none'">Chiudi</button>
+</div></div>
+
+<script>
+/* ===== TIMER ===== */
+let startTime;
+function startTimer(){startTime=Date.now();}
+setInterval(()=>{if(!startTime)return;const s=Math.floor((Date.now()-startTime)/1000);const m=Math.floor(s/60),ss=s%60;
+document.getElementById('timer').textContent=`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;},1000);
+
+/* ===== Q2 ===== */
+const ALL_VOCI_Q2 = [
+  {voce:"Cassa",sol:{ce_sp:"SP",da_av:"DARE",macro:"C",romano:"IV",arabo:""}},
+  {voce:"Ricavi vendite",sol:{ce_sp:"CE",da_av:"AVERE",macro:"A",romano:"",arabo:"1"}},
+  {voce:"Debiti fornitori",sol:{ce_sp:"SP",da_av:"AVERE",macro:"D",romano:"",arabo:"7"}},
+  {voce:"Costi materie prime",sol:{ce_sp:"CE",da_av:"DARE",macro:"B",romano:"",arabo:"6"}},
+  {voce:"Macchinari",sol:{ce_sp:"SP",da_av:"DARE",macro:"B",romano:"II",arabo:"2"}},
+  {voce:"Crediti clienti",sol:{ce_sp:"SP",da_av:"DARE",macro:"C",romano:"II",arabo:"1"}},
+  {voce:"Mutui passivi",sol:{ce_sp:"SP",da_av:"AVERE",macro:"D",romano:"",arabo:"4"}},
+  {voce:"Spese per il personale",sol:{ce_sp:"CE",da_av:"DARE",macro:"B",romano:"",arabo:"9"}},
+  {voce:"Brevetti",sol:{ce_sp:"SP",da_av:"DARE",macro:"B",romano:"I",arabo:"3"}},
+  {voce:"Proventi finanziari",sol:{ce_sp:"CE",da_av:"AVERE",macro:"C",romano:"",arabo:"15"}}
+];
+function pickRandomQ2(n=6){return[...ALL_VOCI_Q2].sort(()=>0.5-Math.random()).slice(0,n);}
+let VOCI_Q2=[];
+function buildQ2(){let html=`<table><thead><tr><th>Voce</th><th>SP/CE</th><th>Dare/Avere</th><th>Macroclasse</th><th>Numero romano</th><th>Numero arabo</th></tr></thead><tbody>`;
+VOCI_Q2.forEach((v,i)=>{html+=`<tr><td>${v.voce}</td>
+<td><input id="q2cs${i}" placeholder="SP o CE"></td>
+<td><input id="q2da${i}" placeholder="Dare o Avere"></td>
+<td><input id="q2ma${i}" placeholder="Macro"></td>
+<td><input id="q2ro${i}" placeholder="Romano o vuoto"></td>
+<td><input id="q2ar${i}" placeholder="Arabo o vuoto"></td></tr>`});html+=`</tbody></table>`;document.getElementById('q2Table').innerHTML=html;}
+let scoreQ2=0;
+document.getElementById('checkQ2').onclick=()=>{let base=0,bonus=0,totalBase=VOCI_Q2.length*2,totalBonus=VOCI_Q2.length*3;
+VOCI_Q2.forEach((v,i)=>{const cs=(document.getElementById(`q2cs${i}`).value||"").toUpperCase().trim();
+const da=(document.getElementById(`q2da${i}`).value||"").toUpperCase().trim();
+const ma=(document.getElementById(`q2ma${i}`).value||"").toUpperCase().trim();
+const ro=(document.getElementById(`q2ro${i}`).value||"").toUpperCase().trim();
+const ar=(document.getElementById(`q2ar${i}`).value||"").trim();
+if(cs===v.sol.ce_sp)base++;if(da===v.sol.da_av)base++;if(ma===v.sol.macro)bonus++;
+if(ro===v.sol.romano)bonus++;if(ar===v.sol.arabo)bonus++;});
+scoreQ2=Math.round((base/totalBase)*70+(bonus/totalBonus)*30);
+document.getElementById('fbQ2').textContent=`Punteggio: ${scoreQ2}/100`;document.getElementById('pQ2').textContent=scoreQ2;};
+
+/* ===== Q3 ===== */
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+function genScenario(){const vers=10000;const mac=rand(10000,13000);const perc=[50,60,70][rand(0,2)];
+const pagSub=Math.round(mac*perc/100);const debRes=mac-pagSub;const mat=rand(2000,4000);const ven=rand(2000,4000);
+document.getElementById('scenario').innerHTML=`<ul><li>Versamento socio €${vers}</li><li>Acquisto macchinario €${mac} a debito</li><li>Pagamento ${perc}% (€${pagSub})</li><li>Acquisto materie €${mat}, non pagate</li><li>Vendita merci €${ven}, non incassate</li></ul>`;
+const sol=[{d:"banca",i:vers,a:"capitale"},{d:"macchin",i:mac,a:"debiti"},{d:"debiti",i:pagSub,a:"banca"},{d:"materie",i:mat,a:"debiti"},{d:"crediti",i:ven,a:"ricavi"}];
+let html="";sol.forEach((s,i)=>{html+=`<h4>Operazione ${i+1}</h4><table><thead><tr><th>Dare</th><th>Importo</th><th>Avere</th><th>Importo</th></tr></thead><tbody><tr>
+<td><input id="d${i}" placeholder="Inserisci nome conto (Dare)"></td><td><input id="id${i}" type="number" placeholder="Importo"></td>
+<td><input id="a${i}" placeholder="Inserisci nome conto (Avere)"></td><td><input id="ia${i}" type="number" placeholder="Importo"></td>
+</tr></tbody></table><div id="f${i}" class="result"></div>`});document.getElementById('journals').innerHTML=html;
+window.__dati__={vers,mac,perc,pagSub,debRes,mat,ven,sol};
+document.getElementById("fbQ3").textContent="";document.getElementById("fbBIL").textContent="";
+document.getElementById("pQ3").textContent="0";document.getElementById("pBIL").textContent="0";scoreQ3=0;scoreBIL=0;}
+let scoreQ3=0;
+document.getElementById('checkQ3').onclick=()=>{const {sol}=window.__dati__;let right=0,total=sol.length*4;
+sol.forEach((s,i)=>{const d=(document.getElementById(`d${i}`).value||"").toLowerCase();const a=(document.getElementById(`a${i}`).value||"").toLowerCase();
+const idv=+document.getElementById(`id${i}`).value;const iav=+document.getElementById(`ia${i}`).value;
+const okD=d.includes(s.d);const okA=s.a==="ricavi"?(a.includes("ricavi")||a.includes("vendite")):a.includes(s.a);
+const okID=idv===s.i;const okIA=iav===s.i;const allOk=okD&&okA&&okID&&okIA;
+right+=(okD?1:0)+(okA?1:0)+(okID?1:0)+(okIA?1:0);document.getElementById(`f${i}`).innerHTML=allOk?`<span class="ok">Corretto ✅</span>`:`<span class="no">Errato ❌</span>`;});
+scoreQ3=Math.round(100*right/total);document.getElementById('fbQ3').textContent=`Punteggio scritture: ${scoreQ3}%`;document.getElementById('pQ3').textContent=scoreQ3;};
+
+/* ===== Bilancio ===== */
+let scoreBIL=0;
+function matchVoce(s,keys){s=(s||"").toLowerCase();return keys.some(k=>s.includes(k))}
+document.getElementById('checkBilancio').onclick=()=>{const {vers,pagSub,debRes,mat,ven,mac}=window.__dati__;
+const SP={banca:vers-pagSub,crediti:ven,macchinari:mac,capitale:vers,debiti:debRes+mat,utile:ven-mat};
+const CE={materie:mat,ricavi:ven};let ok=0,total=8,msgs=[];
+if(matchVoce(document.getElementById("att1_v").value,["banca"])&&+document.getElementById("att1_x").value===SP.banca)ok++;else msgs.push(`Attivo: Banca €${SP.banca}`);
+if(matchVoce(document.getElementById("att2_v").value,["crediti"])&&+document.getElementById("att2_x").value===SP.crediti)ok++;else msgs.push(`Attivo: Crediti €${SP.crediti}`);
+if(matchVoce(document.getElementById("att3_v").value,["macchin"])&&+document.getElementById("att3_x").value===SP.macchinari)ok++;else msgs.push(`Attivo: Macchinari €${SP.macchinari}`);
+if(matchVoce(document.getElementById("pas1_v").value,["capitale"])&&+document.getElementById("pas1_x").value===SP.capitale)ok++;else msgs.push(`PN: Capitale €${SP.capitale}`);
+if(matchVoce(document.getElementById("pas2_v").value,["debiti"])&&+document.getElementById("pas2_x").value===SP.debiti)ok++;else msgs.push(`Passivo: Debiti €${SP.debiti}`);
+const resVoce=(document.getElementById("pas3_v").value||"").toLowerCase();const resVal=+document.getElementById("pas3_x").value;
+const resOk=(resVoce.includes("utile")||resVoce.includes("perdita"))&&(Math.abs(resVal)===Math.abs(SP.utile));
+if(resOk)ok++;else msgs.push(SP.utile>=0?`PN: Utile €${SP.utile}`:`PN: Perdita €${Math.abs(SP.utile)}`);
+if(matchVoce(document.getElementById("ce_c1_v").value,["materie"])&&+document.getElementById("ce_c1_x").value===CE.materie)ok++;else msgs.push(`CE: Materie €${CE.materie}`);
+if(matchVoce(document.getElementById("ce_r1_v").value,["vendite","ricavi"])&&+document.getElementById("ce_r1_x").value===CE.ricavi)ok++;else msgs.push(`CE: Vendite €${CE.ricavi}`);
+scoreBIL=Math.round(100*ok/total);
+document.getElementById('fbBIL').innerHTML=(ok===total)?`<span class="ok">Bilancio corretto ✅</span> (${scoreBIL}%)`:`<span class="warn">Parziale</span> – ${scoreBIL}%<br>${msgs.join("<br>")}`;
+document.getElementById('pBIL').textContent=scoreBIL;};
+
+/* ===== Finale ===== */
+document.getElementById('finalize').onclick=()=>{const sec=Math.floor((Date.now()-startTime)/1000),m=Math.floor(sec/60),s=sec%60;
+const media=0.35*scoreQ2+0.45*scoreQ3+0.20*scoreBIL;let voto=Math.round(media*0.30);
+let bonus=0;if(m<8)bonus=2;else if(m<12)bonus=1;else if(m>=20&&m<30)bonus=-1;else if(m>=30)bonus=-2;
+voto=Math.max(18,Math.min(30,voto+bonus));
+document.getElementById('timeLine').textContent=`Tempo: ${m}m ${s}s`;
+document.getElementById('sQ2').textContent=scoreQ2+"%";document.getElementById('sQ3').textContent=scoreQ3+"%";document.getElementById('sBIL').textContent=scoreBIL+"%";
+document.getElementById('grade').textContent=`${voto}/30`;document.getElementById('gradeNote').textContent=`Base ${Math.round(media*0.30)}/30 • Bonus tempo ${bonus>=0?`+${bonus}`:bonus}`;
+document.getElementById('modal').style.display='flex';};
+
+/* ===== Rigenera tutto ===== */
+function resetAll(){VOCI_Q2=pickRandomQ2();buildQ2();genScenario();startTimer();
+scoreQ2=0;scoreQ3=0;scoreBIL=0;document.getElementById("pQ2").textContent="0";document.getElementById("pQ3").textContent="0";document.getElementById("pBIL").textContent="0";}
+document.getElementById("regenAll").onclick=resetAll;
+
+/* Avvio iniziale */
+resetAll();
+</script>
+</body>
+</html>
+
+
+
