@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codice Civile - Diritto Commerciale</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 28px;
+        }
+        .header h2 {
+            color: #34495e;
+            margin: 10px 0 0 0;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .print-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .print-btn:hover {
+            background-color: #2980b9;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            background-color: #34495e;
+            color: white;
+            padding: 15px;
+            margin: 0 0 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .article {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background-color: #f8f9fa;
+            border-radius: 0 5px 5px 0;
+        }
+        .article-number {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .article-title {
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .article-text {
+            text-align: justify;
+            color: #2c3e50;
+        }
+        .comma {
+            margin-bottom: 8px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                font-size: 12pt;
+            }
+            .container {
+                box-shadow: none;
+                max-width: none;
+                padding: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+            .article {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CODICE CIVILE ITALIANO</h1>
+            <h2>Disposizioni in materia di Impresa, Azienda, Società e Bilancio</h2>
+        </div>
+        
+        <button class="print-btn" onclick="window.print()">🖨️ Stampa Documento</button>
+
+        <div class="section">
+            <h2 class="section-title">DELL'IMPRENDITORE</h2>
+            
+            <div class="article">
+                <div class="article-number">Art. 2082</div>
+                <div class="article-title">Imprenditore</div>
+                <div class="article-text">
+                    È imprenditore chi esercita professionalmente una attività economica organizzata al fine della produzione o dello scambio di beni o di servizi.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">DELL'AZIENDA</h2>
+            
+            <div class="article">
+                <div class="article-number">Art. 2555</div>
+                <div class="article-title">Nozione</div>
+                <div class="article-text">
+                    L'azienda è il complesso dei beni organizzati dall'imprenditore per l'esercizio dell'impresa.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">DEL BILANCIO</h2>
+            
+            <div class="article">
+                <div class="article-number">Art. 2423</div>
+                <div class="article-title">Redazione del bilancio</div>
+                <div class="article-text">
+                    Gli amministratori devono redigere il bilancio di esercizio, costituito dallo stato patrimoniale, dal conto economico, dal rendiconto finanziario e dalla nota integrativa.
+                    Il bilancio deve essere redatto con chiarezza e deve rappresentare in modo veritiero e corretto la situazione patrimoniale e finanziaria della società e il risultato economico dell'esercizio.
+                    Se le informazioni richieste da specifiche disposizioni di legge non sono sufficienti a dare una rappresentazione veritiera e corretta, si devono fornire le informazioni complementari necessarie allo scopo.
+                </div>
+            </div>
+
+            <div class="article">
+                <div class="article-number">Art. 2424</div>
+                <div class="article-title">Contenuto dello stato patrimoniale</div>
+                <div class="article-text">
+                    <strong>Lo stato patrimoniale deve essere redatto in conformità al seguente schema:</strong><br><br>
+                    
+                    <strong>ATTIVO</strong><br>
+                    <strong>A) Crediti verso soci per versamenti ancora dovuti</strong>, con separata indicazione della parte già richiamata<br><br>
+                    
+                    <strong>B) Immobilizzazioni</strong>, con separata indicazione di quelle concesse in locazione finanziaria:<br>
+                    <strong>I - Immobilizzazioni immateriali:</strong><br>
+                    <div class="comma">1) costi di impianto e di ampliamento</div>
+                    <div class="comma">2) costi di sviluppo</div>
+                    <div class="comma">3) diritti di brevetto industriale e diritti di utilizzazione delle opere dell'ingegno</div>
+                    <div class="comma">4) concessioni, licenze, marchi e diritti simili</div>
+                    <div class="comma">5) avviamento</div>
+                    <div class="comma">6) immobilizzazioni in corso e acconti</div>
+                    <div class="comma">7) altre</div>
+                    
+                    <strong>II - Immobilizzazioni materiali:</strong><br>
+                    <div class="comma">1) terreni e fabbricati</div>
+                    <div class="comma">2) impianti e macchinario</div>
+                    <div class="comma">3) attrezzature industriali e commerciali</div>
+                    <div class="comma">4) altri beni</div>
+                    <div class="comma">5) immobilizzazioni in corso e acconti</div>
+                    
+                    <strong>III - Immobilizzazioni finanziarie:</strong><br>
+                    <div class="comma">1) partecipazioni in:</div>
+                    <div class="comma" style="margin-left: 20px;">a) imprese controllate</div>
+                    <div class="comma" style="margin-left: 20px;">b) imprese collegate</div>
+                    <div class="comma" style="margin-left: 20px;">c) imprese controllanti</div>
+                    <div class="comma" style="margin-left: 20px;">d) altre imprese</div>
+                    <div class="comma">2) crediti:</div>
+                    <div class="comma" style="margin-left: 20px;">a) verso imprese controllate</div>
+                    <div class="comma" style="margin-left: 20px;">b) verso imprese collegate</div>
+                    <div class="comma" style="margin-left: 20px;">c) verso controllanti</div>
+                    <div class="comma" style="margin-left: 20px;">d) verso altri</div>
+                    <div class="comma">3) altri titoli</div>
+                    <div class="comma">4) azioni proprie</div><br>
+                    
+                    <strong>C) Attivo circolante:</strong><br>
+                    <strong>I - Rimanenze:</strong><br>
+                    <div class="comma">1) materie prime, sussidiarie e di consumo</div>
+                    <div class="comma">2) prodotti in corso di lavorazione e semilavorati</div>
+                    <div class="comma">3) lavori in corso su ordinazione</div>
+                    <div class="comma">4) prodotti finiti e merci</div>
+                    <div class="comma">5) acconti</div>
+                    
+                    <strong>II - Crediti:</strong><br>
+                    <div class="comma">1) verso clienti</div>
+                    <div class="comma">2) verso imprese controllate</div>
+                    <div class="comma">3) verso imprese collegate</div>
+                    <div class="comma">4) verso controllanti</div>
+                    <div class="comma">4-bis) crediti tributari</div>
+                    <div class="comma">4-ter) imposte anticipate</div>
+                    <div class="comma">5) verso altri</div>
+                    
+                    <strong>III - Attività finanziarie che non costituiscono immobilizzazioni:</strong><br>
+                    <div class="comma">1) partecipazioni in imprese controllate</div>
+                    <div class="comma">2) partecipazioni in imprese collegate</div>
+                    <div class="comma">3) partecipazioni in imprese controllanti</div>
+                    <div class="comma">4) altre partecipazioni</div>
+                    <div class="comma">5) strumenti finanziari derivati attivi</div>
+                    <div class="comma">6) altri titoli</div>
+                    
+                    <strong>IV - Disponibilità liquide:</strong><br>
+                    <div class="comma">1) depositi bancari e postali</div>
+                    <div class="comma">2) assegni</div>
+                    <div class="comma">3) denaro e valori in cassa</div><br>
+                    
+                    <strong>D) Ratei e risconti</strong><br><br>
+                    
+                    <strong>PASSIVO</strong><br>
+                    <strong>A) Patrimonio netto:</strong><br>
+                    <div class="comma">I - Capitale</div>
+                    <div class="comma">II - Riserva da soprapprezzo delle azioni</div>
+                    <div class="comma">III - Riserve di rivalutazione</div>
+                    <div class="comma">IV - Riserva legale</div>
+                    <div class="comma">V - Riserve statutarie</div>
+                    <div class="comma">VI - Altre riserve</div>
+                    <div class="comma">VII - Riserva per operazioni di copertura dei flussi finanziari attesi</div>
+                    <div class="comma">VIII - Utili (perdite) portati a nuovo</div>
+                    <div class="comma">IX - Utile (perdita) dell'esercizio</div>
+                    <div class="comma">X - Riserva negativa per azioni proprie in portafoglio</div><br>
+                    
+                    <strong>B) Fondi per rischi e oneri:</strong><br>
+                    <div class="comma">1) per trattamento di quiescenza e obblighi simili</div>
+                    <div class="comma">2) per imposte, anche differite</div>
+                    <div class="comma">3) strumenti finanziari derivati passivi</div>
+                    <div class="comma">4) altri</div><br>
+                    
+                    <strong>C) Trattamento di fine rapporto di lavoro subordinato</strong><br><br>
+                    
+                    <strong>D) Debiti:</strong><br>
+                    <div class="comma">1) obbligazioni</div>
+                    <div class="comma">2) obbligazioni convertibili</div>
+                    <div class="comma">3) debiti verso soci per finanziamenti</div>
+                    <div class="comma">4) debiti verso banche</div>
+                    <div class="comma">5) debiti verso altri finanziatori</div>
+                    <div class="comma">6) acconti</div>
+                    <div class="comma">7) debiti verso fornitori</div>
+                    <div class="comma">8) debiti rappresentati da titoli di credito</div>
+                    <div class="comma">9) debiti verso imprese controllate</div>
+                    <div class="comma">10) debiti verso imprese collegate</div>
+                    <div class="comma">11) debiti verso controllanti</div>
+                    <div class="comma">11-bis) debiti verso imprese sottoposte al controllo delle controllanti</div>
+                    <div class="comma">12) debiti tributari</div>
+                    <div class="comma">13) debiti verso istituti di previdenza e di sicurezza sociale</div>
+                    <div class="comma">14) altri debiti</div><br>
+                    
+                    <strong>E) Ratei e risconti</strong>
+                </div>
+            </div>
+
+            <div class="article">
+                <div class="article-number">Art. 2425</div>
+                <div class="article-title">Contenuto del conto economico</div>
+                <div class="article-text">
+                    <strong>Il conto economico deve essere redatto in conformità al seguente schema:</strong><br><br>
+                    
+                    <strong>A) Valore della produzione:</strong><br>
+                    <div class="comma">1) ricavi delle vendite e delle prestazioni</div>
+                    <div class="comma">2) variazioni delle rimanenze di prodotti in corso di lavorazione, semilavorati e finiti</div>
+                    <div class="comma">3) variazioni dei lavori in corso su ordinazione</div>
+                    <div class="comma">4) incrementi di immobilizzazioni per lavori interni</div>
+                    <div class="comma">5) altri ricavi e proventi, con separata indicazione dei contributi in conto esercizio</div>
+                    <strong>Totale</strong><br><br>
+                    
+                    <strong>B) Costi della produzione:</strong><br>
+                    <div class="comma">6) per materie prime, sussidiarie, di consumo e di merci</div>
+                    <div class="comma">7) per servizi</div>
+                    <div class="comma">8) per godimento di beni di terzi</div>
+                    <div class="comma">9) per il personale:</div>
+                    <div class="comma" style="margin-left: 20px;">a) salari e stipendi</div>
+                    <div class="comma" style="margin-left: 20px;">b) oneri sociali</div>
+                    <div class="comma" style="margin-left: 20px;">c) trattamento di fine rapporto</div>
+                    <div class="comma" style="margin-left: 20px;">d) trattamento di quiescenza e simili</div>
+                    <div class="comma" style="margin-left: 20px;">e) altri costi</div>
+                    <div class="comma">10) ammortamenti e svalutazioni:</div>
+                    <div class="comma" style="margin-left: 20px;">a) ammortamento delle immobilizzazioni immateriali</div>
+                    <div class="comma" style="margin-left: 20px;">b) ammortamento delle immobilizzazioni materiali</div>
+                    <div class="comma" style="margin-left: 20px;">c) altre svalutazioni delle immobilizzazioni</div>
+                    <div class="comma" style="margin-left: 20px;">d) svalutazioni dei crediti compresi nell'attivo circolante e delle disponibilità liquide</div>
+                    <div class="comma">11) variazioni delle rimanenze di materie prime, sussidiarie, di consumo e merci</div>
+                    <div class="comma">12) accantonamenti per rischi</div>
+                    <div class="comma">13) altri accantonamenti</div>
+                    <div class="comma">14) oneri diversi di gestione</div>
+                    <strong>Totale</strong><br><br>
+                    
+                    <strong>Differenza tra valore e costi della produzione (A - B)</strong><br><br>
+                    
+                    <strong>C) Proventi e oneri finanziari:</strong><br>
+                    <div class="comma">15) proventi da partecipazioni, con separata indicazione di quelli relativi ad imprese controllate e collegate</div>
+                    <div class="comma">16) altri proventi finanziari:</div>
+                    <div class="comma" style="margin-left: 20px;">a) da crediti iscritti nelle immobilizzazioni</div>
+                    <div class="comma" style="margin-left: 20px;">b) da titoli iscritti nelle immobilizzazioni che non costituiscono partecipazioni</div>
+                    <div class="comma" style="margin-left: 20px;">c) da titoli iscritti nell'attivo circolante che non costituiscono partecipazioni</div>
+                    <div class="comma" style="margin-left: 20px;">d) proventi diversi dai precedenti</div>
+                    <div class="comma">17) interessi e altri oneri finanziari</div>
+                    <div class="comma">17-bis) utili e perdite su cambi</div>
+                    <strong>Totale (15 + 16 - 17 ± 17-bis)</strong><br><br>
+                    
+                    <strong>D) Rettifiche di valore di attività e passività finanziarie:</strong><br>
+                    <div class="comma">18) rivalutazioni:</div>
+                    <div class="comma" style="margin-left: 20px;">a) di partecipazioni</div>
+                    <div class="comma" style="margin-left: 20px;">b) di strumenti finanziari derivati</div>
+                    <div class="comma" style="margin-left: 20px;">c) di altri titoli</div>
+                    <div class="comma">19) svalutazioni:</div>
+                    <div class="comma" style="margin-left: 20px;">a) di partecipazioni</div>
+                    <div class="comma" style="margin-left: 20px;">b) di strumenti finanziari derivati</div>
+                    <div class="comma" style="margin-left: 20px;">c) di altri titoli</div>
+                    <strong>Totale delle rettifiche (18 - 19)</strong><br><br>
+                    
+                    <strong>E) Proventi e oneri straordinari:</strong><br>
+                    <div class="comma">20) proventi</div>
+                    <div class="comma">21) oneri</div>
+                    <strong>Totale delle partite straordinarie (20 - 21)</strong><br><br>
+                    
+                    <strong>Risultato prima delle imposte (A - B ± C ± D ± E)</strong><br><br>
+                    
+                    <div class="comma">22) imposte sul reddito dell'esercizio, correnti, differite e anticipate</div><br>
+                    
+                    <strong>23) Utile (perdita) dell'esercizio</strong>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #7f8c8d; font-style: italic;">
+            Documento generato per scopi didattici - Codice Civile Italiano
+        </div>
+    </div>
+
+    <script>
+        // Funzione per la stampa
+        function stampaBilancio() {
+            window.print();
+        }
+        
+        // Miglioramento accessibilità
+        document.addEventListener('DOMContentLoaded', function() {
+            const printBtn = document.querySelector('.print-btn');
+            printBtn.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    window.print();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
