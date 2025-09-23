@@ -33,6 +33,7 @@
             color: white;
             padding: 40px;
             text-align: center;
+            position: relative;
         }
         
         .header h1 {
@@ -97,7 +98,6 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         
-      
         .content-block.modulo1 {
             border-left-color: #3182ce;
             background: linear-gradient(135deg, #bee3f8 0%, #f8f9fa 50%);
@@ -106,6 +106,26 @@
         .content-block.modulo2 {
             border-left-color: #3182ce;
             background: linear-gradient(135deg, #bee3f8 0%, #f8f9fa 50%);
+        }
+
+        .content-block.modulo3 {
+            border-left-color: #38a169;
+            background: linear-gradient(135deg, #c6f6d5 0%, #f8f9fa 50%);
+        }
+
+        .content-block.gioco {
+            border-left-color: #ed64a6;
+            background: linear-gradient(135deg, #fed7e2 0%, #f8f9fa 50%);
+        }
+
+        .content-block.verifica {
+            border-left-color: #f56565;
+            background: linear-gradient(135deg, #fed7d7 0%, #f8f9fa 50%);
+        }
+
+        .content-block.codice-civile {
+            border-left-color: #805ad5;
+            background: linear-gradient(135deg, #e9d8fd 0%, #f8f9fa 50%);
         }
         
         .content-block h3 {
@@ -171,12 +191,16 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .emoji {
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-                        <h1>Classe 3 AFM</h1>
+            <h1>Classe 3 AFM</h1>
             <p>Economia Aziendale - Prof.ssa Elisa Pontivi</p>
         </div>
         
@@ -186,53 +210,59 @@
                 le prove d'esame e i moduli di studio per prepararvi al meglio.</p>
             </div>
             
-         
-            
             <!-- Blocco Modulo 1 -->
             <div class="content-block modulo1" onclick="window.open('modulo1-imprese-societa1.html', '_blank')">
-                <h3> Modulo 1: Imprenditore, Impresa, Azienda, Società</h3>
+                <h3><span class="emoji">📊</span> Modulo 1: Imprenditore, Impresa, Azienda, Società</h3>
+                <div class="block-content">
+                    <p>Studio delle forme giuridiche d'impresa e delle diverse tipologie societarie.</p>
+                </div>
             </div>
             
             <!-- Blocco Modulo 2 -->
             <div class="content-block modulo2" onclick="window.open('modulo2-bilancio2.html', '_blank')">
-                <h3> Modulo 2: Introduzione al Bilancio</h3>
+                <h3><span class="emoji">📈</span> Modulo 2: Introduzione al Bilancio</h3>
+                <div class="block-content">
+                    <p>Le basi del bilancio d'esercizio: stato patrimoniale e conto economico.</p>
+                </div>
             </div>
 
-<!-- Blocco Gioco Voci SP (Versione facile) -->
-<div class="content-block modulo2" onclick="window.open('giocosp.html', '_blank')">
-    <h3>🎮 Gioco: Voci Stato Patrimoniale </h3>
-    <div class="block-content">
-        <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere dello Stato Patrimoniale.</p>
-    </div>
-
-
-</div>
-
-     <!-- Blocco Modulo 3 -->
-            <div class="content-block modulo2" onclick="window.open('partitadoppiaintroduzione.html', '_blank')">
-                <h3> Modulo 3: Introduzione Partita doppia</h3>
+            <!-- Blocco Modulo 3 -->
+            <div class="content-block modulo3" onclick="window.open('partitadoppiaintroduzione.html', '_blank')">
+                <h3><span class="emoji">⚖️</span> Modulo 3: Introduzione Partita Doppia</h3>
+                <div class="block-content">
+                    <p>I principi fondamentali della contabilità in partita doppia.</p>
+                </div>
             </div>
-        </div>
 
-        </div>
+            <!-- Blocco Codice Civile -->
+            <div class="content-block codice-civile" onclick="window.open('codicecivile.html', '_blank')">
+                <h3><span class="emoji">📚</span> Codice Civile </h3>
+                <div class="block-content">
+                    <p>Articoli fondamentali del Codice Civile per l'economia aziendale: imprenditore, azienda, società e bilancio.</p>
+                    <p><strong>Articoli inclusi:</strong> 2082 (Imprenditore), 2555 (Azienda), 2423-2425 (Bilancio)</p>
+                </div>
+            </div>
+
+            <!-- Blocco Gioco Voci SP -->
+            <div class="content-block gioco" onclick="window.open('giocosp.html', '_blank')">
+                <h3><span class="emoji">🎮</span> Gioco: Voci Stato Patrimoniale</h3>
+                <div class="block-content">
+                    <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere dello Stato Patrimoniale.</p>
+                </div>
+            </div>
 
             <!-- Blocco Simulazione Verifica -->
-    <div class="content-block modulo2" onclick="window.open('simulazionever.html', '_blank')">
-        <h3>📝 Simulazione Verifica</h3>
-       
+            <div class="content-block verifica" onclick="window.open('simulazionever.html', '_blank')">
+                <h3><span class="emoji">📝</span> Simulazione Verifica</h3>
+                <div class="block-content">
+                    <p>Preparati per le verifiche con esercizi pratici e domande teoriche.</p>
+                </div>
+            </div>
         </div>
-    </div>
-
-        
         
         <div class="footer">
             <p>Prof.ssa Elisa Pontivi | <a href="mailto:elisa.pontivi@istituto-pascoli.it">elisa.pontivi@istituto-pascoli.it</a></p>
         </div>
     </div>
 </body>
-
 </html>
-
-
-
-
