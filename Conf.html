@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conferimenti di Immobilizzazioni nelle Società</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;
+         background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);min-height:100vh}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;text-align:center;
+           padding:40px 20px;border-radius:15px;margin-bottom:30px;box-shadow:0 8px 32px rgba(0,0,0,.1)}
+    h1{font-size:2.5em;margin-bottom:10px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+    .subtitle{font-size:1.2em;opacity:.9}
+    .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:30px}
+    .card{background:#fff;padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.1);
+          transition:transform .3s ease,box-shadow .3s ease}
+    .card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.15)}
+    .full-width{grid-column:1 / -1}
+    h2{color:#667eea;margin-bottom:20px;padding-bottom:10px;border-bottom:3px solid #f0f0f0;font-size:1.8em}
+    h3{color:#764ba2;margin:25px 0 15px 0;font-size:1.3em}
+    h4{color:#555;margin:20px 0 10px 0;font-size:1.1em}
+    .law-article{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff;padding:20px;border-radius:10px;margin:15px 0;border-left:5px solid #fff}
+    .law-article h4{color:#fff;margin-top:0;font-weight:bold}
+    .law-article p,.law-article li{font-size:.95em;line-height:1.55}
+    .law-article a{color:#fff;text-decoration:underline}
+    .highlight-box{background:linear-gradient(135deg,#84fab0 0%,#8fd3f4 100%);padding:20px;border-radius:10px;margin:20px 0;border-left:5px solid #4ecdc4}
+    .comparison-table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .comparison-table th{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:15px;text-align:left}
+    .comparison-table td{padding:15px;border-bottom:1px solid #f0f0f0}
+    .comparison-table tr:nth-child(even){background:#f8f9fa}
+    ul{margin:15px 0;padding-left:25px}
+    li{margin:8px 0}
+    .example-box{background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%);padding:20px;border-radius:10px;margin:20px 0;border-left:5px solid #ff8a80}
+    .toc{background:#fff;padding:25px;border-radius:15px;margin-bottom:30px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+    .toc h3{color:#667eea;margin-bottom:15px}
+    .toc ul{list-style:none;padding-left:0}
+    .toc li{padding:8px 0;border-bottom:1px solid #f0f0f0}
+    .toc a{color:#555;text-decoration:none;transition:color .3s ease}
+    .toc a:hover{color:#667eea}
+    .warning-box{background:linear-gradient(135deg,#ffd3a5 0%,#fd9853 100%);padding:20px;border-radius:10px;margin:20px 0;border-left:5px solid #f76707;color:#333}
+    @media (max-width:768px){.content-grid{grid-template-columns:1fr}h1{font-size:2em}.card{padding:20px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Conferimenti di Immobilizzazioni</h1>
+      <p class="subtitle">Testi completi degli articoli del Codice Civile italiano</p>
+    </header>
+
+    <div class="toc">
+      <h3>Indice dei contenuti</h3>
+      <ul>
+        <li><a href="#introduzione">1. Introduzione ai conferimenti</a></li>
+        <li><a href="#societa-persone">2. Società di persone</a></li>
+        <li><a href="#societa-capitali">3. Società di capitali</a></li>
+        <li><a href="#perizia">4. Quando serve la perizia</a></li>
+        <li><a href="#sovrapprezzo">5. Riserva sovrapprezzo</a></li>
+      </ul>
+    </div>
+
+    <div class="content-grid">
+      <!-- INTRO -->
+      <div class="card full-width" id="introduzione">
+        <h2>1. Introduzione ai Conferimenti di Immobilizzazioni</h2>
+        <p>I conferimenti di immobilizzazioni sono apporti in beni durevoli (impianti, macchinari, immobili, brevetti, marchi) in luogo dei conferimenti in denaro, in sede di costituzione o aumento di capitale.</p>
+        <div class="highlight-box">
+          <h4>Quando avvengono</h4>
+          <ul>
+            <li><strong>Costituzione</strong> della società</li>
+            <li><strong>Aumenti di capitale</strong> (a pagamento o gratuiti, se pertinenti)</li>
+            <li><strong>Ingresso di nuovi soci</strong> con apporto in natura</li>
+            <li><strong>Trasformazioni/operazioni straordinarie</strong> con apporto di beni</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SOCIETÀ DI PERSONE -->
+      <div class="card" id="societa-persone">
+        <h2>2. Società di persone</h2>
+
+        <h3>S.n.c. (Società in nome collettivo)</h3>
+        <div class="law-article">
+          <h4>Art. 2253 c.c. — Conferimenti</h4>
+          <p><strong>Il socio è obbligato a eseguire i conferimenti determinati nel contratto sociale.</strong></p>
+          <p><strong>Se i conferimenti non sono determinati, si presume che i soci siano obbligati a conferire, in parti eguali tra loro, quanto è necessario per il conseguimento dell'oggetto sociale.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2254 c.c. — Garanzia e rischi dei conferimenti</h4>
+          <p><strong>Per le cose conferite in proprietà la garanzia dovuta dal socio e il passaggio dei rischi sono regolati dalle norme sulla vendita.</strong></p>
+          <p><strong>Il rischio delle cose conferite in godimento resta a carico del socio che le ha conferite. La garanzia per il godimento è regolata dalle norme sulla locazione.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2255 c.c. — Conferimento di crediti</h4>
+          <p><strong>Il socio che ha conferito un credito risponde della insolvenza del debitore, nei limiti indicati dall'articolo 1267 per il caso di assunzione convenzionale della garanzia.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <h3>S.a.s. (Società in accomandita semplice)</h3>
+        <div class="law-article">
+          <h4>Art. 2315 c.c. — Norme applicabili</h4>
+          <p><strong>Alla società in accomandita semplice si applicano le disposizioni relative alla società in nome collettivo, in quanto siano compatibili con le norme seguenti.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+      </div>
+
+      <!-- SOCIETÀ DI CAPITALI - S.P.A. -->
+      <div class="card full-width" id="societa-capitali">
+        <h2>3. Società di capitali</h2>
+
+        <h3>S.p.A. (Società per azioni)</h3>
+        <div class="law-article">
+          <h4>Art. 2342 c.c. — Conferimenti</h4>
+          <p><strong>Se nell'atto costitutivo non è stabilito diversamente, il conferimento deve farsi in danaro.</strong></p>
+          <p><strong>Alla sottoscrizione dell'atto costitutivo deve essere versato presso una banca almeno il venticinque per cento dei conferimenti in danaro o, nel caso di costituzione con atto unilaterale, il loro intero ammontare.</strong></p>
+          <p><strong>Per i conferimenti di beni in natura e di crediti si osservano le disposizioni degli articoli 2254 e 2255. Le azioni corrispondenti a tali conferimenti devono essere integralmente liberate al momento della sottoscrizione.</strong></p>
+          <p><strong>Se viene meno la pluralità dei soci, i versamenti ancora dovuti devono essere effettuati entro novanta giorni.</strong></p>
+          <p><strong>Non possono formare oggetto di conferimento le prestazioni di opera o di servizi.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2343 c.c. — Stima dei conferimenti di beni in natura e di crediti</h4>
+          <p><strong>Chi conferisce beni in natura o crediti deve presentare la relazione giurata di un esperto designato dal tribunale nel cui circondario ha sede la società, contenente la descrizione dei beni o dei crediti conferiti, l'attestazione che il loro valore è almeno pari a quello ad essi attribuito ai fini della determinazione del capitale sociale e dell'eventuale soprapprezzo e i criteri di valutazione seguiti. La relazione deve essere allegata all'atto costitutivo.</strong></p>
+          <p><strong>L'esperto risponde dei danni causati alla società, ai soci e ai terzi. Si applicano le disposizioni dell'articolo 64 del codice di procedura civile.</strong></p>
+          <p><strong>Gli amministratori devono, nel termine di centottanta giorni dalla iscrizione della società, controllare le valutazioni contenute nella relazione indicata nel primo comma e, se sussistano fondati motivi, devono procedere alla revisione della stima. Fino a quando le valutazioni non sono state controllate, le azioni corrispondenti ai conferimenti sono inalienabili e devono restare depositate presso la società.</strong></p>
+          <p><strong>Se risulta che il valore dei beni o dei crediti conferiti era inferiore di oltre un quinto a quello per cui avvenne il conferimento, la società deve proporzionalmente ridurre il capitale sociale, annullando le azioni che risultano scoperte. Tuttavia il socio conferente può versare la differenza in danaro o recedere dalla società; il socio recedente ha diritto alla restituzione del conferimento, qualora sia possibile in tutto o in parte in natura.</strong></p>
+          <p><strong>L'atto costitutivo può prevedere, salvo in ogni caso quanto disposto dal quinto comma dell'articolo 2346, che per effetto dell'annullamento delle azioni disposto nel presente comma si determini una loro diversa ripartizione tra i soci.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2343-ter c.c. — Conferimento di beni in natura o crediti senza relazione di stima</h4>
+          <p><strong>Nel caso di conferimento di valori mobiliari ovvero di strumenti del mercato monetario non è richiesta la relazione di cui all'articolo 2343, primo comma, se il valore ad essi attribuito ai fini della determinazione del capitale sociale e dell'eventuale sovrapprezzo è pari o inferiore al prezzo medio ponderato al quale sono stati negoziati su uno o più mercati regolamentati nei sei mesi precedenti il conferimento.</strong></p>
+          <p><strong>Fuori dai casi in cui è applicabile il primo comma, non è altresì richiesta la relazione di cui all'articolo 2343, primo comma, qualora il valore attribuito, ai fini della determinazione del capitale sociale e dell'eventuale sovrapprezzo, ai beni in natura o crediti conferiti sia pari o inferiore:</strong></p>
+          <p><strong>a) al fair value iscritto nel bilancio dell'esercizio precedente quello nel quale è effettuato il conferimento a condizione che il bilancio sia sottoposto a revisione legale e la relazione del revisore non esprima rilievi in ordine alla valutazione dei beni oggetto del conferimento, ovvero;</strong></p>
+          <p><strong>b) al valore risultante da una valutazione riferita ad una data precedente di non oltre sei mesi il conferimento e conforme ai principi e criteri generalmente riconosciuti per la valutazione dei beni oggetto del conferimento, a condizione che essa provenga da un esperto indipendente da chi effettua il conferimento, dalla società e dai soci che esercitano individualmente o congiuntamente il controllo sul soggetto conferente o sulla società medesima, dotato di adeguata e comprovata professionalità.</strong></p>
+          <p><strong>Chi conferisce beni o crediti ai sensi del primo e secondo comma presenta la documentazione dalla quale risulta il valore attribuito ai conferimenti e la sussistenza, per i conferimenti di cui al secondo comma, delle condizioni ivi indicate. La documentazione è allegata all'atto costitutivo.</strong></p>
+          <p><strong>L'esperto di cui al secondo comma, lettera b), risponde dei danni causati alla società, ai soci e ai terzi.</strong></p>
+          <p><strong>Ai fini dell'applicazione del secondo comma, lettera a), per la definizione di "fair value" si fa riferimento ai principi contabili internazionali adottati dall'Unione europea.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2343-quater c.c. — Fatti eccezionali o rilevanti che incidono sulla valutazione</h4>
+          <p><strong>Gli amministratori verificano, nel termine di trenta giorni dalla iscrizione della società, se, nel periodo successivo a quello di cui all'articolo 2343 ter, primo comma, sono intervenuti fatti eccezionali che hanno inciso sul prezzo dei valori mobiliari o degli strumenti del mercato monetario conferiti in modo tale da modificare sensibilmente il valore di tali beni alla data di iscrizione della società nel registro delle imprese, comprese le situazioni in cui il mercato dei valori o strumenti non è più liquido.</strong></p>
+          <p><strong>Gli amministratori verificano altresì nel medesimo termine se, successivamente al termine dell'esercizio cui si riferisce il bilancio di cui alla lettera a) del secondo comma dell'articolo 2343 ter, o alla data della valutazione di cui alla lettera b) del medesimo comma, si sono verificati fatti nuovi rilevanti tali da modificare sensibilmente il valore dei beni o dei crediti conferiti alla data di iscrizione della società nel registro delle imprese, nonché i requisiti di professionalità e indipendenza dell'esperto di cui alla lettera b) del secondo comma dell'articolo 2343 ter.</strong></p>
+          <p><strong>Qualora gli amministratori ritengano che siano intervenuti i fatti di cui al primo comma, ovvero ritengano non idonei i requisiti di professionalità e indipendenza dell'esperto che ha reso la valutazione di cui all'articolo 2343 ter, secondo comma, lettera b), si procede, su iniziativa degli amministratori, ad una nuova valutazione ai sensi e per gli effetti dell'articolo 2343.</strong></p>
+          <p><strong>Fino all'iscrizione nel registro delle imprese della dichiarazione di cui al comma successivo, le azioni corrispondenti ai conferimenti sono inalienabili e devono restare depositate presso la società.</strong></p>
+          <p><strong>All'esito delle verifiche di cui al primo e secondo comma gli amministratori, entro trenta giorni dall'iscrizione della società nel registro delle imprese, depositano per l'iscrizione nel registro stesso una dichiarazione contenente le seguenti informazioni:</strong></p>
+          <p><strong>a) la descrizione dei beni o dei crediti conferiti per i quali non si è fatto luogo alla relazione di cui all'articolo 2343, primo comma;</strong></p>
+          <p><strong>b) il valore ad essi attribuito, la fonte di valutazione e, qualora si tratti di una valutazione effettuata ai sensi del secondo comma dell'articolo 2343 ter da un esperto, il metodo di valutazione;</strong></p>
+          <p><strong>c) la dichiarazione che il valore attribuito ai beni o crediti conferiti è almeno pari a quello ad essi attribuito ai fini della determinazione del capitale sociale e dell'eventuale soprapprezzo;</strong></p>
+          <p><strong>d) la dichiarazione che non sono intervenuti fatti eccezionali o rilevanti che incidono sulla valutazione di cui al comma precedente, lettera b);</strong></p>
+          <p><strong>e) la dichiarazione di idoneità dei requisiti di professionalità e indipendenza dell'esperto di cui all'articolo 2343 ter, secondo comma, lettera b).</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+      </div>
+
+      <!-- S.R.L. -->
+      <div class="card full-width">
+        <h3>S.r.l. (Società a responsabilità limitata)</h3>
+        <div class="law-article">
+          <h4>Art. 2464 c.c. — Conferimenti</h4>
+          <p><strong>Il valore dei conferimenti non può essere complessivamente inferiore all'ammontare globale del capitale sociale.</strong></p>
+          <p><strong>Possono essere conferiti tutti gli elementi dell'attivo suscettibili di valutazione economica.</strong></p>
+          <p><strong>Se nell'atto costitutivo non è stabilito diversamente, il conferimento deve farsi in danaro.</strong></p>
+          <p><strong>Alla sottoscrizione dell'atto costitutivo deve essere versato all'organo amministrativo nominato nell'atto costitutivo almeno il venticinque per cento dei conferimenti in danaro e l'intero soprapprezzo o, nel caso di costituzione con atto unilaterale, il loro intero ammontare. I mezzi di pagamento sono indicati nell'atto. Il versamento può essere sostituito dalla stipula, per un importo almeno corrispondente, di una polizza di assicurazione o di una fideiussione bancaria con le caratteristiche determinate con decreto del Presidente del Consiglio dei Ministri; in tal caso il socio può in ogni momento sostituire la polizza o la fideiussione con il versamento del corrispondente importo in danaro.</strong></p>
+          <p><strong>Per i conferimenti di beni in natura e di crediti si osservano le disposizioni degli articoli 2254 e 2255. Le quote corrispondenti a tali conferimenti devono essere integralmente liberate al momento della sottoscrizione.</strong></p>
+          <p><strong>Il conferimento può anche avvenire mediante la prestazione di una polizza di assicurazione o di una fideiussione bancaria con cui vengono garantiti, per l'intero valore ad essi assegnato, gli obblighi assunti dal socio aventi per oggetto la prestazione d'opera o di servizi a favore della società. In tal caso, se l'atto costitutivo lo prevede, la polizza o la fideiussione possono essere sostituite dal socio con il versamento a titolo di cauzione del corrispondente importo in danaro presso la società.</strong></p>
+          <p><strong>Se viene meno la pluralità dei soci, i versamenti ancora dovuti devono essere effettuati nei novanta giorni.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+
+        <div class="law-article">
+          <h4>Art. 2465 c.c. — Stima dei conferimenti di beni in natura e di crediti</h4>
+          <p><strong>Chi conferisce beni in natura o crediti deve presentare la relazione giurata di un revisore legale o di una società di revisione legale iscritti nell'apposito registro. La relazione, che deve contenere la descrizione dei beni o crediti conferiti, l'indicazione dei criteri di valutazione adottati e l'attestazione che il loro valore è almeno pari a quello ad essi attribuito ai fini della determinazione del capitale sociale e dell'eventuale soprapprezzo, deve essere allegata all'atto costitutivo.</strong></p>
+          <p><strong>La disposizione del precedente comma si applica in caso di acquisto da parte della società, per un corrispettivo pari o superiore al decimo del capitale sociale, di beni o di crediti dei soci fondatori, dei soci e degli amministratori, nei due anni dalla iscrizione della società nel registro delle imprese. In tal caso l'acquisto, salvo diversa disposizione dell'atto costitutivo, deve essere autorizzato con decisione dei soci a norma dell'articolo 2479.</strong></p>
+          <p><strong>Nei casi previsti dai precedenti commi si applicano il secondo comma dell'articolo 2343 ed il quarto e quinto comma dell'articolo 2343 bis.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+      </div>
+
+      <!-- PERIZIA -->
+      <div class="card full-width" id="perizia">
+        <h2>4. Quando è obbligatoria la perizia</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Tipo di società</th><th>Obbligo</th><th>Alternative</th><th>Controlli</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>S.p.A.</strong></td>
+              <td>Regola: relazione ex art. 2343</td>
+              <td>
+                <ul>
+                  <li>Art. 2343-ter: titoli/strumenti MM (prezzo medio 6 mesi)</li>
+                  <li>Art. 2343-ter: <em>fair value</em> da bilancio revisionato (&lt; 1 anno)</li>
+                  <li>Art. 2343-ter: stima esperto indipendente (&lt; 6 mesi)</li>
+                </ul>
+              </td>
+              <td>Art. 2343-quater: verifica entro 30 giorni e, se necessario, nuova stima</td>
+            </tr>
+            <tr>
+              <td><strong>S.r.l.</strong></td>
+              <td>Relazione di revisore legale (art. 2465)</td>
+              <td>Nessuna alternativa prevista</td>
+              <td>Regole su acquisti "pericolosi" e rinvii a 2343/2343-bis</td>
+            </tr>
+            <tr>
+              <td><strong>S.n.c./S.a.s.</strong></td>
+              <td>Perizia non obbligatoria</td>
+              <td>Accordo tra soci</td>
+              <td>Rischi/garanzie: artt. 2254-2255</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="warning-box">
+          <h4>Nota pratica</h4>
+          <p>Nelle S.p.A. <em>non</em> è "sempre" necessaria la relazione: i casi dell'art. 2343-ter la escludono, fermo il controllo degli amministratori ex art. 2343-quater (azioni inalienabili fino al deposito della dichiarazione).</p>
+        </div>
+      </div>
+
+      <!-- SOVRAPPREZZO -->
+      <div class="card full-width" id="sovrapprezzo">
+        <h2>5. Riserva sovrapprezzo azioni/quote</h2>
+        <div class="law-article">
+          <h4>Art. 2431 c.c. — Soprapprezzo delle azioni</h4>
+          <p><strong>Le somme percepite dalla società per l'emissione di azioni ad un prezzo superiore al loro valore nominale, ivi comprese quelle derivate dalla conversione di obbligazioni, non possono essere distribuite fino a che la riserva legale non abbia raggiunto il limite stabilito dall'articolo 2430.</strong></p>
+          <p><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262" target="_blank" rel="noopener">Testo ufficiale su Normattiva</a></p>
+        </div>
+        <div class="highlight-box">
+          <h4>Utilizzi della riserva sovrapprezzo</h4>
+          <ul>
+            <li>Copertura delle perdite</li>
+            <li>Aumento gratuito del capitale sociale</li>
+            <li>Integrazione della riserva legale</li>
+            <li>Distribuzione ai soci (solo se la riserva legale ha raggiunto il quinto del capitale sociale)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SINTESI -->
+      <div class="card full-width">
+        <h2>Sintesi normativa</h2>
+        <div class="content-grid" style="margin-bottom:0">
+          <div>
+            <h3>Società di persone</h3>
+            <ul>
+              <li><strong>Art. 2253</strong> — Conferimenti</li>
+              <li><strong>Art. 2254</strong> — Garanzia e rischi</li>
+              <li><strong>Art. 2255</strong> — Crediti conferiti</li>
+              <li><strong>Art. 2315</strong> — Rinvio alla S.n.c. (S.a.s.)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Società di capitali</h3>
+            <ul>
+              <li><strong>Art. 2342</strong> — Conferimenti (S.p.A.)</li>
+              <li><strong>Art. 2343 / 2343-ter / 2343-quater</strong> — Stima, alternative, controlli</li>
+              <li><strong>Art. 2464 / 2465</strong> — Conferimenti e stime (S.r.l.)</li>
+              <li><strong>Art. 2431</strong> — Sovrapprezzo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCLUSIONI -->
+    <div class="card full-width">
+      <h2>Conclusioni</h2>
+      <p>Le regole sui conferimenti variano significativamente per forma societaria. Per le S.p.A. esistono importanti alternative alla relazione di stima classica previste dall'art. 2343-ter; per le S.r.l. la relazione del revisore legale è regola generale per beni/crediti, ma è ammesso il conferimento di prestazioni d'opera o servizi (con garanzie). Collegare i casi pratici alle norme vigenti evita errori su capitale effettivo e tutele di soci/creditori.</p>
+    </div>
+  </div>
+</body>
+</html>

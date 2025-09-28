@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizi: Costruzioni in Economia</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c3e50; background-color: #f8f9fa;}
+        .container {max-width: 1100px; margin: 0 auto; padding: 20px; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.1);}
+        .header {text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 3px solid #2980b9;}
+        .header h1 {color: #2980b9; font-size: 2.5em; margin-bottom: 10px; font-weight: bold;}
+        .header .subtitle {color: #34495e; font-size: 1.2em; font-style: italic;}
+        .section-title {color: #2980b9; font-size: 1.8em; font-weight: bold; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #2980b9;}
+        .subsection-title {color: #34495e; font-size: 1.4em; font-weight: bold; margin: 25px 0 15px 0;}
+        .definition-box {background-color: #f0f8ff; border-left: 5px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 5px;}
+        .definition-box .title {color: #3498db; font-size: 1.1em; font-weight: bold; margin-bottom: 10px;}
+        .exercise-box {background-color: #e8f5e8; border-left: 5px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 5px;}
+        .exercise-box .title {color: #27ae60; font-size: 1.1em; font-weight: bold; margin-bottom: 10px;}
+        .data-highlight {background: #fff3cd; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #856404;}
+        .amount-highlight {background: #d1ecf1; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #0c5460;}
+        .accounting-entry {background-color: #f8f9fa; border: 2px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0; font-family: 'Courier New', monospace;}
+        .accounting-entry .date {font-weight: bold; color: #2980b9; margin-bottom: 10px;}
+        .accounting-entry table {width: 100%; border-collapse: collapse;}
+        .accounting-entry th {background-color: #e9ecef; padding: 10px; border: 1px solid #dee2e6; font-weight: bold; text-align: center;}
+        .accounting-entry td {padding: 8px 10px; border: 1px solid #dee2e6;}
+        .accounting-entry .dare, .accounting-entry .avere {text-align: right; font-weight: bold;}
+        .mastrini-section {margin-top: 40px; padding-top: 30px; border-top: 3px solid #27ae60;}
+        .mastrini-title {color: #27ae60; font-size: 1.6em; font-weight: bold; margin: 20px 0; text-align: center;}
+        .grid-2 {display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;}
+        .grid-3 {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 30px 0;}
+        .neutro-color {color: #2980b9; border-color: #2980b9;}
+        .neutro-bg {background: #e8f4fd;}
+        .saldo-finale {text-align: center; font-weight: bold; padding: 10px; margin-top: 10px; border-radius: 5px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>COSTRUZIONI IN ECONOMIA</h1>
+        <div class="subtitle">Immobilizzazioni in corso e impianti</div>
+    </div>
+
+    <h2 class="section-title">1. Teoria</h2>
+    <div class="definition-box">
+        <div class="title">Definizione</div>
+        <p>Le <strong>costruzioni in economia</strong> si hanno quando un’impresa realizza internamente un bene strumentale, sostenendo costi per materie prime, manodopera, ammortamenti, ecc.</p>
+        <ul>
+            <li>I costi sono rilevati nei conti economici durante l’anno.</li>
+            <li>A fine esercizio, per rispettare il principio di competenza, si rileva un ricavo figurativo “Costruzioni in economia” che neutralizza tali costi.</li>
+            <li>Se il bene non è ultimato, si iscrive nello Stato patrimoniale come <strong>Immobilizzazioni in corso</strong>.</li>
+            <li>Quando il bene è completato, il valore complessivo confluisce in <strong>Impianti</strong>.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">2. Esercizio A – Ultimazione nello stesso anno</h2>
+    <div class="exercise-box">
+        <div class="title">Testo</div>
+        <p>Nel periodo <span class="data-highlight">T</span> inizia la costruzione interna di un impianto. Al <span class="data-highlight">31/12/T</span> l’impianto risulta <strong>ultimato</strong> e i costi capitalizzabili ammontano a <span class="amount-highlight">€ 93.000</span>.</p>
+    </div>
+
+    <div class="accounting-entry">
+        <div class="date">31/12/T – Scrittura di assestamento</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Impianti</td><td class="dare">93.000</td><td>-</td></tr>
+            <tr><td>Costruzioni in economia</td><td>-</td><td class="avere">93.000</td></tr>
+        </table>
+    </div>
+
+    <div class="mastrini-section">
+        <h3 class="mastrini-title">📊 Mastrini – Esercizio A</h3>
+        <div class="grid-2">
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>IMPIANTI</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr>
+                        <td>31/12/T – Costruzioni in economia<br><strong>€ 93.000</strong></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 93.000 (DARE)</div>
+            </div>
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>COSTRUZIONI IN ECONOMIA</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr>
+                        <td></td>
+                        <td>31/12/T – Impianti<br><strong>€ 93.000</strong></td>
+                    </tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 0 (conto chiuso)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 class="section-title">3. Esercizio B – Ultimazione in due anni</h2>
+    <div class="exercise-box">
+        <div class="title">Testo</div>
+        <p>Nel periodo <span class="data-highlight">T</span> inizia la costruzione interna di un impianto. Alla chiusura del <span class="data-highlight">31/12/T</span> la costruzione non è ancora ultimata e i costi capitalizzabili ammontano a <span class="amount-highlight">€ 68.000</span>. In <span class="data-highlight">T+1</span> la costruzione si completa con ulteriori costi per <span class="amount-highlight">€ 25.000</span>.</p>
+    </div>
+
+    <div class="accounting-entry">
+        <div class="date">31/12/T – Scrittura di assestamento</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Immobilizzazioni in corso</td><td class="dare">68.000</td><td>-</td></tr>
+            <tr><td>Costruzioni in economia</td><td>-</td><td class="avere">68.000</td></tr>
+        </table>
+    </div>
+
+    <div class="accounting-entry">
+        <div class="date">31/12/T+1 – Ultimazione impianto</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Impianti</td><td class="dare">93.000</td><td>-</td></tr>
+            <tr><td>Costruzioni in economia</td><td>-</td><td class="avere">25.000</td></tr>
+            <tr><td>Immobilizzazioni in corso</td><td>-</td><td class="avere">68.000</td></tr>
+        </table>
+    </div>
+
+    <div class="mastrini-section">
+        <h3 class="mastrini-title">📊 Mastrini – Esercizio B</h3>
+        <div class="grid-3">
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>IMMOBILIZZAZIONI IN CORSO</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>31/12/T – Costruzioni in economia<br><strong>€ 68.000</strong></td><td></td></tr>
+                    <tr><td></td><td>31/12/T+1 – Impianti<br><strong>€ 68.000</strong></td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 0 (conto chiuso)</div>
+            </div>
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>COSTRUZIONI IN ECONOMIA</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td></td><td>31/12/T – Immobilizzazioni in corso<br><strong>€ 68.000</strong></td></tr>
+                    <tr><td></td><td>31/12/T+1 – Impianti<br><strong>€ 25.000</strong></td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 93.000 (AVERE)</div>
+            </div>
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>IMPIANTI</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>31/12/T+1 – Costruzioni in economia<br><strong>€ 25.000</strong></td><td></td></tr>
+                    <tr><td>31/12/T+1 – Immobilizzazioni in corso<br><strong>€ 68.000</strong></td><td></td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 93.000 (DARE)</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

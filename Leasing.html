@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Esempio: Leasing con maxicanone e canoni anticipati</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; color:#2c3e50; background:#f8f9fa; }
+    .container { max-width:1100px; margin:0 auto; padding:20px; background:#fff; box-shadow:0 0 20px rgba(0,0,0,.1); }
+    .header { text-align:center; margin-bottom:40px; padding:30px 0; border-bottom:3px solid #2980b9; }
+    .header h1 { color:#2980b9; font-size:2.5em; margin-bottom:10px; font-weight:700; }
+    .header .subtitle { color:#34495e; font-size:1.2em; font-style:italic; }
+
+    .section-title { color:#2980b9; font-size:1.8em; font-weight:700; margin:30px 0 20px; padding-bottom:10px; border-bottom:2px solid #2980b9; }
+    .definition-box { background:#f0f8ff; border-left:5px solid #3498db; padding:20px; border-radius:5px; margin:20px 0; }
+    .definition-box .title { color:#3498db; font-weight:800; margin-bottom:10px; }
+    .note-box { background:#fff8e1; border-left:5px solid #f4b400; padding:16px; border-radius:6px; margin:18px 0; }
+    .note-box .title{ color:#b37a00; font-weight:800; margin-bottom:6px; }
+
+    .exercise-box { background:#e8f5e8; border-left:5px solid #27ae60; padding:20px; border-radius:5px; margin:20px 0; }
+    .exercise-box .title { color:#27ae60; font-weight:800; margin-bottom:10px; }
+
+    .accounting-entry { background:#f8f9fa; border:2px solid #dee2e6; border-radius:8px; padding:20px; margin:15px 0; font-family:'Courier New', monospace; }
+    .accounting-entry .date { font-weight:700; color:#2980b9; margin-bottom:10px; }
+    .accounting-entry table { width:100%; border-collapse:collapse; }
+    .accounting-entry th { background:#e9ecef; padding:10px; border:1px solid #dee2e6; font-weight:700; text-align:center; }
+    .accounting-entry td { padding:8px 10px; border:1px solid #dee2e6; }
+    .accounting-entry .dare, .accounting-entry .avere { text-align:right; font-weight:700; }
+
+    .mastrini-section { margin-top:40px; padding-top:30px; border-top:3px solid #27ae60; }
+    .mastrini-title { color:#27ae60; font-size:1.6em; font-weight:700; margin:20px 0; text-align:center; }
+    .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin:30px 0; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin:30px 0; }
+
+    .neutro-color { color:#2980b9; border-color:#2980b9; }
+    .neutro-bg { background:#e8f4fd; }
+    .saldo-finale { text-align:center; font-weight:700; padding:10px; margin-top:10px; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Leasing: maxicanone iniziale e canoni trimestrali anticipati</h1>
+      <div class="subtitle">Rilevazioni del 01/07/T e del 01/10/T – scritture in P.D. e mastrini</div>
+    </div>
+
+    <!-- TEORIA -->
+    <h2 class="section-title">1. Teoria</h2>
+    <div class="definition-box">
+      <div class="title">Come si contabilizzano i canoni di leasing (impostazione dell’esercizio)</div>
+      <p>Nella prassi didattica adottata in questo esercizio i canoni di leasing (compreso il <strong>maxicanone iniziale</strong>) sono rilevati come <strong>costi a Conto economico</strong> al momento della fattura; la <strong>IVA</strong> confluisce in <em>IVA ns/credito</em> e il debito nasce in <em>Debiti v/fornitori</em>, che si estingue con il pagamento (addebito in c/c).</p>
+      <ul style="margin-left:20px;">
+        <li><strong>Maxicanone</strong>: registrato come “Canoni di leasing” al ricevimento della fattura iniziale.</li>
+        <li><strong>Canoni periodici anticipati</strong>: alla data di inizio periodo si registra il canone (fattura) e si paga contestualmente.</li>
+        <li><strong>Conti coinvolti</strong>: Canoni di leasing (costo), IVA ns/credito (attivo), Debiti v/fornitori (passivo), Banca c/c (attivo).</li>
+      </ul>
+    </div>
+    <div class="note-box">
+      <div class="title">Dati contrattuali (sintesi)</div>
+      <ul style="margin-left:20px;">
+        <li>Maxicanone iniziale: <strong>€ 40.000</strong></li>
+        <li>Canone trimestrale anticipato: <strong>€ 15.500</strong> (n. canoni trimestrali: 11)</li>
+        <li>Durata: <strong>36 mesi</strong> – Riscatto a 01/07/T+3: <strong>€ 5.000</strong></li>
+        <li>Fatturazione/pagamento: maxicanone il <strong>01/07/T</strong>; canoni trimestrali all’inizio di ciascun trimestre (da <strong>01/10/T</strong>), con <em>addebito diretto</em> sul c/c nelle stesse date.</li>
+      </ul>
+    </div>
+
+    <!-- ESERCIZIO -->
+    <h2 class="section-title">2. Scritture in P.D.</h2>
+
+    <!-- 01/07/T: maxicanone + pagamento -->
+    <div class="accounting-entry">
+      <div class="date">01/07/T – Fattura maxicanone iniziale</div>
+      <table>
+        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+        <tr><td>Canoni di leasing</td><td class="dare">40.000,00</td><td></td></tr>
+        <tr><td>IVA ns/credito</td><td class="dare">8.800,00</td><td></td></tr>
+        <tr><td>Debiti v/fornitori</td><td></td><td class="avere">48.800,00</td></tr>
+      </table>
+    </div>
+
+    <div class="accounting-entry">
+      <div class="date">01/07/T – Pagamento maxicanone (addebito in c/c)</div>
+      <table>
+        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+        <tr><td>Debiti v/fornitori</td><td class="dare">48.800,00</td><td></td></tr>
+        <tr><td>Banca c/c</td><td></td><td class="avere">48.800,00</td></tr>
+      </table>
+    </div>
+
+    <!-- 01/10/T: canone trimestrale + pagamento -->
+    <div class="accounting-entry">
+      <div class="date">01/10/T – Fattura canone trimestrale anticipato</div>
+      <table>
+        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+        <tr><td>Canoni di leasing</td><td class="dare">15.500,00</td><td></td></tr>
+        <tr><td>IVA ns/credito</td><td class="dare">3.410,00</td><td></td></tr>
+        <tr><td>Debiti v/fornitori</td><td></td><td class="avere">18.910,00</td></tr>
+      </table>
+    </div>
+
+    <div class="accounting-entry">
+      <div class="date">01/10/T – Pagamento canone (addebito in c/c)</div>
+      <table>
+        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+        <tr><td>Debiti v/fornitori</td><td class="dare">18.910,00</td><td></td></tr>
+        <tr><td>Banca c/c</td><td></td><td class="avere">18.910,00</td></tr>
+      </table>
+    </div>
+
+    <!-- MASTRINI -->
+    <div class="mastrini-section">
+      <h3 class="mastrini-title">📊 MASTRINI</h3>
+
+      <div class="grid-3">
+        <div class="accounting-entry">
+          <div class="date neutro-color"><strong>CANONI DI LEASING</strong></div>
+          <table>
+            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+            <tr><td>01/07/T – Fattura maxicanone<br><strong>€ 40.000,00</strong></td><td></td></tr>
+            <tr><td>01/10/T – Fattura canone trim.<br><strong>€ 15.500,00</strong></td><td></td></tr>
+          </table>
+          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 55.500,00 (DARE)</strong></div>
+        </div>
+
+        <div class="accounting-entry">
+          <div class="date neutro-color"><strong>IVA NS/CREDITO</strong></div>
+          <table>
+            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+            <tr><td>01/07/T – Fattura maxicanone<br><strong>€ 8.800,00</strong></td><td></td></tr>
+            <tr><td>01/10/T – Fattura canone trim.<br><strong>€ 3.410,00</strong></td><td></td></tr>
+          </table>
+          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 12.210,00 (DARE)</strong></div>
+        </div>
+
+        <div class="accounting-entry">
+          <div class="date neutro-color"><strong>DEBITI V/FORNITORI</strong></div>
+          <table>
+            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+            <tr><td>01/07/T – Pagamento maxicanone<br><strong>€ 48.800,00</strong></td><td>01/07/T – Fattura maxicanone<br><strong>€ 48.800,00</strong></td></tr>
+            <tr><td>01/10/T – Pagamento canone<br><strong>€ 18.910,00</strong></td><td>01/10/T – Fattura canone<br><strong>€ 18.910,00</strong></td></tr>
+          </table>
+          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 0,00 (conto chiuso)</strong></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="accounting-entry">
+          <div class="date neutro-color"><strong>BANCA C/C</strong></div>
+          <table>
+            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+            <tr><td></td><td>01/07/T – Addebito maxicanone<br><strong>€ 48.800,00</strong></td></tr>
+            <tr><td></td><td>01/10/T – Addebito canone<br><strong>€ 18.910,00</strong></td></tr>
+          </table>
+          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 67.710,00 (AVERE)</strong></div>
+        </div>
+
+        <div class="accounting-entry">
+          <div class="date neutro-color"><strong>RIEPILOGO</strong></div>
+          <table>
+            <tr><th class="neutro-bg">CONTO</th><th class="neutro-bg">SALDO</th></tr>
+            <tr><td>Canoni di leasing</td><td style="text-align:right;"><strong>€ 55.500,00 (DARE)</strong></td></tr>
+            <tr><td>IVA ns/credito</td><td style="text-align:right;"><strong>€ 12.210,00 (DARE)</strong></td></tr>
+            <tr><td>Debiti v/fornitori</td><td style="text-align:right;"><strong>€ 0,00</strong></td></tr>
+            <tr><td>Banca c/c</td><td style="text-align:right;"><strong>€ 67.710,00 (AVERE)</strong></td></tr>
+          </table>
+          <div class="saldo-finale neutro-bg"><strong>Conti chiusi/correnti come sopra</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

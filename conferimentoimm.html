@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio: Conferimenti Misti S.p.A.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        .header h1 {
+            color: #2980b9;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            color: #34495e;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .exercise-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .exercise-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .data-highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .amount-highlight {
+            background: #d1ecf1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #0c5460;
+        }
+        
+        .accounting-entry {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .accounting-entry .date {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .accounting-entry th {
+            background-color: #e9ecef;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .accounting-entry td {
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .accounting-entry .dare {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .accounting-entry .avere {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .important {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .important .title {
+            color: #c0392b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+
+        .timeline {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .timeline .title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .timeline-date {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESERCIZIO: CONFERIMENTI MISTI</h1>
+            <div class="subtitle">Costituzione S.p.A. con brevetto e denaro</div>
+        </div>
+
+        <h2 class="section-title">Testo dell'Esercizio</h2>
+        
+        <div class="exercise-box">
+            <div class="title">SITUAZIONE</div>
+            <p>Il sig. Rossi, proprietario di un brevetto, vuole costituire una società per lo sfruttamento industriale del brevetto stesso. Trova alcuni partner per realizzare questo progetto.</p>
+            
+            <p>In data <span class="data-highlight">12/07/T</span> si costituisce la <strong>Gamma Spa</strong>, con capitale sociale pari a <span class="amount-highlight">€ 1.600.000</span>.</p>
+            
+            <p>Il Sig. Rossi conferisce il brevetto, cui l'esperto nominato dal Tribunale ha attribuito un valore di <span class="amount-highlight">€ 400.000</span>; gli altri soci fondatori sottoscrivono le azioni in contanti.</p>
+            
+            <p>All'atto della costituzione i soci versano in banca il <strong>25%</strong> del capitale sociale sottoscritto in contanti.</p>
+            
+            <p>In data <span class="data-highlight">15/09/T</span> i soci versano sul c/c della Gamma Spa il capitale residuo.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="title">CRONOLOGIA DELLE OPERAZIONI</div>
+            <div class="timeline-item">
+                <div class="timeline-date">12/07/T</div>
+                <div>Costituzione Gamma S.p.A. - Capitale sociale € 1.600.000</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">12/07/T</div>
+                <div>Conferimento brevetto (Sig. Rossi) - € 400.000</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">12/07/T</div>
+                <div>Versamento 25% dei conferimenti in denaro - € 300.000</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">15/09/T</div>
+                <div>Versamento capitale residuo - € 900.000</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Calcoli Preliminari</h2>
+
+        <div class="explanation-box">
+            <div class="title">SUDDIVISIONE DEI CONFERIMENTI</div>
+            <ul>
+                <li><strong>Capitale sociale totale:</strong> € 1.600.000</li>
+                <li><strong>Conferimento brevetto (Sig. Rossi):</strong> € 400.000 (liberato integralmente per legge)</li>
+                <li><strong>Conferimenti in denaro (altri soci):</strong> € 1.200.000</li>
+                <li><strong>Versamento immediato (25% di € 1.200.000):</strong> € 300.000</li>
+                <li><strong>Versamento residuo:</strong> € 900.000</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Scritture Contabili</h2>
+
+        <div class="accounting-entry">
+            <div class="date">12/07/T - Sottoscrizione del capitale sociale</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Azionisti c/sottoscrizioni</td>
+                    <td class="dare">1.600.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Capitale sociale</td>
+                    <td class="dare">-</td>
+                    <td class="avere">1.600.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">12/07/T - Conferimento del brevetto</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Brevetti</td>
+                    <td class="dare">400.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Azionisti c/sottoscrizioni</td>
+                    <td class="dare">-</td>
+                    <td class="avere">400.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">12/07/T - Versamento 25% capitale in denaro</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">300.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Azionisti c/sottoscrizioni</td>
+                    <td class="dare">-</td>
+                    <td class="avere">300.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">15/09/T - Versamento capitale residuo</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">900.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Azionisti c/sottoscrizioni</td>
+                    <td class="dare">-</td>
+                    <td class="avere">900.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">Mastrini dei Conti</h2>
+
+        <div class="explanation-box">
+            <div class="title">MASTRINI COINVOLTI</div>
+            <p>Per questo esercizio abbiamo quattro conti principali che si movimentano:</p>
+            <ul>
+                <li><strong>Azionisti c/sottoscrizioni</strong> (Conto transitorio)</li>
+                <li><strong>Capitale sociale</strong> (Stato Patrimoniale - Patrimonio Netto)</li>
+                <li><strong>Brevetti</strong> (Stato Patrimoniale - Attivo)</li>
+                <li><strong>Banca c/c</strong> (Stato Patrimoniale - Attivo)</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">
+                    <strong>AZIONISTI C/SOTTOSCRIZIONI</strong><br>
+                    <small>(Conto Transitorio)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #d5f4e6;">DARE</th>
+                        <th style="width: 50%; background: #d5f4e6;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #27ae60; height: 180px;">
+                            <strong>12/07</strong><br>
+                            a) Capitale sociale<br>
+                            <strong>€ 1.600.000</strong>
+                            <hr style="margin: 20px 0; border: 1px solid #27ae60;">
+                            <div style="text-align: center; font-weight: bold; color: #27ae60;">€ 1.600.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 180px;">
+                            <strong>12/07</strong><br>
+                            a) Brevetti<br>
+                            <strong>€ 400.000</strong><br><br>
+                            <strong>12/07</strong><br>
+                            a) Banca c/c<br>
+                            <strong>€ 300.000</strong><br><br>
+                            <strong>15/09</strong><br>
+                            a) Banca c/c<br>
+                            <strong>€ 900.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #27ae60;">
+                            <div style="text-align: center; font-weight: bold; color: #27ae60;">€ 1.600.000</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #e8f5e8; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 0,00 (CONTO CHIUSO)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                    <strong>CAPITALE SOCIALE</strong><br>
+                    <small>(Stato Patrimoniale - Patrimonio Netto)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #e8f4fd;">DARE</th>
+                        <th style="width: 50%; background: #e8f4fd;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #3498db; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>12/07</strong><br>
+                            a) Azionisti c/sottoscrizioni<br>
+                            <strong>€ 1.600.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #3498db;">
+                            <div style="text-align: center; font-weight: bold; color: #3498db;">€ 1.600.000</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #f0f8ff; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 1.600.000 (AVERE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px;">
+                    <strong>BREVETTI</strong><br>
+                    <small>(Stato Patrimoniale - Attivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #fef9e7;">DARE</th>
+                        <th style="width: 50%; background: #fef9e7;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #e67e22; height: 120px;">
+                            <strong>12/07</strong><br>
+                            a) Azionisti c/sottoscrizioni<br>
+                            <strong>€ 400.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #e67e22;">
+                            <div style="text-align: center; font-weight: bold; color: #e67e22;">€ 400.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #fef4e6; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 400.000 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #9b59b6; border-bottom: 2px solid #9b59b6; padding-bottom: 10px;">
+                    <strong>BANCA C/C</strong><br>
+                    <small>(Stato Patrimoniale - Attivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #f8f5ff;">DARE</th>
+                        <th style="width: 50%; background: #f8f5ff;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #9b59b6; height: 140px;">
+                            <strong>12/07</strong><br>
+                            a) Azionisti c/sottoscrizioni<br>
+                            <strong>€ 300.000</strong><br><br>
+                            <strong>15/09</strong><br>
+                            a) Azionisti c/sottoscrizioni<br>
+                            <strong>€ 900.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #9b59b6;">
+                            <div style="text-align: center; font-weight: bold; color: #9b59b6;">€ 1.200.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 140px;">
+                            <div style="height: 100px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #f3e8ff; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 1.200.000 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h2 class="section-title">Spiegazione dell'Esercizio</h2>
+
+        <div class="explanation-box">
+            <div class="title">PRINCIPI APPLICATI</div>
+            <p><strong>Art. 2342 c.c. - Conferimenti nelle S.p.A.:</strong></p>
+            <ul>
+                <li>Le azioni corrispondenti ai conferimenti in natura (brevetto) devono essere <strong>integralmente liberate</strong> alla sottoscrizione</li>
+                <li>Per i conferimenti in denaro è sufficiente versare il <strong>25% alla costituzione</strong></li>
+                <li>Il restante 75% può essere versato successivamente su richiamo degli amministratori</li>
+            </ul>
+            
+            <p><strong>Art. 2343 c.c. - Stima dei conferimenti:</strong></p>
+            <ul>
+                <li>Il brevetto deve essere valutato da un <strong>esperto nominato dal Tribunale</strong></li>
+                <li>La relazione di stima deve essere <strong>allegata all'atto costitutivo</strong></li>
+                <li>Il valore determinato (€ 400.000) diventa il valore contabile del bene</li>
+            </ul>
+        </div>
+
+        <div class="important">
+            <div class="title">OSSERVAZIONI IMPORTANTI</div>
+            <ul>
+                <li>Il conto <strong>"Azionisti c/sottoscrizioni"</strong> è un conto transitorio che si chiude completamente quando tutti i conferimenti sono stati effettuati</li>
+                <li>Il <strong>capitale sociale</strong> viene iscritto per l'intero importo (€ 1.600.000) fin dalla costituzione</li>
+                <li>La società dispone immediatamente del brevetto (€ 400.000) e di liquidità pari a € 1.200.000</li>
+                <li>Tutti i conferimenti sono stati regolarmente completati entro il 15 settembre</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">Ammortamento del Brevetto</h2>
+
+        <div class="exercise-box">
+            <div class="title">OPERAZIONE DEL 31/12/T</div>
+            <p>Il <span class="data-highlight">31/12/T</span> si chiude il periodo amministrativo e Gamma S.p.A. deve imputare all'esercizio la quota di ammortamento relativa al brevetto conferito dal Sig. Rossi.</p>
+            
+            <p>La società stima in <strong>8 anni</strong> la vita economicamente utile del brevetto e prevede che esso eroghi un'utilità uniforme nel tempo. In base a queste ipotesi, Gamma ammortizza il brevetto in 8 anni a <strong>quote costanti</strong>.</p>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">CALCOLO DELL'AMMORTAMENTO</div>
+            <ul>
+                <li><strong>Valore del brevetto:</strong> € 400.000</li>
+                <li><strong>Vita utile stimata:</strong> 8 anni</li>
+                <li><strong>Metodo:</strong> Quote costanti (utilità uniforme)</li>
+                <li><strong>Aliquota annua:</strong> 100% ÷ 8 anni = 12,5%</li>
+                <li><strong>Ammortamento annuo:</strong> € 400.000 × 12,5% = € 50.000</li>
+            </ul>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">31/12/T - Ammortamento brevetto</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ammortamento immobilizzazioni immateriali</td>
+                    <td class="dare">50.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento brevetti</td>
+                    <td class="dare">-</td>
+                    <td class="avere">50.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">Mastrini Aggiornati al 31/12/T</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px;">
+                    <strong>BREVETTI</strong><br>
+                    <small>(Stato Patrimoniale - Attivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #fef9e7;">DARE</th>
+                        <th style="width: 50%; background: #fef9e7;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #e67e22; height: 120px;">
+                            <strong>12/07</strong><br>
+                            a) Azionisti c/sottoscrizioni<br>
+                            <strong>€ 400.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #e67e22;">
+                            <div style="text-align: center; font-weight: bold; color: #e67e22;">€ 400.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #fef4e6; padding: 10px; font-weight: bold;">
+                            VALORE LORDO: € 400.000 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #8e44ad; border-bottom: 2px solid #8e44ad; padding-bottom: 10px;">
+                    <strong>FONDO AMMORTAMENTO BREVETTI</strong><br>
+                    <small>(Rettifica di Stato Patrimoniale)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #f4ecf7;">DARE</th>
+                        <th style="width: 50%; background: #f4ecf7;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #8e44ad; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>31/12</strong><br>
+                            a) Ammortamento imm. immateriali<br>
+                            <strong>€ 50.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #8e44ad;">
+                            <div style="text-align: center; font-weight: bold; color: #8e44ad;">€ 50.000</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #f8f5ff; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 50.000 (AVERE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #c0392b; border-bottom: 2px solid #c0392b; padding-bottom: 10px;">
+                    <strong>AMMORTAMENTO IMMOBILIZZAZIONI IMMATERIALI</strong><br>
+                    <small>(Conto Economico - Costi)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #ffebee;">DARE</th>
+                        <th style="width: 50%; background: #ffebee;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #c0392b; height: 120px;">
+                            <strong>31/12</strong><br>
+                            a) Fondo ammortamento brevetti<br>
+                            <strong>€ 50.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #c0392b;">
+                            <div style="text-align: center; font-weight: bold; color: #c0392b;">€ 50.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #ffe6e6; padding: 10px; font-weight: bold;">
+                            SALDO FINALE: € 50.000 (DARE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3 class="subsection-title">Rappresentazione in Bilancio</h3>
+
+        <div class="explanation-box">
+            <div class="title">STATO PATRIMONIALE AL 31/12/T</div>
+            <p><strong>ATTIVO - B.I Immobilizzazioni Immateriali</strong></p>
+            <ul>
+                <li>Brevetti (valore lordo): € 400.000</li>
+                <li>(-) Fondo ammortamento brevetti: (€ 50.000)</li>
+                <li><strong>Brevetti (valore netto): € 350.000</strong></li>
+            </ul>
+            
+            <p><strong>CONTO ECONOMICO - B.10.a Ammortamenti immobilizzazioni immateriali</strong></p>
+            <ul>
+                <li><strong>Ammortamento brevetti: € 50.000</strong></li>
+            </ul>
+        </div>
+
+        <div class="important">
+            <div class="title">CONSIDERAZIONI FINALI</div>
+            <ul>
+                <li>Il <strong>brevetto</strong> viene ammortizzato sistematicamente lungo la sua vita utile stimata</li>
+                <li>Il <strong>metodo a quote costanti</strong> è appropriato per brevetti con utilità uniforme nel tempo</li>
+                <li>Il <strong>valore netto contabile</strong> al 31/12/T è di € 350.000</li>
+                <li>L'<strong>ammortamento annuo di € 50.000</strong> si ripeterà per i prossimi 7 anni</li>
+                <li>La <strong>vita utile di 8 anni</strong> è ragionevole per un brevetto industriale</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

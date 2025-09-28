@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traccia – Sigma S.p.A. | Stato Patrimoniale T</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;line-height:1.6;color:#2c3e50;background:#f8f9fa}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:900px;margin:0 auto;padding:20px}
+    .hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:36px 20px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+    .hero h1{font-size:2rem;font-weight:800;text-align:center}
+    .hero p{text-align:center;opacity:.95;margin-top:8px}
+    .section{background:#fff;border:1px solid #e9ecef;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:18px}
+    .title{color:#2980b9;font-size:1.2rem;font-weight:800;margin:10px 0 12px;border-bottom:2px solid #2980b9;padding-bottom:6px}
+    .bloc{margin:14px 0}
+    .muted{color:#5b6b7a}
+    ul{margin-left:18px}
+    li{margin:6px 0}
+    .mono{font-family:'Courier New',monospace}
+    .btnbar{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;border:2px solid transparent;transition:.15s;font-size:.95rem}
+    .btn.ghost{background:#fff;color:#2980b9;border-color:#2980b9}
+    .btn.ghost:hover{background:#e8f4fd}
+    .footer{padding:24px 0;text-align:center;color:#6b7280;font-size:.92rem}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Traccia – Sigma S.p.A.</h1>
+      <p>Compito: redigere solo lo Stato Patrimoniale al 31/12/T.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2 class="title">Stato Patrimoniale sintetico al 31/12/T-1 (valori in euro)</h2>
+      <div class="bloc">
+        <ul class="mono">
+          <li>Immobilizzazioni materiali (netto): 5.450.000</li>
+          <li>Immobilizzazioni immateriali (netto): 260.000</li>
+          <li>Rimanenze: 2.300.000</li>
+          <li>Crediti v/clienti: 1.980.000</li>
+          <li>Disponibilità liquide: 520.000</li>
+        </ul>
+        <p class="mono" style="margin-top:6px;"><strong>Totale Attivo: 10.510.000</strong></p>
+      </div>
+
+      <div class="bloc">
+        <ul class="mono">
+          <li>Capitale sociale: 3.200.000</li>
+          <li>Riserve: 780.000</li>
+          <li>Debiti finanziari M/L: 3.100.000</li>
+          <li>Debiti v/fornitori: 2.770.000</li>
+          <li>Debiti tributari e altri debiti: 660.000</li>
+        </ul>
+        <p class="mono" style="margin-top:6px;"><strong>Totale Passivo + PN: 10.510.000</strong></p>
+      </div>
+
+      <h2 class="title">Racconto degli eventi dell’anno T (informazioni volutamente limitate)</h2>
+      <div class="bloc muted">
+        <p>
+          La società approva un <strong>piano di investimento</strong> per rinnovare alcune immobilizzazioni e introdurre dotazioni di supporto.
+          Una parte degli interventi entra in funzione nel secondo semestre; altre attività rimangono <em>in corso</em> a fine esercizio.
+        </p>
+        <p style="margin-top:10px;">
+          Per finanziare il piano, il management ricorre a <strong>nuovi strumenti finanziari</strong>: si attivano <strong>debiti</strong> (a breve e/o m/l termine)
+          e possono essere valutati anche altri strumenti (es. prestito obbligazionario). Le decisioni operative emergono progressivamente durante l’anno.
+          I rapporti con i fornitori restano significativi. Si registra inoltre la <strong>dismissione di un bene</strong> non più strategico con incasso.
+        </p>
+        <p style="margin-top:10px;">
+          Non sono forniti importi, aliquote o tempi precisi: è richiesto di <strong>esplicitare e motivare</strong> le assunzioni.
+        </p>
+      </div>
+
+      <h2 class="title">Consegnare</h2>
+      <div class="bloc">
+        <ul>
+          <li><strong>Stato Patrimoniale al 31/12/T</strong> con: immobilizzazioni materiali/immateriali, <em>immobilizzazioni in corso</em>, fondi ammortamento pro-rata, crediti/debiti (fornitori, <em>finanziari</em> a breve/lungo), disponibilità liquide.</li>
+          <li>Evidenziare le <strong>nuove passività finanziarie</strong> scelte (tipologia e classificazione breve/lungo) e l’eventuale riflesso su PN, se pertinente.</li>
+          <li>Elenco <strong>assunzioni</strong> (max 10 righe): mix di finanziamento utilizzato, criteri di capitalizzazione, date d’entrata in funzione, profili IVA se rilevanti.</li>
+        </ul>
+      </div>
+
+      <div class="btnbar">
+        <a class="btn ghost" href="javascript:history.back()">Torna indietro</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> – Tracce di applicazione
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent=(new Date()).getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio: Acquisto Immobilizzazioni con Costi Accessori</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        .header h1 {
+            color: #2980b9;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            color: #34495e;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .exercise-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .exercise-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .data-highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .amount-highlight {
+            background: #d1ecf1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #0c5460;
+        }
+        
+        .definition-box {
+            background-color: #f0f8ff;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .definition-box .title {
+            color: #3498db;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .accounting-entry .date {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .accounting-entry th {
+            background-color: #e9ecef;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .accounting-entry td {
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .accounting-entry .dare {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .accounting-entry .avere {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .important {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .important .title {
+            color: #c0392b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .costi-accessori-box {
+            background-color: #f5f0ff;
+            border-left: 5px solid #8e44ad;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .costi-accessori-box .title {
+            color: #8e44ad;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+
+        .timeline {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .timeline .title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .timeline-date {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .calculation-box {
+            background-color: #fff8dc;
+            border-left: 5px solid #daa520;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .calculation-box .title {
+            color: #b8860b;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 2px solid #fff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .capitalizzare {
+            background: linear-gradient(135deg, #e8f5e8, #c6f6d5);
+        }
+        
+        .non-capitalizzare {
+            background: linear-gradient(135deg, #ffebee, #f8bbd9);
+        }
+
+        /* Stili per i mastrini */
+        .mastrini-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px solid #27ae60;
+        }
+
+        .mastrini-title {
+            color: #27ae60;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .macchinari-color {
+            color: #8e44ad;
+            border-color: #8e44ad;
+        }
+        
+        .macchinari-bg {
+            background: #f5f0ff;
+        }
+        
+        .fornitori-color {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        .fornitori-bg {
+            background: #ffebee;
+        }
+        
+        .neutro-color {
+            color: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        .neutro-bg {
+            background: #e8f4fd;
+        }
+
+        .saldo-finale {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: 1px solid;
+        }
+
+        .oic-quote {
+            background-color: #f8f9fa;
+            border-left: 5px solid #6c757d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ACQUISTO IMMOBILIZZAZIONI</h1>
+            <div class="subtitle">Costi Accessori e Capitalizzazione</div>
+        </div>
+
+        <h2 class="section-title">1. Introduzione ai Costi delle Immobilizzazioni Materiali</h2>
+        
+        <div class="definition-box">
+            <div class="title">PRINCIPIO CONTABILE DI RIFERIMENTO</div>
+            <p>Secondo l'<strong>OIC 16 - Immobilizzazioni materiali</strong>, il costo di un'immobilizzazione materiale comprende:</p>
+            <ul>
+                <li><strong>Prezzo di acquisto</strong> (al netto di sconti commerciali e abbuoni)</li>
+                <li><strong>Eventuali oneri accessori</strong> direttamente imputabili all'acquisto</li>
+                <li><strong>Costi per mettere il bene nelle condizioni di funzionamento</strong></li>
+                <li><strong>Costi di installazione</strong> quando necessari</li>
+            </ul>
+        </div>
+
+        <div class="oic-quote">
+            <p><strong>OIC 16:</strong></p>
+            <p>"Il costo di un'immobilizzazione materiale include tutti i costi direttamente sostenuti per portare il bene nel luogo e nelle condizioni necessarie perché sia in grado di operare nel modo inteso dalla direzione aziendale."</p>
+        </div>
+
+        <div class="costi-accessori-box">
+            <div class="title">COSTI ACCESSORI DA CAPITALIZZARE</div>
+            <p>I <strong>costi accessori</strong> sono tutti i costi sostenuti per rendere l'immobilizzazione pronta all'uso. Questi costi devono essere <strong>capitalizzati</strong> (aggiunti al costo del bene) e non imputati direttamente a conto economico.</p>
+            
+            <p><strong>Esempi di costi accessori:</strong></p>
+            <ul>
+                <li><strong>Trasporto e movimentazione</strong></li>
+                <li><strong>Installazione e montaggio</strong></li>
+                <li><strong>Collaudi e prove</strong></li>
+                <li><strong>Perizie e consulenze tecniche</strong></li>
+                <li><strong>Dazi doganali</strong></li>
+                <li><strong>Spese notarili per trasferimenti immobiliari</strong></li>
+            </ul>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">COSTI DA CAPITALIZZARE</th>
+                    <th style="width: 50%;">COSTI DA NON CAPITALIZZARE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="capitalizzare">
+                        <strong>Criteri:</strong><br>
+                        Costi <strong>direttamente collegati</strong> all'acquisizione e alla messa in funzione del bene
+                        <br><br>
+                        <strong>Esempi:</strong><br>
+                        • Trasporto dal fornitore<br>
+                        • Installazione e montaggio<br>
+                        • Collaudi tecnici<br>
+                        • Permessi necessari<br>
+                        • Onorari professionali specifici
+                        <br><br>
+                        <strong>Effetto contabile:</strong><br>
+                        Aumentano il valore dell'immobilizzazione e saranno ammortizzati negli anni
+                    </td>
+                    <td class="non-capitalizzare">
+                        <strong>Criteri:</strong><br>
+                        Costi <strong>non direttamente collegati</strong> o sostenuti dopo la messa in funzione
+                        <br><br>
+                        <strong>Esempi:</strong><br>
+                        • Costi di finanziamento<br>
+                        • Costi di formazione del personale<br>
+                        • Costi di marketing del prodotto<br>
+                        • Spese generali amministrative<br>
+                        • Manutenzioni successive
+                        <br><br>
+                        <strong>Effetto contabile:</strong><br>
+                        Vanno imputati direttamente a conto economico nell'esercizio
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Testo dell'Esercizio</h2>
+        
+        <div class="exercise-box">
+            <div class="title">ESERCIZIO - ACQUISTO MACCHINARIO CON COSTI ACCESSORI</div>
+            <p>Nel mese di <strong>gennaio T</strong> la <strong>Alfa Spa</strong> sottoscrive un contratto per l'acquisto di un macchinario necessario alla produzione.</p>
+            
+            <p>Il macchinario ha un costo di <span class="amount-highlight">€ 50.000 + IVA</span>; le clausole contrattuali prevedono che il <strong>trasporto del macchinario sia a carico dell'acquirente</strong>.</p>
+            
+            <p>In data <span class="data-highlight">08/01/T</span> Alfa riceve il macchinario e la fattura di <span class="amount-highlight">€ 400 + IVA</span> della società di trasporti incaricata di effettuare la consegna del bene. Lo stesso giorno Alfa paga direttamente il vettore tramite <strong>assegno bancario</strong>.</p>
+            
+            <p>In data <span class="data-highlight">14/01/T</span> la Alfa Spa riceve la <strong>fattura di acquisto del macchinario</strong>.</p>
+            
+            <p>Il regolamento del debito avviene tramite <strong>bonifico</strong> il <span class="data-highlight">15/01/T</span>.</p>
+        </div>
+
+        <h2 class="section-title">3. Analisi e Calcoli Preliminari</h2>
+
+        <div class="calculation-box">
+            <div class="title">DATI DELL'OPERAZIONE</div>
+            <ul>
+                <li><strong>Costo macchinario:</strong> € 50.000</li>
+                <li><strong>IVA su macchinario (22%):</strong> € 50.000 × 22% = € 11.000</li>
+                <li><strong>Costo trasporto:</strong> € 400</li>
+                <li><strong>IVA su trasporto (22%):</strong> € 400 × 22% = € 88</li>
+                <li><strong>Totale fattura macchinario:</strong> € 61.000</li>
+                <li><strong>Totale fattura trasporto:</strong> € 488</li>
+            </ul>
+        </div>
+
+        <div class="timeline">
+            <div class="title">CRONOLOGIA DELL'OPERAZIONE</div>
+            <div class="timeline-item">
+                <div class="timeline-date">Gen T</div>
+                <div>Sottoscrizione contratto acquisto macchinario</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">08/01/T</div>
+                <div>Ricevimento macchinario + fattura trasporto € 488 + pagamento vettore</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">14/01/T</div>
+                <div>Ricevimento fattura acquisto macchinario € 61.000</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">15/01/T</div>
+                <div>Pagamento macchinario tramite bonifico</div>
+            </div>
+        </div>
+
+        <div class="costi-accessori-box">
+            <div class="title">CAPITALIZZAZIONE DEL COSTO DI TRASPORTO</div>
+            <p><strong>Analisi:</strong> Il trasporto è un costo accessorio necessario per portare il macchinario nel luogo di utilizzo.</p>
+            <ul>
+                <li><strong>Costo base macchinario:</strong> € 50.000</li>
+                <li><strong>Costo accessorio (trasporto):</strong> € 400</li>
+                <li><strong>Costo totale da capitalizzare:</strong> € 50.000 + € 400 = € 50.400</li>
+            </ul>
+            <p><strong>Risultato:</strong> Il valore dell'immobilizzazione sarà di € 50.400</p>
+        </div>
+
+        <h2 class="section-title">4. Risoluzione dell'Esercizio</h2>
+
+        <h3 class="subsection-title">Scritture Contabili</h3>
+
+        <div class="accounting-entry">
+            <div class="date">08/01/T - Arrivo macchinario e fattura trasporto</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Macchinari</td>
+                    <td class="dare">400</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>IVA a credito</td>
+                    <td class="dare">88</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Debiti v/fornitori</td>
+                    <td class="dare">-</td>
+                    <td class="avere">488</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">08/01/T - Pagamento trasporto con assegno</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Debiti v/fornitori</td>
+                    <td class="dare">488</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">-</td>
+                    <td class="avere">488</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">14/01/T - Ricevimento fattura acquisto macchinario</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Macchinari</td>
+                    <td class="dare">50.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>IVA a credito</td>
+                    <td class="dare">11.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Debiti v/fornitori</td>
+                    <td class="dare">-</td>
+                    <td class="avere">61.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">15/01/T - Pagamento macchinario con bonifico</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Debiti v/fornitori (macchinario)</td>
+                    <td class="dare">61.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">-</td>
+                    <td class="avere">61.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">LOGICA DELLE SCRITTURE</div>
+            <p><strong>Scrittura dell'08/01 (prima):</strong></p>
+            <p>Si registra solo il costo del trasporto (€ 400 + IVA) perché è quello che si ha in mano. Il trasporto viene capitalizzato come costo accessorio del macchinario anche se il macchinario stesso non è ancora stato fatturato.</p>
+            
+            <p><strong>Scrittura dell'08/01 (seconda):</strong></p>
+            <p>Si paga immediatamente il trasporto con assegno bancario, chiudendo il debito verso il vettore.</p>
+            
+            <p><strong>Scrittura del 14/01:</strong></p>
+            <p>All'arrivo della fattura del macchinario si registra il costo base (€ 50.000 + IVA). Il conto "Macchinari" ora avrà il valore totale di € 50.400 (€ 400 + € 50.000).</p>
+            
+            <p><strong>Risultato finale:</strong></p>
+            <p>Il macchinario risulta capitalizzato per € 50.400, che rappresenta il costo completo necessario per renderlo operativo.</p>
+        </div>
+
+        <!-- MASTRINI -->
+        <div class="mastrini-section">
+            <h3 class="mastrini-title">📊 MASTRINI - ACQUISTO MACCHINARIO CON COSTI ACCESSORI</h3>
+
+            <div class="grid-3">
+                <div class="accounting-entry">
+                    <div class="date macchinari-color">
+                        <strong>MACCHINARI</strong><br>
+                        <small>(Stato Patrimoniale - Attivo)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="macchinari-bg">DARE</th>
+                            <th class="macchinari-bg">AVERE</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; height: 120px; border-right: 2px solid #8e44ad;">
+                                <strong>08/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 400</strong><br><br>
+                                <strong>14/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 50.000</strong>
+                                <hr class="macchinari-color">
+                                <div style="text-align: center; font-weight: bold;" class="macchinari-color">€ 50.400</div>
+                            </td>
+                            <td style="padding: 15px; height: 120px;">
+                                <div style="height: 80px; display: flex; align-items: center; justify-content: center; font-style: italic; color: #6c757d;">
+                                    Nessuna movimentazione
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale macchinari-bg">
+                        <strong>Saldo finale: € 50.400 (DARE)</strong><br>
+                        <small>Trasporto + Costo base</small>
+                    </div>
+                </div>
+
+                <div class="accounting-entry">
+                    <div class="date neutro-color">
+                        <strong>IVA A CREDITO</strong><br>
+                        <small>(Stato Patrimoniale - Attivo)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="neutro-bg">DARE</th>
+                            <th class="neutro-bg">AVERE</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
+                                <strong>08/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 88</strong><br><br>
+                                <strong>14/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 11.000</strong>
+                                <hr class="neutro-color">
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 11.088</div>
+                            </td>
+                            <td style="padding: 15px; height: 120px;">
+                                <div style="height: 80px;"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale neutro-bg">
+                        <strong>Saldo finale: € 11.088 (DARE)</strong><br>
+                        <small>IVA macchinario + trasporto</small>
+                    </div>
+                </div>
+
+                <div class="accounting-entry">
+                    <div class="date fornitori-color">
+                        <strong>DEBITI V/FORNITORI</strong><br>
+                        <small>(Stato Patrimoniale - Passivo)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="fornitori-bg">DARE</th>
+                            <th class="fornitori-bg">AVERE</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; height: 120px; border-right: 2px solid #e74c3c;">
+                                <strong>08/01/T</strong><br>
+                                a) Banca c/c (trasporti)<br>
+                                <strong>€ 488</strong><br><br>
+                                <strong>14/01/T</strong><br>
+                                a) IVA a credito<br>
+                                <strong>€ 11.000</strong><br><br>
+                                <strong>15/01/T</strong><br>
+                                a) Banca c/c<br>
+                                <strong>€ 61.000</strong>
+                            </td>
+                            <td style="padding: 15px; height: 120px;">
+                                <strong>08/01/T</strong><br>
+                                a) Macchinari (trasporti)<br>
+                                <strong>€ 488</strong><br>
+                                a) Macchinari<br>
+                                <strong>€ 50.000</strong><br><br>
+                                <strong>14/01/T</strong><br>
+                                a) IVA a credito<br>
+                                <strong>€ 11.000</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale fornitori-bg">
+                        <strong>Saldo finale: € 0,00 (Conti chiusi)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="accounting-entry">
+                    <div class="date neutro-color">
+                        <strong>BANCA C/C</strong><br>
+                        <small>(Stato Patrimoniale - Attivo)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="neutro-bg">DARE</th>
+                            <th class="neutro-bg">AVERE</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
+                                <div style="height: 80px;"></div>
+                            </td>
+                            <td style="padding: 15px; height: 120px;">
+                                <strong>08/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 488</strong><br><br>
+                                <strong>15/01/T</strong><br>
+                                a) Debiti v/fornitori<br>
+                                <strong>€ 61.000</strong>
+                                <hr class="neutro-color">
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 61.488</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale neutro-bg">
+                        <strong>Saldo finale: € -61.488 (AVERE)</strong><br>
+                        <small>Uscite per macchinario e trasporto</small>
+                    </div>
+                </div>
+
+                <div class="accounting-entry">
+                    <div class="date macchinari-color">
+                        <strong>ANALISI COMPOSIZIONE COSTO</strong><br>
+                        <small>(Dettaglio capitalizzazione)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="macchinari-bg">COMPONENTE</th>
+                            <th class="macchinari-bg">IMPORTO</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-right: 2px solid #8e44ad;">
+                                <strong>Prezzo base macchinario</strong><br>
+                                <strong>Costo trasporto (accessorio)</strong><br>
+                                <strong>IVA (non capitalizzabile)</strong>
+                            </td>
+                            <td style="padding: 10px; text-align: right;">
+                                <strong>€ 50.000</strong><br>
+                                <strong>€ 400</strong><br>
+                                <strong>€ 11.088</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale macchinari-bg">
+                        <strong>Valore capitalizzato: € 50.400</strong><br>
+                        <strong>IVA recuperabile: € 11.088</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">5. Analisi del Risultato</h2>
+
+        <div class="calculation-box">
+            <div class="title">RIEPILOGO FINALE</div>
+            <p><strong>ATTIVO:</strong></p>
+            <ul>
+                <li><strong>Macchinari:</strong> € 50.400 (costo base + trasporto)</li>
+                <li><strong>IVA a credito:</strong> € 11.088 (macchinario + trasporto)</li>
+            </ul>
+            
+            <p><strong>MOVIMENTO FINANZIARIO:</strong></p>
+            <ul>
+                <li><strong>Uscita per trasporto:</strong> € 488</li>
+                <li><strong>Uscita per macchinario:</strong> € 61.000</li>
+                <li><strong>Uscita totale:</strong> € 61.488</li>
+            </ul>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">EFFETTI CONTABILI DELLA CAPITALIZZAZIONE</div>
+            <p><strong>Vantaggi della capitalizzazione:</strong></p>
+            <ul>
+                <li><strong>Rappresentazione fedele:</strong> Il valore dell'immobilizzazione riflette tutti i costi sostenuti per renderla operativa</li>
+                <li><strong>Correlazione costi-ricavi:</strong> I costi accessori vengono ammortizzati insieme al bene lungo la sua vita utile</li>
+                <li><strong>Informazioni migliori:</strong> Il bilancio mostra il reale investimento sostenuto</li>
+            </ul>
+            
+            <p><strong>Conseguenze future:</strong></p>
+            <ul>
+                <li><strong>Ammortamento su € 50.400</strong> invece che su € 50.000</li>
+                <li><strong>Maggiori costi di ammortamento</strong> negli esercizi futuri</li>
+                <li><strong>Corretto matching</strong> tra investimento e ricavi generati</li>
+            </ul>
+        </div>
+
+        <div class="important">
+            <div class="title">ERRORI DA EVITARE</div>
+            <ul>
+                <li><strong>Non capitalizzare i costi accessori:</strong> Porterebbe a una sottovalutazione dell'immobilizzazione</li>
+                <li><strong>Capitalizzare l'IVA:</strong> L'IVA detraibile non fa parte del costo del bene</li>
+                <li><strong>Registrare tutto insieme:</strong> È importante distinguere le diverse componenti per chiarezza</li>
+                <li><strong>Dimenticare i pagamenti:</strong> Occorre sempre chiudere i debiti con le relative uscite finanziarie</li>
+            </ul>
+        </div>
+
+        <div class="important">
+            <div class="title">PRINCIPI CONTABILI APPLICATI</div>
+            <ul>
+                <li><strong>OIC 16:</strong> Immobilizzazioni materiali - Determinazione del costo</li>
+                <li><strong>Prudenza:</strong> Tutti i costi necessari vengono capitalizzati</li>
+                <li><strong>Competenza:</strong> I costi vengono attribuiti al bene che contribuiscono a creare</li>
+                <li><strong>Chiarezza:</strong> Separazione tra costi capitalizzabili e non capitalizzabili</li>
+                <li><strong>Correlazione:</strong> I costi accessori seguono la stessa vita contabile del bene principale</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

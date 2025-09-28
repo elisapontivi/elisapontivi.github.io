@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio: Ammortamento e Svalutazione</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        .header h1 {
+            color: #2980b9;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            color: #34495e;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .exercise-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .exercise-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .data-highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .amount-highlight {
+            background: #d1ecf1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #0c5460;
+        }
+        
+        .accounting-entry {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .accounting-entry .date {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .accounting-entry th {
+            background-color: #e9ecef;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .accounting-entry td {
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .accounting-entry .dare {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .accounting-entry .avere {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .important {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .important .title {
+            color: #c0392b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+
+        .timeline {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .timeline .title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .timeline-date {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .calculation-box {
+            background-color: #fff8dc;
+            border-left: 5px solid #daa520;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .calculation-box .title {
+            color: #b8860b;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .warning-box {
+            background-color: #fef9e7;
+            border-left: 5px solid #f1c40f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box .title {
+            color: #f39c12;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 2px solid #fff;
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .year-t {
+            background: linear-gradient(135deg, #d5f4e6, #c6f6d5);
+        }
+        
+        .year-t1 {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+        }
+        
+        .year-t2 {
+            background: linear-gradient(135deg, #e8f4fd, #bee3f8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESERCIZIO: AMMORTAMENTO E SVALUTAZIONE</h1>
+            <div class="subtitle">Immobilizzazioni Materiali - Perdita Durevole di Valore</div>
+        </div>
+
+        <h2 class="section-title">Testo dell'Esercizio</h2>
+        
+        <div class="exercise-box">
+            <div class="title">SITUAZIONE INIZIALE</div>
+            <p>Tra le immobilizzazioni materiali della <strong>Alfa S.p.A.</strong> è presente un impianto dal costo storico di <span class="amount-highlight">€ 250.000</span>.</p>
+            
+            <p>Al <span class="data-highlight">31/12/T</span> Alfa rileva la <strong>terza quota di ammortamento</strong> (al 20% annuo).</p>
+            
+            <p>Prefigurando l'utilizzo dell'impianto nei futuri processi produttivi, la Alfa S.p.A. prevede che il valore netto contabile <strong>non potrà essere reintegrato</strong> dai futuri ricavi di vendita dei prodotti che l'impianto stesso contribuirà a ottenere.</p>
+            
+            <p>Si rende necessaria una <strong>svalutazione</strong> stimata in <span class="amount-highlight">€ 30.000</span>.</p>
+        </div>
+
+        <div class="exercise-box">
+            <div class="title">RICHIESTE</div>
+            <ul>
+                <li>Rilevare la svalutazione operata al <span class="data-highlight">31/12/T</span></li>
+                <li>Ricalcolare le quote di ammortamento per il <span class="data-highlight">31/12/T+1</span> e il <span class="data-highlight">31/12/T+2</span></li>
+                <li><strong>Ipotesi:</strong> La vita utile dell'impianto non si modifica e l'utilità erogata è uniforme in T+1 e T+2</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Analisi e Calcoli Preliminari</h2>
+
+        <div class="calculation-box">
+            <div class="title">SITUAZIONE AL 31/12/T (PRIMA DELLA SVALUTAZIONE)</div>
+            <ul>
+                <li><strong>Costo storico impianto:</strong> € 250.000</li>
+                <li><strong>Aliquota di ammortamento:</strong> 20% annuo</li>
+                <li><strong>Vita utile totale:</strong> 100% ÷ 20% = 5 anni</li>
+                <li><strong>Ammortamento annuo:</strong> € 250.000 × 20% = € 50.000</li>
+                <li><strong>Anni già ammortizzati:</strong> 3 anni (terza quota)</li>
+                <li><strong>Fondo ammortamento al 31/12/T:</strong> € 50.000 × 3 = € 150.000</li>
+                <li><strong>Valore netto contabile al 31/12/T:</strong> € 250.000 - € 150.000 = € 100.000</li>
+            </ul>
+        </div>
+
+        <div class="timeline">
+            <div class="title">CRONOLOGIA DELLE OPERAZIONI</div>
+            <div class="timeline-item">
+                <div class="timeline-date">31/12/T</div>
+                <div>Rilevazione terza quota di ammortamento (€ 50.000)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">31/12/T</div>
+                <div>Svalutazione per perdita durevole di valore (€ 30.000)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">31/12/T+1</div>
+                <div>Nuova quota di ammortamento (da calcolare)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">31/12/T+2</div>
+                <div>Nuova quota di ammortamento (da calcolare)</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Scritture Contabili</h2>
+
+        <h3 class="subsection-title">31/12/T - Ammortamento Ordinario</h3>
+
+        <div class="accounting-entry">
+            <div class="date">31/12/T - Terza quota di ammortamento</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ammortamento immobilizzazioni materiali</td>
+                    <td class="dare">50.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento impianti</td>
+                    <td class="dare">-</td>
+                    <td class="avere">50.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">31/12/T - Svalutazione per Perdita Durevole</h3>
+
+        <div class="important">
+            <div class="title">PRINCIPIO CONTABILE APPLICATO</div>
+            <p>Secondo l'<strong>art. 2426 comma 1 n.3 del Codice Civile</strong> e l'<strong>OIC 9</strong>, le immobilizzazioni che risultino durevolmente di valore inferiore devono essere svalutate. La svalutazione deve essere rilevata quando il valore recuperabile è inferiore al valore netto contabile.</p>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">31/12/T - Svalutazione impianto</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Svalutazione immobilizzazioni materiali</td>
+                    <td class="dare">30.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo svalutazione impianti</td>
+                    <td class="dare">-</td>
+                    <td class="avere">30.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="calculation-box">
+            <div class="title">SITUAZIONE DOPO LA SVALUTAZIONE (31/12/T)</div>
+            <ul>
+                <li><strong>Costo storico:</strong> € 250.000 (invariato)</li>
+                <li><strong>Fondo ammortamento:</strong> € 150.000</li>
+                <li><strong>Fondo svalutazione:</strong> € 30.000</li>
+                <li><strong>Valore netto contabile:</strong> € 250.000 - € 150.000 - € 30.000 = € 70.000</li>
+                <li><strong>Vita utile residua:</strong> 5 - 3 = 2 anni</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Ricalcolo Ammortamenti Futuri</h2>
+
+        <div class="explanation-box">
+            <div class="title">NUOVO PIANO DI AMMORTAMENTO</div>
+            <p>Dopo la svalutazione, il nuovo valore da ammortizzare è il <strong>valore netto contabile post-svalutazione</strong> (€ 70.000) da ripartire sulla <strong>vita utile residua</strong> (2 anni).</p>
+            
+            <p><strong>Formula:</strong> Nuovo ammortamento annuo = Valore netto post-svalutazione ÷ Vita utile residua</p>
+            
+            <p><strong>Calcolo:</strong> € 70.000 ÷ 2 anni = € 35.000 annui</p>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">ESERCIZIO</th>
+                    <th style="width: 25%;">AMMORTAMENTO ANNUO</th>
+                    <th style="width: 25%;">FONDO AMMORTAMENTO</th>
+                    <th style="width: 30%;">VALORE NETTO CONTABILE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="year-t"><strong>T</strong></td>
+                    <td class="year-t">€ 50.000 (normale)<br>+ Svalutazione € 30.000</td>
+                    <td class="year-t">€ 150.000<br>+ Fondo svalutazione € 30.000</td>
+                    <td class="year-t">€ 70.000</td>
+                </tr>
+                <tr>
+                    <td class="year-t1"><strong>T+1</strong></td>
+                    <td class="year-t1">€ 35.000</td>
+                    <td class="year-t1">€ 185.000<br>+ Fondo svalutazione € 30.000</td>
+                    <td class="year-t1">€ 35.000</td>
+                </tr>
+                <tr>
+                    <td class="year-t2"><strong>T+2</strong></td>
+                    <td class="year-t2">€ 35.000</td>
+                    <td class="year-t2">€ 220.000<br>+ Fondo svalutazione € 30.000</td>
+                    <td class="year-t2">€ 0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="subsection-title">Scritture Contabili Anni Futuri</h3>
+
+        <div class="accounting-entry">
+            <div class="date">31/12/T+1 - Ammortamento post-svalutazione</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ammortamento immobilizzazioni materiali</td>
+                    <td class="dare">35.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento impianti</td>
+                    <td class="dare">-</td>
+                    <td class="avere">35.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">31/12/T+2 - Ammortamento finale</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ammortamento immobilizzazioni materiali</td>
+                    <td class="dare">35.000</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento impianti</td>
+                    <td class="dare">-</td>
+                    <td class="avere">35.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">Mastrini dei Conti</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">
+                    <strong>IMPIANTI E MACCHINARI</strong><br>
+                    <small>(Stato Patrimoniale - Attivo)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #d5f4e6;">DARE</th>
+                        <th style="width: 50%; background: #d5f4e6;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #27ae60; height: 120px;">
+                            <strong>Costo storico</strong><br>
+                            <strong>€ 250.000</strong>
+                            <hr style="margin: 20px 0; border: 1px solid #27ae60;">
+                            <div style="text-align: center; font-weight: bold; color: #27ae60;">€ 250.000</div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #e8f5e8; padding: 10px; font-weight: bold;">
+                            COSTO STORICO INVARIATO
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px;">
+                    <strong>FONDO AMMORTAMENTO IMPIANTI</strong><br>
+                    <small>(Rettifica di Stato Patrimoniale)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #fef9e7;">DARE</th>
+                        <th style="width: 50%; background: #fef9e7;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #e67e22; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>31/12/T:</strong> € 50.000<br>
+                            <strong>31/12/T+1:</strong> € 35.000<br>
+                            <strong>31/12/T+2:</strong> € 35.000
+                            <hr style="margin: 15px 0; border: 1px solid #e67e22;">
+                            <div style="text-align: center; font-weight: bold; color: #e67e22;">€ 220.000</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #fef4e6; padding: 10px; font-weight: bold;">
+                            TOTALE AMMORTAMENTI
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
+            <div class="accounting-entry">
+                <div class="date" style="text-align: center; color: #c0392b; border-bottom: 2px solid #c0392b; padding-bottom: 10px;">
+                    <strong>FONDO SVALUTAZIONE IMPIANTI</strong><br>
+                    <small>(Rettifica di Stato Patrimoniale)</small>
+                </div>
+                <table style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 50%; background: #ffebee;">DARE</th>
+                        <th style="width: 50%; background: #ffebee;">AVERE</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top; border-right: 2px solid #c0392b; height: 120px;">
+                            <div style="height: 80px;"></div>
+                        </td>
+                        <td style="padding: 15px; vertical-align: top; height: 120px;">
+                            <strong>31/12/T</strong><br>
+                            a) Svalutazione imm. materiali<br>
+                            <strong>€ 30.000</strong>
+                            <hr style="margin: 15px 0; border: 1px solid #c0392b;">
+                            <div style="text-align: center; font-weight: bold; color: #c0392b;">€ 30.000</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; background: #ffe6e6; padding: 10px; font-weight: bold;">
+                            SVALUTAZIONE PERMANENTE
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h2 class="section-title">Rappresentazione in Bilancio</h2>
+
+        <div class="explanation-box">
+            <div class="title">STATO PATRIMONIALE - EVOLUZIONE NEL TEMPO</div>
+            <p><strong>Voce B.II.2 - Impianti e macchinari:</strong></p>
+            
+            <table class="comparison-table" style="margin-top: 15px;">
+                <tr>
+                    <th>COMPONENTE</th>
+                    <th>31/12/T</th>
+                    <th>31/12/T+1</th>
+                    <th>31/12/T+2</th>
+                </tr>
+                <tr>
+                    <td><strong>Costo storico</strong></td>
+                    <td>€ 250.000</td>
+                    <td>€ 250.000</td>
+                    <td>€ 250.000</td>
+                </tr>
+                <tr>
+                    <td><strong>Fondo ammortamento</strong></td>
+                    <td>(€ 150.000)</td>
+                    <td>(€ 185.000)</td>
+                    <td>(€ 220.000)</td>
+                </tr>
+                <tr>
+                    <td><strong>Fondo svalutazione</strong></td>
+                    <td>(€ 30.000)</td>
+                    <td>(€ 30.000)</td>
+                    <td>(€ 30.000)</td>
+                </tr>
+                <tr style="background: #f39c12; color: white; font-weight: bold;">
+                    <td><strong>VALORE NETTO</strong></td>
+                    <td><strong>€ 70.000</strong></td>
+                    <td><strong>€ 35.000</strong></td>
+                    <td><strong>€ 0</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="warning-box">
+            <div class="title">CONSIDERAZIONI FINALI</div>
+            <ul>
+                <li>La <strong>svalutazione</strong> ha ridotto il valore netto contabile da € 100.000 a € 70.000</li>
+                <li>Il <strong>nuovo ammortamento annuo</strong> è di € 35.000 (invece dei precedenti € 50.000)</li>
+                <li>La <strong>vita utile</strong> rimane invariata (5 anni totali)</li>
+                <li>L'impianto sarà <strong>completamente ammortizzato</strong> al 31/12/T+2</li>
+                <li>La svalutazione è <strong>irreversibile</strong> salvo recupero del valore negli esercizi successivi</li>
+            </ul>
+        </div>
+
+        <div class="important">
+            <div class="title">PRINCIPI CONTABILI APPLICATI</div>
+            <ul>
+                <li><strong>OIC 9:</strong> Svalutazioni per perdite durevoli di valore</li>
+                <li><strong>OIC 16:</strong> Immobilizzazioni materiali</li>
+                <li><strong>Art. 2426 c.c.:</strong> Criteri di valutazione</li>
+                <li><strong>Principio della prudenza:</strong> Rilevazione tempestiva delle perdite</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traccia – Omega S.p.A. | Stato Patrimoniale T</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;line-height:1.6;color:#2c3e50;background:#f8f9fa}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:900px;margin:0 auto;padding:20px}
+    .hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:36px 20px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+    .hero h1{font-size:2rem;font-weight:800;text-align:center}
+    .hero p{text-align:center;opacity:.95;margin-top:8px}
+    .section{background:#fff;border:1px solid #e9ecef;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:18px}
+    .title{color:#2980b9;font-size:1.2rem;font-weight:800;margin:10px 0 12px;border-bottom:2px solid #2980b9;padding-bottom:6px}
+    .bloc{margin:14px 0}
+    .muted{color:#5b6b7a}
+    ul{margin-left:18px}
+    li{margin:6px 0}
+    .mono{font-family:'Courier New',monospace}
+    .btnbar{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;border:2px solid transparent;transition:.15s;font-size:.95rem}
+    .btn.ghost{background:#fff;color:#2980b9;border-color:#2980b9}
+    .btn.ghost:hover{background:#e8f4fd}
+    .footer{padding:24px 0;text-align:center;color:#6b7280;font-size:.92rem}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Traccia – Omega S.p.A.</h1>
+      <p>Compito: redigere solo lo Stato Patrimoniale al 31/12/T.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2 class="title">Stato Patrimoniale sintetico al 31/12/T-1 (valori in euro)</h2>
+      <div class="bloc">
+        <ul class="mono">
+          <li>Immobilizzazioni materiali (netto): 3.600.000</li>
+          <li>Immobilizzazioni immateriali (netto): 220.000</li>
+          <li>Rimanenze: 1.900.000</li>
+          <li>Crediti v/clienti: 1.250.000</li>
+          <li>Disponibilità liquide: 410.000</li>
+        </ul>
+        <p class="mono" style="margin-top:6px;"><strong>Totale Attivo: 7.380.000</strong></p>
+      </div>
+
+      <div class="bloc">
+        <ul class="mono">
+          <li>Capitale sociale: 2.800.000</li>
+          <li>Riserve: 520.000</li>
+          <li>Debiti finanziari M/L: 1.900.000</li>
+          <li>Debiti v/fornitori: 1.660.000</li>
+          <li>Debiti tributari e altri debiti: 500.000</li>
+        </ul>
+        <p class="mono" style="margin-top:6px;"><strong>Totale Passivo + PN: 7.380.000</strong></p>
+      </div>
+
+      <h2 class="title">Racconto degli eventi dell’anno T (informazioni volutamente limitate)</h2>
+      <div class="bloc muted">
+        <p>
+          Nel corso dell’anno T la società decide di aumentare in modo stabile la capacità produttiva realizzando una
+          <strong>costruzione in economia</strong> (nuovo impianto/linea interna). I reparti dedicano personale e mezzi aziendali; vengono acquistati materiali e servizi.
+          L’impianto entra in funzione verso fine novembre. Sono eseguiti <em>lavori sui locali</em> e predisposizioni tecniche funzionali,
+          insieme a spese di natura più ordinaria. Per sostenere il programma, l’Assemblea delibera un
+          <strong>aumento di capitale sociale</strong> interamente sottoscritto e liberato.
+        </p>
+        <p style="margin-top:10px;">
+          Non sono specificati importi, aliquote di ammortamento o modalità IVA: lo studente deve assumere e motivare scelte coerenti.
+        </p>
+      </div>
+
+      <h2 class="title">Consegnare</h2>
+      <div class="bloc">
+        <ul>
+          <li><strong>Stato Patrimoniale al 31/12/T</strong>, distinguendo tra <em>immobilizzazioni in corso</em> e cespiti entrati in funzione (ammortamento pro-rata dalla data d’uso).</li>
+          <li>Trattare la <strong>costruzione in economia</strong> con <em>conti di giro</em> e capitalizzazione dei costi interni pertinenti.</li>
+          <li>Aggiornare il <strong>Patrimonio Netto</strong> per l’<strong>aumento di capitale</strong>; evidenziare crediti/debiti (incl. eventuale IVA) e disponibilità liquide.</li>
+          <li>Elenco <strong>assunzioni</strong> (max 10 righe): aliquote e decorrenze, capitalizzazione vs costo, criteri IVA.</li>
+        </ul>
+      </div>
+
+      <div class="btnbar">
+        <a class="btn ghost" href="javascript:history.back()">Torna indietro</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> – Tracce di applicazione
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent=(new Date()).getFullYear();
+  </script>
+</body>
+</html>

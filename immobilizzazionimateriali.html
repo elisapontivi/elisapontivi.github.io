@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immobilizzazioni Materiali - OIC 16</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        .header h1 {
+            color: #2980b9;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            color: #34495e;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+        }
+        
+        .definition-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .definition-box .title {
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .codice-box {
+            background-color: #f5f5f5;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .codice-box .title {
+            color: #2980b9;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-box {
+            background-color: #fef4e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .explanation-box .title {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .example-box {
+            background-color: #f0f8ff;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .example-box .title {
+            color: #3498db;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .warning-box {
+            background-color: #fef9e7;
+            border-left: 5px solid #f1c40f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box .title {
+            color: #f39c12;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .accounting-entry .date {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .accounting-entry table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .accounting-entry th {
+            background-color: #e9ecef;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .accounting-entry td {
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .accounting-entry .dare {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .accounting-entry .avere {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 2px solid #fff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .terreni-fabbricati {
+            background: linear-gradient(135deg, #d5f4e6, #c6f6d5);
+        }
+        
+        .impianti-macchinari {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+        }
+        
+        .attrezzature {
+            background: linear-gradient(135deg, #e8f4fd, #bee3f8);
+        }
+        
+        .altri-beni {
+            background: linear-gradient(135deg, #fdf2f8, #f3e8ff);
+        }
+
+        .immobilizzazioni-corso {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        }
+        
+        .important {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .important .title {
+            color: #c0392b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .page-break {
+            margin: 40px 0;
+            border-top: 2px dashed #bdc3c7;
+            padding-top: 20px;
+        }
+
+        .formula {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .timeline {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .timeline .title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .timeline-step {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 80px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>IMMOBILIZZAZIONI MATERIALI</h1>
+            <div class="subtitle">Principi Contabili OIC 16 - Teoria e Applicazioni Pratiche</div>
+        </div>
+
+        <h2 class="section-title">1. Definizione e Caratteristiche</h2>
+        
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE DI IMMOBILIZZAZIONI MATERIALI</div>
+            <p>Le <strong>immobilizzazioni materiali</strong> sono <strong>beni tangibili di uso durevole</strong> costituenti parte dell'organizzazione permanente delle società, la cui utilità economica si estende oltre i limiti di un esercizio.</p>
+            
+            <p>Il riferirsi a fattori e condizioni durature <strong>non è una caratteristica intrinseca ai beni</strong> come tali, bensì alla loro <strong>destinazione</strong>.</p>
+        </div>
+
+        <div class="important">
+            <div class="title">CARATTERISTICHE FONDAMENTALI</div>
+            <ul>
+                <li><strong>Tangibilità:</strong> beni fisicamente esistenti e toccabili</li>
+                <li><strong>Durata:</strong> utilità economica pluriennale</li>
+                <li><strong>Strumentalità (non sempre):</strong> impiegati come strumenti di produzione del reddito</li>
+                <li><strong>Non destinazione alla vendita:</strong> non sono destinate alla vendita né alla trasformazione</li>
+                <li><strong>Organizzazione permanente:</strong> fanno parte della struttura stabile dell'azienda</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="title">COSA POSSONO COMPRENDERE</div>
+            <ul>
+                <li><strong>Beni materiali acquistati</strong> da terzi</li>
+                <li><strong>Beni materiali realizzati internamente</strong> (costruzioni in economia)</li>
+                <li><strong>Beni materiali in corso di costruzione</strong></li>
+                <li><strong>Somme anticipate</strong> a fronte del loro acquisto o produzione</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">2. Classificazione nello Stato Patrimoniale</h2>
+
+        <div class="codice-box">
+            <div class="title">ART. 2424 CODICE CIVILE - SCHEMA DI STATO PATRIMONIALE</div>
+            <p>Le immobilizzazioni materiali sono iscritte nell'<strong>attivo dello stato patrimoniale alla voce B.II</strong> con la seguente classificazione:</p>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">VOCE</th>
+                    <th style="width: 35%;">DENOMINAZIONE</th>
+                    <th style="width: 40%;">ESEMPI PRINCIPALI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="terreni-fabbricati"><strong>B.II.1</strong></td>
+                    <td class="terreni-fabbricati"><strong>Terreni e fabbricati</strong></td>
+                    <td class="terreni-fabbricati">Terreni, stabilimenti industriali, uffici, magazzini, fabbricati ad uso abitativo, opere idrauliche</td>
+                </tr>
+                <tr>
+                    <td class="impianti-macchinari"><strong>B.II.2</strong></td>
+                    <td class="impianti-macchinari"><strong>Impianti e macchinario</strong></td>
+                    <td class="impianti-macchinari">Impianti generici/specifici, macchinario automatico e non automatico, forni</td>
+                </tr>
+                <tr>
+                    <td class="attrezzature"><strong>B.II.3</strong></td>
+                    <td class="attrezzature"><strong>Attrezzature industriali e commerciali</strong></td>
+                    <td class="attrezzature">Attrezzi di laboratorio, equipaggiamenti, attrezzatura commerciale, utensili</td>
+                </tr>
+                <tr>
+                    <td class="altri-beni"><strong>B.II.4</strong></td>
+                    <td class="altri-beni"><strong>Altri beni</strong></td>
+                    <td class="altri-beni">Mobili e arredi, macchine d'ufficio, automezzi, imballaggi da riutilizzare</td>
+                </tr>
+                <tr>
+                    <td class="immobilizzazioni-corso"><strong>B.II.5</strong></td>
+                    <td class="immobilizzazioni-corso"><strong>Immobilizzazioni in corso e acconti</strong></td>
+                    <td class="immobilizzazioni-corso">Immobilizzazioni in costruzione, acconti a fornitori</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <div class="title">TERRENI E FABBRICATI - DISTINZIONE IMPORTANTE</div>
+            <p><strong>Fabbricati strumentali:</strong> utilizzati direttamente nell'attività della società</p>
+            <p><strong>Fabbricati non strumentali:</strong> rappresentano investimenti di mezzi finanziari (es. immobili ad uso abitativo)</p>
+            <p><strong>Terreni:</strong> generalmente non sono ammortizzabili (eccetto cave e discariche)</p>
+        </div>
+
+        <h2 class="section-title">3. Rilevazione Iniziale - Principi Generali</h2>
+
+        <div class="timeline">
+            <div class="title">QUANDO RILEVARE LE IMMOBILIZZAZIONI</div>
+            <div class="timeline-item">
+                <div class="timeline-step">STEP 1</div>
+                <div><strong>Identificazione del momento:</strong> trasferimento dei rischi e dei benefici</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">STEP 2</div>
+                <div><strong>Regola generale:</strong> coincide con il trasferimento del titolo di proprietà</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">STEP 3</div>
+                <div><strong>Eccezioni:</strong> prevalgono sempre i rischi e benefici (analisi clausole contrattuali)</div>
+            </div>
+        </div>
+
+        <div class="codice-box">
+            <div class="title">ART. 2426 COMMA 1 N.1 CODICE CIVILE</div>
+            <p><strong>"Le immobilizzazioni sono iscritte al costo di acquisto o di produzione."</strong></p>
+            <p>Il costo di acquisto comprende anche i <strong>costi accessori</strong>. Il costo di produzione comprende tutti i costi direttamente imputabili al prodotto e può comprendere anche altri costi per la quota ragionevolmente imputabile.</p>
+        </div>
+
+        <h3 class="subsection-title">Componenti del Costo</h3>
+
+        <div class="example-box">
+            <div class="title">COSTO D'ACQUISTO</div>
+            <ul>
+                <li><strong>Prezzo di acquisto</strong> (al netto di sconti incondizionati)</li>
+                <li><strong>IVA indetraibile</strong> (se la società opera in regime di IVA indetraibile)</li>
+                <li><strong>Costi accessori</strong> necessari per rendere il bene utilizzabile</li>
+            </ul>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">CATEGORIA</th>
+                    <th style="width: 70%;">ESEMPI DI COSTI ACCESSORI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="terreni-fabbricati"><strong>Fabbricati</strong></td>
+                    <td class="terreni-fabbricati">Costi notarili, tasse di registrazione, onorari di progettazione, opere di urbanizzazione, compensi di mediazione</td>
+                </tr>
+                <tr>
+                    <td class="impianti-macchinari"><strong>Impianti e Macchinari</strong></td>
+                    <td class="impianti-macchinari">Costi di progettazione, trasporti, dazi, installazione, collaudi, montaggio, messa a punto</td>
+                </tr>
+                <tr>
+                    <td class="altri-beni"><strong>Mobili</strong></td>
+                    <td class="altri-beni">Trasporto, dazi su importazione</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="explanation-box">
+            <div class="title">COSTO DI PRODUZIONE</div>
+            <p>Per i beni prodotti internamente, il costo comprende:</p>
+            <ul>
+                <li><strong>Costi diretti:</strong> materiali, mano d'opera diretta, costi di progettazione</li>
+                <li><strong>Costi generali di produzione:</strong> quota ragionevolmente imputabile</li>
+                <li><strong>Oneri finanziari:</strong> capitalizzabili secondo criteri specifici</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">4. Capitalizzazione degli Oneri Finanziari</h2>
+
+        <div class="important">
+            <div class="title">CONDIZIONI PER LA CAPITALIZZAZIONE</div>
+            <p>Gli oneri finanziari possono essere capitalizzati <strong>solo quando ricorrono tutte</strong> le seguenti condizioni:</p>
+            <ul>
+                <li><strong>Oneri effettivamente sostenuti</strong> e oggettivamente determinabili</li>
+                <li><strong>Beni che richiedono un periodo di costruzione significativo</strong></li>
+                <li><strong>Entro il limite del valore recuperabile</strong> del bene</li>
+                <li><strong>Periodo di costruzione:</strong> dal pagamento ai fornitori fino al momento in cui il bene è pronto per l'uso</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="title">METODI DI CALCOLO</div>
+            <p><strong>Finanziamento di scopo:</strong></p>
+            <p>Oneri capitalizzabili = Oneri effettivi del finanziamento - Proventi da investimento temporaneo</p>
+            
+            <p><strong>Finanziamenti generici:</strong></p>
+            <p>Oneri capitalizzabili = Costi sostenuti × Tasso medio ponderato dei finanziamenti generici</p>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">Capitalizzazione oneri finanziari</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Immobilizzazioni in corso</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Incrementi immobilizzazioni per lavori interni</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">5. Ammortamento delle Immobilizzazioni</h2>
+
+        <div class="definition-box">
+            <div class="title">DEFINIZIONE DI AMMORTAMENTO</div>
+            <p>L'<strong>ammortamento</strong> è la ripartizione del costo di un'immobilizzazione nel periodo della sua stimata vita utile con un metodo <strong>sistematico e razionale</strong>, indipendentemente dai risultati conseguiti nell'esercizio. L’ammortamento decorre dal momento in cui l’immobilizzazione è disponibile e pronta per l’uso. </p>
+        </div>
+
+        <div class="formula">
+            VALORE DA AMMORTIZZARE = COSTO DELL'IMMOBILIZZAZIONE - VALORE RESIDUO
+        </div>
+
+        <h3 class="subsection-title">Elementi del Piano di Ammortamento</h3>
+
+        <div class="timeline">
+            <div class="title">DETERMINAZIONE DEL PIANO</div>
+            <div class="timeline-item">
+                <div class="timeline-step">1</div>
+                <div><strong>Valore da ammortizzare:</strong> costo - valore residuo stimato</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">2</div>
+                <div><strong>Vita utile:</strong> periodo in cui si prevede che il cespite sarà utile alla società</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">3</div>
+                <div><strong>Metodo di ammortamento:</strong> quote costanti (preferibile) o quote decrescenti</div>
+            </div>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">FATTORI CHE INFLUENZANO LA VITA UTILE</div>
+            <ul>
+                <li><strong>Deterioramento fisico</strong> legato al trascorrere del tempo</li>
+                <li><strong>Grado di utilizzo</strong> (turni di produzione)</li>
+                <li><strong>Esperienza aziendale</strong> e del settore</li>
+                <li><strong>Obsolescenza tecnologica</strong></li>
+                <li><strong>Correlazione con altri cespiti</strong></li>
+                <li><strong>Piani aziendali</strong> per la sostituzione</li>
+                <li><strong>Politiche di manutenzione</strong></li>
+                <li><strong>Fattori ambientali e legali</strong></li>
+            </ul>
+        </div>
+
+        <h3 class="subsection-title">Metodi di Ammortamento</h3>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">METODO</th>
+                    <th style="width: 40%;">CARATTERISTICHE</th>
+                    <th style="width: 30%;">QUANDO UTILIZZARE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="terreni-fabbricati"><strong>Quote Costanti</strong></td>
+                    <td class="terreni-fabbricati">Stesso importo ogni anno. Metodo preferibile e più diffuso</td>
+                    <td class="terreni-fabbricati">Utilizzazione costante nel tempo</td>
+                </tr>
+                <tr>
+                    <td class="impianti-macchinari"><strong>Quote Decrescenti</strong></td>
+                    <td class="impianti-macchinari">Importi più alti nei primi anni, poi decrescenti</td>
+                    <td class="impianti-macchinari">Maggiore sfruttamento iniziale del bene</td>
+                </tr>
+                <tr>
+                    <td class="attrezzature"><strong>Unità di Prodotto</strong></td>
+                    <td class="attrezzature">Basato sulla produzione effettiva vs. produzione totale stimata</td>
+                    <td class="attrezzature">Produzione variabile nel tempo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <div class="title">METODI NON AMMESSI</div>
+            <ul>
+                <li><strong>Quote crescenti:</strong> contrasta con il principio della prudenza</li>
+                <li><strong>Quote basate sui ricavi:</strong> non ammesso legare l'ammortamento ai risultati</li>
+            </ul>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">Rilevazione ammortamento</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Ammortamento immobilizzazioni materiali</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento [specifica immobilizzazione]</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="section-title">6. Beni Non Ammortizzabili</h2>
+
+        <div class="important">
+            <div class="title">IMMOBILIZZAZIONI NON SOGGETTE AD AMMORTAMENTO</div>
+            <ul>
+                <li><strong>Terreni:</strong> utilità non si esaurisce nel tempo (eccetto cave e discariche)</li>
+                <li><strong>Opere d'arte:</strong> valore non si deteriora</li>
+                <li><strong>Fabbricati non strumentali:</strong> se il valore residuo è pari o superiore al valore netto contabile</li>
+            </ul>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">SCORPORO TERRENO DAI FABBRICATI</div>
+            <p>Se il valore dei fabbricati incorpora anche quello dei terreni, il valore del fabbricato va <strong>scorporato</strong>, anche in base a stime, per determinarne il corretto ammortamento.</p>
+        </div>
+
+        <h2 class="section-title">7. Manutenzioni: Ordinarie vs Straordinarie</h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">TIPO</th>
+                    <th style="width: 35%;">DEFINIZIONE</th>
+                    <th style="width: 40%;">TRATTAMENTO CONTABILE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="terreni-fabbricati"><strong>Manutenzione Ordinaria</strong></td>
+                    <td class="terreni-fabbricati">Pulizia, verniciatura, riparazione, sostituzione parti deteriorate per mantenere buono stato</td>
+                    <td class="terreni-fabbricati">Costi a Conto Economico nell'esercizio</td>
+                </tr>
+                <tr>
+                    <td class="impianti-macchinari"><strong>Manutenzione Straordinaria</strong></td>
+                    <td class="impianti-macchinari">Ampliamenti, ammodernamenti che aumentano capacità, produttività o sicurezza</td>
+                    <td class="impianti-maccrinari">Capitalizzazione + Ricalcolo ammortamento</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="accounting-entry">
+            <div class="date">Manutenzione ordinaria</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Costi di manutenzione</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c (o Fornitori)</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">Manutenzione straordinaria</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Impianti e macchinari</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Banca c/c (o Fornitori)</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="section-title">8. Svalutazioni e Rivalutazioni</h2>
+
+        <div class="definition-box">
+            <div class="title">SVALUTAZIONE PER PERDITA DUREVOLE DI VALORE</div>
+            <p>La società deve valutare a ogni data di bilancio la presenza di <strong>indicatori di perdite durevoli di valore</strong>. Se sussistono, si procede alla stima del <strong>valore recuperabile</strong> e si effettua una svalutazione se necessario.</p>
+        </div>
+
+        <div class="formula">
+            VALORE RECUPERABILE = MAGGIORE TRA (Valore d'uso ; Fair Value - Costi di vendita)
+        </div>
+
+        <div class="important">
+            <div class="title">RIVALUTAZIONI</div>
+            <ul>
+                <li><strong>Ammesse solo per legge:</strong> non sono consentite rivalutazioni volontarie</li>
+                <li><strong>Limite massimo:</strong> valore recuperabile dell'immobilizzazione</li>
+                <li><strong>Riserva di rivalutazione:</strong> l'effetto va a patrimonio netto</li>
+                <li><strong>Ammortamento:</strong> continua sulla residua vita utile originaria</li>
+            </ul>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">Svalutazione immobilizzazione</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Svalutazione immobilizzazioni materiali</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo svalutazione immobilizzazioni</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="section-title">9. Alienazioni e Permute</h2>
+
+        <div class="explanation-box">
+            <div class="title">ALIENAZIONE DI IMMOBILIZZAZIONI</div>
+            <p>Quando un'immobilizzazione è venduta occorre:</p>
+            <ul>
+                <li><strong>Eliminare</strong> il valore netto contabile dell'immobilizzazione</li>
+                <li><strong>Rilevare</strong> il corrispettivo ricevuto</li>
+                <li><strong>Calcolare</strong> la plusvalenza o minusvalenza</li>
+                <li><strong>Includere</strong> l'ammortamento dell'ultimo esercizio fino alla data di cessione</li>
+            </ul>
+        </div>
+
+        <div class="accounting-entry">
+            <div class="date">Vendita immobilizzazione</div>
+            <table>
+                <tr>
+                    <th>CONTO</th>
+                    <th>DARE</th>
+                    <th>AVERE</th>
+                </tr>
+                <tr>
+                    <td>Banca c/c</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Fondo ammortamento</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Minusvalenze su alienazioni (eventuale)</td>
+                    <td class="dare">XXX</td>
+                    <td class="avere">-</td>
+                </tr>
+                <tr>
+                    <td>Impianti e macchinari</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+                <tr>
+                    <td>Plusvalenze su alienazioni (eventuale)</td>
+                    <td class="dare">-</td>
+                    <td class="avere">XXX</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="section-title">10. Informativa in Nota Integrativa</h2>
+
+        <div class="codice-box">
+            <div class="title">ART. 2427 CODICE CIVILE - INFORMAZIONI OBBLIGATORIE</div>
+            <ul>
+                <li><strong>Criteri di valutazione</strong> applicati alle immobilizzazioni</li>
+                <li><strong>Movimenti delle immobilizzazioni</strong> (prospetto dettagliato)</li>
+                <li><strong>Misura e motivazioni</strong> delle riduzioni di valore</li>
+                <li><strong>Oneri finanziari capitalizzati</strong> nell'esercizio</li>
+                <li><strong>Impegni, garanzie e passività potenziali</strong></li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="title">PROSPETTO MOVIMENTI IMMOBILIZZAZIONI</div>
+            <p>Per ciascuna categoria di immobilizzazioni deve essere indicato:</p>
+            <ul>
+                <li><strong>Costo storico</strong> all'inizio dell'esercizio</li>
+                <li><strong>Precedenti rivalutazioni, ammortamenti e svalutazioni</strong></li>
+                <li><strong>Acquisizioni, alienazioni, spostamenti</strong> dell'esercizio</li>
+                <li><strong>Ammortamenti e svalutazioni</strong> dell'esercizio</li>
+                <li><strong>Valore netto finale</strong></li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <div class="title">PRINCIPIO DI RILEVANZA</div>
+            <p><strong>Art. 2423 comma 4 c.c.:</strong> Non occorre rispettare gli obblighi quando la loro osservanza abbia <strong>effetti irrilevanti</strong> per una rappresentazione veritiera e corretta.</p>
+            
+            <p><strong>Esempi pratici:</strong></p>
+            <ul>
+                <li>Attrezzature di scarso valore a <strong>valore costante</strong></li>
+                <li>Ammortamento al <strong>50% per cespiti acquistati nell'anno</strong></li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 class="section-title">Riepilogo Normativo</h2>
+
+        <div class="important">
+            <div class="title">PRINCIPALI RIFERIMENTI NORMATIVI</div>
+            <ul>
+                <li><strong>Art. 2424 c.c.:</strong> Schema di stato patrimoniale</li>
+                <li><strong>Art. 2424-bis c.c.:</strong> Immobilizzazioni = elementi utilizzati durevolmente</li>
+                <li><strong>Art. 2426 c.c.:</strong> Criteri di valutazione (costo, ammortamento, svalutazione)</li>
+                <li><strong>Art. 2427 c.c.:</strong> Informazioni in nota integrativa</li>
+                <li><strong>OIC 16:</strong> Principio contabile di riferimento</li>
+            </ul>
+        </div>
+
+        <div class="explanation-box">
+            <div class="title">PUNTI CHIAVE DA RICORDARE</div>
+            <ul>
+                <li>Le immobilizzazioni sono <strong>beni strumentali durevoli</strong></li>
+                <li>Si iscrivono al <strong>costo</strong> comprensivo di oneri accessori</li>
+                <li>L'ammortamento è <strong>obbligatorio</strong> (salvo terreni e opere d'arte)</li>
+                <li>Il metodo preferibile è quello a <strong>quote costanti</strong></li>
+                <li>Le svalutazioni sono obbligatorie in caso di <strong>perdita durevole</strong></li>
+                <li>Le rivalutazioni sono ammesse <strong>solo per legge</strong></li>
+                <li>L'informativa in nota integrativa è <strong>dettagliata e obbligatoria</strong></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
