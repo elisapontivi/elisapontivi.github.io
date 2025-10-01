@@ -1,303 +1,227 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Esempio: Acquisto beni strumentali con acconto</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c3e50; background-color: #f8f9fa; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 20px; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-
-    .header { text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 3px solid #2980b9; }
-    .header h1 { color: #2980b9; font-size: 2.5em; margin-bottom: 10px; font-weight: bold; }
-    .header .subtitle { color: #34495e; font-size: 1.2em; font-style: italic; }
-
-    .section-title { color: #2980b9; font-size: 1.8em; font-weight: bold; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #2980b9; }
-    .subsection-title { color: #34495e; font-size: 1.4em; font-weight: bold; margin: 25px 0 15px 0; }
-
-    .definition-box { background-color: #f0f8ff; border-left: 5px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 5px; }
-    .definition-box .title { color: #3498db; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
-
-    .note-box { background:#fff8e1; border-left:5px solid #f4b400; padding:16px; border-radius:6px; margin:18px 0; }
-    .note-box .title{ color:#b37a00; font-weight:800; margin-bottom:6px; }
-
-    .exercise-box { background-color: #e8f5e8; border-left: 5px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 5px; }
-    .exercise-box .title { color: #27ae60; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
-
-    .data-highlight { background: #fff3cd; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #856404; }
-    .amount-highlight { background: #d1ecf1; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #0c5460; }
-
-    .accounting-entry { background-color: #f8f9fa; border: 2px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0; font-family: 'Courier New', monospace; }
-    .accounting-entry .date { font-weight: bold; color: #2980b9; margin-bottom: 10px; }
-    .accounting-entry table { width: 100%; border-collapse: collapse; }
-    .accounting-entry th { background-color: #e9ecef; padding: 10px; border: 1px solid #dee2e6; font-weight: bold; text-align: center; }
-    .accounting-entry td { padding: 8px 10px; border: 1px solid #dee2e6; }
-    .accounting-entry .dare, .accounting-entry .avere { text-align: right; font-weight: 700; }
-
-    .invoice-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:16px 0; }
-    .invoice { background:#fff; border:2px solid #e9ecef; border-radius:8px; }
-    .invoice .head { background:#f6f8fa; padding:10px 12px; border-bottom:2px solid #e9ecef; font-weight:800; }
-    .invoice .body { padding:12px; }
-    .invoice .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #eee; }
-    .invoice .row:last-child{border-bottom:none;}
-
-    .mastrini-section { margin-top: 40px; padding-top: 30px; border-top: 3px solid #27ae60; }
-    .mastrini-title { color: #27ae60; font-size: 1.6em; font-weight: bold; margin: 20px 0; text-align: center; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 30px 0; }
-
-    .neutro-color { color: #2980b9; border-color: #2980b9; }
-    .neutro-bg { background: #e8f4fd; }
-    .saldo-finale { text-align: center; font-weight: bold; padding: 10px; margin-top: 10px; border-radius: 5px; }
-    .page-break { margin: 40px 0; border-top: 2px dashed #bdc3c7; padding-top: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio: Contributi in Conto Impianti</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c3e50; background-color: #f8f9fa; margin: 0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 3px solid #2980b9; }
+        .header h1 { color: #2980b9; font-size: 2.5em; margin-bottom: 10px; font-weight: bold; }
+        .header .subtitle { color: #34495e; font-size: 1.2em; font-style: italic; }
+        .section-title { color: #2980b9; font-size: 1.8em; font-weight: bold; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #2980b9; }
+        .subsection-title { color: #34495e; font-size: 1.4em; font-weight: bold; margin: 25px 0 15px 0; }
+        .exercise-box { background-color: #e8f5e8; border-left: 5px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .exercise-box .title { color: #27ae60; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
+        .data-highlight { background: #fff3cd; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #856404; }
+        .amount-highlight { background: #d1ecf1; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: #0c5460; }
+        .definition-box { background-color: #f0f8ff; border-left: 5px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .definition-box .title { color: #3498db; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
+        .accounting-entry { background-color: #f8f9fa; border: 2px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0; font-family: 'Courier New', monospace; }
+        .accounting-entry .date { font-weight: bold; color: #2980b9; margin-bottom: 10px; }
+        .accounting-entry table { width: 100%; border-collapse: collapse; }
+        .accounting-entry th { background-color: #e9ecef; padding: 10px; border: 1px solid #dee2e6; font-weight: bold; text-align: center; }
+        .accounting-entry td { padding: 8px 10px; border: 1px solid #dee2e6; text-align: left; }
+        .accounting-entry .dare { text-align: right; font-weight: bold; }
+        .accounting-entry .avere { text-align: right; font-weight: bold; }
+        .explanation-box { background-color: #fef4e6; border-left: 5px solid #e67e22; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .explanation-box .title { color: #e67e22; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
+        .important { background: #ffe6e6; border-left: 5px solid #e74c3c; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .important .title { color: #c0392b; font-weight: bold; margin-bottom: 8px; }
+        .contributo-box { background-color: #f0fff0; border-left: 5px solid #32cd32; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .contributo-box .title { color: #228b22; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
+        ul { margin: 10px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
+        .page-break { margin: 40px 0; border-top: 2px dashed #bdc3c7; padding-top: 20px; }
+        .timeline { background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #6c757d; }
+        .timeline .title { color: #495057; font-weight: bold; margin-bottom: 15px; font-size: 1.1em; }
+        .timeline-item { display: flex; align-items: center; margin: 10px 0; padding: 10px; background: white; border-radius: 5px; border-left: 3px solid #007bff; }
+        .timeline-date { background: #007bff; color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; font-weight: bold; margin-right: 15px; min-width: 100px; text-align: center; }
+        .calculation-box { background-color: #fff8dc; border-left: 5px solid #daa520; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .calculation-box .title { color: #b8860b; font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .comparison-table th, .comparison-table td { border: 2px solid #fff; padding: 12px; text-align: left; vertical-align: top; }
+        .comparison-table th { background: linear-gradient(135deg, #2980b9, #3498db); color: white; font-weight: bold; text-align: center; }
+        .metodo-indiretto { background: linear-gradient(135deg, #e8f5e8, #c6f6d5); }
+        .metodo-diretto { background: linear-gradient(135deg, #fef9e7, #fcf3cf); }
+        .mastrini-section { margin-top: 40px; padding-top: 30px; border-top: 3px solid #27ae60; }
+        .mastrini-title { color: #27ae60; font-size: 1.6em; font-weight: bold; margin: 20px 0; text-align: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 30px 0; }
+        .neutro-color { color: #2980b9; border-color: #2980b9; }
+        .neutro-bg { background: #e8f4fd; }
+        .saldo-finale { text-align: center; font-weight: bold; padding: 10px; margin-top: 10px; border-radius: 5px; }
+    </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="header">
-      <h1>Acquisto di beni strumentali con versamento di un acconto</h1>
-      <div class="subtitle">Fatture di acconto e a saldo – scritture in P.D. e mastrini</div>
+        <h1>CONTRIBUTI IN CONTO IMPIANTI</h1>
+        <div class="subtitle">Immobilizzazioni Materiali</div>
     </div>
 
-    <!-- TEORIA -->
-    <h2 class="section-title">1. Teoria</h2>
+    <h2 class="section-title">1. Introduzione ai Contributi in Conto Impianti</h2>
     <div class="definition-box">
-      <div class="title">Come si contabilizza l’acconto per immobilizzazioni</div>
-      <p>Quando si acquista un bene strumentale con <strong>acconto</strong> e successivo <strong>saldo alla consegna</strong> si usano questi conti:</p>
-      <ul style="margin-left:20px;">
-        <li><strong>Fornitori imm. mat. c/acconti</strong> (SP – “Immobilizzazioni in corso e acconti”): accoglie l’<em>acconto versato</em> a fronte del bene in arrivo.</li>
-        <li><strong>Debiti per acconti a fornitori</strong> (passivo): rileva l’<em>obbligo</em> di pagare l’acconto (alla stipula/ordine) e si chiude con la fattura di acconto.</li>
-        <li><strong>Debiti v/fornitori</strong>: debito verso il fornitore sorto con la fattura (di acconto o di saldo).</li>
-        <li><strong>Impianti e macchinari</strong>: si movimenta solo con la <em>fattura a saldo</em> alla consegna del bene.</li>
-        <li><strong>IVA ns/credito</strong>: si detrae sia sulla fattura di acconto sia su quella a saldo (sull’imponibile residuo).</li>
-        <li><strong>Banca c/c</strong> e <strong>Commissioni bancarie</strong>: per pagamento e oneri di bonifico.</li>
-      </ul>
+        <div class="title">DEFINIZIONE DI CONTRIBUTO IN CONTO IMPIANTI</div>
+        <p>I <strong>contributi in conto impianti</strong> sono erogazioni gratuite concesse da enti pubblici (Stato, Regioni, Province, Comuni, UE) alle imprese per finanziare investimenti in immobilizzazioni materiali.</p>
+        <ul>
+            <li><strong>Non devono essere restituiti</strong> (a differenza dei finanziamenti)</li>
+            <li><strong>Sono vincolati</strong> a specifici investimenti</li>
+            <li><strong>Riducono il costo dell'investimento</strong> per l'impresa</li>
+            <li><strong>Hanno natura di ricavo distribuito nel tempo</strong></li>
+        </ul>
     </div>
 
-    <div class="note-box">
-      <div class="title">In sintesi</div>
-      <p>L’<strong>acconto</strong> si rileva alla nascita dell’obbligo e si paga con bonifico; con la <strong>fattura di acconto</strong> si chiude <em>Debiti per acconti</em> e si rileva l’IVA. Con la <strong>fattura a saldo</strong> si capitalizza il bene in <em>Impianti</em>, si storna l’<em>acconto</em> dal conto “Fornitori imm. mat. c/acconti” e si registra l’IVA sul residuo.</p>
+    <div class="oic-quote">
+        <p><strong>OIC 16 - Immobilizzazioni materiali:</strong> "I contributi in conto impianti commisurati al costo delle immobilizzazioni materiali sono rilevati a conto economico con un criterio sistematico, gradualmente lungo la vita utile dei cespiti."</p>
     </div>
 
-    <!-- TESTO -->
-    <h2 class="section-title">2. Testo dell’esempio</h2>
+    <div class="important">
+        <div class="title">PRINCIPIO CONTABILE DI RIFERIMENTO</div>
+        <p><strong>OIC 16</strong> prevede due metodi alternativi per la contabilizzazione:</p>
+        <ul>
+            <li><strong>Metodo indiretto:</strong> Contributi rilevati come ricavi (A5) con rinvio tramite risconti passivi</li>
+            <li><strong>Metodo diretto:</strong> Contributi portati a riduzione del costo delle immobilizzazioni</li>
+        </ul>
+        <p>Entrambi i metodi producono lo <strong>stesso effetto economico finale</strong>.</p>
+    </div>
+
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>METODO INDIRETTO</th>
+                <th>METODO DIRETTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="metodo-indiretto">
+                    • Contributo rilevato in A5 e rinviato tramite risconti passivi<br>
+                    • Ammortamento sul costo lordo<br>
+                    • Immobilizzazione al costo storico
+                </td>
+                <td class="metodo-diretto">
+                    • Contributo a riduzione del costo dell’impianto<br>
+                    • Ammortamento sul valore netto<br>
+                    • Immobilizzazione al costo netto
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="section-title">2. Testo dell'Esercizio</h2>
     <div class="exercise-box">
-      <div class="title">Situazione</div>
-      <p>Il <span class="data-highlight">15/02</span> la <strong>Light spa</strong> stipula con la <strong>Climax srl</strong> un contratto per l’acquisto di un impianto al prezzo di <strong class="amount-highlight">€ 30.000 + IVA</strong> con le seguenti condizioni:</p>
-      <ul style="margin-left:20px;">
-        <li>versamento di un <strong>acconto pari a 1/3</strong> del prezzo;</li>
-        <li><strong>saldo</strong> alla consegna dell’impianto prevista entro 60 giorni.</li>
-      </ul>
-      <p>L’acconto viene versato il <span class="data-highlight">26/02</span> con bonifico bancario (<em>commissioni</em> <strong>€ 2,50</strong>) e nello stesso giorno la Light spa riceve la <strong>fattura n. 98</strong> relativa all’acconto. Il <span class="data-highlight">16/04</span> l’impianto viene consegnato e si riceve la <strong>fattura n. 135</strong>.</p>
+        <div class="title">ESERCIZIO - CONTRIBUTO IN CONTO IMPIANTI</div>
+        <p>01/05/T: Acquisto impianto € 500.000 + IVA, pagamento immediato.</p>
+        <p>20/05/T: Delibera Regione: contributo 40% = € 200.000.</p>
+        <p>31/07/T: Accredito del contributo su c/c bancario.</p>
+        <p><strong>Richiesta:</strong> contabilizzare con il metodo diretto.</p>
     </div>
 
-    <!-- FATTURE -->
-    <h2 class="section-title">3. Fatture</h2>
-    <div class="invoice-grid">
-      <div class="invoice">
-        <div class="head">Fattura n. 98 (acconto)</div>
-        <div class="body">
-          <div class="row"><span>Acconto</span><strong>10.000,00 €</strong></div>
-          <div class="row"><span>IVA 22%</span><strong>2.200,00 €</strong></div>
-          <div class="row"><span><strong>Totale versato</strong></span><strong>12.200,00 €</strong></div>
+    <h2 class="section-title">3. Scritture Contabili – Metodo Diretto</h2>
+    <div class="accounting-entry">
+        <div class="date">01/05/T - Acquisto impianto</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Impianti industriali</td><td class="dare">500.000</td><td>-</td></tr>
+            <tr><td>IVA a credito</td><td class="dare">110.000</td><td>-</td></tr>
+            <tr><td>Debiti v/fornitori</td><td>-</td><td class="avere">610.000</td></tr>
+        </table>
+    </div>
+    <div class="accounting-entry">
+        <div class="date">01/05/T - Pagamento fornitore</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Debiti v/fornitori</td><td class="dare">610.000</td><td>-</td></tr>
+            <tr><td>Banca c/c</td><td>-</td><td class="avere">610.000</td></tr>
+        </table>
+    </div>
+    <div class="accounting-entry">
+        <div class="date">31/07/T - Accredito contributo (metodo diretto)</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Banca c/c</td><td class="dare">200.000</td><td>-</td></tr>
+            <tr><td>Impianti industriali</td><td>-</td><td class="avere">200.000</td></tr>
+        </table>
+    </div>
+
+    <!-- MASTRINI -->
+    <div class="mastrini-section">
+        <h3 class="mastrini-title">📊 MASTRINI - METODO DIRETTO</h3>
+        <div class="grid-2">
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>IMPIANTI INDUSTRIALI</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>01/05 - Debiti fornitori € 500.000</td><td>31/07 - Banca c/c € 200.000</td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 300.000 (DARE)</div>
+            </div>
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>IVA A CREDITO</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>01/05 - Debiti fornitori € 110.000</td><td></td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 110.000 (DARE)</div>
+            </div>
         </div>
-      </div>
-      <div class="invoice">
-        <div class="head">Fattura n. 135 (a saldo)</div>
-        <div class="body">
-          <div class="row"><span>Impianto di sollevamento pallet</span><strong>30.000,00 €</strong></div>
-          <div class="row"><span>Acconto versato</span><strong>– 10.000,00 €</strong></div>
-          <div class="row"><span><strong>Imponibile</strong></span><strong>20.000,00 €</strong></div>
-          <div class="row"><span>IVA 22%</span><strong>4.400,00 €</strong></div>
-          <div class="row"><span><strong>Totale fattura a saldo</strong></span><strong>24.400,00 €</strong></div>
+        <div class="grid-2">
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>DEBITI V/FORNITORI</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>01/05 - Banca € 610.000</td><td>01/05 - Impianti € 500.000<br>01/05 - IVA ns/credito € 110.000</td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € 0 (conto chiuso)</div>
+            </div>
+            <div class="accounting-entry">
+                <div class="date neutro-color"><strong>BANCA C/C</strong></div>
+                <table>
+                    <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
+                    <tr><td>31/07 - Impianti € 200.000</td><td>01/05 - Debiti fornitori € 610.000</td></tr>
+                </table>
+                <div class="saldo-finale neutro-bg">Saldo finale: € -410.000 (AVERE)</div>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <!-- SCRITTURE -->
-    <h2 class="section-title">4. Scritture in P.D.</h2>
-
-    <div class="accounting-entry">
-      <div class="date">15/02 – Rilevazione dell’obbligo di versare l’acconto</div>
-      <table>
-        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
-        <tr><td>Fornitori imm. mat. c/acconti</td><td class="dare">10.000,00</td><td></td></tr>
-        <tr><td>Debiti per acconti a fornitori</td><td></td><td class="avere">10.000,00</td></tr>
-      </table>
-    </div>
-
-    <div class="accounting-entry">
-      <div class="date">26/02 – Pagamento dell’acconto</div>
-      <table>
-        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
-        <tr><td>Debiti v/fornitori</td><td class="dare">12.200,00</td><td></td></tr>
-        <tr><td>Banca c/c</td><td></td><td class="avere">12.200,00</td></tr>
-      </table>
-    </div>
-
-    <div class="accounting-entry">
-      <div class="date">26/02 – Addebito commissioni bancarie</div>
-      <table>
-        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
-        <tr><td>Commissioni bancarie</td><td class="dare">2,50</td><td></td></tr>
-        <tr><td>Banca c/c</td><td></td><td class="avere">2,50</td></tr>
-      </table>
-    </div>
-
-    <div class="accounting-entry">
-      <div class="date">26/02 – Registrazione fattura n. 98 (acconto)</div>
-      <table>
-        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
-        <tr><td>Debiti per acconti a fornitori</td><td class="dare">10.000,00</td><td></td></tr>
-        <tr><td>IVA ns/credito</td><td class="dare">2.200,00</td><td></td></tr>
-        <tr><td>Debiti v/fornitori</td><td></td><td class="avere">12.200,00</td></tr>
-      </table>
-    </div>
-
-    <div class="accounting-entry">
-      <div class="date">16/04 – Registrazione fattura n. 135 (a saldo con consegna)</div>
-      <table>
-        <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
-        <tr><td>Impianti e macchinari</td><td class="dare">30.000,00</td><td></td></tr>
-        <tr><td>IVA ns/credito</td><td class="dare">4.400,00</td><td></td></tr>
-        <tr><td>Fornitori imm. mat. c/acconti</td><td></td><td class="avere">10.000,00</td></tr>
-        <tr><td>Debiti v/fornitori</td><td></td><td class="avere">24.400,00</td></tr>
-      </table>
     </div>
 
     <div class="page-break"></div>
 
-    <!-- MASTRINI -->
-    <div class="mastrini-section">
-      <h3 class="mastrini-title">📊 MASTRINI</h3>
-
-      <div class="grid-3">
-        <!-- Fornitori imm. mat. c/acconti -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>FORNITORI IMM. MAT. C/ACCONTI</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>15/02 – Impegno acconto<br><strong>€ 10.000,00</strong></td>
-              <td>16/04 – Fattura a saldo (storno acconto)<br><strong>€ 10.000,00</strong></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 0,00 (conto chiuso)</strong></div>
-        </div>
-
-        <!-- Debiti per acconti a fornitori -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>DEBITI PER ACCONTI A FORNITORI</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>26/02 – Fattura acconto<br><strong>€ 10.000,00</strong></td>
-              <td>15/02 – Impegno acconto<br><strong>€ 10.000,00</strong></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 0,00 (conto chiuso)</strong></div>
-        </div>
-
-        <!-- Debiti v/fornitori -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>DEBITI V/FORNITORI</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>26/02 – Pagamento fattura acconto<br><strong>€ 12.200,00</strong></td>
-              <td>26/02 – Fattura n. 98 (acconto)<br><strong>€ 12.200,00</strong></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>16/04 – Fattura n. 135 (saldo)<br><strong>€ 24.400,00</strong></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 24.400,00 (AVERE)</strong></div>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <!-- IVA ns/credito -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>IVA NS/CREDITO</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>26/02 – Fattura acconto<br><strong>€ 2.200,00</strong></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>16/04 – Fattura saldo<br><strong>€ 4.400,00</strong></td>
-              <td></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 6.600,00 (DARE)</strong></div>
-        </div>
-
-        <!-- Banca c/c -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>BANCA C/C</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td></td>
-              <td>26/02 – Bonifico acconto<br><strong>€ 12.200,00</strong></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>26/02 – Commissioni bonifico<br><strong>€ 2,50</strong></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 12.202,50 (AVERE)</strong></div>
-        </div>
-
-        <!-- Impianti e macchinari -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>IMPIANTI E MACCHINARI</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>16/04 – Fattura saldo (cap.)<br><strong>€ 30.000,00</strong></td>
-              <td></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 30.000,00 (DARE)</strong></div>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <!-- Commissioni bancarie -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>COMMISSIONI BANCARIE</strong></div>
-          <table>
-            <tr><th class="neutro-bg">DARE</th><th class="neutro-bg">AVERE</th></tr>
-            <tr>
-              <td>26/02 – Onere di bonifico<br><strong>€ 2,50</strong></td>
-              <td></td>
-            </tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Saldo finale: € 2,50 (DARE)</strong></div>
-        </div>
-
-        <!-- Riepilogo sintetico -->
-        <div class="accounting-entry">
-          <div class="date neutro-color"><strong>RIEPILOGO CONTI</strong></div>
-          <table>
-            <tr><th class="neutro-bg">CONTO</th><th class="neutro-bg">SALDO</th></tr>
-            <tr><td>Fornitori imm. mat. c/acconti</td><td style="text-align:right;"><strong>€ 0,00</strong></td></tr>
-            <tr><td>Debiti per acconti a fornitori</td><td style="text-align:right;"><strong>€ 0,00</strong></td></tr>
-            <tr><td>Debiti v/fornitori</td><td style="text-align:right;"><strong>€ 24.400,00 (AVERE)</strong></td></tr>
-            <tr><td>IVA ns/credito</td><td style="text-align:right;"><strong>€ 6.600,00 (DARE)</strong></td></tr>
-            <tr><td>Banca c/c</td><td style="text-align:right;"><strong>€ 12.202,50 (AVERE)</strong></td></tr>
-            <tr><td>Impianti e macchinari</td><td style="text-align:right;"><strong>€ 30.000,00 (DARE)</strong></td></tr>
-            <tr><td>Commissioni bancarie</td><td style="text-align:right;"><strong>€ 2,50 (DARE)</strong></td></tr>
-          </table>
-          <div class="saldo-finale neutro-bg"><strong>Conti chiusi/correnti come sopra</strong></div>
-        </div>
-      </div>
+    <h2 class="section-title">4. Gestione negli Esercizi Successivi</h2>
+    <div class="calculation-box">
+        <div class="title">DATI</div>
+        <ul>
+            <li>Costo lordo impianto: € 500.000</li>
+            <li>Contributo diretto: € 200.000</li>
+            <li><strong>Valore netto iscritto: € 300.000</strong></li>
+            <li>Vita utile: 10 anni</li>
+            <li>Ammortamento annuo: € 300.000 ÷ 10 = <strong>€ 30.000</strong></li>
+        </ul>
     </div>
-  </div>
+
+    <div class="accounting-entry">
+        <div class="date">31/12/T+n - Ammortamento annuo</div>
+        <table>
+            <tr><th>CONTO</th><th>DARE</th><th>AVERE</th></tr>
+            <tr><td>Ammortamento impianti industriali</td><td class="dare">30.000</td><td>-</td></tr>
+            <tr><td>Fondo ammortamento impianti industriali</td><td>-</td><td class="avere">30.000</td></tr>
+        </table>
+    </div>
+
+    <div class="contributo-box">
+        <div class="title">EFFETTO SUL CONTO ECONOMICO</div>
+        <p>Ogni anno (per 10 anni):</p>
+        <ul>
+            <li>Costi per ammortamento: - € 30.000</li>
+            <li>Ricavi da contributo: € 0 (già ridotto a monte)</li>
+            <li><strong>Effetto netto annuo: - € 30.000</strong></li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
+
+
