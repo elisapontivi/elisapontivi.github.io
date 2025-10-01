@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulatore Disequazioni Fratte di Primo Grado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+        
+        .generate-btn {
+            padding: 15px 40px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .generate-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .equation {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 3px solid #667eea;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+        
+        .fraction-num {
+            border-bottom: 3px solid #333;
+            padding: 5px 15px;
+            margin-bottom: 3px;
+        }
+        
+        .fraction-den {
+            padding: 5px 15px;
+        }
+        
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .formula {
+            background: #fff3cd;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .mcm-box {
+            background: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 3px solid #2196F3;
+            text-align: center;
+        }
+        
+        .mcm-box strong {
+            color: #0d47a1;
+            font-size: 1.3em;
+        }
+        
+        .ce-box {
+            background: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px solid #2196F3;
+            text-align: center;
+        }
+        
+        .ce-box strong {
+            color: #0d47a1;
+        }
+        
+        .sign-table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .sign-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1em;
+        }
+        
+        .sign-table td {
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #ddd;
+        }
+        
+        .sign-table tr:first-child td {
+            font-weight: bold;
+            background: #f8f9fa;
+        }
+        
+        .sign-table tr:last-child td {
+            background: #e7f3ff;
+            font-weight: bold;
+        }
+        
+        .positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .solution {
+            background: #d4edda;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 3px solid #28a745;
+            text-align: center;
+        }
+        
+        .solution h3 {
+            color: #155724;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .solution .result {
+            font-size: 1.5em;
+            color: #155724;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 Disequazioni Fratte di Primo Grado 📐</h1>
+            <p>Risoluzione con il metodo del Minimo Comune Multiplo e studio del segno</p>
+        </div>
+        
+        <div class="content">
+            <div class="button-container">
+                <h3 style="color: white; margin-bottom: 15px;">🎲 Genera una nuova disequazione</h3>
+                <button class="generate-btn" onclick="generaNuovaDisequazione()">🔄 Nuova Disequazione</button>
+            </div>
+            
+            <div id="esercizio"></div>
+        </div>
+    </div>
+    
+    <script>
+        function gcd(a, b) {
+            a = Math.abs(a);
+            b = Math.abs(b);
+            while (b !== 0) {
+                let temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+        
+        function semplificaFrazione(num, den) {
+            if (den === 0) return { num: num, den: den };
+            const divisore = gcd(num, den);
+            num = num / divisore;
+            den = den / divisore;
+            if (den < 0) {
+                num = -num;
+                den = -den;
+            }
+            return { num, den };
+        }
+        
+        function formatFrazione(num, den) {
+            const fraz = semplificaFrazione(num, den);
+            if (fraz.den === 1) return fraz.num.toString();
+            if (fraz.den === 0) return 'indefinito';
+            return `<div class="fraction" style="display: inline-block; vertical-align: middle; font-size: 0.9em;"><div style="border-bottom: 2px solid #333; padding: 2px 8px;">${fraz.num}</div><div style="padding: 2px 8px;">${fraz.den}</div></div>`;
+        }
+        
+        function formatFrazioneText(num, den) {
+            const fraz = semplificaFrazione(num, den);
+            if (fraz.den === 1) return fraz.num.toString();
+            return `${fraz.num}/${fraz.den}`;
+        }
+        
+        function formatPolinomio(a, b, variabile = 'x') {
+            if (a === 0) return b.toString();
+            let str = '';
+            if (a === 1) str = variabile;
+            else if (a === -1) str = '-' + variabile;
+            else str = a + variabile;
+            
+            if (b !== 0) {
+                str += (b > 0 ? ' + ' : ' ') + b;
+            }
+            return str;
+        }
+        
+        function calcolaSegnoFrazione(num, den, x) {
+            const valoreNum = num.a * x + num.b;
+            const valoreDen = den.a * x + den.b;
+            if (valoreDen === 0) return null;
+            return (valoreNum / valoreDen) > 0 ? '+' : (valoreNum / valoreDen) < 0 ? '-' : '0';
+        }
+        
+        function risolviDisequazione(num, den, verso) {
+            // num = {a, b} rappresenta ax + b
+            // den = {a, b} rappresenta ax + b
+            // verso = '<' o '>'
+            
+            let puntiCritici = [];
+            
+            // Zero del numeratore
+            if (num.a !== 0) {
+                puntiCritici.push({
+                    valore: -num.b / num.a,
+                    frazioneNum: -num.b,
+                    frazioneDen: num.a,
+                    tipo: 'numeratore',
+                    incluso: true
+                });
+            }
+            
+            // Zero del denominatore
+            if (den.a !== 0) {
+                puntiCritici.push({
+                    valore: -den.b / den.a,
+                    frazioneNum: -den.b,
+                    frazioneDen: den.a,
+                    tipo: 'denominatore',
+                    incluso: false
+                });
+            }
+            
+            // Ordina i punti critici
+            puntiCritici.sort((a, b) => a.valore - b.valore);
+            
+            // Testa il segno in ciascun intervallo
+            const intervalli = [];
+            
+            // Intervallo (-∞, primo punto)
+            if (puntiCritici.length > 0) {
+                const testX = puntiCritici[0].valore - 1;
+                const segno = calcolaSegnoFrazione(num, den, testX);
+                intervalli.push({
+                    limite1: null,
+                    limite2: puntiCritici[0],
+                    segno: segno
+                });
+            }
+            
+            // Intervalli tra i punti
+            for (let i = 0; i < puntiCritici.length - 1; i++) {
+                const testX = (puntiCritici[i].valore + puntiCritici[i + 1].valore) / 2;
+                const segno = calcolaSegnoFrazione(num, den, testX);
+                intervalli.push({
+                    limite1: puntiCritici[i],
+                    limite2: puntiCritici[i + 1],
+                    segno: segno
+                });
+            }
+            
+            // Intervallo (ultimo punto, +∞)
+            if (puntiCritici.length > 0) {
+                const testX = puntiCritici[puntiCritici.length - 1].valore + 1;
+                const segno = calcolaSegnoFrazione(num, den, testX);
+                intervalli.push({
+                    limite1: puntiCritici[puntiCritici.length - 1],
+                    limite2: null,
+                    segno: segno
+                });
+            }
+            
+            // Costruisci la soluzione
+            const segnoRichiesto = verso === '>' ? '+' : '-';
+            const soluzioni = [];
+            
+            for (let intervallo of intervalli) {
+                if (intervallo.segno === segnoRichiesto) {
+                    let sol = '';
+                    if (intervallo.limite1 === null) {
+                        sol = `x < ${formatFrazione(intervallo.limite2.frazioneNum, intervallo.limite2.frazioneDen)}`;
+                    } else if (intervallo.limite2 === null) {
+                        sol = `x > ${formatFrazione(intervallo.limite1.frazioneNum, intervallo.limite1.frazioneDen)}`;
+                    } else {
+                        sol = `${formatFrazione(intervallo.limite1.frazioneNum, intervallo.limite1.frazioneDen)} < x < ${formatFrazione(intervallo.limite2.frazioneNum, intervallo.limite2.frazioneDen)}`;
+                    }
+                    soluzioni.push(sol);
+                }
+            }
+            
+            return {
+                soluzione: soluzioni.join(' ∪ ') || 'Nessuna soluzione',
+                puntiCritici: puntiCritici,
+                intervalli: intervalli
+            };
+        }
+        
+        function generaTabellaSegniunificata(num, den, puntiCritici, intervalli, verso) {
+            let html = '<div class="sign-table-container"><table class="sign-table">';
+            
+            // Riga intestazione con intervalli e punti critici
+            html += '<tr><td style="font-weight: bold;">x</td>';
+            
+            for (let i = 0; i < intervalli.length; i++) {
+                const intervallo = intervalli[i];
+                
+                // Colonna per l'intervallo
+                let intervalloStr = '';
+                if (intervallo.limite1 === null && intervallo.limite2 !== null) {
+                    intervalloStr = `−∞ ... ${formatFrazioneText(intervallo.limite2.frazioneNum, intervallo.limite2.frazioneDen)}`;
+                } else if (intervallo.limite1 !== null && intervallo.limite2 === null) {
+                    intervalloStr = `${formatFrazioneText(intervallo.limite1.frazioneNum, intervallo.limite1.frazioneDen)} ... +∞`;
+                } else if (intervallo.limite1 !== null && intervallo.limite2 !== null) {
+                    intervalloStr = `${formatFrazioneText(intervallo.limite1.frazioneNum, intervallo.limite1.frazioneDen)} ... ${formatFrazioneText(intervallo.limite2.frazioneNum, intervallo.limite2.frazioneDen)}`;
+                }
+                
+                html += `<td style="background: #f0f0f0;">${intervalloStr}</td>`;
+                
+                // Colonna per il punto critico (se esiste)
+                if (intervallo.limite2 !== null) {
+                    html += `<td style="background: #e7f3ff; font-weight: bold;">${formatFrazioneText(intervallo.limite2.frazioneNum, intervallo.limite2.frazioneDen)}</td>`;
+                }
+            }
+            html += '</tr>';
+            
+            // Riga numeratore
+            html += '<tr><td style="font-weight: bold;">Numeratore</td>';
+            for (let i = 0; i < intervalli.length; i++) {
+                const intervallo = intervalli[i];
+                const testX = intervallo.limite1 ? intervallo.limite1.valore + 0.1 : intervallo.limite2.valore - 0.1;
+                const valNum = num.a * testX + num.b;
+                const segnoNum = valNum > 0 ? '+' : '-';
+                
+                html += `<td class="${segnoNum === '+' ? 'positive' : 'negative'}" style="background: #f0f0f0;">${segnoNum === '+' ? '+ + +' : '− − −'}</td>`;
+                
+                // Punto critico
+                if (intervallo.limite2 !== null) {
+                    if (intervallo.limite2.tipo === 'numeratore') {
+                        html += '<td style="background: #e7f3ff; font-weight: bold;">0</td>';
+                    } else {
+                        html += `<td class="${segnoNum === '+' ? 'positive' : 'negative'}" style="background: #e7f3ff;">${segnoNum === '+' ? '+ + +' : '− − −'}</td>`;
+                    }
+                }
+            }
+            html += '</tr>';
+            
+            // Riga denominatore
+            html += '<tr><td style="font-weight: bold;">Denominatore</td>';
+            for (let i = 0; i < intervalli.length; i++) {
+                const intervallo = intervalli[i];
+                const testX = intervallo.limite1 ? intervallo.limite1.valore + 0.1 : intervallo.limite2.valore - 0.1;
+                const valDen = den.a * testX + den.b;
+                const segnoDen = valDen > 0 ? '+' : '-';
+                
+                html += `<td class="${segnoDen === '+' ? 'positive' : 'negative'}" style="background: #f0f0f0;">${segnoDen === '+' ? '+ + +' : '− − −'}</td>`;
+                
+                // Punto critico
+                if (intervallo.limite2 !== null) {
+                    if (intervallo.limite2.tipo === 'denominatore') {
+                        html += '<td style="background: #ffe7e7; font-weight: bold;">N.E.</td>';
+                    } else {
+                        html += `<td class="${segnoDen === '+' ? 'positive' : 'negative'}" style="background: #e7f3ff;">${segnoDen === '+' ? '+ + +' : '− − −'}</td>`;
+                    }
+                }
+            }
+            html += '</tr>';
+            
+            // Riga frazione (più evidenziata)
+            html += '<tr><td style="font-weight: bold; background: #d4edda;">FRAZIONE</td>';
+            for (let i = 0; i < intervalli.length; i++) {
+                const intervallo = intervalli[i];
+                const segnoStr = intervallo.segno === '+' ? '+ + +' : '− − −';
+                
+                html += `<td class="${intervallo.segno === '+' ? 'positive' : 'negative'}" style="background: #e8f4ea; font-weight: bold; font-size: 1.1em;">${segnoStr}</td>`;
+                
+                // Punto critico
+                if (intervallo.limite2 !== null) {
+                    if (intervallo.limite2.tipo === 'numeratore') {
+                        html += '<td style="background: #d4edda; font-weight: bold;">0</td>';
+                    } else {
+                        html += '<td style="background: #ffe7e7; font-weight: bold;">N.E.</td>';
+                    }
+                }
+            }
+            html += '</tr>';
+            
+            html += '</table></div>';
+            html += `<div style="margin-top: 15px; padding: 12px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">`;
+            html += `<p><strong>Legenda:</strong></p>`;
+            html += `<p style="margin-top: 5px;">• <strong>N.E.</strong> = Non Esiste (condizione di esistenza - punto escluso)</p>`;
+            html += `<p>• <strong>0</strong> = Zero del numeratore (punto incluso nella soluzione)</p>`;
+            html += `<p style="margin-top: 10px;">📍 Le colonne con sfondo grigio rappresentano gli <strong>intervalli</strong></p>`;
+            html += `<p>📍 Le colonne con sfondo azzurro/rosso rappresentano i <strong>punti critici</strong></p>`;
+            html += `</div>`;
+            html += `<p style="margin-top: 15px; font-size: 1.1em; padding: 10px; background: ${verso === '>' ? '#d4edda' : '#f8d7da'}; border-radius: 5px;"><strong>👉 Cerchiamo gli intervalli dove la frazione è ${verso === '>' ? 'POSITIVA (+ + +)' : 'NEGATIVA (− − −)'}</strong></p>`;
+            
+            return html;
+        }
+        
+        function generaNuovaDisequazione() {
+            const tipoDisEq = Math.floor(Math.random() * 3);
+            let html = '';
+            
+            if (tipoDisEq === 0) {
+                html = generaTipo1();
+            } else if (tipoDisEq === 1) {
+                html = generaTipo2();
+            } else {
+                html = generaTipo3();
+            }
+            
+            document.getElementById('esercizio').innerHTML = html;
+        }
+        
+        function generaTipo1() {
+            // a/x < b  oppure a/x > b
+            const a = Math.floor(Math.random() * 20) - 10;
+            const b = Math.floor(Math.random() * 10) + 1;
+            const verso = Math.random() > 0.5 ? '>' : '<';
+            
+            if (a === 0) return generaTipo1();
+            
+            // Numeratore: a - bx = -bx + a
+            const num = { a: -b, b: a };
+            // Denominatore: x
+            const den = { a: 1, b: 0 };
+            
+            const risultato = risolviDisequazione(num, den, verso);
+            const tabella = generaTabellaSegniunificata(num, den, risultato.puntiCritici, risultato.intervalli, verso);
+            
+            let html = `
+                <div class="section">
+                    <h2>📝 Disequazione</h2>
+                    <div class="equation">
+                        <div class="fraction">
+                            <div class="fraction-num">${a}</div>
+                            <div class="fraction-den">x</div>
+                        </div>
+                        <span style="margin: 0 15px;">${verso}</span>
+                        <span>${b}</span>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>✅ Risoluzione con il metodo dello studio del segno</h2>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 1: Condizioni di Esistenza (C.E.)</div>
+                        <p>Il denominatore non può essere zero:</p>
+                        <div class="ce-box">
+                            <strong>x ≠ 0</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 2: Portare tutto a sinistra</div>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${a}</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            - ${b} ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 3: Calcolo del m.c.m.</div>
+                        <p>I denominatori sono: <strong>x</strong> e <strong>1</strong></p>
+                        <div class="mcm-box">
+                            <strong>m.c.m. = x</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 4: Riduzione a unica frazione</div>
+                        <p>Riduciamo allo stesso denominatore:</p>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${a} - ${b}x</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                        <p>Ovvero:</p>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(num.a, num.b)}</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 5: Studio del segno della frazione</div>
+                        <p><strong>Metodo:</strong> Guardiamo quando il numeratore è maggiore di zero e quando il denominatore è maggiore di zero, poi applichiamo la regola dei segni per la frazione.</p>
+                        
+                        <p style="margin-top: 10px;"><strong>Studio del NUMERATORE > 0:</strong></p>
+                        <div class="formula">${formatPolinomio(num.a, num.b)} > 0</div>
+                        <div class="formula">${num.a}x > ${-num.b}</div>
+                        <div class="formula">x ${num.a > 0 ? '>' : '<'} ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</div>
+                        <p>Il numeratore si annulla per x = ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</p>
+                        
+                        <p style="margin-top: 10px;"><strong>Studio del DENOMINATORE > 0:</strong></p>
+                        <div class="formula">x > 0</div>
+                        <p>Il denominatore si annulla per x = 0</p>
+                        
+                        <p style="margin-top: 15px;"><strong>Tabella dei segni:</strong></p>
+                        ${tabella}
+                        
+                        <div style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 5px;">
+                            <p><strong>Regola dei segni per la frazione:</strong></p>
+                            <p>+ ÷ + = + &nbsp;&nbsp;|&nbsp;&nbsp; − ÷ − = + &nbsp;&nbsp;|&nbsp;&nbsp; + ÷ − = − &nbsp;&nbsp;|&nbsp;&nbsp; − ÷ + = −</p>
+                        </div>
+                    </div>
+                    
+                    <div class="solution">
+                        <h3>🎯 SOLUZIONE FINALE</h3>
+                        <div class="result">${risultato.soluzione}</div>
+                        <p style="margin-top: 10px; font-size: 1em;">con x ≠ 0 (C.E.)</p>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function generaTipo2() {
+            // (ax + b)/x < d  oppure > d
+            const a = Math.floor(Math.random() * 10) + 1;
+            const b = Math.floor(Math.random() * 20) - 10;
+            const d = Math.floor(Math.random() * 10) + 1;
+            const verso = Math.random() > 0.5 ? '>' : '<';
+            
+            // Numeratore: ax + b - dx = (a-d)x + b
+            const num = { a: a - d, b: b };
+            // Denominatore: x
+            const den = { a: 1, b: 0 };
+            
+            const risultato = risolviDisequazione(num, den, verso);
+            const tabella = generaTabellaSegniunificata(num, den, risultato.puntiCritici, risultato.intervalli, verso);
+            
+            let html = `
+                <div class="section">
+                    <h2>📝 Disequazione</h2>
+                    <div class="equation">
+                        <div class="fraction">
+                            <div class="fraction-num">${formatPolinomio(a, b)}</div>
+                            <div class="fraction-den">x</div>
+                        </div>
+                        <span style="margin: 0 15px;">${verso}</span>
+                        <span>${d}</span>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>✅ Risoluzione con il metodo dello studio del segno</h2>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 1: Condizioni di Esistenza (C.E.)</div>
+                        <div class="ce-box">
+                            <strong>x ≠ 0</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 2: Portare tutto a sinistra</div>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(a, b)}</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            - ${d} ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 3: Calcolo del m.c.m. e riduzione</div>
+                        <p>m.c.m. = <strong>x</strong></p>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(a, b)} - ${d}x</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(num.a, num.b)}</div>
+                                <div style="padding: 5px 10px;">x</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 4: Studio del segno della frazione</div>
+                        <p><strong>Metodo:</strong> Guardiamo quando il numeratore è maggiore di zero e quando il denominatore è maggiore di zero.</p>
+                        
+                        ${num.a !== 0 ? `
+                        <p style="margin-top: 10px;"><strong>Studio del NUMERATORE > 0:</strong></p>
+                        <div class="formula">${formatPolinomio(num.a, num.b)} > 0</div>
+                        <div class="formula">${num.a}x > ${-num.b}</div>
+                        <div class="formula">x ${num.a > 0 ? '>' : '<'} ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</div>
+                        <p>Il numeratore si annulla per x = ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</p>
+                        ` : `
+                        <p style="margin-top: 10px;"><strong>Studio del NUMERATORE:</strong></p>
+                        <p>${num.b} (costante ${num.b > 0 ? 'positiva' : 'negativa'})</p>
+                        <p>Il numeratore è sempre ${num.b > 0 ? 'positivo' : 'negativo'} e non si annulla mai</p>
+                        `}
+                        
+                        <p style="margin-top: 10px;"><strong>Studio del DENOMINATORE > 0:</strong></p>
+                        <div class="formula">x > 0</div>
+                        <p>Il denominatore si annulla per x = 0</p>
+                        
+                        <p style="margin-top: 15px;"><strong>Tabella dei segni:</strong></p>
+                        ${tabella}
+                    </div>
+                    
+                    <div class="solution">
+                        <h3>🎯 SOLUZIONE FINALE</h3>
+                        <div class="result">${risultato.soluzione}</div>
+                        <p style="margin-top: 10px; font-size: 1em;">con x ≠ 0 (C.E.)</p>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function generaTipo3() {
+            // (ax + b)/(cx + d) < e  oppure > e
+            const a = Math.floor(Math.random() * 8) + 1;
+            const b = Math.floor(Math.random() * 20) - 10;
+            const c = Math.floor(Math.random() * 8) + 1;
+            const d = Math.floor(Math.random() * 20) - 10;
+            const e = Math.floor(Math.random() * 6) + 1;
+            const verso = Math.random() > 0.5 ? '>' : '<';
+            
+            const ce_xNum = -d;
+            const ce_xDen = c;
+            
+            // Numeratore: ax + b - e(cx + d) = (a - ec)x + (b - ed)
+            const num = { a: a - e * c, b: b - e * d };
+            // Denominatore: cx + d
+            const den = { a: c, b: d };
+            
+            const risultato = risolviDisequazione(num, den, verso);
+            const tabella = generaTabellaSegniunificata(num, den, risultato.puntiCritici, risultato.intervalli, verso);
+            
+            let html = `
+                <div class="section">
+                    <h2>📝 Disequazione</h2>
+                    <div class="equation">
+                        <div class="fraction">
+                            <div class="fraction-num">${formatPolinomio(a, b)}</div>
+                            <div class="fraction-den">${formatPolinomio(c, d)}</div>
+                        </div>
+                        <span style="margin: 0 15px;">${verso}</span>
+                        <span>${e}</span>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>✅ Risoluzione con il metodo dello studio del segno</h2>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 1: Condizioni di Esistenza (C.E.)</div>
+                        <p>${formatPolinomio(c, d)} ≠ 0</p>
+                        <div class="ce-box">
+                            <strong>x ≠ ${formatFrazione(ce_xNum, ce_xDen)}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 2: Portare tutto a sinistra</div>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(a, b)}</div>
+                                <div style="padding: 5px 10px;">${formatPolinomio(c, d)}</div>
+                            </div>
+                            - ${e} ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 3: Calcolo del m.c.m. e riduzione</div>
+                        <p>m.c.m. = <strong>${formatPolinomio(c, d)}</strong></p>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(a, b)} - ${e}(${formatPolinomio(c, d)})</div>
+                                <div style="padding: 5px 10px;">${formatPolinomio(c, d)}</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                        <p>Sviluppiamo il numeratore:</p>
+                        <div class="formula">
+                            <div class="fraction" style="display: inline-block; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #333; padding: 5px 10px;">${formatPolinomio(num.a, num.b)}</div>
+                                <div style="padding: 5px 10px;">${formatPolinomio(c, d)}</div>
+                            </div>
+                            ${verso} 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">Passo 4: Studio del segno della frazione</div>
+                        <p><strong>Metodo:</strong> Guardiamo quando il numeratore è maggiore di zero e quando il denominatore è maggiore di zero.</p>
+                        
+                        ${num.a !== 0 ? `
+                        <p style="margin-top: 10px;"><strong>Studio del NUMERATORE > 0:</strong></p>
+                        <div class="formula">${formatPolinomio(num.a, num.b)} > 0</div>
+                        <div class="formula">${num.a}x > ${-num.b}</div>
+                        <div class="formula">x ${num.a > 0 ? '>' : '<'} ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</div>
+                        <p>Il numeratore si annulla per x = ${formatFrazioneText(risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneNum, risultato.puntiCritici.find(p => p.tipo === 'numeratore').frazioneDen)}</p>
+                        ` : `
+                        <p style="margin-top: 10px;"><strong>Studio del NUMERATORE:</strong></p>
+                        <p>${num.b} (costante ${num.b > 0 ? 'positiva' : 'negativa'})</p>
+                        <p>Il numeratore è sempre ${num.b > 0 ? 'positivo' : 'negativo'} e non si annulla mai</p>
+                        `}
+                        
+                        <p style="margin-top: 10px;"><strong>Studio del DENOMINATORE > 0:</strong></p>
+                        <div class="formula">${formatPolinomio(c, d)} > 0</div>
+                        <div class="formula">${c}x > ${-d}</div>
+                        <div class="formula">x ${c > 0 ? '>' : '<'} ${formatFrazione(ce_xNum, ce_xDen)}</div>
+                        <p>Il denominatore si annulla per x = ${formatFrazione(ce_xNum, ce_xDen)}</p>
+                        
+                        <p style="margin-top: 15px;"><strong>Tabella dei segni:</strong></p>
+                        ${tabella}
+                    </div>
+                    
+                    <div class="solution">
+                        <h3>🎯 SOLUZIONE FINALE</h3>
+                        <div class="result">${risultato.soluzione}</div>
+                        <p style="margin-top: 10px; font-size: 1em;">con x ≠ ${formatFrazione(ce_xNum, ce_xDen)} (C.E.)</p>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        window.onload = function() {
+            generaNuovaDisequazione();
+        };
+    </script>
+</body>
+</html>

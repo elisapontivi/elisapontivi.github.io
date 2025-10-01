@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio: Laboratorio di Cioccolatini di Sara</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .data-box {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .data-box ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        
+        .data-box li {
+            padding: 5px 0;
+        }
+        
+        .data-box li::before {
+            content: "🍫 ";
+            margin-right: 8px;
+        }
+        
+        .formula {
+            background: #fff3cd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+        }
+        
+        .risultato {
+            background: #d4edda;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 3px solid #28a745;
+            text-align: center;
+        }
+        
+        .risultato h3 {
+            color: #155724;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .risultato p {
+            font-size: 1.5em;
+            color: #155724;
+            font-weight: bold;
+        }
+        
+        .calculator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .calculator h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        
+        .calc-button {
+            width: 100%;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        .calc-button:hover {
+            background: #218838;
+        }
+        
+        .calc-result {
+            background: white;
+            color: #333;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .calc-result.show {
+            display: block;
+        }
+        
+        .calc-result table {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .calc-result td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .calc-result td:first-child {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍫 Laboratorio di Cioccolatini di Sara 🍫</h1>
+            <p>Analisi dei costi e calcolo del punto di pareggio</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📋 Testo dell'Esercizio</h2>
+                <p>Sara ha aperto un piccolo laboratorio di cioccolatini artigianali. Dopo aver analizzato i suoi costi per il primo mese di attività, ha raccolto i seguenti dati:</p>
+                
+                <div class="data-box">
+                    <h3>Costi Fissi Mensili</h3>
+                    <ul>
+                        <li>Affitto del laboratorio: <strong>450€</strong></li>
+                        <li>Assicurazione e utenze base: <strong>180€</strong></li>
+                        <li>Stipendio fisso di Sara: <strong>1200€</strong></li>
+                        <li>Ammortamento attrezzature: <strong>300€</strong> (3600€ / 12 mesi)</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-weight: bold; color: #8B4513;">Totale costi fissi: 2130€</p>
+                </div>
+                
+                <div class="data-box">
+                    <h3>Costi Variabili</h3>
+                    <ul>
+                        <li>Materie prime per confezione: <strong>8€</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="data-box">
+                    <h3>Ricavi</h3>
+                    <ul>
+                        <li>Prezzo di vendita per confezione: <strong>28€</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="data-box">
+                    <h3>Obiettivo</h3>
+                    <p>Il <span class="highlight">costo medio per confezione</span> deve essere <strong>inferiore a 22€</strong></p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔍 Risoluzione dell'Esercizio</h2>
+                
+                <h3>Passo 1: Calcoliamo i costi fissi totali</h3>
+                <div class="step">
+                    <p><strong>Costi Fissi (CF):</strong></p>
+                    <ul style="list-style: none; padding-left: 20px;">
+                        <li>• Affitto: 450€</li>
+                        <li>• Assicurazione e utenze: 180€</li>
+                        <li>• Stipendio Sara: 1200€</li>
+                        <li>• Ammortamento attrezzature: 300€</li>
+                        <li style="margin-top: 10px; border-top: 2px solid #333; padding-top: 10px;"><strong>CF = 2130€</strong></li>
+                    </ul>
+                </div>
+                
+                <h3>Passo 2: Calcoliamo i costi variabili totali</h3>
+                <div class="step">
+                    <p><strong>Costi Variabili Totali (CVT):</strong></p>
+                    <p>Se chiamiamo <strong>n</strong> il numero di confezioni prodotte:</p>
+                    <div class="formula">CVT = 8€ × n = 8n</div>
+                </div>
+                
+                <h3>Passo 3: Formula del costo medio</h3>
+                <div class="step">
+                    <p>Il <strong>costo medio per confezione</strong> è dato dalla somma dei costi fissi e dei costi variabili totali, diviso per il numero di confezioni:</p>
+                    <div style="text-align: center; margin: 30px 0;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">Costo Medio = </div>
+                        <div style="display: inline-block; text-align: center; font-size: 1.4em;">
+                            <div style="border-bottom: 3px solid #333; padding: 15px 30px; margin-bottom: 5px;">
+                                CF + CVT
+                            </div>
+                            <div style="padding: 15px 30px;">
+                                n
+                            </div>
+                        </div>
+                        <div style="font-size: 1.3em; font-weight: bold; margin-top: 20px;">Costo Medio = </div>
+                        <div style="display: inline-block; text-align: center; font-size: 1.4em;">
+                            <div style="border-bottom: 3px solid #333; padding: 15px 30px; margin-bottom: 5px;">
+                                2130 + 8n
+                            </div>
+                            <div style="padding: 15px 30px;">
+                                n
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Passo 4: Impostiamo la disequazione</h3>
+                <p>Chiamiamo <strong>n</strong> il numero di confezioni da produrre.</p>
+                <div class="formula">
+                    (2130 + 8n) / n < 22
+                </div>
+                
+                <h3>Passo 3: Risolviamo la disequazione</h3>
+                <div class="step">
+                    <p>1. Moltiplichiamo entrambi i membri per n (che è positivo):</p>
+                    <div class="formula">2130 + 8n < 22n</div>
+                </div>
+                
+                <div class="step">
+                    <p>2. Portiamo i termini con n a destra:</p>
+                    <div class="formula">2130 < 22n - 8n</div>
+                </div>
+                
+                <div class="step">
+                    <p>3. Semplifichiamo:</p>
+                    <div class="formula">2130 < 14n</div>
+                </div>
+                
+                <div class="step">
+                    <p>4. Dividiamo per 14:</p>
+                    <div class="formula">n > 2130 / 14 = 152,14...</div>
+                </div>
+                
+                <div class="risultato">
+                    <h3>✅ SOLUZIONE</h3>
+                    <p>Sara deve produrre almeno <span class="highlight">153 confezioni</span> al mese</p>
+                    <p style="font-size: 1em; margin-top: 10px;">per avere un costo medio inferiore a 22€</p>
+                </div>
+                
+                <h3>Verifica con 153 confezioni:</h3>
+                <div class="step">
+                    <p><strong>Costi totali:</strong> 2130€ + (8€ × 153) = 2130€ + 1224€ = 3354€</p>
+                    <p><strong>Costo medio:</strong> 3354€ / 153 = 21,92€ < 22€ ✓</p>
+                    <p><strong>Ricavo per confezione:</strong> 28€ - 21,92€ = <span class="highlight">6,08€ di margine</span></p>
+                    <p><strong>Ricavo totale mensile:</strong> 28€ × 153 = 4284€</p>
+                    <p><strong>Profitto mensile:</strong> 4284€ - 3354€ = <span class="highlight">930€</span></p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; text-align: center;">
+                    <h2 style="color: white; margin-bottom: 10px;">🎲 Esercizio Casuale</h2>
+                    <p style="margin-bottom: 15px;">Aggiorna la pagina per generare un nuovo esercizio con dati diversi!</p>
+                    <button onclick="location.reload()" style="padding: 12px 30px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer;">🔄 Genera Nuovo Esercizio</button>
+                </div>
+                
+                <div id="esercisioCasuale" style="margin-top: 30px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function generaEsercizioCasuale() {
+            // Genera valori casuali
+            const nomi = ['Marco', 'Laura', 'Giulia', 'Andrea', 'Francesca', 'Roberto', 'Alessia', 'Davide'];
+            const attivita = [
+                {nome: 'pasticceria artigianale', prodotto: 'torte', unita: 'torta/e'},
+                {nome: 'laboratorio di biscotti', prodotto: 'confezioni di biscotti', unita: 'confezione/i'},
+                {nome: 'produzione di marmellate', prodotto: 'vasetti di marmellata', unita: 'vasetto/i'},
+                {nome: 'negozio di caramelle', prodotto: 'sacchetti di caramelle', unita: 'sacchetto/i'},
+                {nome: 'laboratorio di gelati artigianali', prodotto: 'vaschette di gelato', unita: 'vaschetta/e'},
+                {nome: 'produzione di panettoni', prodotto: 'panettoni', unita: 'panettone/i'}
+            ];
+            
+            const nome = nomi[Math.floor(Math.random() * nomi.length)];
+            const attivita_scelta = attivita[Math.floor(Math.random() * attivita.length)];
+            
+            const affitto = Math.floor(Math.random() * 400) + 300; // 300-700
+            const assicurazione = Math.floor(Math.random() * 150) + 100; // 100-250
+            const stipendio = Math.floor(Math.random() * 600) + 1000; // 1000-1600
+            const costoAttrezzature = Math.floor(Math.random() * 3000) + 2400; // 2400-5400
+            const ammortamento = Math.round(costoAttrezzature / 12);
+            const costoVariabile = Math.floor(Math.random() * 8) + 5; // 5-13
+            const prezzoVendita = Math.floor(Math.random() * 15) + 20; // 20-35
+            
+            // Calcola l'obiettivo (tra il 70% e 90% del prezzo di vendita)
+            const obiettivoMin = Math.floor(prezzoVendita * 0.7);
+            const obiettivoMax = Math.floor(prezzoVendita * 0.9);
+            const obiettivo = Math.floor(Math.random() * (obiettivoMax - obiettivoMin + 1)) + obiettivoMin;
+            
+            // Calcola la soluzione
+            const costiFissi = affitto + assicurazione + stipendio + ammortamento;
+            const margineContribuzione = prezzoVendita - costoVariabile;
+            const numeratore = costiFissi;
+            const denominatore = obiettivo - costoVariabile;
+            const nMinimo = Math.ceil(numeratore / denominatore);
+            
+            // Verifica
+            const costiTotali = costiFissi + (costoVariabile * nMinimo);
+            const costoMedio = costiTotali / nMinimo;
+            const ricaviTotali = prezzoVendita * nMinimo;
+            const profitto = ricaviTotali - costiTotali;
+            const margineUnitario = prezzoVendita - costoMedio;
+            
+            // Crea l'HTML dell'esercizio
+            let html = `
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107; margin-bottom: 20px;">
+                    <h3 style="color: #856404; margin-bottom: 15px;">📝 Testo dell'Esercizio</h3>
+                    <p><strong>${nome}</strong> ha aperto un piccolo laboratorio di <strong>${attivita_scelta.nome}</strong>. Dopo aver analizzato i suoi costi per il primo mese di attività, ha raccolto i seguenti dati:</p>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #8B4513; margin-bottom: 10px;">Costi Fissi Mensili:</h4>
+                        <ul style="list-style: none; padding-left: 10px;">
+                            <li>🏢 Affitto del laboratorio: <strong>${affitto}€</strong></li>
+                            <li>📋 Assicurazione e utenze base: <strong>${assicurazione}€</strong></li>
+                            <li>💼 Stipendio fisso di ${nome}: <strong>${stipendio}€</strong></li>
+                            <li>🔧 Attrezzature professionali acquistate: <strong>${costoAttrezzature}€</strong> (da ammortizzare in 12 mesi)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #8B4513; margin-bottom: 10px;">Costi Variabili:</h4>
+                        <ul style="list-style: none; padding-left: 10px;">
+                            <li>📦 Ogni ${attivita_scelta.unita} richiede materie prime per: <strong>${costoVariabile}€</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #8B4513; margin-bottom: 10px;">Ricavi:</h4>
+                        <ul style="list-style: none; padding-left: 10px;">
+                            <li>💰 Ogni ${attivita_scelta.unita} viene venduto/a a: <strong>${prezzoVendita}€</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #d4edda; padding: 15px; margin: 15px 0; border-radius: 8px; border: 2px solid #28a745;">
+                        <h4 style="color: #155724; margin-bottom: 10px;">🎯 Obiettivo:</h4>
+                        <p style="color: #155724;"><strong>${nome}</strong> vuole che il <strong>costo medio per ${attivita_scelta.unita}</strong> sia <strong>inferiore a ${obiettivo}€</strong></p>
+                        <p style="color: #155724; margin-top: 10px;">❓ Quante ${attivita_scelta.prodotto} deve produrre e vendere ogni mese?</p>
+                    </div>
+                </div>
+                
+                <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; border-left: 5px solid #2196F3;">
+                    <h3 style="color: #0d47a1; margin-bottom: 15px;">✅ Risoluzione</h3>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #667eea;">Passo 1: Calcoliamo i costi fissi totali (CF)</h4>
+                        <p>CF = ${affitto}€ + ${assicurazione}€ + ${stipendio}€ + ${ammortamento}€ = <strong>${costiFissi}€</strong></p>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #667eea;">Passo 2: Calcoliamo i costi variabili totali (CVT)</h4>
+                        <p>CVT = ${costoVariabile}€ × n = <strong>${costoVariabile}n</strong></p>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #667eea;">Passo 3: Formula del costo medio</h4>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="display: inline-block; text-align: center; font-size: 1.3em;">
+                                <div style="border-bottom: 3px solid #333; padding: 10px 20px; margin-bottom: 5px;">
+                                    CF + CVT
+                                </div>
+                                <div style="padding: 10px 20px;">
+                                    n
+                                </div>
+                            </div>
+                            <span style="font-size: 1.3em; margin: 0 15px;">=</span>
+                            <div style="display: inline-block; text-align: center; font-size: 1.3em;">
+                                <div style="border-bottom: 3px solid #333; padding: 10px 20px; margin-bottom: 5px;">
+                                    ${costiFissi} + ${costoVariabile}n
+                                </div>
+                                <div style="padding: 10px 20px;">
+                                    n
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #667eea;">Passo 4: Impostiamo e risolviamo la disequazione</h4>
+                        <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                            <div style="text-align: center; margin: 15px 0; display: flex; align-items: center; justify-content: center;">
+                                <div style="display: inline-block; text-align: center; font-size: 1.2em;">
+                                    <div style="border-bottom: 3px solid #333; padding: 10px 20px; margin-bottom: 5px;">
+                                        ${costiFissi} + ${costoVariabile}n
+                                    </div>
+                                    <div style="padding: 10px 20px;">
+                                        n
+                                    </div>
+                                </div>
+                                <span style="font-size: 1.2em; margin: 0 10px;"><</span>
+                                <span style="font-size: 1.2em;">${obiettivo}</span>
+                            </div>
+                        </div>
+                        <p>Moltiplichiamo per n:</p>
+                        <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0;">${costiFissi} + ${costoVariabile}n < ${obiettivo}n</p>
+                        <p>Portiamo i termini con n a destra:</p>
+                        <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0;">${costiFissi} < ${obiettivo}n - ${costoVariabile}n</p>
+                        <p>Semplifichiamo:</p>
+                        <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0;">${costiFissi} < ${denominatore}n</p>
+                        <p>Dividiamo per ${denominatore}:</p>
+                        <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0;">n > ${costiFissi} / ${denominatore} = ${(numeratore / denominatore).toFixed(2)}</p>
+                    </div>
+                    
+                    <div style="background: #d4edda; padding: 20px; margin: 20px 0; border-radius: 10px; border: 3px solid #28a745; text-align: center;">
+                        <h3 style="color: #155724; font-size: 1.8em;">🎉 SOLUZIONE</h3>
+                        <p style="font-size: 1.6em; color: #155724; font-weight: bold; margin: 15px 0;">
+                            ${nome} deve produrre almeno <span style="background: #ffeb3b; padding: 5px 10px; border-radius: 5px;">${nMinimo} ${attivita_scelta.prodotto}</span> al mese
+                        </p>
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                        <h4 style="color: #667eea;">Verifica con ${nMinimo} ${attivita_scelta.prodotto}:</h4>
+                        <ul style="list-style: none; padding-left: 10px;">
+                            <li>📊 <strong>Costi totali:</strong> ${costiFissi}€ + (${costoVariabile}€ × ${nMinimo}) = ${costiFissi}€ + ${costoVariabile * nMinimo}€ = <strong>${costiTotali}€</strong></li>
+                            <li>💵 <strong>Costo medio:</strong> ${costiTotali}€ / ${nMinimo} = <strong>${costoMedio.toFixed(2)}€</strong> < ${obiettivo}€ ✓</li>
+                            <li>📈 <strong>Ricavi totali:</strong> ${prezzoVendita}€ × ${nMinimo} = <strong>${ricaviTotali}€</strong></li>
+                            <li>💰 <strong>Margine unitario:</strong> ${prezzoVendita}€ - ${costoMedio.toFixed(2)}€ = <strong>${margineUnitario.toFixed(2)}€</strong></li>
+                            <li>🎯 <strong>Profitto mensile:</strong> ${ricaviTotali}€ - ${costiTotali}€ = <strong>${profitto}€</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('esercisioCasuale').innerHTML = html;
+        }
+        
+        // Genera esercizio al caricamento della pagina
+        window.onload = function() {
+            generaEsercizioCasuale();
+        };
+    </script>
+</body>
+</html>
