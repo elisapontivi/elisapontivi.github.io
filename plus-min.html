@@ -327,7 +327,6 @@
             font-weight: bold;
         }
 
-        /* Stili per i mastrini */
         .mastrini-section {
             margin-top: 40px;
             padding-top: 30px;
@@ -346,13 +345,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
-            margin: 30px 0;
-        }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
             margin: 30px 0;
         }
 
@@ -519,7 +511,7 @@
                 </tr>
             </table>
             
-            <p><strong>Ammortamento periodo T:</strong> € 30.000 × 258/365 = € 21.205</p>
+            <p><strong>Ammortamento periodo T:</strong> € 30.000 × 258/365 = € 21.205,48</p>
         </div>
 
         <div class="calculation-box">
@@ -528,9 +520,9 @@
                 <li><strong>Ammortamento T-3:</strong> € 30.000 (anno completo)</li>
                 <li><strong>Ammortamento T-2:</strong> € 30.000 (anno completo)</li>
                 <li><strong>Ammortamento T-1:</strong> € 30.000 (anno completo)</li>
-                <li><strong>Ammortamento T:</strong> € 21.205 (fino al 15/09)</li>
-                <li><strong>Fondo ammortamento totale:</strong> € 111.205</li>
-                <li><strong>Valore netto contabile:</strong> € 240.000 - € 111.205 = <strong>€ 128.795</strong></li>
+                <li><strong>Ammortamento T:</strong> € 21.205,48 (fino al 15/09)</li>
+                <li><strong>Fondo ammortamento totale:</strong> € 111.205,48</li>
+                <li><strong>Valore netto contabile:</strong> € 240.000 - € 111.205,48 = <strong>€ 128.794,52</strong></li>
             </ul>
         </div>
 
@@ -549,20 +541,20 @@
                 <tr>
                     <td class="caso-base"><strong>Esercizio 1</strong></td>
                     <td class="caso-base">€ 140.000</td>
-                    <td class="caso-base">€ 128.795</td>
-                    <td class="caso-base"><strong>Plusvalenza € 11.205</strong></td>
+                    <td class="caso-base">€ 128.794,52</td>
+                    <td class="caso-base"><strong>Plusvalenza € 11.205,48</strong></td>
                 </tr>
                 <tr>
                     <td class="caso-variante1"><strong>Esercizio 2</strong></td>
                     <td class="caso-variante1">€ 120.000</td>
-                    <td class="caso-variante1">€ 128.795</td>
-                    <td class="caso-variante1"><strong>Minusvalenza € 8.795</strong></td>
+                    <td class="caso-variante1">€ 128.794,52</td>
+                    <td class="caso-variante1"><strong>Minusvalenza € 8.794,52</strong></td>
                 </tr>
                 <tr>
                     <td class="caso-variante2"><strong>Esercizio 3</strong></td>
                     <td class="caso-variante2">€ 0 (rottamazione)</td>
-                    <td class="caso-variante2">€ 128.795</td>
-                    <td class="caso-variante2"><strong>Minusvalenza € 128.795</strong></td>
+                    <td class="caso-variante2">€ 128.794,52</td>
+                    <td class="caso-variante2"><strong>Minusvalenza € 128.794,52</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -581,19 +573,19 @@
                 </tr>
                 <tr>
                     <td>Ammortamento immobilizzazioni materiali</td>
-                    <td class="dare">21.205</td>
+                    <td class="dare">21.205,48</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
                     <td>Fondo ammortamento macchinari</td>
                     <td class="dare">-</td>
-                    <td class="avere">21.205</td>
+                    <td class="avere">21.205,48</td>
                 </tr>
             </table>
         </div>
 
         <div class="accounting-entry">
-            <div class="date">15/09/T - Eliminazione macchinario dalla contabilità</div>
+            <div class="date">15/09/T - Storno fondo ammortamento</div>
             <table>
                 <tr>
                     <th>CONTO</th>
@@ -602,18 +594,13 @@
                 </tr>
                 <tr>
                     <td>Fondo ammortamento macchinari</td>
-                    <td class="dare">111.205</td>
+                    <td class="dare">111.205,48</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
-                    <td class="dare">128.795</td>
-                    <td class="avere">-</td>
-                </tr>
-                <tr>
-                    <td>Impianti e macchinari</td>
+                    <td>Macchinari</td>
                     <td class="dare">-</td>
-                    <td class="avere">240.000</td>
+                    <td class="avere">111.205,48</td>
                 </tr>
             </table>
         </div>
@@ -627,40 +614,24 @@
                     <th>AVERE</th>
                 </tr>
                 <tr>
-                    <td>Clienti (o Banca c/c)</td>
+                    <td>Crediti diversi</td>
                     <td class="dare">170.800</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
+                    <td>Macchinari</td>
                     <td class="dare">-</td>
-                    <td class="avere">140.000</td>
-                </tr>
-                <tr>
-                    <td>IVA a debito</td>
-                    <td class="dare">-</td>
-                    <td class="avere">30.800</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="accounting-entry">
-            <div class="date">15/09/T - Rilevazione plusvalenza</div>
-            <table>
-                <tr>
-                    <th>CONTO</th>
-                    <th>DARE</th>
-                    <th>AVERE</th>
-                </tr>
-                <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
-                    <td class="dare">11.205</td>
-                    <td class="avere">-</td>
+                    <td class="avere">128.794,52</td>
                 </tr>
                 <tr>
                     <td>Plusvalenze su alienazioni</td>
                     <td class="dare">-</td>
-                    <td class="avere">11.205</td>
+                    <td class="avere">11.205,48</td>
+                </tr>
+                <tr>
+                    <td>IVA ns. debito</td>
+                    <td class="dare">-</td>
+                    <td class="avere">30.800</td>
                 </tr>
             </table>
         </div>
@@ -668,11 +639,10 @@
         <div class="plusvalenza-box">
             <div class="title">PLUSVALENZA REALIZZATA</div>
             <p><strong>Calcolo:</strong> Prezzo di vendita - Valore netto contabile</p>
-            <p><strong>€ 140.000 - € 128.795 = € 11.205</strong></p>
+            <p><strong>€ 140.000 - € 128.794,52 = € 11.205,48</strong></p>
             <p><strong>Classificazione CE:</strong> A.5 "Altri ricavi e proventi"</p>
         </div>
 
-        <!-- MASTRINI Esercizio 1 -->
         <div class="mastrini-section">
             <h3 class="mastrini-title">📊 MASTRINI - Esercizio 1 (Plusvalenza)</h3>
 
@@ -697,8 +667,10 @@
                             <td style="padding: 15px; height: 120px;">
                                 <strong>15/09/T</strong><br>
                                 a) Fondo ammortamento<br>
-                                a) Realizzo vendita<br>
-                                <strong>€ 240.000</strong>
+                                <strong>€ 111.205,48</strong><br><br>
+                                <strong>15/09/T</strong><br>
+                                a) Crediti diversi<br>
+                                <strong>€ 128.794,52</strong>
                                 <hr class="neutro-color">
                                 <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 240.000</div>
                             </td>
@@ -722,17 +694,19 @@
                         <tr>
                             <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
                                 <strong>15/09/T</strong><br>
-                                a) Impianti e macchinari<br>
-                                a) Realizzo vendita<br>
-                                <strong>€ 111.205</strong>
+                                a) Macchinari<br>
+                                <strong>€ 111.205,48</strong>
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205,48</div>
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <strong>Saldo iniziale</strong><br>
-                                € 111.205
+                                € 90.000<br><br>
+                                <strong>15/09/T</strong><br>
+                                a) Ammortamento<br>
+                                € 21.205,48
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205,48</div>
                             </td>
                         </tr>
                     </table>
@@ -743,41 +717,6 @@
             </div>
 
             <div class="grid-2">
-                <div class="accounting-entry">
-                    <div class="date neutro-color">
-                        <strong>REALIZZO VENDITA IMMOBILIZZAZIONI</strong><br>
-                        <small>(Conto Transitorio)</small>
-                    </div>
-                    <table>
-                        <tr>
-                            <th class="neutro-bg">DARE</th>
-                            <th class="neutro-bg">AVERE</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
-                                <strong>15/09/T</strong><br>
-                                a) Impianti e macchinari<br>
-                                <strong>€ 128.795</strong><br><br>
-                                <strong>15/09/T</strong><br>
-                                a) Plusvalenze<br>
-                                <strong>€ 11.205</strong>
-                                <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 140.000</div>
-                            </td>
-                            <td style="padding: 15px; height: 120px;">
-                                <strong>15/09/T</strong><br>
-                                a) Clienti<br>
-                                <strong>€ 140.000</strong>
-                                <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 140.000</div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="saldo-finale neutro-bg">
-                        <strong>Saldo finale: € 0,00 (Conto chiuso)</strong>
-                    </div>
-                </div>
-
                 <div class="accounting-entry">
                     <div class="date plusvalenza-color">
                         <strong>PLUSVALENZE SU ALIENAZIONI</strong><br>
@@ -794,15 +733,45 @@
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <strong>15/09/T</strong><br>
-                                a) Realizzo vendita<br>
-                                <strong>€ 11.205</strong>
+                                a) Crediti diversi<br>
+                                <strong>€ 11.205,48</strong>
                                 <hr class="plusvalenza-color">
-                                <div style="text-align: center; font-weight: bold;" class="plusvalenza-color">€ 11.205</div>
+                                <div style="text-align: center; font-weight: bold;" class="plusvalenza-color">€ 11.205,48</div>
                             </td>
                         </tr>
                     </table>
                     <div class="saldo-finale plusvalenza-bg">
-                        <strong>Saldo finale: € 11.205 (AVERE) - RICAVO</strong>
+                        <strong>Saldo finale: € 11.205,48 (AVERE) - RICAVO</strong>
+                    </div>
+                </div>
+
+                <div class="accounting-entry">
+                    <div class="date neutro-color">
+                        <strong>CREDITI DIVERSI</strong><br>
+                        <small>(Stato Patrimoniale - Attivo)</small>
+                    </div>
+                    <table>
+                        <tr>
+                            <th class="neutro-bg">DARE</th>
+                            <th class="neutro-bg">AVERE</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
+                                <strong>15/09/T</strong><br>
+                                a) Macchinari<br>
+                                a) Plusvalenze<br>
+                                a) IVA ns. debito<br>
+                                <strong>€ 170.800</strong>
+                                <hr class="neutro-color">
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 170.800</div>
+                            </td>
+                            <td style="padding: 15px; height: 120px;">
+                                <div style="height: 80px;"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="saldo-finale neutro-bg">
+                        <strong>Saldo finale: € 170.800 (DARE) - CREDITO</strong>
                     </div>
                 </div>
             </div>
@@ -813,7 +782,7 @@
         <h3 class="subsection-title">Esercizio 2 - Prezzo € 120.000 (Minusvalenza)</h3>
 
         <div class="accounting-entry">
-            <div class="date">15/09/T - Eliminazione macchinario dalla contabilità</div>
+            <div class="date">15/09/T - Storno fondo ammortamento</div>
             <table>
                 <tr>
                     <th>CONTO</th>
@@ -822,24 +791,19 @@
                 </tr>
                 <tr>
                     <td>Fondo ammortamento macchinari</td>
-                    <td class="dare">111.205</td>
+                    <td class="dare">111.205,48</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
-                    <td class="dare">128.795</td>
-                    <td class="avere">-</td>
-                </tr>
-                <tr>
-                    <td>Impianti e macchinari</td>
+                    <td>Macchinari</td>
                     <td class="dare">-</td>
-                    <td class="avere">240.000</td>
+                    <td class="avere">111.205,48</td>
                 </tr>
             </table>
         </div>
 
         <div class="accounting-entry">
-            <div class="date">15/09/T - Emissione fattura di vendita</div>
+            <div class="date">15/09/T - Emissione fattura di vendita con minusvalenza</div>
             <table>
                 <tr>
                     <th>CONTO</th>
@@ -847,40 +811,24 @@
                     <th>AVERE</th>
                 </tr>
                 <tr>
-                    <td>Clienti (o Banca c/c)</td>
+                    <td>Crediti diversi</td>
                     <td class="dare">146.400</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
-                    <td class="dare">-</td>
-                    <td class="avere">120.000</td>
-                </tr>
-                <tr>
-                    <td>IVA a debito</td>
-                    <td class="dare">-</td>
-                    <td class="avere">26.400</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="accounting-entry">
-            <div class="date">15/09/T - Rilevazione minusvalenza</div>
-            <table>
-                <tr>
-                    <th>CONTO</th>
-                    <th>DARE</th>
-                    <th>AVERE</th>
-                </tr>
-                <tr>
                     <td>Minusvalenze su alienazioni</td>
-                    <td class="dare">8.795</td>
+                    <td class="dare">8.794,52</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Realizzo vendita immobilizzazioni</td>
+                    <td>Macchinari</td>
                     <td class="dare">-</td>
-                    <td class="avere">8.795</td>
+                    <td class="avere">128.794,52</td>
+                </tr>
+                <tr>
+                    <td>IVA ns. debito</td>
+                    <td class="dare">-</td>
+                    <td class="avere">26.400</td>
                 </tr>
             </table>
         </div>
@@ -888,19 +836,18 @@
         <div class="minusvalenza-box">
             <div class="title">MINUSVALENZA SOSTENUTA</div>
             <p><strong>Calcolo:</strong> Valore netto contabile - Prezzo di vendita</p>
-            <p><strong>€ 128.795 - € 120.000 = € 8.795</strong></p>
+            <p><strong>€ 128.794,52 - € 120.000 = € 8.794,52</strong></p>
             <p><strong>Classificazione CE:</strong> B.14 "Oneri diversi di gestione"</p>
         </div>
 
-        <!-- MASTRINI Esercizio 2 -->
         <div class="mastrini-section">
             <h3 class="mastrini-title">📊 MASTRINI - Esercizio 2 (Minusvalenza)</h3>
 
             <div class="grid-2">
                 <div class="accounting-entry">
                     <div class="date neutro-color">
-                        <strong>REALIZZO VENDITA IMMOBILIZZAZIONI</strong><br>
-                        <small>(Conto Transitorio)</small>
+                        <strong>IMPIANTI E MACCHINARI</strong><br>
+                        <small>(Stato Patrimoniale - Attivo)</small>
                     </div>
                     <table>
                         <tr>
@@ -909,21 +856,21 @@
                         </tr>
                         <tr>
                             <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
-                                <strong>15/09/T</strong><br>
-                                a) Impianti e macchinari<br>
-                                <strong>€ 128.795</strong>
+                                <strong>Saldo iniziale</strong><br>
+                                € 240.000
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 128.795</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 240.000</div>
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <strong>15/09/T</strong><br>
-                                a) Clienti<br>
-                                <strong>€ 120.000</strong><br><br>
+                                a) Fondo ammortamento<br>
+                                <strong>€ 111.205,48</strong><br><br>
                                 <strong>15/09/T</strong><br>
+                                a) Crediti diversi<br>
                                 a) Minusvalenze<br>
-                                <strong>€ 8.795</strong>
+                                <strong>€ 128.794,52</strong>
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 128.795</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 240.000</div>
                             </td>
                         </tr>
                     </table>
@@ -945,10 +892,10 @@
                         <tr>
                             <td style="padding: 15px; height: 120px; border-right: 2px solid #c0392b;">
                                 <strong>15/09/T</strong><br>
-                                a) Realizzo vendita<br>
-                                <strong>€ 8.795</strong>
+                                a) Macchinari<br>
+                                <strong>€ 8.794,52</strong>
                                 <hr class="minusvalenza-color">
-                                <div style="text-align: center; font-weight: bold;" class="minusvalenza-color">€ 8.795</div>
+                                <div style="text-align: center; font-weight: bold;" class="minusvalenza-color">€ 8.794,52</div>
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <div style="height: 80px;"></div>
@@ -956,7 +903,7 @@
                         </tr>
                     </table>
                     <div class="saldo-finale minusvalenza-bg">
-                        <strong>Saldo finale: € 8.795 (DARE) - COSTO</strong>
+                        <strong>Saldo finale: € 8.794,52 (DARE) - COSTO</strong>
                     </div>
                 </div>
             </div>
@@ -976,16 +923,16 @@
                 </tr>
                 <tr>
                     <td>Fondo ammortamento macchinari</td>
-                    <td class="dare">111.205</td>
+                    <td class="dare">111.205,48</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Minusvalenze su alienazioni</td>
-                    <td class="dare">128.795</td>
+                    <td>Sopravvenienza passiva</td>
+                    <td class="dare">128.794,52</td>
                     <td class="avere">-</td>
                 </tr>
                 <tr>
-                    <td>Impianti e macchinari</td>
+                    <td>Macchinari</td>
                     <td class="dare">-</td>
                     <td class="avere">240.000</td>
                 </tr>
@@ -995,12 +942,11 @@
         <div class="minusvalenza-box">
             <div class="title">PERDITA TOTALE PER ROTTAMAZIONE</div>
             <p><strong>Calcolo:</strong> Intero valore netto contabile</p>
-            <p><strong>€ 128.795</strong></p>
-            <p><strong>Classificazione CE:</strong> B.14 "Oneri diversi di gestione"</p>
+            <p><strong>€ 128.794,52</strong></p>
+            <p><strong>Classificazione CE:</strong> "Sopravvenienza passiva"</p>
             <p><strong>Nota:</strong> Non c'è incasso né IVA in quanto il bene viene rottamato</p>
         </div>
 
-        <!-- MASTRINI Esercizio 3 -->
         <div class="mastrini-section">
             <h3 class="mastrini-title">📊 MASTRINI - Esercizio 3 (Rottamazione)</h3>
 
@@ -1025,7 +971,7 @@
                             <td style="padding: 15px; height: 120px;">
                                 <strong>15/09/T</strong><br>
                                 a) Fondo ammortamento<br>
-                                a) Minusvalenze<br>
+                                a) Sopravvenienza passiva<br>
                                 <strong>€ 240.000</strong>
                                 <hr class="neutro-color">
                                 <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 240.000</div>
@@ -1050,16 +996,16 @@
                         <tr>
                             <td style="padding: 15px; height: 120px; border-right: 2px solid #2980b9;">
                                 <strong>15/09/T</strong><br>
-                                a) Impianti e macchinari<br>
-                                <strong>€ 111.205</strong>
+                                a) Macchinari<br>
+                                <strong>€ 111.205,48</strong>
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205,48</div>
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <strong>Saldo iniziale</strong><br>
-                                € 111.205
+                                € 111.205,48
                                 <hr class="neutro-color">
-                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205</div>
+                                <div style="text-align: center; font-weight: bold;" class="neutro-color">€ 111.205,48</div>
                             </td>
                         </tr>
                     </table>
@@ -1072,8 +1018,8 @@
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
                 <div class="accounting-entry">
                     <div class="date minusvalenza-color">
-                        <strong>MINUSVALENZE SU ALIENAZIONI</strong><br>
-                        <small>(Conto Economico - B.14)</small>
+                        <strong>SOPRAVVENIENZA PASSIVA</strong><br>
+                        <small>(Conto Economico)</small>
                     </div>
                     <table>
                         <tr>
@@ -1083,10 +1029,10 @@
                         <tr>
                             <td style="padding: 15px; height: 120px; border-right: 2px solid #c0392b;">
                                 <strong>15/09/T</strong><br>
-                                a) Impianti e macchinari<br>
-                                <strong>€ 128.795</strong>
+                                a) Macchinari<br>
+                                <strong>€ 128.794,52</strong>
                                 <hr class="minusvalenza-color">
-                                <div style="text-align: center; font-weight: bold;" class="minusvalenza-color">€ 128.795</div>
+                                <div style="text-align: center; font-weight: bold;" class="minusvalenza-color">€ 128.794,52</div>
                             </td>
                             <td style="padding: 15px; height: 120px;">
                                 <div style="height: 80px;"></div>
@@ -1094,7 +1040,7 @@
                         </tr>
                     </table>
                     <div class="saldo-finale minusvalenza-bg">
-                        <strong>Saldo finale: € 128.795 (DARE) - COSTO</strong><br>
+                        <strong>Saldo finale: € 128.794,52 (DARE) - COSTO</strong><br>
                         <small>Perdita totale del valore netto contabile</small>
                     </div>
                 </div>
@@ -1117,19 +1063,19 @@
                 <tr>
                     <td class="caso-base"><strong>Esercizio 1</strong></td>
                     <td class="caso-base">A.5 Altri ricavi e proventi</td>
-                    <td class="caso-base">+ € 11.205</td>
+                    <td class="caso-base">+ € 11.205,48</td>
                     <td class="caso-base">Plusvalenza</td>
                 </tr>
                 <tr>
                     <td class="caso-variante1"><strong>Esercizio 2</strong></td>
                     <td class="caso-variante1">B.14 Oneri diversi di gestione</td>
-                    <td class="caso-variante1">- € 8.795</td>
+                    <td class="caso-variante1">- € 8.794,52</td>
                     <td class="caso-variante1">Minusvalenza</td>
                 </tr>
                 <tr>
                     <td class="caso-variante2"><strong>Esercizio 3</strong></td>
-                    <td class="caso-variante2">B.14 Oneri diversi di gestione</td>
-                    <td class="caso-variante2">- € 128.795</td>
+                    <td class="caso-variante2">Sopravvenienza passiva</td>
+                    <td class="caso-variante2">- € 128.794,52</td>
                     <td class="caso-variante2">Perdita totale</td>
                 </tr>
             </table>
@@ -1140,7 +1086,7 @@
             <p>In tutti e tre i casi:</p>
             <ul>
                 <li><strong>Eliminazione dell'immobilizzazione:</strong> - € 240.000 (costo storico)</li>
-                <li><strong>Eliminazione del fondo:</strong> - € 111.205 (ammortamenti accumulati)</li>
+                <li><strong>Eliminazione del fondo:</strong> - € 111.205,48 (ammortamenti accumulati)</li>
                 <li><strong>Incasso (casi base e Esercizio 2):</strong> Aumento liquidità o crediti</li>
                 <li><strong>IVA a debito:</strong> Aumento dei debiti tributari (escluso Esercizio 3)</li>
             </ul>
@@ -1162,7 +1108,7 @@
             <ul>
                 <li>Il <strong>momento della cessione</strong> determina l'ammortamento finale da calcolare</li>
                 <li>La <strong>plusvalenza/minusvalenza</strong> è la differenza tra prezzo e valore netto contabile</li>
-                <li>La <strong>rottamazione</strong> genera sempre una minusvalenza pari al valore netto residuo</li>
+                <li>La <strong>rottamazione</strong> genera sempre una perdita pari al valore netto residuo</li>
                 <li>L'<strong>IVA</strong> si applica solo quando c'è un corrispettivo effettivo</li>
                 <li>Tutte le operazioni devono <strong>eliminare completamente</strong> il cespite dalla contabilità</li>
                 <li>I <strong>mastrini</strong> mostrano chiaramente come ogni conto si movimenti e si chiuda</li>
@@ -1170,5 +1116,4 @@
         </div>
     </div>
 </body>
-
 </html>
