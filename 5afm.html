@@ -97,6 +97,11 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         
+        .content-block.esercizi {
+            border-left-color: #ed8936;
+            background: linear-gradient(135deg, #feebc8 0%, #f8f9fa 50%);
+        }
+        
         .content-block.maturita {
             border-left-color: #e53e3e;
             background: linear-gradient(135deg, #fed7d7 0%, #f8f9fa 50%);
@@ -182,7 +187,7 @@
 <body>
     <div class="container">
         <div class="header">
-                        <h1>Classe 5 AFM</h1>
+            <h1>Classe 5 AFM</h1>
             <p>Economia Aziendale - Prof.ssa Elisa Pontivi</p>
         </div>
         
@@ -190,6 +195,14 @@
             <div class="intro">
                 <p>Benvenuti nella pagina dedicata alla classe 5 AFM. Qui troverete tutti i materiali, 
                 le prove d'esame e i moduli di studio per prepararvi al meglio all'Esame di Stato.</p>
+            </div>
+            
+            <!-- Blocco Esercizi Visti in Aula -->
+            <div class="content-block esercizi" onclick="window.open('esaula.html', '_blank')">
+                <h3>✍️ ESERCIZI VISTI IN AULA</h3>
+                <div class="block-content">
+                    <p>Raccolta degli esercizi svolti durante le lezioni in classe con i rispettivi materiali PDF.</p>
+                </div>
             </div>
             
             <!-- Blocco Prove di Maturità -->
@@ -205,33 +218,30 @@
             <!-- Blocco Modulo 2 -->
             <div class="content-block modulo2" onclick="window.open('modulo2-bilancio.html', '_blank')">
                 <h3> Modulo 2: Introduzione al Bilancio</h3>
-
-</div>
+            </div>
             
-<!-- Blocco Gioco Voci SP (Versione facile) -->
-<div class="content-block modulo2" onclick="window.open('giocosp.html', '_blank')">
-    <h3>🎮 Gioco: Voci Stato Patrimoniale (Versione facile) </h3>
-    <div class="block-content">
-        <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere dello Stato Patrimoniale.</p>
-    </div>
-
-
-</div>
+            <!-- Blocco Gioco Voci SP (Versione facile) -->
+            <div class="content-block modulo2" onclick="window.open('giocosp.html', '_blank')">
+                <h3>🎮 Gioco: Voci Stato Patrimoniale (Versione facile) </h3>
+                <div class="block-content">
+                    <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere dello Stato Patrimoniale.</p>
+                </div>
+            </div>
             
-<!-- Blocco Gioco Voci SP e CE -->
-<div class="content-block modulo2" onclick="window.open('cesp.html', '_blank')">
-    <h3>🎮 Gioco: Voci Stato Patrimoniale e Conto Economico</h3>
-    <div class="block-content">
-        <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere, distinguendo tra SP e CE.</p>
-    </div>
-</div>
+            <!-- Blocco Gioco Voci SP e CE -->
+            <div class="content-block modulo2" onclick="window.open('cesp.html', '_blank')">
+                <h3>🎮 Gioco: Voci Stato Patrimoniale e Conto Economico</h3>
+                <div class="block-content">
+                    <p>Metti alla prova la tua conoscenza del bilancio! Classifica correttamente le voci tra Dare e Avere, distinguendo tra SP e CE.</p>
+                </div>
+            </div>
 
             <!-- Blocco Modulo 3 -->
             <div class="content-block modulo2" onclick="window.open('rateirisconti.html', '_blank')">
                 <h3> Modulo 3: Ratei e risconti</h3>
-</div>
+            </div>
 
-                        <!-- Blocco Esercizi vari Ratei e Risconti -->
+            <!-- Blocco Esercizi vari Ratei e Risconti -->
             <div class="content-block modulo2" onclick="window.open('esrr.html', '_blank')">
                 <h3>✍️ Esercizi vari su Ratei e Risconti con Soluzioni</h3>
                 <div class="block-content">
@@ -239,8 +249,7 @@
                 </div>
             </div>
 
-            
-     <!-- Blocco Modulo 4 -->
+            <!-- Blocco Modulo 4 -->
             <div class="content-block modulo2" onclick="window.open('immobilizzazioni.html', '_blank')">
                 <h3> Modulo 4: Immobilizzazioni </h3>
             </div>
@@ -252,5 +261,4 @@
     </div>
 </body>
 </html>
-
 
