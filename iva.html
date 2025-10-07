@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'IVA - Imposta sul Valore Aggiunto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .requisiti {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .requisito {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .requisito h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .aliquote {
+            margin: 20px 0;
+        }
+        
+        .aliquota-box {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .aliquota-box strong {
+            color: #764ba2;
+            font-size: 1.3em;
+        }
+        
+        .formula {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .esempio {
+            background: #fff5e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #ff9800;
+        }
+        
+        .operazioni {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .operazione {
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .imponibile {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .non-imponibile {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .esente {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+        }
+        
+        .liquidazione-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .liquidazione-box h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .registro-box {
+            background: #e8eaf6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #5c6bc0;
+        }
+        
+        .timeline {
+            background: #fff;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .scadenza {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 5px solid #f44336;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IVA</h1>
+        <p class="subtitle">Imposta sul Valore Aggiunto</p>
+        
+        
+        <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+            <a href="rispostaIVA.html" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                📝 ESEMPIO RISPOSTA PERFETTA
+            </a>
+            <a href="mappaiva.pdf" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                🗺️ ESEMPIO MAPPA CONCETTUALE 
+            </a>
+        </div>
+        
+        <h2>Cos'è l'IVA?</h2>
+        <p>
+            L'IVA (Imposta sul Valore Aggiunto) è un'imposta indiretta sui consumi, introdotta in Italia nel 1973. 
+            Si applica sulle cessioni di beni e sulle prestazioni di servizi effettuate nel territorio dello Stato 
+            nell'esercizio di imprese, arti e professioni.
+        </p>
+        
+        <div class="highlight">
+            <strong>In sintesi:</strong> L'IVA colpisce il consumo di beni e servizi e viene pagata dal consumatore finale, 
+            mentre le imprese fungono da "esattori" per conto dello Stato.
+        </div>
+        
+        <h2>Il Valore Aggiunto</h2>
+        <p>
+            Il <strong>valore aggiunto</strong> è l'incremento di valore che un bene o servizio acquista in ogni fase 
+            del processo produttivo e distributivo. In pratica, è la differenza tra il valore dei beni/servizi prodotti 
+            e il costo dei beni/servizi acquistati per produrli.
+        </p>
+        
+        <div class="esempio">
+            <strong>Esempio pratico:</strong><br>
+            Un falegname acquista legno per 100€ + IVA e produce un tavolo che vende a 300€. Il valore aggiunto è 200€, 
+            e l'IVA si applica proprio su questa "aggiunta di valore" creata dal suo lavoro.
+        </div>
+        
+        <h2>Caratteristiche dell'IVA</h2>
+        
+        <h3>È un'imposta proporzionale</h3>
+        <p>
+            L'IVA è <strong>proporzionale</strong> perché si applica con un'aliquota percentuale fissa sul valore del 
+            bene o servizio. Questo significa che l'importo dell'imposta aumenta in proporzione al valore del bene: 
+            chi compra un prodotto da 100€ paga 22€ di IVA, chi compra un prodotto da 1.000€ paga 220€ di IVA 
+            (con aliquota ordinaria al 22%).
+        </p>
+        
+        <h3>Grava sui consumatori finali</h3>
+        <p>
+            Anche se formalmente l'IVA viene versata allo Stato dalle imprese e dai professionisti, 
+            <strong>l'onere economico finale ricade sui consumatori</strong>. Le imprese applicano l'IVA sulle vendite 
+            (IVA a debito) ma possono detrarre l'IVA pagata sugli acquisti (IVA a credito), versando allo Stato solo 
+            la differenza. Il consumatore finale, invece, non può detrarre l'IVA e quindi la sopporta interamente.
+        </p>
+        
+        <h2>I Tre Requisiti dell'IVA</h2>
+        <p>Perché un'operazione sia soggetta ad IVA, devono essere presenti contemporaneamente tre requisiti:</p>
+        
+        <div class="requisiti">
+            <div class="requisito">
+                <h4>1. Requisito Oggettivo</h4>
+                <p>Deve trattarsi di cessioni di beni o prestazioni di servizi</p>
+            </div>
+            <div class="requisito">
+                <h4>2. Requisito Soggettivo</h4>
+                <p>L'operazione deve essere effettuata da un soggetto che svolge abitualmente attività d'impresa o di lavoro autonomo</p>
+            </div>
+            <div class="requisito">
+                <h4>3. Requisito Territoriale</h4>
+                <p>L'operazione deve essere effettuata nel territorio dello Stato italiano</p>
+            </div>
+        </div>
+        
+        <h2>Le Aliquote IVA in Italia</h2>
+        <p>In Italia esistono diverse aliquote IVA a seconda della tipologia di beni o servizi:</p>
+        
+        <div class="aliquote">
+            <div class="aliquota-box">
+                <strong>22% - Aliquota Ordinaria</strong><br>
+                Si applica alla maggior parte dei beni e servizi (elettronica, abbigliamento, servizi professionali, ecc.)
+            </div>
+            
+            <div class="aliquota-box">
+                <strong>10% - Aliquota Ridotta</strong><br>
+per esempio per la fornitura di energia elettrica e del gas per usi domestici, i medicinali, gli interventi di recupero del patrimonio edilizio per specifici beni e servizi.            
+            </div>
+            
+            <div class="aliquota-box">
+                <strong>5% - Aliquota Ridotta Minima</strong><br> 
+per esempio per alcuni alimenti            
+            </div>
+            
+            <div class="aliquota-box">
+                <strong>4% - Aliquota Minima</strong><br>  
+per esempio per alimentari, bevande e prodotti agricoli            
+            </div>
+        </div>
+        
+        <h2>Tipologie di Operazioni</h2>
+        
+        <div class="operazioni">
+            <div class="operazione imponibile">
+                <h3>Operazioni Imponibili</h3>
+                <p>
+                    Sono le operazioni che soddisfano tutti e tre i requisiti dell'IVA e su cui si applica normalmente 
+                    l'imposta. L'IVA viene calcolata e addebitata al cliente, che la paga insieme al prezzo del bene/servizio.
+                </p>
+                <strong>Esempio:</strong> Vendita di un computer, prestazione di un servizio di consulenza
+            </div>
+            
+             <div class="operazione non-imponibile">
+                <h3>Operazioni Non Imponibili</h3>
+                <p>
+                    Sono operazioni che <strong>rientrano nel campo di applicazione dell'IVA</strong> e soddisfano i requisiti 
+                    oggettivo e soggettivo, ma <strong>mancano del requisito della territorialità</strong>. Per questo motivo, 
+                    pur non essendo assoggettate al tributo, sono comunque soggette agli obblighi di fatturazione e registrazione.
+                </p>
+                <p>
+                    <strong>Caratteristiche fondamentali:</strong>
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Concorrono alla formazione del volume d'affari</strong> (escluse le cessioni di beni ammortizzabili)</li>
+                    <li><strong>Mantengono il diritto alla detrazione IVA</strong>: il venditore può recuperare l'IVA pagata "a monte" 
+                    su acquisti e spese relative a queste operazioni</li>
+                    <li><strong>Si emette fattura senza IVA</strong>, indicando la norma di riferimento</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Tipologie di operazioni non imponibili:</strong>
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Cessioni all'esportazione</strong> (vendite verso paesi extra-UE)</li>
+                    <li><strong>Cessioni intracomunitarie</strong> (vendite verso altri paesi UE)</li>
+                    <li><strong>Servizi internazionali</strong> o connessi agli scambi internazionali</li>
+                    <li><strong>Operazioni con Città del Vaticano e San Marino</strong></li>
+                    <li><strong>Operazioni effettuate in base a trattati internazionali</strong></li>
+                    <li>Operazioni assimilate alle esportazioni</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Esempio:</strong> Un'azienda italiana vende macchinari a un cliente negli USA per 10.000€. 
+                    Emette fattura senza IVA (operazione non imponibile art. 8 DPR 633/72), ma può detrarre l'IVA pagata 
+                    per l'acquisto dei materiali e delle spese sostenute per produrre quei macchinari.
+                </p>
+            </div>
+
+            <div class="operazione esente">
+                <h3>Operazioni Esenti</h3>
+                <p>
+                    Sono operazioni che, pur soddisfacendo i requisiti, sono escluse dall'applicazione dell'IVA per 
+                    ragioni di interesse pubblico. Il venditore emette fattura senza IVA ma NON può detrarre l'IVA 
+                    sugli acquisti relativi a queste operazioni.
+                </p>
+                <strong>Esempio:</strong> Prestazioni sanitarie, attività educative, operazioni bancarie e assicurative
+            </div>
+        </div>
+        
+        <h2>I Registri IVA</h2>
+        
+        <div class="registro-box">
+            <h3>Cosa sono i Registri IVA?</h3>
+            <p>
+                I <strong>registri IVA</strong> sono documenti contabili obbligatori in cui devono essere annotate 
+                cronologicamente tutte le operazioni rilevanti ai fini IVA. Questi registri sono fondamentali per 
+                determinare l'IVA da versare o da ricevere a credito e per permettere all'Agenzia delle Entrate di 
+                verificare la corretta applicazione dell'imposta.
+            </p>
+        </div>
+        
+        <h3>I principali registri IVA sono:</h3>
+        
+        <div class="timeline">
+            <h4>📗 Registro delle Fatture Emesse (o Registro delle Vendite)</h4>
+            <p>
+                Contiene tutte le fatture emesse dall'impresa o dal professionista. Qui si registra l'<strong>IVA a debito</strong>, 
+                cioè l'IVA che il soggetto ha incassato dai clienti e che dovrà versare allo Stato.
+            </p>
+        </div>
+        
+        <div class="timeline">
+            <h4>📕 Registro delle Fatture Ricevute (o Registro degli Acquisti)</h4>
+            <p>
+                Contiene tutte le fatture di acquisto ricevute da fornitori. Qui si registra l'<strong>IVA a credito</strong>, 
+                cioè l'IVA che il soggetto ha pagato sugli acquisti e che può detrarre dall'IVA a debito.
+            </p>
+        </div>
+        
+        <div class="timeline">
+            <h4>📘 Registro dei Corrispettivi</h4>
+            <p>
+                Utilizzato dai commercianti al minuto per registrare le vendite al dettaglio effettuate senza emissione 
+                di fattura (es. negozi, bar, ristoranti). Con la fatturazione elettronica e i registratori telematici, 
+                questo registro è stato in gran parte sostituito dai sistemi digitali.
+            </p>
+        </div>
+        
+        <h2>Quando Registrare le Fatture</h2>
+        
+        <div class="highlight">
+            <strong>Principio generale:</strong> Le fatture devono essere registrate nei registri IVA rispettando 
+            precise tempistiche stabilite dalla legge per garantire la corretta determinazione dell'imposta.
+        </div>
+        
+        <h3>📗 Fatture Emesse (Vendite)</h3>
+        <div class="scadenza">
+            <strong>Termine di registrazione:</strong><br>
+            Le fatture emesse devono essere registrate nel registro delle vendite entro <strong> il 15° giorno del mese successivo</strong> 
+            dalla data di emissione.
+            <br><br>
+            <strong>Data da registrare:</strong><br>
+            La data di registrazione deve corrispondere alla <strong>data di emissione della fattura</strong>. 
+            Questa data determina in quale periodo (mese o trimestre) la fattura rileva ai fini della liquidazione IVA.
+            <br><br>
+            <strong>Importante:</strong> Anche se la registrazione materiale avviene dopo, 
+            la fattura si considera sempre nel periodo di emissione. Se emetto una fattura il 28 gennaio e la 
+            registro il 5 febbraio, la data di registrazione sarà comunque 28 gennaio e la fattura rileverà 
+            nella liquidazione di gennaio.
+        </div>
+        
+        <h3>📕 Fatture Ricevute (Acquisti)</h3>
+        <div class="scadenza">
+            <strong>Termine di registrazione:</strong><br>
+            Le fatture di acquisto devono essere registrate entro il giorno <strong>15 del mese successivo</strong> 
+            a quello di ricevimento del documento.
+            <br><br>
+            <strong>Data da registrare:</strong><br>
+            La data di registrazione corrisponde alla <strong>data di ricezione della fattura</strong> 
+            (la data in cui arriva il documento, fisicamente o tramite Sistema di Interscambio per le fatture elettroniche). 
+            <br><br>
+            <strong>Importante - Scelta del periodo di competenza IVA:</strong><br>
+            Anche se registri la fattura con la data di ricezione, <strong>puoi scegliere</strong> in quale periodo 
+            far rilevare l'IVA ai fini della liquidazione:
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Nel mese di ricezione</strong> (quello in cui effettivamente ti arriva)</li>
+                <li><strong>Nel mese di emissione</strong> (il mese indicato sulla fattura dal fornitore), 
+                purché tu la riceva e registri entro il giorno 15 del mese successivo all'emissione</li>
+            </ul>
+            <br>
+            <strong>Esempio pratico:</strong> Fattura emessa dal fornitore il 28 marzo, ricevuta il 3 aprile.
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Registro la fattura il 3 aprile (data di registrazione = 3 aprile)</li>
+                <li><strong>Opzione A:</strong> Indico che l'IVA è detraibile nella liquidazione di <strong>aprile</strong></li>
+                <li><strong>Opzione B:</strong> Indico che l'IVA è detraibile nella liquidazione di <strong>marzo</strong> 
+                (purché la registri entro il 15 aprile)</li>
+            </ul>
+            Questa flessibilità ti permette di gestire strategicamente la liquidazione IVA, anticipando le detrazioni 
+            quando conviene al tuo flusso di cassa.
+        </div>
+        
+        <h2>La Liquidazione IVA</h2>
+        
+        <p>
+            La <strong>liquidazione IVA</strong> è il procedimento attraverso il quale si calcola l'IVA da versare 
+            allo Stato (o il credito IVA) per un determinato periodo. Si effettua confrontando l'IVA a debito 
+            (incassata dalle vendite) con l'IVA a credito (pagata sugli acquisti).
+        </p>
+        
+        <div class="formula">
+            IVA da versare = IVA a Debito - IVA a Credito
+        </div>
+        
+        <h3>Periodicità della Liquidazione IVA</h3>
+        
+        <div class="liquidazione-box">
+            <h4>📅 Liquidazione Mensile</h4>
+            <p>
+                Per i contribuenti che hanno registrato un volume d'affari superiore a 500.000€ (per le prestazioni 
+                di servizi) o 800.000€ (per altre attività) nell'anno precedente.
+                <br><br>
+                <strong>Scadenza:</strong> Entro il giorno <strong>16 di ogni mese</strong> per il mese precedente
+                <br>
+                <strong>Esempio:</strong> La liquidazione IVA di gennaio va versata entro il 16 febbraio
+            </p>
+        </div>
+        
+        <div class="liquidazione-box">
+            <h4>📅 Liquidazione Trimestrale</h4>
+            <p>
+                Per i contribuenti che non superano le soglie sopra indicate, con applicazione di interessi dell'1% 
+                sull'importo da versare.
+                <br><br>
+                <strong>Scadenze trimestrali:</strong>
+            </p>
+            <ul style="text-align: left; margin-top: 10px;">
+                <li><strong>1° trimestre</strong> (gennaio-marzo): versamento entro il 16 maggio</li>
+                <li><strong>2° trimestre</strong> (aprile-giugno): versamento entro il 16 agosto</li>
+                <li><strong>3° trimestre</strong> (luglio-settembre): versamento entro il 16 novembre</li>
+                <li><strong>4° trimestre</strong> (ottobre-dicembre): versamento entro il 16 febbraio dell'anno successivo</li>
+            </ul>
+        </div>
+        
+        <h3>Come si effettua la liquidazione</h3>
+        <div class="timeline">
+            <strong>Passaggio 1:</strong> Si sommano tutte le fatture emesse (IVA a debito) del periodo<br>
+            <strong>Passaggio 2:</strong> Si sommano tutte le fatture ricevute (IVA a credito) del periodo<br>
+            <strong>Passaggio 3:</strong> Si calcola la differenza (IVA a debito - IVA a credito)<br>
+            <strong>Passaggio 4:</strong> Se positivo, si versa allo Stato; se negativo, si ha un credito IVA da riportare
+        </div>
+        
+        <div class="esempio">
+            <strong>Esempio di liquidazione mensile (gennaio):</strong><br>
+            IVA a debito (fatture emesse): 5.000€<br>
+            IVA a credito (fatture ricevute): 3.200€<br>
+            IVA da versare: 5.000€ - 3.200€ = 1.800€<br>
+            <strong>Scadenza versamento:</strong> 16 febbraio
+        </div>
+        
+        <h2>Formule di Calcolo IVA</h2>
+        
+        <h3>Da Base Imponibile a Importo Totale (con IVA al 22%)</h3>
+        <div class="formula">
+            Totale = Base Imponibile × 1,22
+        </div>
+        <div class="esempio">
+            <strong>Esempio:</strong> Base imponibile 100€<br>
+            Totale con IVA = 100€ × 1,22 = 122€
+        </div>
+        
+        <h3>Calcolo solo dell'IVA (al 22%)</h3>
+        <div class="formula">
+            IVA = Base Imponibile × 0,22
+        </div>
+        <div class="esempio">
+            <strong>Esempio:</strong> Base imponibile 100€<br>
+            IVA = 100€ × 0,22 = 22€
+        </div>
+       
+        
+        <div class="highlight" style="margin-top: 30px;">
+            <strong>Nota bene:</strong> Per aliquote diverse dal 22%, sostituisci 1,22 con il corrispondente moltiplicatore:
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li>Aliquota 4%: usa 1,04</li>
+                <li>Aliquota 5%: usa 1,05</li>
+                <li>Aliquota 10%: usa 1,10</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
