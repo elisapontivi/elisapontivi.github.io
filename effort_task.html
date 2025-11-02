@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cognitivo Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .instructions h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .instructions p {
+            margin-bottom: 10px;
+        }
+
+        .key-hint {
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .crt-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .crt-question h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .crt-question p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .crt-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .crt-input:focus {
+            outline: none;
+            border-color: #5568d3;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .stimulus-area {
+            position: relative;
+            height: 200px;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        .center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ccc;
+            z-index: 1;
+        }
+
+        .stimulus {
+            font-size: 48px;
+            font-weight: bold;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .phase-indicator {
+            text-align: center;
+            font-size: 18px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .input-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .response-input {
+            font-size: 20px;
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        .response-input:focus {
+            outline: none;
+            border-color: #5568d3;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .results {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .results h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .result-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress {
+            text-align: center;
+            color: #666;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .phase-transition {
+            background: #667eea;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .phase-transition h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .phase-transition p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Test Cognitivo Completo</h1>
+        
+        <!-- Schermata CRT -->
+        <div id="crtScreen">
+            <div class="instructions">
+                <h2>📋 Test di Riflessione Cognitiva (CRT)</h2>
+                <p>Rispondi alle seguenti tre domande. Prenditi il tempo necessario per pensare.</p>
+            </div>
+
+            <div class="crt-question">
+                <h3>Domanda 1:</h3>
+                <p>Una mazza da baseball e una palla costano insieme 1,10€. La mazza costa 1€ in più della palla. Quanto costa la palla?</p>
+                <input type="text" class="crt-input" id="crt1" placeholder="Inserisci la tua risposta (in centesimi)">
+            </div>
+
+            <div class="crt-question">
+                <h3>Domanda 2:</h3>
+                <p>Se 5 macchine impiegano 5 minuti per produrre 5 oggetti, quanto tempo impiegheranno 100 macchine per produrre 100 oggetti?</p>
+                <input type="text" class="crt-input" id="crt2" placeholder="Inserisci la tua risposta (solo numero in minuti)">
+            </div>
+
+            <div class="crt-question">
+                <h3>Domanda 3:</h3>
+                <p>In un lago, le ninfee raddoppiano la superficie coperta ogni giorno. Se impiegano 48 giorni per coprire l'intero lago, quanti giorni impiegano per coprirne la metà?</p>
+                <input type="text" class="crt-input" id="crt3" placeholder="Inserisci la tua risposta (solo numero in giorni)">
+            </div>
+
+            <div class="controls">
+                <button class="btn-primary" onclick="submitCRT()">Continua al Task Principale</button>
+            </div>
+        </div>
+
+        <!-- Schermata Istruzioni Task -->
+        <div id="instructionsScreen" class="hidden">
+            <div class="instructions">
+                <h2>📋 Istruzioni:</h2>
+                <p><strong>Fase 1 - maiuscolo/minuscolo:</strong></p>
+                <p>Scrivi <span class="key-hint">maiuscolo</span> se la parola è in maiuscolo</p>
+                <p>Scrivi <span class="key-hint">minuscolo</span> se la parola è in minuscolo</p>
+                
+                <p style="margin-top: 15px;"><strong>Fase 2 - destra/sinistra:</strong></p>
+                <p>Scrivi <span class="key-hint">sinistra</span> se la parola è a sinistra del centro</p>
+                <p>Scrivi <span class="key-hint">destra</span> se la parola è a destra del centro</p>
+                
+                <p style="margin-top: 15px; color: #666;">💡 Premi INVIO dopo aver scritto la risposta</p>
+                <p style="color: #666;">ℹ️ Non importa se scrivi in maiuscolo o minuscolo</p>
+            </div>
+
+            <div class="controls">
+                <button class="btn-primary" onclick="startTask()">Inizia il Task</button>
+            </div>
+        </div>
+
+        <!-- Schermata Transizione Fase -->
+        <div id="phaseTransitionScreen" class="hidden">
+            <div class="phase-transition">
+                <h2>✅ Fase 1 Completata!</h2>
+                <p>Ottimo lavoro! Hai completato la prima fase.</p>
+                <p style="margin-top: 15px;">Ora passiamo alla <strong>Fase 2</strong>: dovrai indicare se la parola è a <strong>sinistra</strong> o a <strong>destra</strong> del centro.</p>
+            </div>
+            <div class="controls">
+                <button class="btn-primary" onclick="startPhase2()">Inizia Fase 2</button>
+            </div>
+        </div>
+
+        <!-- Schermata Task -->
+        <div id="taskScreen" class="hidden">
+            <div class="phase-indicator" id="phaseIndicator"></div>
+            <div class="progress" id="progress"></div>
+            
+            <div class="stimulus-area">
+                <div class="center-line"></div>
+                <div class="stimulus" id="stimulus"></div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" 
+                       class="response-input" 
+                       id="responseInput" 
+                       placeholder="Scrivi qui la tua risposta..."
+                       autocomplete="off">
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="controls">
+                <button class="btn-secondary" onclick="resetTask()">Ricomincia</button>
+            </div>
+        </div>
+
+        <!-- Schermata Risultati -->
+        <div id="resultsScreen" class="hidden">
+            <div class="results">
+                <h2>📊 Risultati</h2>
+                <div id="resultsContent"></div>
+            </div>
+            <div class="controls">
+                <button class="btn-primary" onclick="resetTask()">Rifai il Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Stimoli organizzati come nell'immagine originale
+        // Prima metà: parole sulla POSIZIONE (sinistra/destra)
+        // Seconda metà: parole sul CASE (maiuscolo/minuscolo)
+        const stimuli = [
+            // Prime 8: parole sinistra/destra in varie forme e posizioni
+            { word: 'SINISTRA', position: 'left' },
+            { word: 'sinistra', position: 'left' },
+            { word: 'destra', position: 'left' },
+            { word: 'DESTRA', position: 'left' },
+            { word: 'DESTRA', position: 'right' },
+            { word: 'sinistra', position: 'right' },
+            { word: 'SINISTRA', position: 'left' },
+            { word: 'destra', position: 'right' },
+            
+            // Seconde 8: parole maiuscolo/minuscolo in varie forme e posizioni
+            { word: 'maiuscolo', position: 'right' },
+            { word: 'minuscolo', position: 'right' },
+            { word: 'MINUSCOLO', position: 'right' },
+            { word: 'maiuscolo', position: 'right' },
+            { word: 'MAIUSCOLO', position: 'right' },
+            { word: 'minuscolo', position: 'right' },
+            { word: 'MINUSCOLO', position: 'left' },
+            { word: 'maiuscolo', position: 'left' }
+        ];
+
+        let currentIndex = 0;
+        let phase = 1; // 1 = case, 2 = position
+        let results = [];
+        let startTime;
+        let crtAnswers = {};
+
+        function submitCRT() {
+            // Salva le risposte CRT
+            crtAnswers = {
+                q1: document.getElementById('crt1').value.trim(),
+                q2: document.getElementById('crt2').value.trim(),
+                q3: document.getElementById('crt3').value.trim()
+            };
+
+            // Passa alla schermata istruzioni
+            document.getElementById('crtScreen').classList.add('hidden');
+            document.getElementById('instructionsScreen').classList.remove('hidden');
+        }
+
+        function startTask() {
+            document.getElementById('instructionsScreen').classList.add('hidden');
+            document.getElementById('taskScreen').classList.remove('hidden');
+            currentIndex = 0;
+            phase = 1;
+            results = [];
+            showStimulus();
+        }
+
+        function startPhase2() {
+            document.getElementById('phaseTransitionScreen').classList.add('hidden');
+            document.getElementById('taskScreen').classList.remove('hidden');
+            showStimulus();
+        }
+
+        function showStimulus() {
+            if (currentIndex >= stimuli.length) {
+                if (phase === 1) {
+                    // Mostra schermata di transizione
+                    document.getElementById('taskScreen').classList.add('hidden');
+                    document.getElementById('phaseTransitionScreen').classList.remove('hidden');
+                    phase = 2;
+                    currentIndex = 0;
+                } else {
+                    // Fine del task
+                    showResults();
+                }
+                return;
+            }
+
+            const stimulus = stimuli[currentIndex];
+            const stimulusEl = document.getElementById('stimulus');
+            
+            // Mostra la parola
+            stimulusEl.textContent = stimulus.word;
+            
+            // Posiziona la parola
+            const positions = {
+                'left': '25%',
+                'right': '75%'
+            };
+            stimulusEl.style.left = positions[stimulus.position];
+            stimulusEl.style.transform = 'translateX(-50%)';
+
+            // Aggiorna indicatore fase
+            const phaseText = phase === 1 ? 
+                '📝 FASE 1: Scrivi "maiuscolo" o "minuscolo"' : 
+                '📍 FASE 2: Scrivi "sinistra" o "destra"';
+            document.getElementById('phaseIndicator').textContent = phaseText;
+
+            // Aggiorna progresso
+            document.getElementById('progress').textContent = 
+                `Stimolo ${currentIndex + 1} di ${stimuli.length} - Fase ${phase}/2`;
+
+            // Nascondi feedback e pulisci input
+            document.getElementById('feedback').style.display = 'none';
+            const inputEl = document.getElementById('responseInput');
+            inputEl.value = '';
+            inputEl.focus();
+
+            startTime = Date.now();
+        }
+
+        function submitResponse() {
+            const inputEl = document.getElementById('responseInput');
+            const userInput = inputEl.value.trim();
+
+            if (userInput === '') return;
+
+            const reactionTime = Date.now() - startTime;
+            const stimulus = stimuli[currentIndex];
+            
+            let correct = false;
+            let correctAnswer = '';
+            let userResponse = userInput;
+
+            if (phase === 1) {
+                // Fase maiuscolo/minuscolo - confronto case-insensitive
+                const isUpperCase = stimulus.word === stimulus.word.toUpperCase();
+                correctAnswer = isUpperCase ? 'maiuscolo' : 'minuscolo';
+                
+                const normalizedInput = userInput.toUpperCase();
+                if (normalizedInput === 'MAIUSCOLO') {
+                    correct = isUpperCase;
+                } else if (normalizedInput === 'MINUSCOLO') {
+                    correct = !isUpperCase;
+                } else {
+                    correct = false;
+                }
+            } else {
+                // Fase posizione - confronto case-insensitive
+                correctAnswer = stimulus.position === 'left' ? 'sinistra' : 'destra';
+                
+                const normalizedInput = userInput.toUpperCase();
+                if (normalizedInput === 'SINISTRA') {
+                    correct = stimulus.position === 'left';
+                } else if (normalizedInput === 'DESTRA') {
+                    correct = stimulus.position === 'right';
+                } else {
+                    correct = false;
+                }
+            }
+
+            results.push({
+                phase: phase,
+                stimulus: stimulus.word,
+                position: stimulus.position,
+                userResponse: userResponse,
+                correct: correct,
+                reactionTime: reactionTime
+            });
+
+            // Mostra feedback
+            const feedbackEl = document.getElementById('feedback');
+            feedbackEl.style.display = 'block';
+            if (correct) {
+                feedbackEl.className = 'feedback correct';
+                feedbackEl.textContent = '✓ Corretto!';
+            } else {
+                feedbackEl.className = 'feedback incorrect';
+                feedbackEl.textContent = `✗ Risposta corretta: ${correctAnswer}`;
+            }
+
+            // Prossimo stimolo dopo un breve delay
+            setTimeout(() => {
+                currentIndex++;
+                showStimulus();
+            }, 1000);
+        }
+
+        function showResults() {
+            document.getElementById('taskScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const phase1Results = results.filter(r => r.phase === 1);
+            const phase2Results = results.filter(r => r.phase === 2);
+
+            const phase1Correct = phase1Results.filter(r => r.correct).length;
+            const phase2Correct = phase2Results.filter(r => r.correct).length;
+
+            const avgRT1 = phase1Results.length > 0 ? 
+                phase1Results.reduce((sum, r) => sum + r.reactionTime, 0) / phase1Results.length : 0;
+            const avgRT2 = phase2Results.length > 0 ?
+                phase2Results.reduce((sum, r) => sum + r.reactionTime, 0) / phase2Results.length : 0;
+
+            const resultsHTML = `
+                <div class="result-item">
+                    <strong>CRT - Risposte:</strong><br>
+                    Domanda 1: ${crtAnswers.q1} (corretta: 0,05€ o 5 centesimi)<br>
+                    Domanda 2: ${crtAnswers.q2} (corretta: 5 minuti)<br>
+                    Domanda 3: ${crtAnswers.q3} (corretta: 47 giorni)
+                </div>
+                <div class="result-item">
+                    <strong>Fase 1 (maiuscolo/minuscolo):</strong><br>
+                    Corrette: ${phase1Correct}/${phase1Results.length} 
+                    (${phase1Results.length > 0 ? ((phase1Correct/phase1Results.length)*100).toFixed(1) : 0}%)<br>
+                    Tempo medio di reazione: ${avgRT1.toFixed(0)} ms
+                </div>
+                <div class="result-item">
+                    <strong>Fase 2 (sinistra/destra):</strong><br>
+                    Corrette: ${phase2Correct}/${phase2Results.length} 
+                    (${phase2Results.length > 0 ? ((phase2Correct/phase2Results.length)*100).toFixed(1) : 0}%)<br>
+                    Tempo medio di reazione: ${avgRT2.toFixed(0)} ms
+                </div>
+                <div class="result-item">
+                    <strong>Totale Task:</strong><br>
+                    Corrette: ${phase1Correct + phase2Correct}/${results.length} 
+                    (${results.length > 0 ? (((phase1Correct + phase2Correct)/results.length)*100).toFixed(1) : 0}%)
+                </div>
+            `;
+
+            document.getElementById('resultsContent').innerHTML = resultsHTML;
+        }
+
+        function resetTask() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('taskScreen').classList.add('hidden');
+            document.getElementById('phaseTransitionScreen').classList.add('hidden');
+            document.getElementById('instructionsScreen').classList.add('hidden');
+            document.getElementById('crtScreen').classList.remove('hidden');
+            
+            // Reset CRT inputs
+            document.getElementById('crt1').value = '';
+            document.getElementById('crt2').value = '';
+            document.getElementById('crt3').value = '';
+        }
+
+        // Gestione input da tastiera - INVIO per confermare
+        document.addEventListener('keydown', (event) => {
+            if (document.getElementById('taskScreen').classList.contains('hidden')) return;
+            
+            if (event.key === 'Enter') {
+                submitResponse();
+            }
+        });
+    </script>
+</body>
+</html>
