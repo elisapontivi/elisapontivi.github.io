@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Task - Esperimento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .screen {
+            display: none;
+            text-align: center;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #3498db;
+        }
+
+        .instructions {
+            background-color: #34495e;
+            padding: 30px;
+            border-radius: 10px;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .instructions p {
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .key-hint {
+            background-color: #2980b9;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .trial-screen {
+            height: 400px;
+            position: relative;
+            background-color: #34495e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .stimulus {
+            position: absolute;
+            font-size: 48px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stimulus.left {
+            left: 15%;
+        }
+
+        .stimulus.right {
+            right: 15%;
+        }
+
+        .fixation {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            color: white;
+        }
+
+        .feedback {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            color: #2ecc71;
+        }
+
+        .feedback.incorrect {
+            color: #e74c3c;
+        }
+
+        .progress {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        .results-table {
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #2c3e50;
+        }
+
+        th {
+            background-color: #2980b9;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2c3e50;
+        }
+
+        .summary {
+            background-color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            line-height: 2;
+        }
+
+        .highlight {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background-color: #2c3e50;
+            color: white;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Schermata Istruzioni -->
+        <div id="instructions-screen" class="screen active">
+            <h1>Simon Task - Esperimento sui Tempi di Reazione</h1>
+            <div class="instructions">
+                <h2>Istruzioni:</h2>
+                <p>In questo esperimento vedrai le parole <strong>SINISTRA</strong> o <strong>DESTRA</strong> apparire sullo schermo, a sinistra o a destra.</p>
+                
+                <p><strong>Il tuo compito è:</strong></p>
+                <ul>
+                    <li>Premere il tasto <span class="key-hint">A</span> quando vedi la parola <strong>SINISTRA</strong></li>
+                    <li>Premere il tasto <span class="key-hint">L</span> quando vedi la parola <strong>DESTRA</strong></li>
+                </ul>
+
+                <p><strong>Importante:</strong></p>
+                <ul>
+                    <li>Rispondi il più velocemente possibile, ma cerca di essere accurato</li>
+                    <li>La posizione della parola sullo schermo NON è importante - rispondi solo in base al significato della parola</li>
+                    <li>Prima farai alcune prove di pratica, poi l'esperimento vero e proprio</li>
+                    <li>Hai tutto il tempo che vuoi per rispondere</li>
+                </ul>
+
+                <p><strong>Condizioni:</strong></p>
+                <ul>
+                    <li><strong>Compatibile:</strong> La parola corrisponde alla sua posizione (es. SINISTRA a sinistra)</li>
+                    <li><strong>Incompatibile:</strong> La parola non corrisponde alla sua posizione (es. SINISTRA a destra)</li>
+                </ul>
+
+                <p>L'<strong>effetto Simon</strong> misura la differenza tra i tempi di reazione nelle condizioni incompatibili vs compatibili.</p>
+            </div>
+            <button onclick="startPractice()">Inizia Pratica</button>
+        </div>
+
+        <!-- Schermata Pratica -->
+        <div id="practice-screen" class="screen">
+            <h1>Prove di Pratica</h1>
+            <p style="margin-bottom: 20px;">Fai pratica per familiarizzare con il compito</p>
+            <div class="trial-screen" id="practice-trial"></div>
+            <div class="progress" id="practice-progress"></div>
+        </div>
+
+        <!-- Schermata Sperimentale -->
+        <div id="experiment-screen" class="screen">
+            <h1>Esperimento</h1>
+            <div class="trial-screen" id="experiment-trial"></div>
+            <div class="progress" id="experiment-progress"></div>
+        </div>
+
+        <!-- Schermata Risultati -->
+        <div id="results-screen" class="screen">
+            <h1>Risultati dell'Esperimento</h1>
+            
+            <div class="summary">
+                <h2>Riepilogo:</h2>
+                <p>Accuratezza totale: <span class="highlight" id="accuracy"></span></p>
+                <p>Tempo di reazione medio (prove compatibili): <span class="highlight" id="rt-compatible"></span> ms</p>
+                <p>Tempo di reazione medio (prove incompatibili): <span class="highlight" id="rt-incompatible"></span> ms</p>
+                <p><strong>Effetto Simon:</strong> <span class="highlight" id="simon-effect"></span> ms</p>
+            </div>
+
+            <div class="results-table">
+                <h3>Dati Dettagliati di Ogni Prova:</h3>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Prova</th>
+                            <th>Parola</th>
+                            <th>Posizione</th>
+                            <th>Condizione</th>
+                            <th>Risposta</th>
+                            <th>Corretto</th>
+                            <th>Tempo (ms)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+            </div>
+
+            <div class="results-table">
+                <h3>Copia i tuoi dati (CSV):</h3>
+                <textarea id="csv-data" readonly></textarea>
+                <button onclick="copyToClipboard()">Copia negli Appunti</button>
+                <button onclick="downloadCSV()">Scarica CSV</button>
+            </div>
+
+            <button onclick="restartExperiment()">Ripeti Esperimento</button>
+        </div>
+    </div>
+
+    <script>
+        // Configurazione esperimento
+        const config = {
+            practiceTrials: 8,
+            experimentTrials: 20,  // Ridotto a 20 prove
+            fixationDuration: 1000,  // Tempo croce fissazione (ms)
+            feedbackDuration: 1000,  // Tempo feedback (solo pratica) (ms)
+            interTrialInterval: 1000 // Pausa tra prove (ms)
+        };
+
+        // Variabili globali
+        let currentPhase = 'instructions';
+        let currentTrial = 0;
+        let trials = [];
+        let results = [];
+        let startTime = 0;
+        let responded = false;
+
+        // Genera trials bilanciati
+        function generateTrials(numTrials) {
+            const trialsArray = [];
+            const trialsPerCondition = numTrials / 4;
+
+            // 4 condizioni: SINISTRA-sinistra, SINISTRA-destra, DESTRA-sinistra, DESTRA-destra
+            for (let i = 0; i < trialsPerCondition; i++) {
+                trialsArray.push({ word: 'SINISTRA', position: 'left', compatible: true });
+                trialsArray.push({ word: 'SINISTRA', position: 'right', compatible: false });
+                trialsArray.push({ word: 'DESTRA', position: 'left', compatible: false });
+                trialsArray.push({ word: 'DESTRA', position: 'right', compatible: true });
+            }
+
+            // Randomizza
+            return trialsArray.sort(() => Math.random() - 0.5);
+        }
+
+        // Inizia pratica
+        function startPractice() {
+            currentPhase = 'practice';
+            currentTrial = 0;
+            trials = generateTrials(config.practiceTrials);
+            results = [];
+            
+            document.getElementById('instructions-screen').classList.remove('active');
+            document.getElementById('practice-screen').classList.add('active');
+            
+            setTimeout(() => runTrial(), 500);
+        }
+
+        // Inizia esperimento
+        function startExperiment() {
+            currentPhase = 'experiment';
+            currentTrial = 0;
+            trials = generateTrials(config.experimentTrials);
+            results = [];
+            
+            document.getElementById('practice-screen').classList.remove('active');
+            document.getElementById('experiment-screen').classList.add('active');
+            
+            setTimeout(() => runTrial(), 500);
+        }
+
+        // Esegui una prova
+        function runTrial() {
+            if (currentTrial >= trials.length) {
+                if (currentPhase === 'practice') {
+                    alert('Pratica completata! Ora inizierà l\'esperimento vero e proprio.');
+                    startExperiment();
+                } else {
+                    showResults();
+                }
+                return;
+            }
+
+            const trial = trials[currentTrial];
+            const trialContainer = currentPhase === 'practice' ? 
+                document.getElementById('practice-trial') : 
+                document.getElementById('experiment-trial');
+            const progressContainer = currentPhase === 'practice' ? 
+                document.getElementById('practice-progress') : 
+                document.getElementById('experiment-progress');
+
+            // Aggiorna progresso
+            progressContainer.textContent = `Prova ${currentTrial + 1} di ${trials.length}`;
+
+            // Reset
+            trialContainer.innerHTML = '';
+            responded = false;
+
+            // Fissazione
+            const fixation = document.createElement('div');
+            fixation.className = 'fixation';
+            fixation.textContent = '+';
+            trialContainer.appendChild(fixation);
+
+            setTimeout(() => {
+                trialContainer.innerHTML = '';
+
+                // Stimolo
+                const stimulus = document.createElement('div');
+                stimulus.className = `stimulus ${trial.position}`;
+                stimulus.textContent = trial.word;
+                trialContainer.appendChild(stimulus);
+
+                // Inizia misurazione
+                startTime = performance.now();
+                
+                // Nessun timeout - l'utente ha tutto il tempo che vuole
+
+            }, config.fixationDuration);
+        }
+
+        // Gestisci risposta
+        function handleResponse(key, trial) {
+            if (responded) return;
+            
+            responded = true;
+
+            const reactionTime = performance.now() - startTime;
+            const correctKey = trial.word === 'SINISTRA' ? 'a' : 'l';
+            const isCorrect = key === correctKey;
+
+            // Salva risultato
+            results.push({
+                trial: currentTrial + 1,
+                word: trial.word,
+                position: trial.position,
+                compatible: trial.compatible,
+                response: key,
+                correct: isCorrect,
+                rt: Math.round(reactionTime)
+            });
+
+            // Mostra feedback
+            const trialContainer = currentPhase === 'practice' ? 
+                document.getElementById('practice-trial') : 
+                document.getElementById('experiment-trial');
+            
+            if (currentPhase === 'practice') {
+                const feedback = document.createElement('div');
+                feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                feedback.textContent = isCorrect ? '✓ Corretto!' : '✗ Errore!';
+                trialContainer.appendChild(feedback);
+
+                setTimeout(() => {
+                    currentTrial++;
+                    setTimeout(() => runTrial(), config.interTrialInterval);
+                }, config.feedbackDuration);
+            } else {
+                currentTrial++;
+                setTimeout(() => runTrial(), config.interTrialInterval);
+            }
+        }
+
+        // Event listener per tastiera
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if ((currentPhase === 'practice' || currentPhase === 'experiment') && 
+                !responded && 
+                (key === 'a' || key === 'l')) {
+                const trial = trials[currentTrial];
+                handleResponse(key, trial);
+            }
+        });
+
+        // Mostra risultati
+        function showResults() {
+            document.getElementById('experiment-screen').classList.remove('active');
+            document.getElementById('results-screen').classList.add('active');
+
+            // Filtra solo risposte corrette per calcolo RT
+            const correctResults = results.filter(r => r.correct && r.rt !== null);
+            const compatibleRTs = correctResults.filter(r => r.compatible).map(r => r.rt);
+            const incompatibleRTs = correctResults.filter(r => !r.compatible).map(r => r.rt);
+
+            const meanCompatible = compatibleRTs.length > 0 ? 
+                Math.round(compatibleRTs.reduce((a, b) => a + b, 0) / compatibleRTs.length) : 0;
+            const meanIncompatible = incompatibleRTs.length > 0 ? 
+                Math.round(incompatibleRTs.reduce((a, b) => a + b, 0) / incompatibleRTs.length) : 0;
+            const simonEffect = meanIncompatible - meanCompatible;
+
+            const accuracy = Math.round((results.filter(r => r.correct).length / results.length) * 100);
+
+            // Aggiorna sommario
+            document.getElementById('accuracy').textContent = `${accuracy}%`;
+            document.getElementById('rt-compatible').textContent = meanCompatible;
+            document.getElementById('rt-incompatible').textContent = meanIncompatible;
+            document.getElementById('simon-effect').textContent = simonEffect;
+
+            // Crea tabella
+            const tbody = document.getElementById('results-body');
+            tbody.innerHTML = '';
+            
+            results.forEach(r => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = r.trial;
+                row.insertCell(1).textContent = r.word;
+                row.insertCell(2).textContent = r.position === 'left' ? 'Sinistra' : 'Destra';
+                row.insertCell(3).textContent = r.compatible ? 'Compatibile' : 'Incompatibile';
+                row.insertCell(4).textContent = r.response.toUpperCase();
+                row.insertCell(5).textContent = r.correct ? '✓' : '✗';
+                row.insertCell(6).textContent = r.rt;
+            });
+
+            // Genera CSV
+            let csv = 'Prova,Parola,Posizione,Condizione,Risposta,Corretto,Tempo_ms\n';
+            results.forEach(r => {
+                csv += `${r.trial},${r.word},${r.position},${r.compatible ? 'compatibile' : 'incompatibile'},${r.response},${r.correct ? 'si' : 'no'},${r.rt}\n`;
+            });
+            csv += `\nStatistiche:\n`;
+            csv += `Accuratezza,${accuracy}%\n`;
+            csv += `RT_medio_compatibile,${meanCompatible}\n`;
+            csv += `RT_medio_incompatibile,${meanIncompatible}\n`;
+            csv += `Effetto_Simon,${simonEffect}\n`;
+            
+            document.getElementById('csv-data').value = csv;
+        }
+
+        // Copia negli appunti
+        function copyToClipboard() {
+            const textarea = document.getElementById('csv-data');
+            textarea.select();
+            document.execCommand('copy');
+            alert('Dati copiati negli appunti!');
+        }
+
+        // Scarica CSV
+        function downloadCSV() {
+            const csv = document.getElementById('csv-data').value;
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `simon_task_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+        }
+
+        // Riavvia esperimento
+        function restartExperiment() {
+            currentPhase = 'instructions';
+            document.getElementById('results-screen').classList.remove('active');
+            document.getElementById('instructions-screen').classList.add('active');
+        }
+    </script>
+</body>
+</html>
