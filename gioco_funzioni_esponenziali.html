@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina la Funzione Esponenziale!</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .question {
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .option-btn {
+            padding: 20px;
+            font-size: 1.1em;
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .option-btn.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+            animation: pulse 0.5s;
+        }
+        
+        .option-btn.wrong {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+            animation: shake 0.5s;
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .next-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .next-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .next-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+        
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        .game-over {
+            text-align: center;
+            display: none;
+        }
+        
+        .game-over.show {
+            display: block;
+        }
+        
+        .game-over h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .final-score {
+            font-size: 3em;
+            color: #28a745;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .restart-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎮 Indovina la Funzione Esponenziale!</h1>
+        <p class="subtitle">Osserva il grafico e scegli la formula corretta</p>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Punteggio</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Domanda</div>
+                <div class="score-value"><span id="current-question">1</span>/<span id="total-questions">10</span></div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Corrette</div>
+                <div class="score-value" id="correct">0</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        
+        <div id="game-content">
+            <div class="chart-container">
+                <canvas id="functionChart"></canvas>
+            </div>
+            
+            <p class="question">Quale funzione rappresenta questo grafico?</p>
+            
+            <div class="options" id="options"></div>
+            
+            <div class="feedback" id="feedback"></div>
+            
+            <button class="next-btn" id="next-btn" disabled>Prossima Domanda →</button>
+        </div>
+        
+        <div class="game-over" id="game-over">
+            <h2>🎉 Gioco Completato!</h2>
+            <div class="final-score" id="final-score"></div>
+            <p style="font-size: 1.2em; color: #666; margin-bottom: 20px;">
+                Hai risposto correttamente a <span id="final-correct"></span> domande su <span id="final-total"></span>!
+            </p>
+            <button class="restart-btn" onclick="location.reload()">🔄 Gioca Ancora</button>
+        </div>
+    </div>
+
+    <script>
+        // Definizione delle funzioni esponenziali
+        const functions = [
+            {
+                formula: "f(x) = 2^x",
+                display: "f(x) = 2ˣ",
+                func: x => Math.pow(2, x),
+                wrongOptions: ["f(x) = 3ˣ", "f(x) = 2ˣ + 1", "f(x) = 2^(x-1)"]
+            },
+            {
+                formula: "f(x) = 3^x",
+                display: "f(x) = 3ˣ",
+                func: x => Math.pow(3, x),
+                wrongOptions: ["f(x) = 2ˣ", "f(x) = 3ˣ + 1", "f(x) = 3^(x+1)"]
+            },
+            {
+                formula: "f(x) = (1/2)^x",
+                display: "f(x) = (1/2)ˣ",
+                func: x => Math.pow(0.5, x),
+                wrongOptions: ["f(x) = (1/3)ˣ", "f(x) = -2ˣ", "f(x) = (1/2)^(x-1)"]
+            },
+            {
+                formula: "f(x) = 2^x + 1",
+                display: "f(x) = 2ˣ + 1",
+                func: x => Math.pow(2, x) + 1,
+                wrongOptions: ["f(x) = 2ˣ + 2", "f(x) = 2^(x+1)", "f(x) = 2ˣ"]
+            },
+            {
+                formula: "f(x) = 2^x + 2",
+                display: "f(x) = 2ˣ + 2",
+                func: x => Math.pow(2, x) + 2,
+                wrongOptions: ["f(x) = 2ˣ + 1", "f(x) = 3 · 2ˣ", "f(x) = 2ˣ + 3"]
+            },
+            {
+                formula: "f(x) = 2^x - 1",
+                display: "f(x) = 2ˣ - 1",
+                func: x => Math.pow(2, x) - 1,
+                wrongOptions: ["f(x) = 2ˣ", "f(x) = 2ˣ - 2", "f(x) = 2^(x-1)"]
+            },
+            {
+                formula: "f(x) = 2^(x-1)",
+                display: "f(x) = 2^(x-1)",
+                func: x => Math.pow(2, x - 1),
+                wrongOptions: ["f(x) = 2ˣ", "f(x) = 2^(x+1)", "f(x) = 2ˣ - 1"]
+            },
+            {
+                formula: "f(x) = 2^(x+1)",
+                display: "f(x) = 2^(x+1)",
+                func: x => Math.pow(2, x + 1),
+                wrongOptions: ["f(x) = 2ˣ", "f(x) = 2^(x-1)", "f(x) = 2ˣ + 1"]
+            },
+            {
+                formula: "f(x) = -2^x",
+                display: "f(x) = -2ˣ",
+                func: x => -Math.pow(2, x),
+                wrongOptions: ["f(x) = 2ˣ", "f(x) = -(1/2)ˣ", "f(x) = 2ˣ - 1"]
+            },
+            {
+                formula: "f(x) = (1/2)^x + 1",
+                display: "f(x) = (1/2)ˣ + 1",
+                func: x => Math.pow(0.5, x) + 1,
+                wrongOptions: ["f(x) = (1/2)ˣ", "f(x) = (1/2)ˣ + 2", "f(x) = (1/2)^(x+1)"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        const totalQuestions = 10;
+        let chart = null;
+        let currentFunction = null;
+        let answered = false;
+
+        // Shuffle array
+        function shuffle(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Inizializza il gioco
+        function initGame() {
+            loadQuestion();
+        }
+
+        // Carica una nuova domanda
+        function loadQuestion() {
+            if (currentQuestion >= totalQuestions) {
+                endGame();
+                return;
+            }
+
+            answered = false;
+            document.getElementById('next-btn').disabled = true;
+            document.getElementById('feedback').classList.remove('show');
+
+            // Seleziona una funzione casuale
+            currentFunction = functions[Math.floor(Math.random() * functions.length)];
+
+            // Crea il grafico
+            createChart(currentFunction);
+
+            // Crea le opzioni
+            createOptions(currentFunction);
+
+            // Aggiorna UI
+            updateUI();
+        }
+
+        // Crea il grafico
+        function createChart(func) {
+            const ctx = document.getElementById('functionChart').getContext('2d');
+
+            // Genera i dati
+            const xValues = [];
+            const yValues = [];
+            for (let x = -2; x <= 2; x += 0.1) {
+                xValues.push(x);
+                yValues.push(func.func(x));
+            }
+
+            // Distruggi il grafico precedente se esiste
+            if (chart) {
+                chart.destroy();
+            }
+
+            // Crea nuovo grafico
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'f(x)',
+                        data: yValues,
+                        borderColor: '#ff9500',
+                        backgroundColor: 'rgba(255, 149, 0, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'x',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#000'
+                            },
+                            ticks: {
+                                color: '#000',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)',
+                                drawBorder: true,
+                                borderColor: '#000',
+                                borderWidth: 3,
+                                lineWidth: function(context) {
+                                    return context.tick.value === 0 ? 3 : 1;
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'y',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#000'
+                            },
+                            ticks: {
+                                color: '#000',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)',
+                                drawBorder: true,
+                                borderColor: '#000',
+                                borderWidth: 3,
+                                lineWidth: function(context) {
+                                    return context.tick.value === 0 ? 3 : 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Crea le opzioni di risposta
+        function createOptions(func) {
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            // Crea array di opzioni (corretta + 3 sbagliate)
+            const allOptions = [func.display, ...func.wrongOptions];
+            const shuffledOptions = shuffle(allOptions);
+
+            // Crea i bottoni
+            shuffledOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Controlla la risposta
+        function checkAnswer(selected, button) {
+            if (answered) return;
+
+            answered = true;
+            const feedback = document.getElementById('feedback');
+            const buttons = document.querySelectorAll('.option-btn');
+
+            if (selected === currentFunction.display) {
+                // Risposta corretta
+                button.classList.add('correct');
+                feedback.textContent = '✅ Corretto! Ottimo lavoro!';
+                feedback.className = 'feedback correct show';
+                score += 10;
+                correctAnswers++;
+            } else {
+                // Risposta sbagliata
+                button.classList.add('wrong');
+                feedback.textContent = `❌ Sbagliato! La risposta corretta è: ${currentFunction.display}`;
+                feedback.className = 'feedback wrong show';
+
+                // Evidenzia la risposta corretta
+                buttons.forEach(btn => {
+                    if (btn.textContent === currentFunction.display) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            // Disabilita tutti i bottoni
+            buttons.forEach(btn => btn.disabled = true);
+
+            // Abilita il bottone next
+            document.getElementById('next-btn').disabled = false;
+
+            updateUI();
+        }
+
+        // Prossima domanda
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentQuestion++;
+            loadQuestion();
+        });
+
+        // Aggiorna UI
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('total-questions').textContent = totalQuestions;
+            
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        // Termina il gioco
+        function endGame() {
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('game-over').classList.add('show');
+            document.getElementById('final-score').textContent = score + ' punti';
+            document.getElementById('final-correct').textContent = correctAnswers;
+            document.getElementById('final-total').textContent = totalQuestions;
+        }
+
+        // Avvia il gioco
+        initGame();
+    </script>
+</body>
+</html>
