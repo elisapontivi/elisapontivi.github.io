@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrivi la Funzione Esponenziale!</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #f5576c;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .instructions-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        
+        .instructions-list {
+            color: #856404;
+            margin-left: 20px;
+        }
+        
+        .instructions-list li {
+            margin: 5px 0;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #f5576c;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .question {
+            text-align: center;
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: stretch;
+        }
+        
+        .formula-input {
+            flex: 1;
+            padding: 20px;
+            font-size: 1.3em;
+            border: 3px solid #f5576c;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .formula-input:focus {
+            outline: none;
+            border-color: #f093fb;
+            box-shadow: 0 0 20px rgba(240, 147, 251, 0.3);
+        }
+        
+        .formula-input.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .formula-input.wrong {
+            border-color: #dc3545;
+            background: #f8d7da;
+            animation: shake 0.5s;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .check-btn, .skip-btn {
+            padding: 20px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .check-btn {
+            background: #f5576c;
+            color: white;
+        }
+        
+        .check-btn:hover:not(:disabled) {
+            background: #f093fb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .check-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .skip-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .skip-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .next-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background: #f5576c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .next-btn:hover {
+            background: #f093fb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .next-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .feedback {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+            animation: slideIn 0.5s;
+        }
+        
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+            animation: slideIn 0.5s;
+        }
+        
+        .feedback.skipped {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #17a2b8;
+            animation: slideIn 0.5s;
+        }
+        
+        .correct-formula {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #155724;
+            font-weight: bold;
+        }
+        
+        .game-over {
+            text-align: center;
+            display: none;
+        }
+        
+        .game-over.show {
+            display: block;
+        }
+        
+        .game-over h2 {
+            color: #f5576c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .final-score {
+            font-size: 3em;
+            color: #28a745;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .performance {
+            font-size: 1.2em;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        .restart-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #f5576c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            background: #f093fb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            transition: width 0.3s;
+        }
+
+        .hint {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>✍️ Scrivi la Funzione Esponenziale!</h1>
+        <p class="subtitle">Osserva il grafico e scrivi la formula corretta</p>
+        
+        <div class="instructions">
+            <div class="instructions-title">📝 Come scrivere le formule:</div>
+            <ul class="instructions-list">
+                <li><strong>Formato:</strong> puoi scrivere y = ... oppure f(x) = ...</li>
+                <li><strong>Esponenti:</strong> usa ^ (es: 2^x, 2^(x+1))</li>
+                <li><strong>Frazioni:</strong> usa / (es: (1/2)^x)</li>
+                <li><strong>Operazioni:</strong> + - * / (es: 2^x + 1, 3*2^x)</li>
+                <li><strong>Parentesi:</strong> usa sempre le parentesi per l'esponente (es: 2^(x-1))</li>
+            </ul>
+        </div>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Punteggio</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Domanda</div>
+                <div class="score-value"><span id="current-question">1</span>/<span id="total-questions">8</span></div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Corrette</div>
+                <div class="score-value" id="correct">0</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        
+        <div id="game-content">
+            <div class="chart-container">
+                <canvas id="functionChart"></canvas>
+            </div>
+            
+            <p class="question">Scrivi la formula di questa funzione:</p>
+            
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    class="formula-input" 
+                    id="formula-input" 
+                    placeholder="y = ... oppure f(x) = ..."
+                    autocomplete="off"
+                />
+                <div class="btn-group">
+                    <button class="check-btn" id="check-btn">✓ Verifica</button>
+                    <button class="skip-btn" id="skip-btn">→ Salta</button>
+                </div>
+            </div>
+            
+            <p class="hint">Premi Invio per verificare la risposta</p>
+            
+            <div class="feedback" id="feedback"></div>
+            
+            <button class="next-btn" id="next-btn" style="display: none;">Prossima Domanda →</button>
+        </div>
+        
+        <div class="game-over" id="game-over">
+            <h2>🎉 Gioco Completato!</h2>
+            <div class="final-score" id="final-score"></div>
+            <div class="performance">
+                <p>Hai risposto correttamente a <strong><span id="final-correct"></span></strong> domande su <strong><span id="final-total"></span></strong>!</p>
+                <p style="margin-top: 10px;">Domande saltate: <strong><span id="final-skipped"></span></strong></p>
+            </div>
+            <button class="restart-btn" onclick="location.reload()">🔄 Gioca Ancora</button>
+        </div>
+    </div>
+
+    <script>
+        // Definizione delle funzioni esponenziali
+        const functions = [
+            {
+                display: "2^x",
+                alternatives: ["2**x", "pow(2,x)", "2^(x)"],
+                func: x => Math.pow(2, x),
+                latex: "f(x) = 2^x"
+            },
+            {
+                display: "3^x",
+                alternatives: ["3**x", "pow(3,x)", "3^(x)"],
+                func: x => Math.pow(3, x),
+                latex: "f(x) = 3^x"
+            },
+            {
+                display: "(1/2)^x",
+                alternatives: ["(0.5)^x", "0.5^x", "(1/2)**x", "pow(0.5,x)", "pow(1/2,x)"],
+                func: x => Math.pow(0.5, x),
+                latex: "f(x) = (1/2)^x"
+            },
+            {
+                display: "2^x+1",
+                alternatives: ["2^x + 1", "1+2^x", "1 + 2^x", "2**x+1", "2**x + 1"],
+                func: x => Math.pow(2, x) + 1,
+                latex: "f(x) = 2^x + 1"
+            },
+            {
+                display: "2^x+2",
+                alternatives: ["2^x + 2", "2+2^x", "2 + 2^x", "2**x+2", "2**x + 2"],
+                func: x => Math.pow(2, x) + 2,
+                latex: "f(x) = 2^x + 2"
+            },
+            {
+                display: "2^x-1",
+                alternatives: ["2^x - 1", "2**x-1", "2**x - 1", "-1+2^x"],
+                func: x => Math.pow(2, x) - 1,
+                latex: "f(x) = 2^x - 1"
+            },
+            {
+                display: "2^(x-1)",
+                alternatives: ["2**(x-1)", "pow(2,x-1)", "2^(x - 1)", "2**(x - 1)"],
+                func: x => Math.pow(2, x - 1),
+                latex: "f(x) = 2^(x-1)"
+            },
+            {
+                display: "2^(x+1)",
+                alternatives: ["2**(x+1)", "pow(2,x+1)", "2^(x + 1)", "2**(x + 1)"],
+                func: x => Math.pow(2, x + 1),
+                latex: "f(x) = 2^(x+1)"
+            },
+            {
+                display: "-2^x",
+                alternatives: ["-2**x", "-pow(2,x)", "-(2^x)", "-(2**x)"],
+                func: x => -Math.pow(2, x),
+                latex: "f(x) = -2^x"
+            },
+            {
+                display: "(1/2)^x+1",
+                alternatives: ["(1/2)^x + 1", "0.5^x+1", "0.5^x + 1", "1+(1/2)^x", "1 + (1/2)^x"],
+                func: x => Math.pow(0.5, x) + 1,
+                latex: "f(x) = (1/2)^x + 1"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let skippedAnswers = 0;
+        const totalQuestions = 8;
+        let chart = null;
+        let currentFunction = null;
+        let answered = false;
+        let usedFunctions = [];
+
+        // Normalizza la stringa per il confronto
+        function normalizeFormula(formula) {
+            return formula
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/f\(x\)=/g, '')
+                .replace(/y=/g, '')
+                .replace(/\*\*/g, '^');
+        }
+
+        // Controlla se la formula è corretta
+        function isCorrect(userInput) {
+            const normalized = normalizeFormula(userInput);
+            const correctNormalized = normalizeFormula(currentFunction.display);
+            
+            if (normalized === correctNormalized) return true;
+            
+            // Controlla alternative
+            for (let alt of currentFunction.alternatives) {
+                if (normalized === normalizeFormula(alt)) return true;
+            }
+            
+            return false;
+        }
+
+        // Inizializza il gioco
+        function initGame() {
+            document.getElementById('formula-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('check-btn').click();
+                }
+            });
+            
+            document.getElementById('check-btn').addEventListener('click', checkAnswer);
+            document.getElementById('skip-btn').addEventListener('click', skipQuestion);
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            
+            loadQuestion();
+        }
+
+        // Carica una nuova domanda
+        function loadQuestion() {
+            if (currentQuestion >= totalQuestions) {
+                endGame();
+                return;
+            }
+
+            answered = false;
+            document.getElementById('formula-input').value = '';
+            document.getElementById('formula-input').className = 'formula-input';
+            document.getElementById('formula-input').disabled = false;
+            document.getElementById('check-btn').disabled = false;
+            document.getElementById('skip-btn').disabled = false;
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('feedback').classList.remove('show');
+            document.getElementById('formula-input').focus();
+
+            // Seleziona una funzione casuale non ancora usata
+            let availableFunctions = functions.filter(f => !usedFunctions.includes(f));
+            if (availableFunctions.length === 0) {
+                usedFunctions = [];
+                availableFunctions = functions;
+            }
+            
+            currentFunction = availableFunctions[Math.floor(Math.random() * availableFunctions.length)];
+            usedFunctions.push(currentFunction);
+
+            // Crea il grafico
+            createChart(currentFunction);
+
+            // Aggiorna UI
+            updateUI();
+        }
+
+        // Crea il grafico
+        function createChart(func) {
+            const ctx = document.getElementById('functionChart').getContext('2d');
+
+            // Genera i dati
+            const xValues = [];
+            const yValues = [];
+            for (let x = -2; x <= 2; x += 0.1) {
+                xValues.push(x);
+                yValues.push(func.func(x));
+            }
+
+            // Distruggi il grafico precedente se esiste
+            if (chart) {
+                chart.destroy();
+            }
+
+            // Crea nuovo grafico
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'f(x)',
+                        data: yValues,
+                        borderColor: '#ff9500',
+                        backgroundColor: 'rgba(255, 149, 0, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'x',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#000'
+                            },
+                            ticks: {
+                                color: '#000',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)',
+                                drawBorder: true,
+                                borderColor: '#000',
+                                borderWidth: 3,
+                                lineWidth: function(context) {
+                                    return context.tick.value === 0 ? 3 : 1;
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'y',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#000'
+                            },
+                            ticks: {
+                                color: '#000',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)',
+                                drawBorder: true,
+                                borderColor: '#000',
+                                borderWidth: 3,
+                                lineWidth: function(context) {
+                                    return context.tick.value === 0 ? 3 : 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Controlla la risposta
+        function checkAnswer() {
+            if (answered) return;
+
+            const userInput = document.getElementById('formula-input').value.trim();
+            
+            if (!userInput) {
+                alert('Scrivi una formula prima di verificare!');
+                return;
+            }
+
+            answered = true;
+            const input = document.getElementById('formula-input');
+            const feedback = document.getElementById('feedback');
+
+            input.disabled = true;
+            document.getElementById('check-btn').disabled = true;
+            document.getElementById('skip-btn').disabled = true;
+
+            if (isCorrect(userInput)) {
+                // Risposta corretta
+                input.classList.add('correct');
+                feedback.innerHTML = `✅ <strong>Perfetto!</strong> Hai scritto la formula corretta!`;
+                feedback.className = 'feedback correct show';
+                score += 15;
+                correctAnswers++;
+            } else {
+                // Risposta sbagliata
+                input.classList.add('wrong');
+                feedback.innerHTML = `❌ <strong>Non è corretto.</strong><br>
+                    <div class="correct-formula">La risposta corretta è: ${currentFunction.latex}</div>`;
+                feedback.className = 'feedback wrong show';
+            }
+
+            document.getElementById('next-btn').style.display = 'block';
+            updateUI();
+        }
+
+        // Salta domanda
+        function skipQuestion() {
+            if (answered) return;
+
+            answered = true;
+            const feedback = document.getElementById('feedback');
+
+            document.getElementById('formula-input').disabled = true;
+            document.getElementById('check-btn').disabled = true;
+            document.getElementById('skip-btn').disabled = true;
+
+            feedback.innerHTML = `ℹ️ <strong>Domanda saltata</strong><br>
+                <div class="correct-formula">La risposta era: ${currentFunction.latex}</div>`;
+            feedback.className = 'feedback skipped show';
+            
+            skippedAnswers++;
+            document.getElementById('next-btn').style.display = 'block';
+            updateUI();
+        }
+
+        // Prossima domanda
+        function nextQuestion() {
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        // Aggiorna UI
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            document.getElementById('correct').textContent = correctAnswers;
+            
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        // Termina il gioco
+        function endGame() {
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('game-over').classList.add('show');
+            document.getElementById('final-score').textContent = score + ' punti';
+            document.getElementById('final-correct').textContent = correctAnswers;
+            document.getElementById('final-total').textContent = totalQuestions;
+            document.getElementById('final-skipped').textContent = skippedAnswers;
+        }
+
+        // Avvia il gioco
+        initGame();
+    </script>
+</body>
+</html>
