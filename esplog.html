@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esponenziali e Logaritmi - Materiali ed Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-icon {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .card-description {
+            color: #666;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .badge-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge-guide {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .card-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .pdf-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid #ff8c69;
+        }
+        
+        .pdf-card .card-title {
+            color: #d63031;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .info-box p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .info-box ul {
+            margin: 15px 0 15px 25px;
+            color: #666;
+        }
+        
+        .info-box li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Esponenziali e Logaritmi</h1>
+            <p class="subtitle">Materiali ed Esercizi</p>
+        </header>
+        
+        <!-- Sezione Giochi -->
+        <div class="section">
+            <h2 class="section-title">🎮 Giochi Interattivi</h2>
+            <div class="cards-container">
+                <!-- Gioco 1: Scelta Multipla -->
+                <a href="gioco_funzioni_esponenziali.html" class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Indovina la Funzione</h3>
+                    <p class="card-description">
+                        Osserva il grafico e scegli la formula corretta tra 4 opzioni. 
+                        Perfetto per iniziare!
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">10</div>
+                            <div class="stat-label">Domande</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10 pt</div>
+                            <div class="stat-label">per risposta</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="btn">Gioca Ora →</span>
+                    </div>
+                </a>
+                
+                <!-- Gioco 2: Scrivi la Formula -->
+                <a href="gioco_scrivi_funzione.html" class="card">
+                    <div class="card-icon">✍️</div>
+                    <h3 class="card-title">Scrivi la Funzione</h3>
+                    <p class="card-description">
+                        Scrivi tu stesso la formula della funzione esponenziale. 
+                        Una sfida più impegnativa!
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Domande</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15 pt</div>
+                            <div class="stat-label">per risposta</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="btn btn-secondary">Gioca Ora →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Sezione Guide PDF -->
+        <div class="section">
+            <h2 class="section-title">📖 Guide di Studio</h2>
+            <div class="cards-container">
+                <!-- PDF 1: Riconoscere Grafici -->
+                <a href="guida_funzioni_esponenziali__1_.pdf" class="card pdf-card" download>
+                    <div class="card-icon">📄</div>
+                    <h3 class="card-title">Guida: Riconoscere i Grafici</h3>
+                    <p class="card-description">
+                        Impara a identificare le funzioni esponenziali dai loro grafici. 
+                        Include teoria, metodo sistematico ed esempi pratici.
+                    </p>
+                    <div class="card-footer">
+                        <span class="btn">📥 Scarica PDF</span>
+                    </div>
+                </a>
+                
+                <!-- PDF 2: Traslazioni -->
+                <a href="guida_traslazioni_esponenziali__1_.pdf" class="card pdf-card" download>
+                    <div class="card-icon">📄</div>
+                    <h3 class="card-title">Guida: Traslazioni</h3>
+                    <p class="card-description">
+                        Scopri come riconoscere e scrivere funzioni esponenziali con traslazioni 
+                        verticali e orizzontali.
+                    </p>
+                    <div class="card-footer">
+                        <span class="btn">📥 Scarica PDF</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Sezione Appunti -->
+        <div class="section">
+            <h2 class="section-title">📝 Appunti Presi in Classe</h2>
+            <div class="cards-container">
+                <a href="appuntilogaritmi.pdf" class="card" style="background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%); border: 3px solid #00acc1;" download>
+                    <div class="card-icon">📓</div>
+                    <h3 class="card-title" style="color: #00838f;">Appunti sui Logaritmi</h3>
+                    <p class="card-description">
+                        Appunti presi durante le lezioni in classe sui logaritmi.
+                    </p>
+                    <div class="card-footer">
+                        <span class="btn">📥 Scarica Appunti</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Elisa Pontivi</p>
+        </footer>
+    </div>
+</body>
+</html>
