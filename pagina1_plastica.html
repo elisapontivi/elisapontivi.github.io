@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esperimento - Introduzione</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 40px;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PAGINA 1 - Introduzione compenso</h1>
+        
+        <h2>Come compenso per la tua partecipazione riceverai:</h2>
+        
+        <ul>
+            <li><strong>2 euro</strong> di quota di partecipazione fissa</li>
+            <li>Un <strong>compenso variabile</strong> determinato dalle risposte che darai nel questionario</li>
+        </ul>
+        
+        <button class="btn" onclick="avanti()">AVANTI</button>
+    </div>
+
+    <script>
+        function avanti() {
+            window.location.href = 'pagina2_plastica.html';
+        }
+    </script>
+</body>
+</html>

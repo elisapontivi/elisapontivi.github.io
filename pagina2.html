@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esperimento - Compenso in natura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .content {
+            margin: 30px 0;
+            font-size: 1.1em;
+        }
+        .content p {
+            margin: 20px 0;
+        }
+        .highlight {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        strong {
+            color: #2c3e50;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        .btn {
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+            flex: 1;
+        }
+        .btn-back {
+            background-color: #95a5a6;
+        }
+        .btn-back:hover {
+            background-color: #7f8c8d;
+        }
+        .btn-forward {
+            background-color: #3498db;
+        }
+        .btn-forward:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <p>Oltre al compenso monetario, riceverai una <strong>penna</strong>.</p>
+            
+            <p>In questo studio sono disponibili due tipologie di penne: una in <strong>bioplastica</strong> e una in <strong>plastica tradizionale</strong>.</p>
+            
+            <div class="highlight">
+                <p>A parità di costo per lo studio, i ricercatori hanno scelto di impostare come <strong>opzione predefinita la penna in bioplastica</strong>.</p>
+            </div>
+            
+            <p>Potrai confermare questa scelta o modificarla in un passaggio successivo, secondo le modalità che ti verranno indicate.</p>
+        </div>
+        
+        <div class="button-container">
+            <button class="btn btn-back" onclick="indietro()">INDIETRO</button>
+            <button class="btn btn-forward" onclick="avanti()">AVANTI</button>
+        </div>
+    </div>
+
+    <script>
+        function indietro() {
+            window.location.href = 'pagina1.html';
+        }
+        
+        function avanti() {
+            window.location.href = 'pagina3.html';
+        }
+    </script>
+</body>
+</html>

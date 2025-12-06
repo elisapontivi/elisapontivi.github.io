@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esperimento - Attività di impegno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        .instructions {
+            background-color: #fef5e7;
+            padding: 20px;
+            border-left: 4px solid #f39c12;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .timer {
+            font-size: 2em;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fadbd8;
+            border-radius: 10px;
+        }
+        .counter {
+            font-size: 1.5em;
+            text-align: center;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+        .slider-container {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        .slider-item {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+        .value-display {
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 10px;
+            color: #2c3e50;
+        }
+        .correct {
+            background-color: #d5f4e6 !important;
+            border: 2px solid #27ae60;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        .btn {
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-back {
+            background-color: #95a5a6;
+        }
+        .btn-back:hover {
+            background-color: #7f8c8d;
+        }
+        .btn-start {
+            background-color: #3498db;
+            flex: 1;
+        }
+        .btn-start:hover {
+            background-color: #2980b9;
+        }
+        .btn-forward {
+            background-color: #3498db;
+            flex: 1;
+        }
+        .btn-forward:hover {
+            background-color: #2980b9;
+        }
+        .btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="instructions">
+            <p>Ora ti verranno mostrati dei cursori (slider) posizionati casualmente su una barra. Il tuo obiettivo è spostare ciascun cursore esattamente sulla posizione <strong>50</strong> nel minor tempo possibile.</p>
+            
+            <p style="margin-top: 15px;">Hai a disposizione <strong>120 secondi (2 minuti)</strong> per completare quanti più cursori possibile.</p>
+            
+            <p style="margin-top: 15px;">L'importo esatto del compenso ti verrà comunicato alla fine dell'esperimento.</p>
+        </div>
+        
+        <div id="startSection">
+            <div class="button-container">
+                <button class="btn btn-back" onclick="indietro()">INDIETRO</button>
+                <button class="btn btn-start" onclick="iniziaTask()">Inizia l'attività</button>
+            </div>
+        </div>
+        
+        <div id="taskSection" class="hidden">
+            <div class="timer" id="timer">Tempo rimanente: 120s</div>
+            <div class="counter" id="counter">Cursori completati: 0</div>
+            
+            <div class="slider-container" id="sliderContainer">
+                <!-- Gli slider verranno generati qui -->
+            </div>
+            
+            <button class="btn btn-forward" onclick="terminaTask()" style="display: block; margin: 20px auto; width: 200px;">AVANTI</button>
+        </div>
+        
+        <div id="endSection" class="hidden">
+            <p style="text-align: center; font-size: 1.2em; color: #27ae60;">
+                <strong>Attività completata!</strong>
+            </p>
+            <button class="btn btn-forward" onclick="avanti()" style="display: block; margin: 30px auto; width: 200px;">AVANTI</button>
+        </div>
+    </div>
+
+    <script>
+        let timeRemaining = 120;
+        let timerId;
+        let completedSliders = 0;
+        const totalSliders = 48;
+        const sliderStates = new Array(totalSliders).fill(false);
+
+        function indietro() {
+            window.location.href = 'pagina3.html';
+        }
+
+        function iniziaTask() {
+            document.getElementById('startSection').classList.add('hidden');
+            document.getElementById('taskSection').classList.remove('hidden');
+            
+            // Genera gli slider
+            generaSliders();
+            
+            // Avvia il timer
+            timerId = setInterval(aggiornaTimer, 1000);
+        }
+
+        function generaSliders() {
+            const container = document.getElementById('sliderContainer');
+            
+            for (let i = 0; i < totalSliders; i++) {
+                const randomValue = Math.floor(Math.random() * 101);
+                
+                const sliderDiv = document.createElement('div');
+                sliderDiv.className = 'slider-item';
+                sliderDiv.id = `slider-item-${i}`;
+                
+                sliderDiv.innerHTML = `
+                    <div class="slider-label">
+                        <span>Cursore ${i + 1}</span>
+                        <span>Obiettivo: 50</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="${randomValue}" 
+                           id="slider-${i}" oninput="checkSlider(${i})">
+                    <div class="value-display" id="value-${i}">Valore attuale: ${randomValue}</div>
+                `;
+                
+                container.appendChild(sliderDiv);
+            }
+        }
+
+        function checkSlider(index) {
+            const slider = document.getElementById(`slider-${index}`);
+            const value = parseInt(slider.value);
+            const valueDisplay = document.getElementById(`value-${index}`);
+            const sliderItem = document.getElementById(`slider-item-${index}`);
+            
+            valueDisplay.textContent = `Valore attuale: ${value}`;
+            
+            if (value === 50 && !sliderStates[index]) {
+                sliderStates[index] = true;
+                completedSliders++;
+                sliderItem.classList.add('correct');
+                slider.disabled = true;
+                aggiornaContatore();
+            } else if (value !== 50 && sliderStates[index]) {
+                sliderStates[index] = false;
+                completedSliders--;
+                sliderItem.classList.remove('correct');
+                slider.disabled = false;
+                aggiornaContatore();
+            }
+        }
+
+        function aggiornaContatore() {
+            document.getElementById('counter').textContent = `Cursori completati: ${completedSliders}`;
+        }
+
+        function aggiornaTimer() {
+            timeRemaining--;
+            document.getElementById('timer').textContent = `Tempo rimanente: ${timeRemaining}s`;
+            
+            if (timeRemaining <= 0) {
+                fineTask();
+            }
+        }
+
+        function fineTask() {
+            clearInterval(timerId);
+            
+            // Salva i risultati
+            localStorage.setItem('slidersCompletati', completedSliders);
+            localStorage.setItem('guadagnoEffort', '2.00'); // Tutti guadagnano 2 euro
+            
+            // Mostra sezione finale
+            document.getElementById('taskSection').classList.add('hidden');
+            document.getElementById('endSection').classList.remove('hidden');
+        }
+
+        function terminaTask() {
+            // Permette di terminare l'attività anticipatamente
+            if (confirm('Sei sicuro di voler terminare l\'attività ora?')) {
+                fineTask();
+            }
+        }
+
+        function avanti() {
+            window.location.href = 'pagina5.html';
+        }
+    </script>
+</body>
+</html>
