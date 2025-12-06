@@ -25,7 +25,7 @@
             font-size: 1.3em;
         }
 
-        /* OPZIONI COMPENSO – TESTUALE, UNA SOTTO L’ALTRA */
+        /* OPZIONI COMPENSO – TESTUALE, UNA SOTTO L'ALTRA */
         .options {
             display: flex;
             flex-direction: column;
@@ -80,14 +80,14 @@
             margin: 3px 0;
             background-color: #f7fdf8;
         }
-        .payment-text {
+        .bonus-text {
             padding: 6px;
             border-radius: 4px;
             margin-top: 4px;
             font-size: 0.75em;
-            background-color: #fdecea;
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            color: #c0392b;
+            background-color: #e8f8f0;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            color: #229954;
             font-weight: bold;
             text-align: left;
         }
@@ -222,62 +222,63 @@
 <body>
     <div class="container">
         <div class="earning-display">
-            Hai guadagnato dall'attività precedente: <strong id="guadagnoDisplay">€ 3,00</strong>
+            Hai guadagnato dall'attività precedente: <strong id="guadagnoDisplay">€ 2,00</strong>
         </div>
         
         <h2>Ora puoi decidere quale compenso ricevere:</h2>
         
         <div class="options">
-            <!-- OPZIONE A: PLASTICA (DEFAULT) -->
+            <!-- OPZIONE A: BIOPLASTICA (DEFAULT) -->
             <div class="option option-a">
                 <span class="badge">Predefinita</span>
-                <h3>Opzione A – Penna in plastica tradizionale</h3>
+                <h3>Opzione A – Penna in bioplastica</h3>
                 <p class="description">
-                    Ricevi una penna in plastica tradizionale e il compenso che hai guadagnato
-                    nell'attività precedente. Non effettui alcun pagamento aggiuntivo.
+                    Ricevi una penna in bioplastica e il compenso che hai guadagnato
+                    nell'attività precedente. Non ricevi alcun bonus aggiuntivo.
                 </p>
             </div>
             
-           <!-- OPZIONE B: BIOPLASTICA (CON POSSIBILE PAGAMENTO) -->
-<div class="option option-b">
-    <span class="badge">Alternativa</span>
-    <h3>Opzione B – Penna in bioplastica</h3>
-    <p class="description">
-        Ricevi una penna in bioplastica e lo stesso compenso dell'attività precedente,
-        ma è richiesto un pagamento aggiuntivo di un importo determinato dal meccanismo descritto sotto.
-    </p>
-</div>
+            <!-- OPZIONE B: PLASTICA (CON POSSIBILE BONUS) -->
+            <div class="option option-b">
+                <span class="badge">Alternativa</span>
+                <h3>Opzione B – Penna in plastica tradizionale</h3>
+                <p class="description">
+                    Ricevi una penna in plastica tradizionale e lo stesso compenso dell'attività precedente,
+                    riceverai anche un bonus aggiuntivo di un importo determinato dal meccanismo descritto sotto.
+                </p>
+            </div>
+        </div>
         
         <div class="bdm-section">
-            <h3>Come funziona il meccanismo per l'importo:</h3>
+            <h3>Come funziona il meccanismo per il bonus:</h3>
             
             <ol>
                 <li>
-                    Ti chiederemo di indicare <strong>quanto saresti disposto a pagare</strong>
-                    (da 0 a 1 euro) per passare dalla penna in plastica tradizionale
-                    a quella in bioplastica.
+                    Ti chiederemo di indicare <strong>qual è il bonus minimo</strong>
+                    (da 0 a 1 euro) che saresti disposto ad accettare per passare dalla penna in bioplastica
+                    a quella in plastica tradizionale.
                 </li>
                 
                 <li>Il computer estrarrà in modo casuale un numero tra 0 e 1 euro.</li>
                 
-                <li><strong>Se il numero estratto è minore o uguale al tuo importo massimo:</strong>
+                <li><strong>Se il numero estratto è maggiore o uguale al tuo bonus minimo:</strong>
                     <ul>
-                        <li>Riceverai la penna in bioplastica</li>
-                        <li>Pagherai il <strong>numero estratto</strong> dal computer (non il tuo massimo dichiarato)</li>
+                        <li>Riceverai la penna in plastica tradizionale</li>
+                        <li>Il tuo bonus sarà pari al <strong>numero estratto</strong> dal computer (non al tuo minimo richiesto)</li>
                     </ul>
                 </li>
                 
-                <li><strong>Se il numero estratto è maggiore del tuo importo massimo:</strong>
+                <li><strong>Se il numero estratto è minore al tuo bonus minimo:</strong>
                     <ul>
-                        <li>Riceverai la penna in plastica tradizionale (opzione predefinita)</li>
-                        <li>Non pagherai nulla</li>
+                        <li>Riceverai la penna in bioplastica (opzione predefinita)</li>
+                        <li>Non riceverai alcun bonus</li>
                     </ul>
                 </li>
             </ol>
             
             <div class="strategy-box">
                 <strong>💡 Qual è la strategia migliore?</strong>
-                Indicare sinceramente quanto saresti disposto a pagare per cambiare tipo di penna.
+                Indicare sinceramente il bonus minimo che ritieni accettabile per cambiare tipo di penna.
                 In questo modo massimizzi la probabilità di ottenere un risultato che ti soddisfa.
             </div>
         </div>
@@ -292,20 +293,20 @@
         <div style="margin: 30px 0;">
             <label style="display: block; padding: 15px; background-color: #fef5e7; border-radius: 5px; margin-bottom: 15px; cursor: pointer; border: 2px solid #e67e22;">
                 <input type="radio" name="sceltaPrelim" value="A" onchange="mostraScelta()" style="margin-right: 10px; transform: scale(1.3);">
-                <strong>Confermo l'Opzione A</strong> - Mantengo la penna in plastica tradizionale
+                <strong>Confermo l'Opzione A</strong> - Mantengo la penna in bioplastica
             </label>
             
             <label style="display: block; padding: 15px; background-color: #fef5e7; border-radius: 5px; cursor: pointer; border: 2px solid #e67e22;">
                 <input type="radio" name="sceltaPrelim" value="B" onchange="mostraScelta()" style="margin-right: 10px; transform: scale(1.3);">
-                <strong>Valuto l'Opzione B</strong> - Voglio considerare la penna in bioplastica
+                <strong>Valuto l'Opzione B</strong> - Voglio considerare la penna in plastica con bonus
             </label>
         </div>
         
         <div id="bdmMechanism" class="hidden">
             <div class="slider-input">
                 <div class="slider-label">
-                    Indica quanto saresti disposto a pagare (in euro) per ricevere
-                    la penna in bioplastica invece che in plastica tradizionale:
+                    Indica il bonus minimo (in euro) che accetteresti per ricevere
+                    la penna in plastica tradizionale invece che in bioplastica:
                 </div>
                 
                 <input type="range" min="0" max="100" value="50" step="1"
@@ -330,10 +331,8 @@
     <script>
         // Recupera il guadagno dall'effort task
         window.onload = function() {
-            const guadagno = localStorage.getItem('guadagnoEffort') || '3.00';
+            const guadagno = localStorage.getItem('guadagnoEffort') || '2.00';
             document.getElementById('guadagnoDisplay').textContent = `€ ${guadagno}`;
-            document.getElementById('compensoA').textContent = `€ ${guadagno}`;
-            document.getElementById('compensoB').textContent = `€ ${guadagno}`;
         };
 
         function aggiornaValore() {
@@ -354,7 +353,7 @@
         }
 
         function indietro() {
-            window.location.href = 'pagina4_plastica.html';
+            window.location.href = 'pagina4_bioplastica.html';
         }
 
         function confermaScelta() {
@@ -365,18 +364,18 @@
                 return;
             }
             
-            const guadagnoEffort = localStorage.getItem('guadagnoEffort') || '3.00';
+            const guadagnoEffort = localStorage.getItem('guadagnoEffort') || '2.00';
             
             if (sceltaPrelim.value === 'A') {
-                // Ha scelto direttamente l'opzione A (plastica)
+                // Ha scelto direttamente l'opzione A (bioplastica)
                 const risultati = {
-                    trattamento: 'default_plastica',
+                    trattamento: 'default_bioplastica',
                     sceltaPrelim: 'A',
                     sceltaFinale: 'A',
-                    wtp: 'N/A',
+                    wta: 'N/A',
                     importoEstratto: 'N/A',
-                    importoPagato: '0.00',
-                    pennaRicevuta: 'plastica',
+                    bonusRicevuto: '0.00',
+                    pennaRicevuta: 'bioplastica',
                     guadagnoEffort: guadagnoEffort,
                     slidersCompletati: localStorage.getItem('slidersCompletati') || '0'
                 };
@@ -388,9 +387,9 @@
                 alert(
                     `Hai confermato l'Opzione A.\n\n` +
                     `Risultato:\n` +
-                    `- Riceverai una penna in plastica tradizionale\n` +
+                    `- Riceverai una penna in bioplastica\n` +
                     `- Compenso dall'attività: € ${guadagnoEffort}\n` +
-                    `- Importo pagato: € 0,00\n\n` +
+                    `- Bonus aggiuntivo: € 0,00\n\n` +
                     `Compenso totale: € ${compensoTotale}\n\n` +
                     `Grazie per la partecipazione!`
                 );
@@ -398,35 +397,35 @@
                 console.log('Risultati:', risultati);
                 
             } else {
-                // Ha scelto l'opzione B - applica meccanismo BDM (pagamento)
-                const wtp = document.getElementById('bonusSlider').value / 100;
+                // Ha scelto l'opzione B - applica meccanismo BDM (bonus)
+                const wta = document.getElementById('bonusSlider').value / 100;
                 
-                // Estrazione casuale (da 0 a 1 euro)
+                // Estrazione casuale del bonus (da 0 a 1 euro)
                 const importoEstratto = Math.random();
                 
                 // Determina il risultato
-                let sceltaFinale, importoPagato, pennaRicevuta;
+                let sceltaFinale, bonusRicevuto, pennaRicevuta;
                 
-                if (importoEstratto <= wtp) {
-                    // Riceve penna in bioplastica e paga l'importo estratto
+                if (importoEstratto >= wta) {
+                    // Riceve penna in plastica + bonus estratto
                     sceltaFinale = 'B';
-                    importoPagato = importoEstratto;
-                    pennaRicevuta = 'bioplastica';
-                } else {
-                    // Riceve penna in plastica e non paga nulla
-                    sceltaFinale = 'A';
-                    importoPagato = 0;
+                    bonusRicevuto = importoEstratto;
                     pennaRicevuta = 'plastica';
+                } else {
+                    // Riceve penna in bioplastica + nessun bonus
+                    sceltaFinale = 'A';
+                    bonusRicevuto = 0;
+                    pennaRicevuta = 'bioplastica';
                 }
                 
                 // Salva i risultati
                 const risultati = {
-                    trattamento: 'default_plastica',
+                    trattamento: 'default_bioplastica',
                     sceltaPrelim: 'B',
-                    wtp: wtp.toFixed(2),
+                    wta: wta.toFixed(2),
                     importoEstratto: importoEstratto.toFixed(2),
                     sceltaFinale: sceltaFinale,
-                    importoPagato: importoPagato.toFixed(2),
+                    bonusRicevuto: bonusRicevuto.toFixed(2),
                     pennaRicevuta: pennaRicevuta,
                     guadagnoEffort: guadagnoEffort,
                     slidersCompletati: localStorage.getItem('slidersCompletati') || '0'
@@ -434,16 +433,16 @@
                 
                 localStorage.setItem('risultatiFinali', JSON.stringify(risultati));
                 
-                const compensoTotale = (parseFloat(guadagnoEffort) - parseFloat(importoPagato)).toFixed(2);
+                const compensoTotale = (parseFloat(guadagnoEffort) + parseFloat(bonusRicevuto)).toFixed(2);
                 
                 // Mostra il risultato
                 alert(
                     `Il computer ha estratto: € ${importoEstratto.toFixed(2)}\n\n` +
-                    `Il tuo importo massimo era: € ${wtp.toFixed(2)}\n\n` +
+                    `Il tuo bonus minimo era: € ${wta.toFixed(2)}\n\n` +
                     `Risultato:\n` +
                     `- Riceverai una penna in ${pennaRicevuta}\n` +
                     `- Compenso dall'attività: € ${guadagnoEffort}\n` +
-                    `- Importo pagato: € ${importoPagato.toFixed(2)}\n\n` +
+                    `- Bonus aggiuntivo: € ${bonusRicevuto.toFixed(2)}\n\n` +
                     `Compenso totale: € ${compensoTotale}\n\n` +
                     `Grazie per la partecipazione!`
                 );
