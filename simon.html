@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simon Task - Esperimento</title>
+    <title>Compito di Risposta</title>
     <style>
         * {
             margin: 0;
@@ -203,10 +203,9 @@
     <div class="container">
         <!-- Schermata Istruzioni -->
         <div id="instructions-screen" class="screen active">
-            <h1>Effort task</h1>
             <div class="instructions">
                 <h2>Istruzioni:</h2>
-                <p>In questo esperimento vedrai le parole <strong>SINISTRA</strong> o <strong>DESTRA</strong> apparire sullo schermo, a sinistra o a destra.</p>
+                <p>Vedrai le parole <strong>SINISTRA</strong> o <strong>DESTRA</strong> apparire sullo schermo, a sinistra o a destra.</p>
                 
                 <p><strong>Il tuo compito è:</strong></p>
                 <ul>
@@ -218,7 +217,7 @@
                 <ul>
                     <li>Rispondi il più velocemente possibile, ma cerca di essere accurato</li>
                     <li>La posizione della parola sullo schermo NON è importante - rispondi solo in base al significato della parola</li>
-                    <li>Prima farai alcune prove di pratica, poi l'esperimento vero e proprio</li>
+                    <li>Prima farai alcune prove di pratica, poi inizierai il compito vero e proprio</li>
                 </ul>
                 
             </div>
@@ -233,16 +232,16 @@
             <div class="progress" id="practice-progress"></div>
         </div>
 
-        <!-- Schermata Sperimentale -->
+        <!-- Schermata Compito -->
         <div id="experiment-screen" class="screen">
-            <h1>Esperimento</h1>
+            <h1>Compito</h1>
             <div class="trial-screen" id="experiment-trial"></div>
             <div class="progress" id="experiment-progress"></div>
         </div>
 
         <!-- Schermata Risultati -->
         <div id="results-screen" class="screen">
-            <h1>Risultati dell'Esperimento</h1>
+            <h1>Completato!</h1>
             
             <div class="summary">
                 <h2>Riepilogo:</h2>
@@ -277,7 +276,7 @@
                 <button onclick="downloadCSV()">Scarica CSV</button>
             </div>
 
-            <button onclick="restartExperiment()">Ripeti Esperimento</button>
+            <button onclick="restartExperiment()">Ripeti</button>
         </div>
     </div>
 
@@ -285,10 +284,10 @@
         // Configurazione esperimento
         const config = {
             practiceTrials: 8,
-            experimentTrials: 20,  // Ridotto a 20 prove
-            fixationDuration: 1000,  // Tempo croce fissazione (ms)
-            feedbackDuration: 1000,  // Tempo feedback (solo pratica) (ms)
-            interTrialInterval: 1000 // Pausa tra prove (ms)
+            experimentTrials: 20,
+            fixationDuration: 1000,
+            feedbackDuration: 1000,
+            interTrialInterval: 1000
         };
 
         // Variabili globali
@@ -346,7 +345,7 @@
         function runTrial() {
             if (currentTrial >= trials.length) {
                 if (currentPhase === 'practice') {
-                    alert('Pratica completata! Ora inizierà l\'esperimento vero e proprio.');
+                    alert('Pratica completata! Ora inizia il compito.');
                     startExperiment();
                 } else {
                     showResults();
@@ -386,8 +385,6 @@
 
                 // Inizia misurazione
                 startTime = performance.now();
-                
-                // Nessun timeout - l'utente ha tutto il tempo che vuole
 
             }, config.fixationDuration);
         }
@@ -513,7 +510,7 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `simon_task_${new Date().toISOString().slice(0,10)}.csv`;
+            a.download = `compito_risposta_${new Date().toISOString().slice(0,10)}.csv`;
             a.click();
         }
 
@@ -525,5 +522,5 @@
         }
     </script>
 </body>
-
 </html>
+
