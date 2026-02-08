@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informazioni Penne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card-body {
+            padding: 40px;
+        }
+        
+        .intro-text .lead {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .default-info {
+            background-color: #e7f3f8;
+            border-left: 4px solid #3498db;
+            padding: 20px 25px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .info-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 0;
+        }
+        
+        .modification-text p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Sezione comparativa */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 40px 0;
+        }
+
+        .info-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .comparison-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .plastic-card {
+            border-top: 5px solid #e74c3c;
+        }
+
+        .bioplastic-card {
+            border-top: 5px solid #27ae60;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .plastic-card .card-title {
+            color: #e74c3c;
+        }
+
+        .bioplastic-card .card-title {
+            color: #27ae60;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .plastic-card .info-icon {
+            color: #e74c3c;
+        }
+
+        .bioplastic-card .info-icon {
+            color: #27ae60;
+        }
+
+        .info-text-item {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .card-footer {
+            background-color: transparent;
+            border-top: none;
+            padding: 20px 40px 40px 40px;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-forward {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-forward:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="intro-text mb-4">
+                    <p class="lead">Oltre al compenso monetario, riceverai una <strong>penna</strong>.</p>
+                    
+                    <p style="margin-bottom: 25px;">
+                        In questo studio sono disponibili due tipologie di penne: una in <strong>plastica tradizionale</strong> e una in <strong>bioplastica</strong>.
+                    </p>
+                </div>
+                
+                <div class="default-info">
+                    <p class="info-text">
+                        A parità di costo per lo studio, i ricercatori hanno scelto di impostare come <strong>opzione predefinita la penna in plastica tradizionale</strong>.
+                    </p>
+                </div>
+                
+                <div class="modification-text">
+                    <p>
+                        Potrai confermare questa scelta o modificarla in un passaggio successivo, secondo le modalità che ti verranno indicate.
+                    </p>
+                </div>
+
+                <!-- NUOVA SEZIONE: Differenze tra plastica e bioplastica -->
+                <div class="divider"></div>
+
+                <h3 class="info-section-title">Le Differenze tra le Due Tipologie di Penne</h3>
+
+                <div class="comparison-container">
+                    <!-- Plastica Tradizionale -->
+                    <div class="comparison-card plastic-card">
+                        <div class="card-icon">🛢️</div>
+                        <h3 class="card-title">Plastica Tradizionale</h3>
+                        <ul class="info-list">
+                            <li>
+                                <span class="info-icon">⚠️</span>
+                                <span class="info-text-item">Deriva da <strong>petrolio</strong>, una risorsa non rinnovabile</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">⚠️</span>
+                                <span class="info-text-item">Impiega <strong>centinaia di anni</strong> per decomporsi nell'ambiente</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">⚠️</span>
+                                <span class="info-text-item">Contribuisce all'<strong>inquinamento da microplastiche</strong> in oceani e suoli</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">⚠️</span>
+                                <span class="info-text-item">La produzione genera <strong>emissioni di CO₂</strong> e gas serra</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">⚠️</span>
+                                <span class="info-text-item">Difficile da riciclare e spesso finisce in <strong>discarica</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Bioplastica -->
+                    <div class="comparison-card bioplastic-card">
+                        <div class="card-icon">🌱</div>
+                        <h3 class="card-title">Bioplastica</h3>
+                        <ul class="info-list">
+                            <li>
+                                <span class="info-icon">✓</span>
+                                <span class="info-text-item">Deriva da <strong>fonti rinnovabili</strong> come mais, canna da zucchero, o alghe</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">✓</span>
+                                <span class="info-text-item">Può essere <strong>biodegradabile</strong> in condizioni di compostaggio industriale</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">✓</span>
+                                <span class="info-text-item">Riduce la dipendenza da <strong>combustibili fossili</strong></span>
+                            </li>
+                            <li>
+                                <span class="info-icon">✓</span>
+                                <span class="info-text-item">Minore <strong>impatto ambientale</strong> nella produzione rispetto alla plastica tradizionale</span>
+                            </li>
+                            <li>
+                                <span class="info-icon">✓</span>
+                                <span class="info-text-item">Contribuisce a un'<strong>economia circolare</strong> più sostenibile</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <div class="button-container">
+                    <button class="btn btn-forward">
+                        AVANTI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
