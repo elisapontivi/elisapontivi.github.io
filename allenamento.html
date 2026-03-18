@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allenamento Pallavolo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --card: #161616;
+    --card-border: #252525;
+    --accent: #e8ff47;
+    --accent2: #ff4757;
+    --accent3: #38d9f5;
+    --accent4: #ffaa33;
+    --text: #f0f0f0;
+    --muted: #888;
+    --tag-bg: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    padding: 16px 24px 16px 0;
+    border-right: 1px solid var(--card-border);
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  .nav-tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-tab.active.blue { color: var(--accent3); border-bottom-color: var(--accent3); }
+  .nav-tab.active.orange { color: var(--accent4); border-bottom-color: var(--accent4); }
+
+  /* ── SECTIONS ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── HEADER ── */
+  .page-header { padding: 50px 40px 30px; max-width: 1200px; margin: 0 auto; }
+  .header-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .header-label::before { content: ''; display: inline-block; width: 24px; height: 2px; background: currentColor; }
+
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 100px); line-height: 0.9; letter-spacing: 2px; }
+
+  .subtitle { margin-top: 16px; color: var(--muted); font-size: 14px; font-weight: 300; max-width: 480px; line-height: 1.6; }
+  .count-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #000;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-top: 20px;
+  }
+
+  /* ── GRID ── */
+  .grid { max-width: 1200px; margin: 0 auto; padding: 10px 40px 60px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 6px; overflow: hidden; display: flex; flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .card:hover { transform: translateY(-4px); }
+  .card.y:hover { border-color: var(--accent); }
+  .card.b:hover { border-color: var(--accent3); }
+  .card.o:hover { border-color: var(--accent4); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-number {
+    padding: 16px 20px 0; font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 3px; color: var(--muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .step-number::after { content: ''; flex: 1; height: 1px; background: var(--card-border); }
+
+  .phase-label {
+    margin: 12px 20px 0; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 2px; width: fit-content;
+  }
+  .phase-label.warm      { background: rgba(255,165,0,0.15);   color: #ffaa33;        border: 1px solid rgba(255,165,0,0.3); }
+  .phase-label.explosive { background: rgba(255,71,87,0.15);   color: var(--accent2); border: 1px solid rgba(255,71,87,0.3); }
+  .phase-label.rest      { background: rgba(100,220,150,0.12); color: #64dc96;        border: 1px solid rgba(100,220,150,0.3); }
+  .phase-label.strength  { background: rgba(100,160,255,0.12); color: #80aaff;        border: 1px solid rgba(100,160,255,0.3); }
+  .phase-label.core      { background: rgba(200,100,255,0.12); color: #cc88ff;        border: 1px solid rgba(200,100,255,0.3); }
+  .phase-label.block     { background: rgba(56,217,245,0.10);  color: var(--accent3); border: 1px solid rgba(56,217,245,0.3); }
+  .phase-label.fast-tag  { background: rgba(255,170,51,0.12);  color: var(--accent4); border: 1px solid rgba(255,170,51,0.3); }
+  .phase-label.upper     { background: rgba(255,71,87,0.12);   color: #ff8c96;        border: 1px solid rgba(255,71,87,0.3); }
+
+  .card-title { padding: 10px 20px 4px; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1.5px; line-height: 1.2; }
+
+  /* ── VIDEO YouTube ── */
+  a.video-wrap {
+    margin: 14px 20px; border-radius: 4px; overflow: hidden;
+    aspect-ratio: 16/9; background: #111; position: relative;
+    display: block; cursor: pointer; text-decoration: none;
+  }
+  a.video-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+  a.video-wrap:hover img { opacity: 0.7; }
+
+  /* ── VIDEO locale ── */
+  .video-local { margin: 14px 20px; border-radius: 4px; overflow: hidden; aspect-ratio: 16/9; background: #111; }
+  .video-local video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .play-btn {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; background: rgba(255,255,255,0.95); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  a.video-wrap:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); background: var(--accent); }
+  .play-btn svg { margin-left: 4px; }
+
+  /* ── SERIES ── */
+  .series-info { display: flex; gap: 10px; padding: 0 20px 16px; flex-wrap: wrap; }
+  .series-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(232,255,71,0.1); border: 1px solid rgba(232,255,71,0.25);
+    border-radius: 3px; padding: 6px 12px; font-size: 12px; font-weight: 700; color: var(--accent);
+  }
+  .series-badge span { font-size: 10px; font-weight: 400; color: #aaa; letter-spacing: 1px; text-transform: uppercase; }
+  .series-badge.alt  { background: rgba(255,71,87,0.1);    border-color: rgba(255,71,87,0.25);   color: var(--accent2); }
+  .series-badge.bl   { background: rgba(56,217,245,0.08);  border-color: rgba(56,217,245,0.25);  color: var(--accent3); }
+  .series-badge.or   { background: rgba(255,170,51,0.10);  border-color: rgba(255,170,51,0.25);  color: var(--accent4); }
+
+  /* ── TAGS ── */
+  .muscles-section { padding: 0 20px 20px; flex: 1; }
+  .muscles-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--text); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 2px; }
+  .tag.primary { background: rgba(232,255,71,0.12); border-color: rgba(232,255,71,0.3); color: var(--accent); }
+  .tag.blue    { background: rgba(56,217,245,0.08); border-color: rgba(56,217,245,0.3); color: var(--accent3); }
+  .tag.orange  { background: rgba(255,170,51,0.10); border-color: rgba(255,170,51,0.3); color: var(--accent4); }
+
+  /* ── NOTE ── */
+  .note { margin: 0 20px 20px; padding: 10px 14px; background: rgba(255,71,87,0.08); border-left: 3px solid var(--accent2); border-radius: 2px; font-size: 12px; color: #bbb; line-height: 1.5; }
+  .note strong { color: var(--accent2); }
+  .note.bl { background: rgba(56,217,245,0.06); border-left-color: var(--accent3); }
+  .note.bl strong { color: var(--accent3); }
+  .note.or { background: rgba(255,170,51,0.06); border-left-color: var(--accent4); }
+  .note.or strong { color: var(--accent4); }
+
+  footer { text-align: center; padding: 30px; color: #333; font-size: 12px; letter-spacing: 1px; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .nav-logo { padding: 14px 16px 14px 0; font-size: 14px; }
+    .page-header { padding: 30px 20px 20px; }
+    .grid { padding: 8px 20px 40px; gap: 16px; }
+    h1 { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🏐</div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('circuito', this, '')">Circuito corpo libero</div>
+    <div class="nav-tab" onclick="showSection('spostamenti', this, 'blue')">Spostamenti a muro</div>
+    <div class="nav-tab" onclick="showSection('fast', this, 'orange')">Fast</div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════
+     SEZIONE 1 · CIRCUITO
+══════════════════════════════ -->
+<div id="circuito" class="section active">
+  <div class="page-header">
+    <div class="header-label" style="color:var(--accent)">Corpo libero · Atletismo</div>
+    <h1>IL MIO<br><span style="color:var(--accent)">CIRCUITO</span></h1>
+    <p class="subtitle">8 esercizi di corpo libero con video, muscoli target e indicazioni per ogni stazione.</p>
+    <div class="count-badge">● 8 esercizi + 1 alternativa</div>
+  </div>
+  <div class="grid">
+
+    <div class="card y">
+      <div class="step-number">01</div>
+      <div class="phase-label warm">🔥 Riscaldamento</div>
+      <div class="card-title">Inchworm</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=VSp0z7Mp5IU" target="_blank">
+        <img src="https://img.youtube.com/vi/VSp0z7Mp5IU/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Femorali</span><span class="tag primary">Core</span>
+          <span class="tag">Spalle</span><span class="tag">Tricipiti</span>
+          <span class="tag">Lombari</span><span class="tag">Polpacci</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> riscaldamento, mobilità della catena posteriore, stretching dinamico</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">02</div>
+      <div class="phase-label explosive">⚡ Gambe · Esplosivo</div>
+      <div class="card-title">Jumping Lunges</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=cIkkHg8YZQU" target="_blank">
+        <img src="https://img.youtube.com/vi/cIkkHg8YZQU/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge alt">2 <span>serie</span></div>
+        <div class="series-badge alt">10-12 rip <span>per lato</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Quadricipiti</span><span class="tag primary">Glutei</span>
+          <span class="tag">Femorali</span><span class="tag">Polpacci</span><span class="tag">Cardio</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> potenza pliometrica, coordinazione, capacità aerobica — meglio a ripetizioni per mantenere la qualità del movimento</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">03</div>
+      <div class="phase-label core">🧱 Core</div>
+      <div class="card-title">Up-Down Plank</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=jF3wvzUUw7s" target="_blank">
+        <img src="https://img.youtube.com/vi/jF3wvzUUw7s/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Core</span><span class="tag primary">Tricipiti</span>
+          <span class="tag">Spalle</span><span class="tag">Pettorali</span><span class="tag">Stabilizzatori</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> forza del core, resistenza delle braccia, coordinazione</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">03 alt</div>
+      <div class="phase-label core">🧱 Core · Alternativa</div>
+      <div class="card-title">Plank Weight Shift</div>
+      <a class="video-wrap" href="https://www.youtube.com/shorts/iw8Fro4bOyY" target="_blank">
+        <img src="https://img.youtube.com/vi/iw8Fro4bOyY/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Core</span><span class="tag primary">Obliqui</span>
+          <span class="tag">Spalle</span><span class="tag">Glutei</span><span class="tag">Stabilizzatori</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> stabilità laterale del core, controllo del bacino — alternativa più statica all'Up-Down Plank</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">04</div>
+      <div class="phase-label strength">💪 Gambe · Forza</div>
+      <div class="card-title">Bulgarian Squat</div>
+      <a class="video-wrap" href="https://www.youtube.com/shorts/uBSoEWZu07k" target="_blank">
+        <img src="https://img.youtube.com/vi/uBSoEWZu07k/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge alt">2 <span>serie</span></div>
+        <div class="series-badge alt">10-12 rip <span>per lato</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Quadricipiti</span><span class="tag primary">Glutei</span>
+          <span class="tag">Femorali</span><span class="tag">Core (stabilizzazione)</span><span class="tag">Equilibrio</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> forza unilaterale, equilibrio, mobilità dell'anca — meglio a ripetizioni per curare la tecnica</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">05</div>
+      <div class="phase-label core">🧱 Core</div>
+      <div class="card-title">Plank Shoulder Tap</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=8rgurWd-PB8" target="_blank">
+        <img src="https://img.youtube.com/vi/8rgurWd-PB8/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Core (anti-rotazione)</span><span class="tag primary">Spalle</span>
+          <span class="tag">Obliqui</span><span class="tag">Glutei</span><span class="tag">Stabilizzatori</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> stabilità del core, equilibrio, controllo posturale</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">06</div>
+      <div class="phase-label upper">💥 Upper Body</div>
+      <div class="card-title">Push-Up</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=WDIpL0pjun0" target="_blank">
+        <img src="https://img.youtube.com/vi/WDIpL0pjun0/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Pettorali</span><span class="tag primary">Tricipiti</span>
+          <span class="tag">Spalle</span><span class="tag">Core</span><span class="tag">Stabilizzatori</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> forza della parte superiore del corpo, fondamentale per la potenza del muro e della battuta</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">07</div>
+      <div class="phase-label strength">💪 Gambe · Schiena</div>
+      <div class="card-title">Isometric Squat Row</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=jLGlz-gHmHE" target="_blank">
+        <img src="https://img.youtube.com/vi/jLGlz-gHmHE/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Quadricipiti (isometrico)</span><span class="tag primary">Gran dorsale</span>
+          <span class="tag">Glutei</span><span class="tag">Bicipiti</span><span class="tag">Romboidi</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> resistenza muscolare gambe + schiena, postura, forza funzionale</div>
+    </div>
+
+    <div class="card y">
+      <div class="step-number">08</div>
+      <div class="phase-label rest">😮‍💨 Recupero attivo</div>
+      <div class="card-title">Glute Bridge</div>
+      <a class="video-wrap" href="https://www.youtube.com/watch?v=Xp33YgPZgns" target="_blank">
+        <img src="https://img.youtube.com/vi/Xp33YgPZgns/hqdefault.jpg" alt="">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </a>
+      <div class="series-info">
+        <div class="series-badge">2 <span>serie</span></div>
+        <div class="series-badge">30 sec <span>tempo</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Muscoli coinvolti</div>
+        <div class="tags">
+          <span class="tag primary">Glutei</span><span class="tag primary">Femorali</span>
+          <span class="tag">Lombari</span><span class="tag">Core</span><span class="tag">Adduttori</span>
+        </div>
+      </div>
+      <div class="note"><strong>Ottimo per:</strong> attivazione glutei, rinforzo lombare, postura del bacino — recupero attivo finale</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════
+     SEZIONE 2 · SPOSTAMENTI
+══════════════════════════════ -->
+<div id="spostamenti" class="section">
+  <div class="page-header">
+    <div class="header-label" style="color:var(--accent3)">Tecnica · Muro</div>
+    <h1>SPOSTAMENTI<br><span style="color:var(--accent3)">A MURO</span></h1>
+    <p class="subtitle">Reattività laterale e timing per il muro. Focus su lettura dello spazio e coordinazione con la palla medica.</p>
+    <div class="count-badge" style="background:var(--accent3)">● 2 esercizi</div>
+  </div>
+  <div class="grid">
+
+    <div class="card b">
+      <div class="step-number">SPOS 01</div>
+      <div class="phase-label block">🤚 Muro · Reattività</div>
+      <div class="card-title">Salto · Spostamento · Muro</div>
+      <div class="video-local">
+        <video controls preload="metadata">
+          <source src="spos1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge bl">3-4 <span>ripetizioni</span></div>
+        <div class="series-badge bl">per lato <span>alternato</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag blue">Reattività laterale</span><span class="tag blue">Timing del salto</span>
+          <span class="tag">Esplosività</span><span class="tag">Lettura della palla</span><span class="tag">Coordinazione</span>
+        </div>
+      </div>
+      <div class="note bl"><strong>Esercizio:</strong> salto, spostamento laterale, nuovo salto e muro sulla palla medica lanciata dal compagno. Simula la sequenza reale di lettura e chiusura del muro.</div>
+    </div>
+
+    <div class="card b">
+      <div class="step-number">SPOS 02</div>
+      <div class="phase-label block">🤚 Muro · Potenza + Mobilità</div>
+      <div class="card-title">Spostamento con Palla Medica</div>
+      <div class="video-local">
+        <video controls preload="metadata">
+          <source src="spos2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge bl">3-4 <span>ripetizioni</span></div>
+        <div class="series-badge bl">per lato <span>alternato</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag blue">Spostamento laterale</span><span class="tag blue">Lancio oltre rete</span>
+          <span class="tag">Agilità</span><span class="tag">Coordinazione braccia-gambe</span>
+        </div>
+      </div>
+      <div class="note bl"><strong>Esercizio:</strong> spostamento laterale con palla medica in mano, lancio oltre la rete dall'altra parte. Allena il trasferimento del peso e la potenza delle braccia in movimento.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════
+     SEZIONE 3 · FAST
+══════════════════════════════ -->
+<div id="fast" class="section">
+  <div class="page-header">
+    <div class="header-label" style="color:var(--accent4)">Tecnica · Fast</div>
+    <h1>PROGRESSIONE<br><span style="color:var(--accent4)">FAST</span></h1>
+    <p class="subtitle">Dal gesto parziale alla situazione di gioco completa. 8 esercizi in progressione crescente di complessità.</p>
+    <div class="count-badge" style="background:var(--accent4); color:#000">● 8 esercizi in progressione</div>
+  </div>
+  <div class="grid">
+
+    <!-- FAST 01 -->
+    <div class="card o">
+      <div class="step-number">FAST 01</div>
+      <div class="phase-label fast-tag">🦶 Gesto base</div>
+      <div class="card-title">Step · Atterraggio · Intrarotazione</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast1.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">6-8 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Intrarotazione del busto</span>
+          <span class="tag orange">Piede sinistro nel cerchio</span>
+          <span class="tag">Timing del salto</span>
+          <span class="tag">Posizione d'arrivo</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> da sopra lo step, salto e atterraggio con il piede sinistro nel cerchio di riferimento, rotazione del busto in intrarotazione per simulare il gesto d'attacco. Nessuna palla — solo gesto.</div>
+    </div>
+
+    <!-- FAST 02 -->
+    <div class="card o">
+      <div class="step-number">FAST 02</div>
+      <div class="phase-label fast-tag">🎯 Gesto + Lancio</div>
+      <div class="card-title">Step · Intrarotazione · Pallina</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast2.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">6-8 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Intrarotazione del busto</span>
+          <span class="tag orange">Lancio della pallina</span>
+          <span class="tag">Coordinazione braccio-busto</span>
+          <span class="tag">Traiettoria</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> da sopra lo step, salto e atterraggio con il piede sinistro nel cerchio, intrarotazione del busto e lancio della pallina. Introduce la coordinazione occhio-mano nel gesto d'attacco.</div>
+    </div>
+
+    <!-- FAST 03 -->
+    <div class="card o">
+      <div class="step-number">FAST 03</div>
+      <div class="phase-label fast-tag">🏃 Rincorsa completa</div>
+      <div class="card-title">Rincorsa Fast · Tre Cerchi · Pallina</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast3.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">5-6 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Passi della rincorsa</span>
+          <span class="tag orange">Tre cerchi di riferimento</span>
+          <span class="tag">Ritmo</span>
+          <span class="tag">Lancio pallina</span>
+          <span class="tag">Posizione dei piedi</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> rincorsa completa con tutti i passi della fast, tre cerchi come riferimento per i piedi, chiusura con lancio della pallina. Obiettivo: automatizzare il ritmo della rincorsa.</div>
+    </div>
+
+    <!-- FAST 04 -->
+    <div class="card o">
+      <div class="step-number">FAST 04</div>
+      <div class="phase-label fast-tag">🦶 Ultimo passo · Salto giù</div>
+      <div class="card-title">Da Step · Salto · Intrarotazione · Pallina</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast4.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">6-8 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Ultimo passo sinistro sopra step</span>
+          <span class="tag orange">Salto verso l'alto</span>
+          <span class="tag">Intrarotazione</span>
+          <span class="tag">Lancio pallina</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> si è sopra lo step con il piede sinistro come ultimo passo della rincorsa, salto verso l'alto, intrarotazione del busto e lancio della pallina. Rinforza il collegamento tra l'ultimo passo e il salto d'attacco.</div>
+    </div>
+
+    <!-- FAST 05 -->
+    <div class="card o">
+      <div class="step-number">FAST 05</div>
+      <div class="phase-label fast-tag">🏐 Da step · Autoalzata</div>
+      <div class="card-title">Step · Autoalzata · Colpo</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast6.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">6-8 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Autoalzata della palla</span>
+          <span class="tag orange">Attacco da sopra lo step</span>
+          <span class="tag">Intrarotazione</span>
+          <span class="tag">Timing</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> da sopra lo step, autoalzata della palla in alto, intrarotazione del busto e colpo sulla palla rimanendo sullo step. Primo esercizio con contatto reale sulla palla.</div>
+    </div>
+
+    <!-- FAST 06 -->
+    <div class="card o">
+      <div class="step-number">FAST 06</div>
+      <div class="phase-label fast-tag">🏐 Da step · Feed allenatore</div>
+      <div class="card-title">Sinistro su Step · Salto · Colpo</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast5.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">6-8 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Sinistro posizionato sullo step</span>
+          <span class="tag orange">Salto verso l'alto e colpo</span>
+          <span class="tag">Palla lanciata dall'allenatore</span>
+          <span class="tag">Timing d'attacco</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> si è sopra lo step con il piede sinistro già posizionato, salto verso l'alto e colpo sulla palla lanciata dall'allenatore. Adattamento del timing alla palla che arriva.</div>
+    </div>
+
+    <!-- FAST 07 -->
+    <div class="card o">
+      <div class="step-number">FAST 07</div>
+      <div class="phase-label fast-tag">⚡ Situazione di gioco</div>
+      <div class="card-title">Fast con Alzata dal Palleggio</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast7.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">5-6 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Alzata dal palleggiatore</span>
+          <span class="tag orange">Sincronizzazione rincorsa</span>
+          <span class="tag">Lettura del palleggio</span>
+          <span class="tag">Timing d'attacco</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> fast con palla alzata direttamente dal palleggiatore. La giocatrice sincronizza la rincorsa con il gesto del palleggio — situazione quasi identica alla partita.</div>
+    </div>
+
+    <!-- FAST 08 -->
+    <div class="card o">
+      <div class="step-number">FAST 08</div>
+      <div class="phase-label fast-tag">🎮 Azione completa</div>
+      <div class="card-title">Palla Passata · Alzata · Fast</div>
+      <div class="video-local">
+        <video controls preload="metadata"><source src="fast8.mp4" type="video/mp4"></video>
+      </div>
+      <div class="series-info">
+        <div class="series-badge or">4-5 <span>ripetizioni</span></div>
+      </div>
+      <div class="muscles-section">
+        <div class="muscles-label">Focus tecnico</div>
+        <div class="tags">
+          <span class="tag orange">Palla passata al palleggio</span>
+          <span class="tag orange">Alzata + attacco</span>
+          <span class="tag">Lettura dell'azione</span>
+          <span class="tag">Continuità</span>
+        </div>
+      </div>
+      <div class="note or"><strong>Esercizio:</strong> azione completa — palla passata al palleggiatore, che alza per la fast. La giocatrice legge il passaggio, parte in anticipo e attacca sulla palla alzata. Massima complessità.</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>PALLAVOLO · ALLENAMENTO</footer>
+
+<script>
+  function showSection(id, tab, color) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => { t.classList.remove('active', 'blue', 'orange'); });
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+    if (color) tab.classList.add(color);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
