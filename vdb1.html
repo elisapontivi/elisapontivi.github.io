@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esame di Microeconomia</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f5f0;
+  --card: #ffffff;
+  --ink: #1a1a2e;
+  --muted: #6b6b7b;
+  --accent: #2d5a8e;
+  --accent-light: #e8eef6;
+  --ok: #1a6b3a;
+  --ok-bg: #e8f5ee;
+  --err: #8b1a1a;
+  --err-bg: #f5e8e8;
+  --border: #dddbd5;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Lora', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+}
+
+/* HEADER */
+.page-header {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.course-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.attempt-badge {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #c5d5e8;
+}
+
+/* CARDS */
+.card {
+  width: 100%;
+  max-width: 680px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.card-head {
+  background: var(--accent);
+  padding: 1.2rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.q-num {
+  width: 26px; height: 26px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 700; color: white; flex-shrink: 0;
+}
+.card-head h2 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  font-style: italic;
+}
+.card-body { padding: 1.75rem; }
+
+/* PARAMS BOX */
+.params-box {
+  background: var(--accent-light);
+  border: 1px solid #c5d5e8;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.param-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.param-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.param-value {
+  font-family: var(--mono);
+  font-size: 1.25rem; font-weight: 500; color: var(--accent);
+}
+
+/* QUESTION TEXT */
+.q-text {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.hint {
+  font-size: 0.8rem; color: var(--muted);
+  font-style: italic; margin-top: 0.4rem; line-height: 1.5;
+}
+.hint code {
+  font-family: var(--mono); font-size: 0.78rem;
+  background: #f0f0f0; padding: 0.1em 0.3em;
+  border-radius: 3px; font-style: normal;
+}
+
+/* INPUT ROW */
+.input-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.45rem;
+}
+.input-row { display: flex; gap: 0.6rem; margin-bottom: 0.4rem; }
+#answer-input {
+  flex: 1;
+  font-family: var(--mono); font-size: 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #fafafa; color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#answer-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45,90,142,0.1);
+  background: white;
+}
+#answer-input.correct { border-color: var(--ok); background: var(--ok-bg); }
+#answer-input.wrong   { border-color: var(--err); background: var(--err-bg); }
+
+/* BUTTONS */
+.btn-primary {
+  padding: 0.75rem 1.4rem;
+  background: var(--accent); color: white;
+  border: none; border-radius: 8px;
+  font-family: var(--sans); font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: #1e3f65; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { background: #aaa; cursor: not-allowed; }
+.btn-ghost {
+  padding: 0.75rem 1.1rem;
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 8px;
+  font-size: 0.88rem; cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FEEDBACK */
+.fb {
+  margin-top: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.88rem; line-height: 1.6;
+  display: none;
+}
+.fb.show { display: block; animation: fadein 0.2s ease; }
+.fb.ok  { background: var(--ok-bg);  border: 1px solid #a8d5ba; color: var(--ok);  }
+.fb.err { background: var(--err-bg); border: 1px solid #d5a8a8; color: var(--err); }
+.fb.warn { background: #fdf5d8; border: 1px solid #e0d080; color: #7a5c00; }
+@keyframes fadein { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+
+/* SOLUTION BOX */
+.sol-box {
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  background: #f9f9f6;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: none;
+}
+.sol-box.show { display: block; }
+.sol-box h4 {
+  font-family: var(--serif); font-size: 0.85rem;
+  color: var(--muted); font-style: italic; margin-bottom: 0.6rem;
+}
+.sol-line { font-family: var(--mono); font-size: 0.9rem; margin-bottom: 0.25rem; }
+.sol-note { font-size: 0.76rem; color: var(--muted); margin-top: 0.6rem; font-style: italic; }
+
+/* GRAPH SECTION */
+.graph-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+#graph-canvas {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fafaf8;
+  cursor: crosshair;
+  touch-action: none;
+  max-width: 100%;
+}
+.graph-hint { font-size: 0.8rem; color: var(--muted); font-style: italic; text-align: center; }
+.btn-row { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+
+/* TAB-LEAVE BANNER */
+#tab-banner {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: #c0392b; color: white;
+  text-align: center; padding: 0.55rem;
+  font-size: 0.82rem; font-weight: 700;
+  z-index: 500; display: none;
+}
+
+/* START OVERLAY */
+#start-overlay {
+  position: fixed; inset: 0;
+  background: rgba(26,26,46,0.93);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.25rem; padding: 2rem;
+  text-align: center; z-index: 9000;
+}
+#start-overlay h3 { font-family: var(--serif); color: white; font-size: 1.4rem; }
+#start-overlay p  { color: rgba(255,255,255,0.72); max-width: 360px; font-size: 0.88rem; line-height: 1.65; }
+
+/* BLOCKED OVERLAY */
+#blocked-overlay {
+  position: fixed; inset: 0;
+  background: rgba(130,15,15,0.97);
+  display: none; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.1rem; padding: 2rem;
+  text-align: center; z-index: 9999;
+}
+#blocked-overlay.show { display: flex; }
+#blocked-overlay .icon { font-size: 2.8rem; }
+#blocked-overlay h3 { font-family: var(--serif); color: white; font-size: 1.4rem; }
+#blocked-overlay p  { color: rgba(255,255,255,0.75); max-width: 360px; font-size: 0.88rem; line-height: 1.6; }
+.leave-badge {
+  font-family: var(--mono); font-size: 0.78rem;
+  background: rgba(255,255,255,0.15); color: white;
+  padding: 0.3rem 0.8rem; border-radius: 20px;
+}
+.unlock-row { display: flex; gap: 0.5rem; }
+#pw-input {
+  font-family: var(--mono); font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 8px; background: rgba(255,255,255,0.1);
+  color: white; outline: none; width: 190px; text-align: center;
+}
+#pw-input::placeholder { color: rgba(255,255,255,0.35); }
+#pw-input:focus { border-color: rgba(255,255,255,0.65); }
+.pw-err { color: #ffbbbb; font-size: 0.78rem; min-height: 1.1em; }
+
+footer { font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<!-- ── OVERLAYS ──────────────────────────────────────────────── -->
+<div id="tab-banner"></div>
+
+<div id="start-overlay">
+  <h3>Esame di Microeconomia</h3>
+  <p>La pagina si aprirà in modalità schermo intero.<br>
+     Non chiudere questa scheda durante l'esame.</p>
+  <button class="btn-primary" onclick="startExam()">Inizia l'esame →</button>
+</div>
+
+<div id="blocked-overlay">
+  <div class="icon">🔒</div>
+  <h3>Esame bloccato</h3>
+  <p>Hai abbandonato la pagina durante l'esame.<br>
+     Il docente deve inserire la password per continuare.</p>
+  <div class="leave-badge" id="leave-badge">uscite: 0</div>
+  <p style="font-size:0.78rem;color:rgba(255,255,255,0.45);">Password docente:</p>
+  <div class="unlock-row">
+    <input type="password" id="pw-input" placeholder="password" />
+    <button class="btn-primary" onclick="tryUnlock()">Sblocca</button>
+  </div>
+  <div class="pw-err" id="pw-err"></div>
+</div>
+
+<!-- ── HEADER ────────────────────────────────────────────────── -->
+<div class="page-header">
+  <span class="course-label">Esame di Microeconomia — Vincolo di bilancio</span>
+  <span class="attempt-badge" id="badge">tentativo #1</span>
+</div>
+
+<!-- ── CARD 1: EQUAZIONE ─────────────────────────────────────── -->
+<div class="card">
+  <div class="card-head">
+    <div class="q-num">1</div>
+    <h2>Scrivi il vincolo di bilancio del consumatore</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="params-box">
+      <div class="param-item">
+        <span class="param-label">Reddito</span>
+        <span class="param-value" id="v-I">—</span>
+      </div>
+      <div class="param-item">
+        <span class="param-label">Prezzo bene x</span>
+        <span class="param-value" id="v-Px">—</span>
+      </div>
+      <div class="param-item">
+        <span class="param-label">Prezzo bene y</span>
+        <span class="param-value" id="v-Py">—</span>
+      </div>
+    </div>
+
+    <div class="q-text">
+      Un consumatore ha un reddito pari a <strong id="t-I">—</strong>,
+      il prezzo del bene x è <strong id="t-Px">—</strong>
+      e il prezzo del bene y è <strong id="t-Py">—</strong>.
+      <br><br>
+      Scrivi il vincolo di bilancio come preferisci:
+      puoi esprimere <em>y</em> in funzione di <em>x</em>,
+      oppure <em>x</em> in funzione di <em>y</em>.
+      <p class="hint">
+        Formato accettato: <code>y = 50 - 2*x</code> &nbsp;·&nbsp;
+        <code>x = 25 - y/2</code> &nbsp;·&nbsp;
+        <code>y = 100/4 - (5/4)*x</code>
+      </p>
+    </div>
+
+    <div class="input-label">La tua risposta</div>
+    <div class="input-row">
+      <input type="text" id="answer-input"
+             placeholder="es.  y = 50 - 2*x"
+             autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="btn-primary" id="eq-btn" onclick="checkEquation()">Verifica</button>
+    </div>
+    <div class="fb" id="eq-fb"></div>
+    <div class="sol-box" id="sol-box">
+      <h4>Soluzione completa</h4>
+      <div class="sol-line" id="sol-y">—</div>
+      <div class="sol-line" id="sol-x">—</div>
+      <div class="sol-note" id="sol-note">—</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CARD 2: GRAFICO ────────────────────────────────────────── -->
+<div class="card">
+  <div class="card-head">
+    <div class="q-num">2</div>
+    <h2>Disegna il grafico del vincolo di bilancio</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="q-text">
+      Trascina i <strong>due punti rossi</strong> per posizionare la retta del vincolo di bilancio.
+      Il punto sull'<strong>asse y</strong> indica la quantità massima di y (con x&nbsp;=&nbsp;0),
+      quello sull'<strong>asse x</strong> la quantità massima di x (con y&nbsp;=&nbsp;0).
+      I punti si spostano di <strong>un'unità alla volta</strong> e mostrano le coordinate in tempo reale.
+    </div>
+
+    <div class="graph-wrap">
+      <canvas id="graph-canvas" width="520" height="440"></canvas>
+      <p class="graph-hint">🔴 Trascina i punti rossi — si spostano a scatti di 1 unità</p>
+
+      <!-- Campo pendenza -->
+      <div style="width:100%;display:flex;flex-direction:column;gap:0.4rem;margin-top:0.25rem;">
+        <div class="input-label">Pendenza della retta</div>
+        <div class="input-row">
+          <input type="text" id="slope-input"
+                 placeholder="es.  -2  oppure  -5/4"
+                 autocomplete="off" autocorrect="off" spellcheck="false"
+                 style="font-family:var(--mono);font-size:1rem;padding:0.7rem 0.9rem;
+                        border:2px solid var(--border);border-radius:8px;
+                        background:#fafafa;flex:1;outline:none;" />
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="resetGraph()">↺ Reimposta</button>
+        <button class="btn-primary" id="graph-btn" onclick="checkGraph()">Verifica grafico</button>
+      </div>
+      <div class="fb" id="graph-fb" style="width:100%"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>Università degli Studi dell'Insubria · Esame di Microeconomia</footer>
+
+<script>
+// ── CONFIGURAZIONE ─────────────────────────────────────────────────────────
+const UNLOCK_PW = 'docente2024';  // ← cambia questa password
+
+// ── GENERA PARAMETRI RANDOM ────────────────────────────────────────────────
+function gcd(a,b){ return b===0?a:gcd(b,a%b); }
+function lcm(a,b){ return a*b/gcd(a,b); }
+
+function makeParams(){
+  const pool = [1,2,3,4,5,6,8,10];
+  let Px, Py;
+  do {
+    Px = pool[Math.floor(Math.random()*pool.length)];
+    Py = pool[Math.floor(Math.random()*pool.length)];
+  } while(Px===Py);
+  const ks = [2,3,4,5,6,8,10];
+  const k  = ks[Math.floor(Math.random()*ks.length)];
+  const I  = k * lcm(Px,Py);
+  return {I, Px, Py};
+}
+
+const {I, Px, Py} = makeParams();
+const intY  =  I/Py;
+const intX  =  I/Px;
+const slopeY = -(Px/Py);
+const slopeX = -(Py/Px);
+
+// ── POPOLA TESTO ──────────────────────────────────────────────────────────
+document.getElementById('v-I').textContent  = 'I = '+I;
+document.getElementById('v-Px').textContent = 'Pₓ = '+Px;
+document.getElementById('v-Py').textContent = 'Pᵧ = '+Py;
+document.getElementById('t-I').textContent  = 'I = '+I;
+document.getElementById('t-Px').textContent = 'Pₓ = '+Px;
+document.getElementById('t-Py').textContent = 'Pᵧ = '+Py;
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function fmt(n){
+  if(Number.isInteger(n)) return String(n);
+  for(let d=2;d<=20;d++){
+    const num=Math.round(n*d);
+    if(Math.abs(num/d-n)<1e-9) return num+'/'+d;
+  }
+  return parseFloat(n.toFixed(3)).toString();
+}
+
+function showFb(id, type, html){
+  const el = document.getElementById(id);
+  el.className = 'fb show '+type;
+  el.innerHTML = html;
+}
+
+// ── SCHERMO INTERO / AVVIO ────────────────────────────────────────────────
+let examActive = false;
+
+function startExam(){
+  document.getElementById('start-overlay').style.display = 'none';
+  examActive = true;
+  const el = document.documentElement;
+  if(el.requestFullscreen)            el.requestFullscreen();
+  else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+}
+
+// ── BLOCCO AL CAMBIO TAB ──────────────────────────────────────────────────
+let leaves = 0;
+let eq1Solved = false;
+let graphSolved = false;
+
+document.addEventListener('visibilitychange', ()=>{
+  if(!examActive) return;
+  if(document.hidden){
+    if(!eq1Solved || !graphSolved) leaves++;
+  } else {
+    if(!eq1Solved || !graphSolved) blockExam();
+  }
+});
+
+function blockExam(){
+  document.getElementById('leave-badge').textContent = 'uscite dalla pagina: '+leaves;
+  document.getElementById('blocked-overlay').classList.add('show');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-err').textContent = '';
+  setTimeout(()=>document.getElementById('pw-input').focus(), 100);
+}
+
+function tryUnlock(){
+  if(document.getElementById('pw-input').value === UNLOCK_PW){
+    document.getElementById('blocked-overlay').classList.remove('show');
+    const b = document.getElementById('tab-banner');
+    b.textContent = '⚠️ Questo studente ha abbandonato la pagina '+leaves+' volta/e durante l\'esame.';
+    b.style.display = 'block';
+  } else {
+    document.getElementById('pw-err').textContent = 'Password errata.';
+    document.getElementById('pw-input').value = '';
+  }
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='Enter' && document.getElementById('blocked-overlay').classList.contains('show')){
+    tryUnlock();
+  }
+});
+
+window.addEventListener('beforeunload', e=>{
+  if(!eq1Solved || !graphSolved){ e.preventDefault(); e.returnValue=''; }
+});
+
+// ── DOMANDA 1: EQUAZIONE ──────────────────────────────────────────────────
+let attempts = 0;
+
+function checkEquation(){
+  if(eq1Solved) return;
+  const raw = document.getElementById('answer-input').value.trim();
+  if(!raw){ showFb('eq-fb','warn','Inserisci una risposta prima di verificare.'); return; }
+
+  attempts++;
+  document.getElementById('badge').textContent = 'tentativo #'+attempts;
+
+  const res = validateEq(raw);
+  const inp = document.getElementById('answer-input');
+
+  if(res.ok){
+    inp.classList.add('correct'); inp.classList.remove('wrong');
+    showFb('eq-fb','ok','✓ <strong>Corretto!</strong> Il vincolo che hai scritto è algebricamente equivalente alla soluzione.');
+    showSolution();
+    eq1Solved = true;
+    document.getElementById('eq-btn').disabled = true;
+    document.getElementById('eq-btn').textContent = 'Corretto ✓';
+  } else {
+    inp.classList.add('wrong'); inp.classList.remove('correct');
+    showFb('eq-fb','err','✗ <strong>Non corretto.</strong> '+res.msg);
+  }
+}
+
+document.getElementById('answer-input').addEventListener('keydown', e=>{
+  if(e.key==='Enter') checkEquation();
+});
+
+function validateEq(input){
+  let s = input.replace(/\s*=\s*/g,'=').replace(/\*\*/g,'^').toLowerCase().replace(/\s+/g,'');
+  let form, rhs;
+  if(s.startsWith('y=')){ form='y'; rhs=s.slice(2); }
+  else if(s.startsWith('x=')){ form='x'; rhs=s.slice(2); }
+  else return {ok:false, msg:'Scrivi nella forma <strong>y = ...</strong> oppure <strong>x = ...</strong>'};
+  if(!rhs) return {ok:false, msg:'Il lato destro è vuoto.'};
+
+  const tests = [0, 1, 2, 5, intY*0.4, intX*0.6];
+  const TOL = 1e-4;
+  try {
+    for(const v of tests){
+      let sv, cv;
+      if(form==='y'){ sv=math.evaluate(rhs,{x:v}); cv=intY+slopeY*v; }
+      else           { sv=math.evaluate(rhs,{y:v}); cv=intX+slopeX*v; }
+      if(typeof sv!=='number'||!isFinite(sv)) return {ok:false,msg:'Risultato non numerico. Controlla la sintassi.'};
+      if(Math.abs(sv-cv)>TOL*Math.max(Math.abs(cv),1)+TOL)
+        return {ok:false,msg:'I valori non corrispondono al vincolo. Ricontrolla intercetta e pendenza.'};
+    }
+    return {ok:true};
+  } catch(e){
+    return {ok:false,msg:'Formato non riconosciuto. Usa: <code>+</code> <code>-</code> <code>*</code> <code>/</code>'};
+  }
+}
+
+function showSolution(){
+  const b = document.getElementById('sol-box');
+  b.classList.add('show');
+  document.getElementById('sol-y').textContent = 'y = '+fmt(intY)+' − '+fmt(Math.abs(slopeY))+'·x';
+  document.getElementById('sol-x').textContent = 'x = '+fmt(intX)+' − '+fmt(Math.abs(slopeX))+'·y';
+  document.getElementById('sol-note').innerHTML =
+    'Intercetta su y: <strong>'+fmt(intY)+'</strong> (max y se x=0) · '+
+    'Intercetta su x: <strong>'+fmt(intX)+'</strong> (max x se y=0) · '+
+    'Pendenza: <strong>−'+fmt(Math.abs(slopeY))+'</strong>';
+}
+
+// ── DOMANDA 2: GRAFICO ────────────────────────────────────────────────────
+const canvas = document.getElementById('graph-canvas');
+const ctx    = canvas.getContext('2d');
+const PAD    = {top:30, right:30, bottom:55, left:58};
+const GW     = canvas.width  - PAD.left - PAD.right;
+const GH     = canvas.height - PAD.top  - PAD.bottom;
+const axMax  = Math.ceil(Math.max(intX, intY) * 1.4 / 5) * 5;
+
+function toPx(rx,ry){
+  return { px: PAD.left+(rx/axMax)*GW, py: PAD.top+(1-ry/axMax)*GH };
+}
+function toRx(px,py){
+  return { rx:((px-PAD.left)/GW)*axMax, ry:(1-(py-PAD.top)/GH)*axMax };
+}
+
+const PR = 9;
+// Punto 0: sull'asse y (x fisso a 0), Punto 1: sull'asse x (y fisso a 0)
+let pts = [{rx:0, ry:Math.round(axMax*0.25)}, {rx:Math.round(axMax*0.25), ry:0}];
+let drag = null;
+function drawGraph(lineCol){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const step = axMax<=30?5:axMax<=60?10:20;
+
+  // Griglia
+  ctx.strokeStyle='#e8e8e0'; ctx.lineWidth=1;
+  for(let v=step;v<axMax;v+=step){
+    const a=toPx(v,0), b=toPx(v,axMax);
+    ctx.beginPath(); ctx.moveTo(a.px,b.py); ctx.lineTo(a.px,a.py); ctx.stroke();
+    const c=toPx(0,v), d=toPx(axMax,v);
+    ctx.beginPath(); ctx.moveTo(c.px,c.py); ctx.lineTo(d.px,d.py); ctx.stroke();
+  }
+
+  // Assi
+  const o=toPx(0,0), xe=toPx(axMax,0), ye=toPx(0,axMax);
+  ctx.strokeStyle='#333'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(o.px,o.py); ctx.lineTo(xe.px,xe.py); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(o.px,o.py); ctx.lineTo(ye.px,ye.py); ctx.stroke();
+
+  // Frecce
+  ctx.fillStyle='#333';
+  ctx.beginPath(); ctx.moveTo(xe.px+10,xe.py); ctx.lineTo(xe.px,xe.py-5); ctx.lineTo(xe.px,xe.py+5); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(ye.px,ye.py-10); ctx.lineTo(ye.px-5,ye.py); ctx.lineTo(ye.px+5,ye.py); ctx.fill();
+
+  // Etichette assi
+  ctx.fillStyle='#555'; ctx.font='italic 14px Georgia,serif';
+  ctx.textAlign='center'; ctx.fillText('x',xe.px+18,xe.py+5);
+  ctx.fillText('y',ye.px,ye.py-16);
+
+  // Tick numerici
+  ctx.font='11px Inter,sans-serif'; ctx.fillStyle='#888'; ctx.strokeStyle='#aaa'; ctx.lineWidth=1;
+  for(let v=step;v<=axMax-step/2;v+=step){
+    const tx=toPx(v,0);
+    ctx.beginPath(); ctx.moveTo(tx.px,tx.py-3); ctx.lineTo(tx.px,tx.py+3); ctx.stroke();
+    ctx.textAlign='center'; ctx.fillText(v,tx.px,tx.py+14);
+    const ty=toPx(0,v);
+    ctx.beginPath(); ctx.moveTo(ty.px-3,ty.py); ctx.lineTo(ty.px+3,ty.py); ctx.stroke();
+    ctx.textAlign='right'; ctx.fillText(v,ty.px-7,ty.py+4);
+  }
+  ctx.textAlign='right'; ctx.fillText('0',o.px-6,o.py+14);
+
+  // Retta (estesa)
+  const p0=toPx(pts[0].rx,pts[0].ry), p1=toPx(pts[1].rx,pts[1].ry);
+  const dx=p1.px-p0.px, dy=p1.py-p0.py, len=Math.hypot(dx,dy);
+  if(len>5){
+    const ux=dx/len, uy=dy/len, BIG=1400;
+    ctx.beginPath();
+    ctx.strokeStyle = lineCol||'#2d5a8e';
+    ctx.lineWidth=2.5; ctx.setLineDash([]);
+    ctx.moveTo(p0.px-ux*BIG, p0.py-uy*BIG);
+    ctx.lineTo(p0.px+ux*BIG, p0.py+uy*BIG);
+    ctx.stroke();
+  }
+
+  // Punti con etichetta coordinate
+  pts.forEach((pt, i)=>{
+    const p=toPx(pt.rx,pt.ry);
+
+    // Cerchio rosso
+    ctx.beginPath(); ctx.arc(p.px,p.py,PR,0,Math.PI*2);
+    ctx.fillStyle='#e74c3c'; ctx.fill();
+    ctx.strokeStyle='white'; ctx.lineWidth=2.5; ctx.stroke();
+
+    // Linea tratteggiata verso asse
+    ctx.setLineDash([3,3]); ctx.strokeStyle='rgba(231,76,60,0.4)'; ctx.lineWidth=1;
+    if(i===0){
+      // Punto asse y: linea orizzontale verso asse y
+      ctx.beginPath(); ctx.moveTo(o.px,p.py); ctx.lineTo(p.px,p.py); ctx.stroke();
+    } else {
+      // Punto asse x: linea verticale verso asse x
+      ctx.beginPath(); ctx.moveTo(p.px,o.py); ctx.lineTo(p.px,p.py); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Etichetta coordinate
+    const label = i===0 ? `(0, ${pt.ry})` : `(${pt.rx}, 0)`;
+    ctx.font='bold 12px Inter,sans-serif';
+    const tw = ctx.measureText(label).width;
+    const lx = i===0 ? p.px+14 : p.px;
+    const ly = i===0 ? p.py-4  : p.py-16;
+
+    // Sfondo etichetta
+    ctx.fillStyle='rgba(255,255,255,0.88)';
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(lx-3, ly-13, tw+6, 18, 4)
+                  : ctx.rect(lx-3, ly-13, tw+6, 18);
+    ctx.fill();
+
+    ctx.fillStyle='#c0392b';
+    ctx.textAlign='left';
+    ctx.fillText(label, lx, ly);
+  });
+}
+drawGraph();
+
+function getPos(e){
+  const r=canvas.getBoundingClientRect();
+  const sx=canvas.width/r.width, sy=canvas.height/r.height;
+  const cx=e.touches?e.touches[0].clientX:e.clientX;
+  const cy=e.touches?e.touches[0].clientY:e.clientY;
+  return {px:(cx-r.left)*sx, py:(cy-r.top)*sy};
+}
+function findPt(px,py){
+  for(let i=0;i<pts.length;i++){
+    const p=toPx(pts[i].rx,pts[i].ry);
+    if(Math.hypot(px-p.px,py-p.py)<PR+10) return i;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousedown',  e=>{ if(!graphSolved){ const p=getPos(e); drag=findPt(p.px,p.py); }});
+canvas.addEventListener('mousemove',  e=>{
+  if(drag===null||graphSolved) return;
+  e.preventDefault();
+  const p=getPos(e);
+  const r=toRx(p.px,p.py);
+  if(drag===0){
+    // Punto asse y: x bloccato a 0, y si muove per interi
+    const ry = Math.round(Math.max(0,Math.min(axMax,r.ry)));
+    pts[0]={rx:0, ry};
+  } else {
+    // Punto asse x: y bloccato a 0, x si muove per interi
+    const rx = Math.round(Math.max(0,Math.min(axMax,r.rx)));
+    pts[1]={rx, ry:0};
+  }
+  drawGraph();
+});
+canvas.addEventListener('mouseup',    ()=>{ drag=null; });
+canvas.addEventListener('touchstart', e=>{ if(!graphSolved){ e.preventDefault(); const p=getPos(e); drag=findPt(p.px,p.py); }},{passive:false});
+canvas.addEventListener('touchmove',  e=>{
+  if(drag===null||graphSolved) return;
+  e.preventDefault();
+  const p=getPos(e);
+  const r=toRx(p.px,p.py);
+  if(drag===0){
+    const ry=Math.round(Math.max(0,Math.min(axMax,r.ry)));
+    pts[0]={rx:0,ry};
+  } else {
+    const rx=Math.round(Math.max(0,Math.min(axMax,r.rx)));
+    pts[1]={rx,ry:0};
+  }
+  drawGraph();
+},{passive:false});
+canvas.addEventListener('touchend', ()=>{ drag=null; });
+
+function checkGraph(){
+  if(graphSolved) return;
+
+  // Verifica posizione punti
+  const okY = Math.abs(pts[0].ry - intY) <= 0.5;
+  const okX = Math.abs(pts[1].rx - intX) <= 0.5;
+
+  // Verifica pendenza inserita
+  const slopeRaw = document.getElementById('slope-input').value.trim();
+  let slopeOk = false, slopeMsg = '';
+  if(!slopeRaw){
+    slopeMsg = 'Inserisci anche la pendenza della retta.';
+  } else {
+    try {
+      const sv = math.evaluate(slopeRaw.replace(/,/g,'.'));
+      if(typeof sv==='number' && isFinite(sv)){
+        slopeOk = Math.abs(sv - slopeY) < Math.abs(slopeY)*0.05 + 0.001;
+        if(!slopeOk) slopeMsg = `Pendenza non corretta (hai inserito ${parseFloat(sv.toFixed(4))}, attesa ${fmt(slopeY)}).`;
+      } else { slopeMsg = 'Valore pendenza non valido.'; }
+    } catch(e){ slopeMsg = 'Formato pendenza non riconosciuto. Usa es. -2 oppure -5/4'; }
+  }
+
+  if(okY && okX && slopeOk){
+    drawGraph('#1a6b3a');
+    document.getElementById('slope-input').style.borderColor='var(--ok)';
+    document.getElementById('slope-input').style.background='var(--ok-bg)';
+    showFb('graph-fb','ok',
+      '✓ <strong>Tutto corretto!</strong> Intercette e pendenza sono giuste. ' +
+      'Il vincolo passa per (0,&nbsp;'+fmt(intY)+') e ('+fmt(intX)+',&nbsp;0) con pendenza '+fmt(slopeY)+'.');
+    document.getElementById('graph-btn').disabled=true;
+    document.getElementById('graph-btn').textContent='Corretto ✓';
+    graphSolved=true;
+  } else {
+    let parts = [];
+    if(!okY) parts.push('intercetta su y sbagliata (hai '+pts[0].ry+', attesa '+fmt(intY)+')');
+    if(!okX) parts.push('intercetta su x sbagliata (hai '+pts[1].rx+', attesa '+fmt(intX)+')');
+    if(slopeMsg) parts.push(slopeMsg);
+    drawGraph('#c0392b');
+    showFb('graph-fb','err','✗ <strong>Non corretto.</strong> '+parts.join(' · '));
+    setTimeout(()=>drawGraph(), 1300);
+  }
+}
+
+function resetGraph(){
+  graphSolved=false;
+  pts=[{rx:0,ry:Math.round(axMax*0.25)},{rx:Math.round(axMax*0.25),ry:0}];
+  document.getElementById('graph-fb').className='fb';
+  document.getElementById('graph-btn').disabled=false;
+  document.getElementById('graph-btn').textContent='Verifica grafico';
+  const si=document.getElementById('slope-input');
+  si.value=''; si.style.borderColor=''; si.style.background='';
+  drawGraph();
+}
+</script>
+</body>
+</html>
