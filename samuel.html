@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Costa Amalfitana — Pacchetto Esclusivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8cc82;
+      --cream: #f5f0e8;
+      --dark: #0e0c09;
+      --dark2: #1a1710;
+      --dark3: #242018;
+      --text: #cfc9bc;
+      --text-light: #f0ead8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 0 8vw 8vh;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(160deg, rgba(14,12,9,0.35) 0%, rgba(14,12,9,0.85) 100%),
+        url('https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=1800&q=80') center/cover no-repeat;
+      transform-origin: center;
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.06); }
+    }
+
+    .hero-badge {
+      position: relative;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: .65rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      padding: .4rem 1.1rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      animation: fadeUp .8s .2s both;
+    }
+
+    .hero h1 {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.2rem, 8vw, 7.5rem);
+      line-height: .95;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      animation: fadeUp .9s .4s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      position: relative;
+      font-size: clamp(.85rem, 1.5vw, 1rem);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 3rem;
+      animation: fadeUp .9s .6s both;
+    }
+
+    .hero-cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      transition: background .3s, gap .3s;
+      animation: fadeUp .9s .8s both;
+    }
+    .hero-cta:hover { background: var(--gold-light); gap: 1.6rem; }
+    .hero-cta span { font-size: 1.1rem; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem; right: 8vw;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold);
+      animation: fadeIn 1s 1.2s both;
+    }
+    .hero-scroll::after {
+      content:'';
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: lineGrow 1.5s 1.5s ease-out both;
+    }
+    @keyframes lineGrow { from { height:0; opacity:0; } to { height:60px; opacity:1; } }
+
+    /* ── STRIP NUMERI ── */
+    .strip {
+      background: var(--gold);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .strip-item {
+      flex: 1; min-width: 180px;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-right: 1px solid rgba(14,12,9,.18);
+      color: var(--dark);
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-item .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300;
+      line-height: 1;
+    }
+    .strip-item .label {
+      font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+      margin-top: .35rem; opacity: .75;
+    }
+
+    /* ── SEZIONI GENERALI ── */
+    section { padding: 8rem 8vw; }
+    .section-tag {
+      font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      color: var(--text-light);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    h2 em { font-style: italic; color: var(--gold-light); }
+    p { line-height: 1.9; font-size: .95rem; max-width: 60ch; }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights { background: var(--dark2); }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px;
+      margin-top: 4rem;
+    }
+    .card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: default;
+    }
+    .card-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .7s ease;
+    }
+    .card:hover .card-img { transform: scale(1.08); }
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,9,7,.92) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 2rem;
+    }
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300;
+      color: rgba(201,168,76,.25);
+      line-height: 1; margin-bottom: .5rem;
+    }
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 1.5rem;
+      color: var(--text-light); margin-bottom: .5rem;
+    }
+    .card p { font-size: .82rem; color: var(--text); max-width: 100%; }
+
+    /* ── ITINERARIO ── */
+    .itinerary { background: var(--dark3); }
+    .days { margin-top: 4rem; display: flex; flex-direction: column; gap: 0; }
+    .day {
+      display: grid;
+      grid-template-columns: 90px 1px 1fr;
+      gap: 0 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(201,168,76,.12);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .day.visible { opacity: 1; transform: translateX(0); }
+    .day-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+      text-align: right;
+    }
+    .day-line {
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .day-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--text-light); margin-bottom: .6rem;
+    }
+    .day-content p { font-size: .88rem; max-width: 55ch; }
+    .day-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    .tag {
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      border: 1px solid rgba(201,168,76,.4);
+      color: var(--gold); padding: .25rem .7rem;
+    }
+
+    /* ── INCLUSO ── */
+    .included { background: var(--dark2); }
+    .included-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 5rem;
+      margin-top: 4rem;
+    }
+    @media(max-width:700px){ .included-cols { grid-template-columns:1fr; } }
+    .incl-group h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--gold); margin-bottom: 1.2rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid rgba(201,168,76,.25);
+    }
+    .incl-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .incl-list li {
+      display: flex; align-items: baseline; gap: .8rem;
+      font-size: .88rem;
+    }
+    .incl-list li::before {
+      content: '—';
+      color: var(--gold); flex-shrink: 0;
+    }
+
+    /* ── PREZZO ── */
+    .pricing {
+      background: var(--dark);
+      text-align: center;
+    }
+    .price-box {
+      display: inline-flex; flex-direction: column; align-items: center;
+      border: 1px solid rgba(201,168,76,.35);
+      padding: 4rem 5rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+    .price-box::before {
+      content:'';
+      position: absolute; top:-1px; left: 15%; right:15%; height:2px;
+      background: var(--gold);
+    }
+    .price-label { font-size: .62rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .price-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300; line-height: 1;
+      color: var(--text-light);
+    }
+    .price-val sup { font-size: 2rem; vertical-align: super; }
+    .price-note { font-size: .75rem; color: var(--text); margin-top: .8rem; }
+    .price-cta {
+      margin-top: 2.5rem;
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: .72rem; font-weight: 400;
+      letter-spacing: .25em; text-transform: uppercase;
+      padding: 1.1rem 2.8rem;
+      text-decoration: none;
+      transition: background .3s, gap .3s;
+    }
+    .price-cta:hover { background: var(--gold-light); gap: 1.6rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark2);
+      padding: 3rem 8vw;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(201,168,76,.15);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--gold-light);
+      letter-spacing: .1em;
+    }
+    .footer-info { font-size: .78rem; color: var(--text); line-height: 1.8; }
+    .footer-contacts { font-size: .78rem; color: var(--text); text-align: right; line-height: 1.8; }
+    .footer-contacts a { color: var(--gold); text-decoration: none; }
+
+    /* ── ANIMAZIONI ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to   { opacity:1; }
+    }
+
+    /* ── REVEAL ON SCROLL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <span class="hero-badge">Viaggio Esclusivo · Estate 2025</span>
+  <h1>Costa<br><em>Amalfitana</em></h1>
+  <p class="hero-sub">7 giorni tra mare, cultura e sapori del Sud</p>
+  <a href="#itinerario" class="hero-cta">Scopri il pacchetto <span>→</span></a>
+  <div class="hero-scroll">Scorri</div>
+</section>
+
+<!-- STRIP NUMERI -->
+<div class="strip">
+  <div class="strip-item"><div class="num">7</div><div class="label">Notti</div></div>
+  <div class="strip-item"><div class="num">5</div><div class="label">Destinazioni</div></div>
+  <div class="strip-item"><div class="num">2</div><div class="label">Escursioni incluse</div></div>
+  <div class="strip-item"><div class="num">★★★★★</div><div class="label">Hotel selezionati</div></div>
+  <div class="strip-item"><div class="num">12</div><div class="label">Partenze disponibili</div></div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights">
+  <p class="section-tag reveal">Le esperienze</p>
+  <h2 class="reveal">Ogni tappa, <em>un capolavoro</em></h2>
+  <p class="reveal">Un itinerario pensato per chi cerca l'autenticità del Mezzogiorno d'Italia: borghi pittoreschi, acque cristalline, cucina d'autore e paesaggi dichiarati Patrimonio UNESCO.</p>
+
+  <div class="highlights-grid reveal">
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80" alt="Positano"/>
+      <div class="card-overlay">
+        <div class="card-num">01</div>
+        <h3>Positano</h3>
+        <p>Case pastello a picco sul mare, vicoli profumati di limone e boutique artigianali uniche.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1614531341773-3bff8b7cb3fc?w=800&q=80" alt="Ravello"/>
+      <div class="card-overlay">
+        <div class="card-num">02</div>
+        <h3>Ravello</h3>
+        <p>Villa Rufolo, i giardini pensili e i concerti del Festival con vista sul golfo.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80" alt="Amalfi"/>
+      <div class="card-overlay">
+        <div class="card-num">03</div>
+        <h3>Amalfi</h3>
+        <p>Il duomo normanno-arabo, la Grotta dello Smeraldo e il celebre limoncello artigianale.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1534445967719-8ae7b972b1a5?w=800&q=80" alt="Capri"/>
+      <div class="card-overlay">
+        <div class="card-num">04</div>
+        <h3>Capri</h3>
+        <p>La Grotta Azzurra, i Faraglioni e un tramonto da Villa Jovis che non si dimentica.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ITINERARIO -->
+<section class="itinerary" id="itinerario">
+  <p class="section-tag reveal">Programma giorno per giorno</p>
+  <h2 class="reveal"><em>7 giorni</em> da vivere appieno</h2>
+
+  <div class="days">
+
+    <div class="day">
+      <div class="day-num">01</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Arrivo a Napoli — Prima notte sulla Costiera</h4>
+        <p>Trasferimento privato dall'aeroporto di Napoli Capodichino verso Positano. Check-in al boutique hotel con terrazza vista mare. Cena di benvenuto con prodotti a km zero.</p>
+        <div class="day-tags"><span class="tag">Trasferimento</span><span class="tag">Check-in</span><span class="tag">Cena</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">02</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Positano — Il villaggio verticale</h4>
+        <p>Mattinata libera per esplorare i vicoli e le spiagge. Nel pomeriggio, degustazione di vini bianchi DOC Amalfi in un vigneto terrazzato. Serata al tramonto sulla Spiaggia Grande.</p>
+        <div class="day-tags"><span class="tag">Degustazione</span><span class="tag">Spiaggia</span><span class="tag">Libero</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">03</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Escursione in barca — Grotta dello Smeraldo</h4>
+        <p>Partenza mattutina in gozzo tradizionale verso Amalfi e la Grotta dello Smeraldo. Visita al Duomo, laboratorio di carta a mano e pranzo in un ristorante stellato affacciato sul porto.</p>
+        <div class="day-tags"><span class="tag">Escursione inclusa</span><span class="tag">Barca privata</span><span class="tag">Pranzo stellato</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">04</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Ravello — Giardini e musica</h4>
+        <p>Trasferimento verso Ravello con sosta a Scala. Visita a Villa Rufolo e Villa Cimbrone. Se in programma, concerto del Ravello Festival con veduta sul golfo di Salerno.</p>
+        <div class="day-tags"><span class="tag">Cultura</span><span class="tag">Giardini</span><span class="tag">Concerto</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">05</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Capri — L'isola dei sogni</h4>
+        <p>Ferry da Amalfi per Capri. Visita alla Grotta Azzurra in barchino, seggiovia sul Monte Solaro, shopping a Via Camerelle e aperitivo ai Faraglioni al tramonto.</p>
+        <div class="day-tags"><span class="tag">Escursione inclusa</span><span class="tag">Grotta Azzurra</span><span class="tag">Panorama</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">06</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Giornata Relax — Spa & Cucina</h4>
+        <p>Mattinata in spa termale con trattamenti a base di limone e olio d'oliva. Nel pomeriggio, cooking class con uno chef locale: pasta fresca, alici marinate e sfogliatelle.</p>
+        <div class="day-tags"><span class="tag">Spa</span><span class="tag">Cooking class</span><span class="tag">Benessere</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">07</div>
+      <div class="day-line"></div>
+      <div class="day-content">
+        <h4>Rientro — Saluti con vista sul golfo</h4>
+        <p>Colazione panoramica sulla terrazza. Check-out e trasferimento privato verso l'aeroporto di Napoli. Un ricordo indelebile nel cuore di ciascun viaggiatore.</p>
+        <div class="day-tags"><span class="tag">Check-out</span><span class="tag">Trasferimento</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INCLUSO / ESCLUSO -->
+<section class="included">
+  <p class="section-tag reveal">Il pacchetto</p>
+  <h2 class="reveal">Tutto quello che <em>è compreso</em></h2>
+
+  <div class="included-cols reveal">
+    <div class="incl-group">
+      <h4>✓ Incluso nel prezzo</h4>
+      <ul class="incl-list">
+        <li>7 notti in hotel 5★ con colazione inclusa</li>
+        <li>Trasferimento aeroporto A/R in auto privata</li>
+        <li>Escursione in barca privata (giorno 3)</li>
+        <li>Ferry A/R Amalfi–Capri (giorno 5)</li>
+        <li>Degustazione vini DOC con sommelier</li>
+        <li>Cooking class con chef locale</li>
+        <li>Trattamento spa (50 min)</li>
+        <li>Cena di benvenuto e cena di arrivederci</li>
+        <li>Guida turistica certificata (3 giorni)</li>
+        <li>Assicurazione viaggio base</li>
+      </ul>
+    </div>
+    <div class="incl-group">
+      <h4>✗ Non incluso</h4>
+      <ul class="incl-list">
+        <li>Voli internazionali e tasse aeroportuali</li>
+        <li>Pranzi e cene non indicati nel programma</li>
+        <li>Ingressi a musei e siti non citati</li>
+        <li>Spese personali e acquisti</li>
+        <li>Mance e servizi extra in hotel</li>
+        <li>Assicurazione annullamento (optional +€ 80)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PREZZO -->
+<section class="pricing">
+  <p class="section-tag reveal">Investi nel tuo benessere</p>
+  <h2 class="reveal">Un'esperienza <em>senza compromessi</em></h2>
+
+  <div class="price-box reveal">
+    <span class="price-label">A partire da — per persona</span>
+    <div class="price-val"><sup>€</sup>2.490</div>
+    <p class="price-note">Camera doppia · Disponibilità limitata · IVA inclusa</p>
+    <a href="mailto:info@viaggiamalfi.it" class="price-cta">Richiedi disponibilità <span>→</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Amalfi Exclusive Travel</div>
+  <div class="footer-info">
+    Tour operator specializzato in viaggi di lusso nel Mezzogiorno d'Italia<br>
+    Lic. n. 1234/TO · RNTO n. 5678
+  </div>
+  <div class="footer-contacts">
+    <a href="tel:+390312345678">+39 031 234 5678</a><br>
+    <a href="mailto:info@viaggiamalfi.it">info@viaggiamalfi.it</a><br>
+    Via Como 12 · Como (CO)
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .day').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
