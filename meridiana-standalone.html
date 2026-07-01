@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<!--
+  MERIDIANA — versione indipendente (Firebase + GitHub Pages)
+
+  COME CONFIGURARLA:
+  1. Vai su https://console.firebase.google.com e crea un progetto gratuito.
+  2. Dentro il progetto, aggiungi una "app web" (icona </>). Ti darà un oggetto
+     firebaseConfig: copialo e incollalo qui sotto al posto dei valori "INSERISCI_QUI".
+  3. Nel menu a sinistra vai su "Firestore Database" -> "Crea database".
+     Scegli una regione vicina a te e parti in modalità produzione.
+  4. Vai su Firestore -> Regole, e incolla queste regole (autorizzano solo
+     la collezione "rooms", usata da quest'app):
+
+     rules_version = '2';
+     service cloud.firestore {
+       match /databases/{database}/documents {
+         match /rooms/{room}/days/{day} {
+           allow read, write: if true;
+         }
+       }
+     }
+
+     Nota: senza un sistema di login, chiunque conosca (o indovini) il codice
+     stanza può leggere e scrivere quella stanza. Per un uso privato tra due
+     persone, scegli un codice stanza lungo e non ovvio (es. non "prova" o
+     "test", ma qualcosa come "meridiana-9f3k-como").
+  5. Carica questo file su GitHub Pages (nel repository, in Settings -> Pages,
+     scegli il branch e la cartella dove si trova questo file, rinominandolo
+     eventualmente in index.html).
+-->
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridiana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<style>
+  :root{
+    --ink-navy:#171c33;
+    --ink-navy-deep:#0f1224;
+    --dusk-violet:#292450;
+    --dusk-violet-soft:#332c5e;
+    --parchment:#f3e9d2;
+    --parchment-dim:#e9dcbc;
+    --ember:#e38b5d;
+    --ember-dim:#c96f42;
+    --gold:#c9a227;
+    --mist:#f7f4ee;
+    --ink-soft:rgba(247,244,238,0.58);
+    --ink-soft-2:rgba(247,244,238,0.36);
+    --line:rgba(247,244,238,0.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 120% 80% at 50% -10%, var(--dusk-violet-soft) 0%, transparent 60%),
+      var(--ink-navy);
+    color:var(--mist);
+    font-family:'Work Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:48px 20px 80px;
+  }
+  .stage{
+    width:100%;
+    max-width:560px;
+  }
+  .brand{
+    text-align:center;
+    margin-bottom:40px;
+  }
+  .brand h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:2.2rem;
+    letter-spacing:0.01em;
+    margin:0 0 8px;
+    color:var(--mist);
+  }
+  .brand p{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    margin:0;
+    line-height:1.5;
+    max-width:400px;
+    margin:0 auto;
+  }
+
+  .card{
+    background:linear-gradient(180deg, var(--dusk-violet) 0%, var(--dusk-violet-soft) 100%);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:32px 28px;
+    margin-bottom:20px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.5);
+  }
+
+  /* ---- Onboarding ---- */
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .field input{
+    width:100%;
+    background:rgba(0,0,0,0.18);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    color:var(--mist);
+    font-family:'Work Sans', sans-serif;
+    font-size:0.98rem;
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .field input:focus{border-color:var(--ember);}
+  .field .hint{
+    font-size:0.76rem;
+    color:var(--ink-soft-2);
+    margin-top:6px;
+  }
+  .btn{
+    appearance:none;
+    border:none;
+    border-radius:10px;
+    padding:13px 20px;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    width:100%;
+    transition:transform .12s ease, opacity .12s ease;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
+  .btn-primary{background:var(--ember); color:var(--ink-navy-deep);}
+  .btn-primary:hover:not(:disabled){background:var(--ember-dim);}
+  .btn-ghost{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--mist);
+  }
+  .btn-ghost:hover{border-color:var(--ink-soft);}
+
+  /* ---- Room header ---- */
+  .room-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:22px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+  }
+  .room-bar .who{
+    font-family:'JetBrains Mono', monospace;
+  }
+  .room-code-pill{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.2);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:6px 12px;
+    cursor:pointer;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--mist);
+  }
+  .room-code-pill:hover{border-color:var(--gold);}
+
+  /* ---- Sundial signature ---- */
+  .sundial-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:6px 0 18px;
+  }
+  .sundial-time{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.86rem;
+    color:var(--gold);
+    margin-top:10px;
+    letter-spacing:0.02em;
+  }
+  .sundial-caption{
+    font-size:0.76rem;
+    color:var(--ink-soft-2);
+    margin-top:4px;
+  }
+
+  /* ---- Message states ---- */
+  .eyebrow{
+    font-size:0.76rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ember);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  textarea{
+    width:100%;
+    background:rgba(0,0,0,0.18);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+    color:var(--mist);
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    line-height:1.55;
+    resize:vertical;
+    min-height:120px;
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  textarea:focus{border-color:var(--ember);}
+  input.phrase-input{
+    width:100%;
+    background:rgba(0,0,0,0.18);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+    color:var(--mist);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    outline:none;
+  }
+  input.phrase-input:focus{border-color:var(--ember);}
+  .counter{
+    text-align:right;
+    font-size:0.74rem;
+    color:var(--ink-soft-2);
+    margin:8px 0 16px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .letter{
+    background:linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dim) 100%);
+    color:var(--ink-navy-deep);
+    border-radius:12px;
+    padding:22px 20px;
+    font-family:'Fraunces', serif;
+    font-size:1.08rem;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+  }
+  .letter-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+    font-size:0.76rem;
+    color:var(--ink-soft-2);
+    font-family:'Work Sans', sans-serif;
+  }
+  .from-tag{
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+
+  .phrase-reply{
+    margin-top:16px;
+    padding:16px 18px;
+    border-left:2px solid var(--gold);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1rem;
+    color:var(--mist);
+    background:rgba(201,162,39,0.06);
+    border-radius:0 10px 10px 0;
+  }
+
+  .status-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    margin:16px 0;
+  }
+  .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--ember);
+    flex-shrink:0;
+  }
+
+  /* ---- Archive ---- */
+  .archive-title{
+    font-family:'Fraunces', serif;
+    font-size:1.1rem;
+    color:var(--ink-soft);
+    margin:36px 0 16px 4px;
+    font-weight:500;
+  }
+  .archive-item{
+    border-top:1px solid var(--line);
+    padding:16px 4px;
+  }
+  .archive-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft-2);
+    margin-bottom:8px;
+  }
+  .archive-msg{
+    font-family:'Fraunces', serif;
+    font-size:0.95rem;
+    color:var(--mist);
+    line-height:1.5;
+    white-space:pre-wrap;
+  }
+  .archive-reply{
+    margin-top:8px;
+    padding-left:14px;
+    border-left:2px solid var(--gold);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .archive-empty{
+    font-size:0.85rem;
+    color:var(--ink-soft-2);
+    text-align:center;
+    padding:20px 0;
+  }
+
+  .footnote{
+    text-align:center;
+    font-size:0.76rem;
+    color:var(--ink-soft-2);
+    margin-top:24px;
+    line-height:1.5;
+  }
+  .error-banner{
+    background:rgba(227,139,93,0.14);
+    border:1px solid rgba(227,139,93,0.4);
+    color:var(--mist);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:0.82rem;
+    margin-bottom:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .error-banner button{
+    background:none;border:none;color:var(--ember);
+    font-weight:600;cursor:pointer;font-size:0.8rem;
+    font-family:'Work Sans', sans-serif;
+    flex-shrink:0;
+  }
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(10px);
+    background:var(--mist);
+    color:var(--ink-navy-deep);
+    padding:10px 18px;
+    border-radius:100px;
+    font-size:0.82rem;
+    font-weight:600;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---- Attachments ---- */
+  .attach-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:12px 0 16px;
+  }
+  .attach-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:transparent;
+    border:1px dashed var(--ink-soft-2);
+    color:var(--ink-soft);
+    border-radius:10px;
+    padding:9px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.82rem;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .attach-btn:hover{border-color:var(--gold); color:var(--mist);}
+  .attach-progress{
+    font-size:0.78rem;
+    color:var(--ink-soft-2);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .attach-preview{
+    position:relative;
+    display:inline-block;
+    margin:4px 0 16px;
+  }
+  .attach-preview img{
+    display:block;
+    max-width:180px;
+    max-height:180px;
+    border-radius:8px;
+    border:1px solid var(--line);
+  }
+  .attach-preview .file-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.18);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:0.82rem;
+    color:var(--mist);
+    max-width:280px;
+  }
+  .attach-preview .remove-x{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:var(--ink-navy-deep);
+    border:1px solid var(--line);
+    color:var(--mist);
+    font-size:0.78rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .letter-photo{
+    margin-top:16px;
+    display:inline-block;
+    background:#fff;
+    padding:8px 8px 22px;
+    border-radius:2px;
+    box-shadow:0 10px 24px -10px rgba(0,0,0,0.45);
+    transform:rotate(-1.1deg);
+    max-width:100%;
+  }
+  .letter-photo img{
+    display:block;
+    max-width:100%;
+    max-height:340px;
+    border-radius:1px;
+  }
+  .letter-file-chip{
+    margin-top:14px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.06);
+    border:1px solid rgba(0,0,0,0.12);
+    border-radius:10px;
+    padding:9px 14px;
+    font-size:0.82rem;
+    color:var(--ink-navy-deep);
+    text-decoration:none;
+  }
+  .letter-file-chip:hover{background:rgba(0,0,0,0.1);}
+  .archive-photo{
+    margin-top:8px;
+  }
+  .archive-photo img{
+    max-width:120px;
+    max-height:120px;
+    border-radius:6px;
+    border:1px solid var(--line);
+  }
+  .attach-error{
+    font-size:0.78rem;
+    color:var(--ember);
+    margin-top:-8px;
+    margin-bottom:14px;
+  }
+
+  .hidden{display:none !important;}
+
+  @media (prefers-reduced-motion: reduce){
+    * { animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="brand">
+    <h1>Meridiana</h1>
+    <p>Un pensiero al giorno tra due persone. Chi arriva prima scrive; l'altra può rispondere solo con una frase — e solo dopo che il tempo sia passato.</p>
+  </div>
+
+  <div id="errorBanner" class="error-banner hidden">
+    <span id="errorText">Qualcosa non ha funzionato.</span>
+    <button id="errorRetry">Riprova</button>
+  </div>
+
+  <!-- CONFIG NEEDED -->
+  <div id="configNeeded" class="card hidden">
+    <div class="eyebrow">Configurazione mancante</div>
+    <div style="font-family:'Fraunces',serif; font-size:1rem; color:var(--mist); line-height:1.6; margin-bottom:14px;">
+      Questo file non è ancora collegato a un progetto Firebase. Apri il file HTML in un editor di testo, cerca <code>firebaseConfig</code> vicino all'inizio dello script, e incolla lì la configurazione del tuo progetto Firebase (la trovi nella console Firebase, sotto "app web").
+    </div>
+    <div style="font-size:0.8rem; color:var(--ink-soft-2); line-height:1.5;">
+      Le istruzioni complete sono scritte come commento in cima al file.
+    </div>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div id="onboarding" class="card hidden">
+    <div class="field">
+      <label for="nameInput">Il tuo nome</label>
+      <input id="nameInput" type="text" maxlength="24" placeholder="es. Elisa" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="roomInput">Codice della stanza</label>
+      <input id="roomInput" type="text" maxlength="24" placeholder="es. como-2026" autocomplete="off">
+      <div class="hint">Condividi lo stesso codice con l'altra persona. Se non esiste ancora, verrà creato ora.</div>
+    </div>
+    <button class="btn btn-primary" id="enterBtn">Entra</button>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" class="hidden">
+    <div class="room-bar">
+      <span class="who">tu sei <strong id="meName"></strong></span>
+      <span class="room-code-pill" id="roomPill" title="Copia il codice stanza">
+        <span id="roomLabel"></span>
+      </span>
+    </div>
+
+    <div class="card" id="dayCard"><!-- filled by JS --></div>
+
+    <div id="archiveWrap">
+      <div class="archive-title">Giorni passati</div>
+      <div id="archiveList"></div>
+    </div>
+
+    <div class="footnote">Un giorno alla volta, senza andare avanti e indietro.<br><a href="#" id="changeRoom" style="color:var(--ink-soft-2);">cambia stanza o nome</a></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  // ---------- Firebase setup ----------
+  const firebaseConfig = {
+    apiKey: "AIzaSyDIiea_rm3v3uYrkZ6OFdZOGpvs2P7Z2iM",
+    authDomain: "meridiana-fc668.firebaseapp.com",
+    projectId: "meridiana-fc668",
+    storageBucket: "meridiana-fc668.firebasestorage.app",
+    messagingSenderId: "944090316758",
+    appId: "1:944090316758:web:e557fa60f86dc809f8ee77"
+  };
+  const configReady = firebaseConfig.apiKey !== "INSERISCI_QUI" && !!firebaseConfig.projectId;
+  let db = null;
+  if(configReady){
+    try{
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+    }catch(e){ /* handled by configReady checks + try/catch in storage calls */ }
+  }
+
+  const DELAY_MS = 3 * 60 * 60 * 1000; // 3 ore prima che si possa rispondere
+  const MSG_MAX = 600;
+  const PHRASE_MAX = 70;
+  const POLL_MS = 15000;
+
+  let identity = null; // {name, room}
+  let pollTimer = null;
+  let pendingAttachment = null; // {kind:'image'|'file', name, mime, size, dataUrl}
+  const MAX_ATTACHMENT_BYTES = 700000; // margine di sicurezza sotto il limite di 1MB per documento Firestore
+
+  const $ = (id) => document.getElementById(id);
+  const onboarding = $('onboarding');
+  const configNeeded = $('configNeeded');
+  const app = $('app');
+  const dayCard = $('dayCard');
+  const archiveList = $('archiveList');
+  const errorBanner = $('errorBanner');
+  const errorText = $('errorText');
+  const toastEl = $('toast');
+
+  function showToast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    setTimeout(()=> toastEl.classList.remove('show'), 1800);
+  }
+
+  function showError(msg, retryFn){
+    errorText.textContent = msg;
+    errorBanner.classList.remove('hidden');
+    $('errorRetry').onclick = () => { errorBanner.classList.add('hidden'); retryFn && retryFn(); };
+  }
+  function clearError(){ errorBanner.classList.add('hidden'); }
+
+  function todayStr(){
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  function fmtDate(str){
+    const [y,m,d] = str.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    return dt.toLocaleDateString('it-IT', { weekday:'long', day:'numeric', month:'long' });
+  }
+  function normName(n){ return (n||'').trim(); }
+  function sameName(a,b){ return normName(a).toLowerCase() === normName(b).toLowerCase(); }
+
+  // Personal data (identity: name + room) lives in localStorage — this runs
+  // as a normal standalone web page now, so localStorage is the right tool.
+  // Shared data (the daily messages) lives in Firestore, under
+  // rooms/{room}/days/{date}. To keep every other function in this file
+  // unchanged, storeGet/storeSet/storeList keep the same signature and
+  // string-based contract as before: shared values are JSON strings, and
+  // keys look like "room:{room}:day:{date}".
+  async function storeGet(key, shared){
+    try{
+      if(!shared){
+        return localStorage.getItem('meridiana_' + key);
+      }
+      if(!db) return null;
+      const [roomPart, date] = key.replace(/^room:/, '').split(':day:');
+      const snap = await db.collection('rooms').doc(roomPart).collection('days').doc(date).get();
+      return snap.exists ? JSON.stringify(snap.data()) : null;
+    }catch(e){ return null; }
+  }
+  async function storeSet(key, value, shared){
+    try{
+      if(!shared){
+        localStorage.setItem('meridiana_' + key, value);
+        return true;
+      }
+      if(!db) return false;
+      const [roomPart, date] = key.replace(/^room:/, '').split(':day:');
+      const data = JSON.parse(value);
+      await db.collection('rooms').doc(roomPart).collection('days').doc(date).set(data);
+      return true;
+    }catch(e){ return false; }
+  }
+  async function storeList(prefix, shared){
+    try{
+      if(!shared) return [];
+      if(!db) return [];
+      const roomPart = prefix.replace(/^room:/, '').replace(/:day:$/, '');
+      const snap = await db.collection('rooms').doc(roomPart).collection('days').get();
+      const keys = [];
+      snap.forEach(d => keys.push(`room:${roomPart}:day:${d.id}`));
+      return keys;
+    }catch(e){ return []; }
+  }
+
+  // ---------- Onboarding ----------
+  async function init(){
+    if(!configReady){
+      configNeeded.classList.remove('hidden');
+      return;
+    }
+    const raw = await storeGet('identity', false);
+    if(raw){
+      try{
+        identity = JSON.parse(raw);
+        if(identity && identity.name && identity.room){
+          enterApp();
+          return;
+        }
+      }catch(e){}
+    }
+    onboarding.classList.remove('hidden');
+  }
+
+  $('enterBtn').addEventListener('click', async () => {
+    const name = normName($('nameInput').value);
+    const room = normName($('roomInput').value).toLowerCase().replace(/\s+/g,'-');
+    if(!name || !room){
+      showError('Inserisci nome e codice stanza.');
+      return;
+    }
+    identity = { name, room };
+    const ok = await storeSet('identity', JSON.stringify(identity), false);
+    if(!ok){
+      showError('Non riesco a salvare. Riprova.', ()=>{});
+      return;
+    }
+    clearError();
+    onboarding.classList.add('hidden');
+    enterApp();
+  });
+
+  $('changeRoom').addEventListener('click', async (e) => {
+    e.preventDefault();
+    if(pollTimer) clearInterval(pollTimer);
+    app.classList.add('hidden');
+    $('nameInput').value = identity ? identity.name : '';
+    $('roomInput').value = identity ? identity.room : '';
+    onboarding.classList.remove('hidden');
+  });
+
+  function enterApp(){
+    $('meName').textContent = identity.name;
+    $('roomLabel').textContent = identity.room;
+    app.classList.remove('hidden');
+    $('roomPill').onclick = () => {
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(identity.room).then(()=> showToast('Codice copiato'));
+      }
+    };
+    render();
+    if(pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(render, POLL_MS);
+  }
+
+  // ---------- Sundial ----------
+  function sundialSVG(progress, id){
+    // progress: 0..1, shadow sweeps from left horizon to right
+    const angle = -80 + progress * 160; // degrees, -80 (left) to +80 (right)
+    const rad = (angle - 90) * Math.PI / 180;
+    const cx = 100, cy = 92, len = 62;
+    const x2 = cx + len * Math.cos(rad);
+    const y2 = cy + len * Math.sin(rad);
+    return `
+    <svg id="${id}" width="200" height="110" viewBox="0 0 200 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="18" y1="92" x2="182" y2="92" stroke="rgba(247,244,238,0.18)" stroke-width="1"/>
+      ${[0,0.25,0.5,0.75,1].map(t=>{
+        const a = -80 + t*160;
+        const r = (a-90)*Math.PI/180;
+        const tx1 = cx + 58*Math.cos(r), ty1 = cy + 58*Math.sin(r);
+        const tx2 = cx + 64*Math.cos(r), ty2 = cy + 64*Math.sin(r);
+        return `<line x1="${tx1}" y1="${ty1}" x2="${tx2}" y2="${ty2}" stroke="rgba(247,244,238,0.25)" stroke-width="1"/>`;
+      }).join('')}
+      <circle cx="${cx}" cy="${cy}" r="4" fill="#c9a227"/>
+      <line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#e38b5d" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M ${cx-3} ${cy} L ${cx} ${cy-14} L ${cx+3} ${cy} Z" fill="rgba(247,244,238,0.5)"/>
+    </svg>`;
+  }
+
+  function fmtRemaining(ms){
+    if(ms <= 0) return '0m';
+    const totalMin = Math.ceil(ms/60000);
+    const h = Math.floor(totalMin/60);
+    const m = totalMin % 60;
+    if(h > 0) return `${h}h ${m}m`;
+    return `${m}m`;
+  }
+
+  // ---------- Rendering ----------
+  async function render(){
+    const date = todayStr();
+    const key = `room:${identity.room}:day:${date}`;
+    const raw = await storeGet(key, true);
+    let entry = null;
+    if(raw){
+      try{ entry = JSON.parse(raw); }catch(e){ entry = null; }
+    }
+
+    if(!entry){
+      renderComposer(date, key);
+    } else {
+      const iAmSender = sameName(entry.senderName, identity.name);
+      if(iAmSender){
+        renderWaitingForReply(entry, key);
+      } else {
+        renderReceivedMessage(entry, key, date);
+      }
+    }
+
+    renderArchive(date);
+  }
+
+  function renderComposer(date, key){
+    dayCard.innerHTML = `
+      <div class="eyebrow">${fmtDate(date)}</div>
+      <div style="font-family:'Fraunces',serif; font-size:1.02rem; color:var(--ink-soft); margin-bottom:14px;">
+        Oggi non è stato ancora scritto nulla. Cosa vuoi dire?
+      </div>
+      <textarea id="msgInput" maxlength="${MSG_MAX}" placeholder="Scrivi con calma…"></textarea>
+      <div class="counter"><span id="msgCount">0</span> / ${MSG_MAX}</div>
+      <div class="attach-row">
+        <button type="button" class="attach-btn" id="attachBtn">📎 aggiungi una foto o un file</button>
+        <span class="attach-progress hidden" id="attachProgress">elaborazione…</span>
+      </div>
+      <input type="file" id="fileInput" accept="image/*,application/pdf" class="hidden">
+      <div id="attachPreviewWrap"></div>
+      <div id="attachError" class="attach-error hidden"></div>
+      <button class="btn btn-primary" id="sendMsgBtn">Invia il pensiero di oggi</button>
+    `;
+    pendingAttachment = null;
+    const input = $('msgInput');
+    input.addEventListener('input', () => { $('msgCount').textContent = input.value.length; });
+    $('attachBtn').addEventListener('click', () => $('fileInput').click());
+    $('fileInput').addEventListener('change', handleFileSelect);
+    $('sendMsgBtn').addEventListener('click', async () => {
+      const text = input.value.trim();
+      if(!text) return;
+      $('sendMsgBtn').disabled = true;
+      $('sendMsgBtn').textContent = 'Invio…';
+      const entry = {
+        senderName: identity.name,
+        message: text,
+        sentAt: Date.now(),
+        replyUnlockAt: Date.now() + DELAY_MS,
+        replierName: null,
+        reply: null,
+        repliedAt: null,
+        attachment: pendingAttachment
+      };
+      // race check: someone might have just written
+      const existing = await storeGet(key, true);
+      if(existing){
+        showToast('Qualcuno ha già scritto per oggi');
+        render();
+        return;
+      }
+      const ok = await storeSet(key, JSON.stringify(entry), true);
+      if(!ok){
+        showError('Non sono riuscito a inviare. Riprova.', render);
+        $('sendMsgBtn').disabled = false;
+        $('sendMsgBtn').textContent = 'Invia il pensiero di oggi';
+        return;
+      }
+      clearError();
+      render();
+    });
+  }
+
+  function renderWaitingForReply(entry, key){
+    let bodyHtml;
+    if(entry.reply){
+      bodyHtml = `
+        <div class="letter">${escapeHtml(entry.message)}</div>
+        ${attachmentHtml(entry.attachment)}
+        <div class="letter-meta"><span class="from-tag">scritto da te</span><span>${timeAgo(entry.sentAt)}</span></div>
+        <div class="phrase-reply">“${escapeHtml(entry.reply)}”<div style="margin-top:6px; font-size:0.76rem; font-style:normal; color:var(--ink-soft-2);">— ${escapeHtml(entry.replierName)}, ${timeAgo(entry.repliedAt)}</div></div>
+      `;
+    } else {
+      const now = Date.now();
+      const remaining = entry.replyUnlockAt - now;
+      const progress = Math.min(1, Math.max(0, (now - entry.sentAt) / DELAY_MS));
+      bodyHtml = `
+        <div class="letter">${escapeHtml(entry.message)}</div>
+        ${attachmentHtml(entry.attachment)}
+        <div class="letter-meta"><span class="from-tag">scritto da te</span><span>${timeAgo(entry.sentAt)}</span></div>
+        <div class="sundial-wrap">
+          ${sundialSVG(progress, 'sd1')}
+          <div class="sundial-time">${remaining > 0 ? fmtRemaining(remaining) + ' alla risposta' : 'la risposta può arrivare ora'}</div>
+          <div class="sundial-caption">${remaining > 0 ? 'in attesa che il tempo passi' : 'in attesa di una frase'}</div>
+        </div>
+      `;
+    }
+    dayCard.innerHTML = `
+      <div class="eyebrow">${fmtDate(todayStr())}</div>
+      ${bodyHtml}
+    `;
+  }
+
+  function renderReceivedMessage(entry, key, date){
+    const now = Date.now();
+    const unlocked = now >= entry.replyUnlockAt;
+    let bodyHtml = `
+      <div class="letter">${escapeHtml(entry.message)}</div>
+      ${attachmentHtml(entry.attachment)}
+      <div class="letter-meta"><span class="from-tag">${escapeHtml(entry.senderName)}</span><span>${timeAgo(entry.sentAt)}</span></div>
+    `;
+    if(entry.reply){
+      bodyHtml += `<div class="phrase-reply">“${escapeHtml(entry.reply)}”<div style="margin-top:6px; font-size:0.76rem; font-style:normal; color:var(--ink-soft-2);">— tu, ${timeAgo(entry.repliedAt)}</div></div>`;
+    } else if(!unlocked){
+      const progress = Math.min(1, Math.max(0, (now - entry.sentAt) / DELAY_MS));
+      const remaining = entry.replyUnlockAt - now;
+      bodyHtml += `
+        <div class="sundial-wrap">
+          ${sundialSVG(progress, 'sd2')}
+          <div class="sundial-time">${fmtRemaining(remaining)} prima di poter rispondere</div>
+          <div class="sundial-caption">lascia sedimentare, prima di dire una parola</div>
+        </div>
+      `;
+    } else {
+      bodyHtml += `
+        <div style="margin-top:18px;">
+          <input class="phrase-input" id="phraseInput" maxlength="${PHRASE_MAX}" placeholder="una frase, non di più…">
+          <div class="counter"><span id="phraseCount">0</span> / ${PHRASE_MAX}</div>
+          <button class="btn btn-primary" id="sendPhraseBtn">Invia la frase</button>
+        </div>
+      `;
+    }
+    dayCard.innerHTML = `
+      <div class="eyebrow">${fmtDate(date)}</div>
+      ${bodyHtml}
+    `;
+    if(unlocked && !entry.reply){
+      const input = $('phraseInput');
+      input.addEventListener('input', () => { $('phraseCount').textContent = input.value.length; });
+      $('sendPhraseBtn').addEventListener('click', async () => {
+        const text = input.value.trim();
+        if(!text) return;
+        $('sendPhraseBtn').disabled = true;
+        $('sendPhraseBtn').textContent = 'Invio…';
+        const fresh = await storeGet(key, true);
+        let freshEntry;
+        try{ freshEntry = JSON.parse(fresh); }catch(e){ freshEntry = entry; }
+        if(freshEntry.reply){
+          showToast('Hai già risposto');
+          render();
+          return;
+        }
+        freshEntry.reply = text;
+        freshEntry.replierName = identity.name;
+        freshEntry.repliedAt = Date.now();
+        const ok = await storeSet(key, JSON.stringify(freshEntry), true);
+        if(!ok){
+          showError('Non sono riuscito a inviare la frase. Riprova.', render);
+          $('sendPhraseBtn').disabled = false;
+          $('sendPhraseBtn').textContent = 'Invia la frase';
+          return;
+        }
+        clearError();
+        render();
+      });
+    }
+  }
+
+  async function renderArchive(today){
+    const keys = await storeList(`room:${identity.room}:day:`, true);
+    const pastKeys = keys.filter(k => !k.endsWith(`:day:${today}`)).sort().reverse().slice(0, 20);
+    if(pastKeys.length === 0){
+      archiveList.innerHTML = `<div class="archive-empty">Non c'è ancora nessun giorno passato.</div>`;
+      return;
+    }
+    const items = [];
+    for(const k of pastKeys){
+      const raw = await storeGet(k, true);
+      if(!raw) continue;
+      let e;
+      try{ e = JSON.parse(raw); }catch(err){ continue; }
+      const dateStr = k.split(':day:')[1];
+      items.push({ dateStr, e });
+    }
+    archiveList.innerHTML = items.map(({dateStr, e}) => `
+      <div class="archive-item">
+        <div class="archive-date">${fmtDate(dateStr)} — ${escapeHtml(e.senderName)}</div>
+        <div class="archive-msg">${escapeHtml(e.message)}</div>
+        ${e.attachment ? `<div class="archive-photo">${attachmentHtml(e.attachment, true)}</div>` : ''}
+        ${e.reply ? `<div class="archive-reply">“${escapeHtml(e.reply)}” — ${escapeHtml(e.replierName)}</div>` : `<div class="archive-reply" style="color:var(--ink-soft-2); font-style:normal;">nessuna risposta</div>`}
+      </div>
+    `).join('');
+  }
+
+  function timeAgo(ts){
+    if(!ts) return '';
+    const diff = Date.now() - ts;
+    const min = Math.floor(diff/60000);
+    if(min < 1) return 'ora';
+    if(min < 60) return `${min} min fa`;
+    const h = Math.floor(min/60);
+    if(h < 24) return `${h} h fa`;
+    const d = Math.floor(h/24);
+    return `${d} g fa`;
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function fmtBytes(n){
+    if(n < 1024) return n + ' B';
+    if(n < 1024*1024) return Math.round(n/1024) + ' KB';
+    return (n/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  function resizeImage(file, maxDim, quality){
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if(width > height && width > maxDim){
+          height = Math.round(height * (maxDim/width));
+          width = maxDim;
+        } else if(height > maxDim){
+          width = Math.round(width * (maxDim/height));
+          height = maxDim;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+
+  function readFileAsDataURL(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleFileSelect(e){
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
+    const progressEl = $('attachProgress');
+    const errorEl = $('attachError');
+    errorEl.classList.add('hidden');
+    if(progressEl){ progressEl.classList.remove('hidden'); }
+
+    try{
+      if(file.type.startsWith('image/')){
+        // try progressively smaller/lower quality until under size cap
+        let dataUrl = await resizeImage(file, 1400, 0.72);
+        if(dataUrl.length > MAX_ATTACHMENT_BYTES){
+          dataUrl = await resizeImage(file, 1000, 0.6);
+        }
+        if(dataUrl.length > MAX_ATTACHMENT_BYTES){
+          dataUrl = await resizeImage(file, 700, 0.5);
+        }
+        if(dataUrl.length > MAX_ATTACHMENT_BYTES){
+          throw new Error('too_big');
+        }
+        pendingAttachment = { kind:'image', name:file.name, mime:'image/jpeg', size:dataUrl.length, dataUrl };
+      } else {
+        if(file.size > MAX_ATTACHMENT_BYTES){
+          throw new Error('too_big');
+        }
+        const dataUrl = await readFileAsDataURL(file);
+        pendingAttachment = { kind:'file', name:file.name, mime:file.type || 'application/octet-stream', size:dataUrl.length, dataUrl };
+      }
+      renderAttachPreview();
+    }catch(err){
+      pendingAttachment = null;
+      renderAttachPreview();
+      errorEl.textContent = 'Il file è troppo grande. Prova una foto più leggera o un file più piccolo.';
+      errorEl.classList.remove('hidden');
+    } finally {
+      if(progressEl){ progressEl.classList.add('hidden'); }
+      e.target.value = '';
+    }
+  }
+
+  function renderAttachPreview(){
+    const wrap = $('attachPreviewWrap');
+    if(!wrap) return;
+    if(!pendingAttachment){
+      wrap.innerHTML = '';
+      return;
+    }
+    if(pendingAttachment.kind === 'image'){
+      wrap.innerHTML = `
+        <div class="attach-preview">
+          <img src="${pendingAttachment.dataUrl}" alt="anteprima">
+          <div class="remove-x" id="removeAttachBtn">✕</div>
+        </div>
+      `;
+    } else {
+      wrap.innerHTML = `
+        <div class="attach-preview">
+          <div class="file-chip">📎 ${escapeHtml(pendingAttachment.name)} · ${fmtBytes(pendingAttachment.size)}</div>
+          <div class="remove-x" id="removeAttachBtn">✕</div>
+        </div>
+      `;
+    }
+    const btn = $('removeAttachBtn');
+    if(btn) btn.addEventListener('click', () => { pendingAttachment = null; renderAttachPreview(); });
+  }
+
+  function attachmentHtml(att, small){
+    if(!att) return '';
+    if(att.kind === 'image'){
+      return `<div class="letter-photo"><img src="${att.dataUrl}" alt="foto allegata" style="${small ? 'max-width:120px;max-height:120px;' : ''}"></div>`;
+    }
+    return `<a class="letter-file-chip" href="${att.dataUrl}" download="${escapeHtml(att.name)}">📎 ${escapeHtml(att.name)} · ${fmtBytes(att.size)}</a>`;
+  }
+
+
+  init();
+})();
+</script>
+</body>
+</html>
