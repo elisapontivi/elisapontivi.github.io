@@ -9,7 +9,7 @@
 'use strict';
 const round=n=>Math.round((n+Number.EPSILON)*100)/100;
 function blank(){return {year:2025,initial:{imm:0,clients:0,bank:0,cash:0,other:0,pn:0,banks:0,suppliers:0,otherDebt:0},assets:[{name:'',cost:0,fund:0,rate:0},{name:'',cost:0,fund:0,rate:0}],ops:{buy:0,buyVatRate:22,buyPct:100,buyBase:'total',sell:0,sellVatRate:22,sellPct:100,sellBase:'total',assetName:'Nuova immobilizzazione',assetCost:0,assetVatRate:22,assetPct:50,rate:12.5,date:'2025-02-01'}};}
-function example(){let s=blank();s.initial={imm:885000,clients:200000,bank:390000,cash:0,other:0,pn:590000,banks:585000,suppliers:300000,otherDebt:0};s.assets=[{name:'Brevetto',cost:2000000,fund:1800000,rate:20},{name:'Fabbricato',cost:3000000,fund:2315000,rate:3}];Object.assign(s.ops,{buy:100000,sell:150000,assetCost:7500000});return s;}
+function example(){let s=blank();s.initial={imm:885000,clients:200000,bank:390000,cash:0,other:0,pn:590000,banks:585000,suppliers:300000,otherDebt:0};s.assets=[{name:'Brevetto',cost:2000000,fund:1800000,rate:20},{name:'Fabbricato',cost:3000000,fund:2315000,rate:3}];Object.assign(s.ops,{buy:100000,sell:4000000,assetCost:7500000});return s;}
 function compute(s){
  const errors=[];const check=(v,label,min=0,max=1e12)=>{if(!Number.isFinite(v)||v<min||v>max)errors.push(label+': inserisci un valore valido'+(min===0?' non negativo':'')+'.');};
  check(s.year,'Anno',1900,2100);if(!Number.isInteger(s.year))errors.push('L’anno deve essere intero.');
@@ -78,4 +78,3 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
 render();
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'read_accounting_results',title:'Leggi i risultati contabili',description:'Legge controlli e risultati dell’esercizio attualmente inserito, senza modificare dati.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute(input){if(input&&Object.keys(input).length)throw new Error('Nessun parametro previsto.');const r=Accounting.compute(state);return {errors:r.errors,initialGap:r.initialGap,vncGap:r.vncGap,vatCredit:r.vatCredit,vatDebit:r.vatDebit,result:r.errors.length?null:r.result,finalGap:r.errors.length?null:r.finalGap};}})).catch(()=>{});}catch{}}
 </script></body></html>
-
