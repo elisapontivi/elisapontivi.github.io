@@ -8,422 +8,543 @@
 <meta name="description" content="Elisa Pontivi, dottoranda in Methods and Models for Economic Decisions, Università degli Studi dell'Insubria. Economia comportamentale e sperimentale, scelte sostenibili.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>
-/* Layout: a plain academic homepage. Sidebar with name and contacts, one readable column of sections. */
+/* Layout: a full-bleed cobalt opening built around a live "default option" choice card,
+   then calm content sections on paper with wide year/label gutters. */
 :root {
-  --bg: #fbfbfa;
-  --fg: #1d2126;
-  --muted: #5b626b;
-  --rule: #dcdfe3;
-  --accent: #23466e;
-  --tint: #eef1f4;
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --cobalt: #2639c9;
+  --cobalt-deep: #1a2894;
+  --marigold: #ffc83d;
+  --on-cobalt: #ffffff;
+  --on-cobalt-soft: rgba(255, 255, 255, .74);
+  --bg: #f6f6f2;
+  --surface: #ffffff;
+  --fg: #14161f;
+  --muted: #5d6070;
+  --rule: #dedfe6;
+  --link: #2639c9;
+  --display: "Bricolage Grotesque", "Arial Black", "Helvetica Neue", sans-serif;
+  --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #15181c; --fg: #e4e6e9; --muted: #9aa1aa; --rule: #2c3138; --accent: #9dbbe0; --tint: #1d2127;
+    --bg: #12131a; --surface: #1a1c26; --fg: #ecedf3; --muted: #a0a3b4; --rule: #2b2e3c; --link: #9fb0ff;
+    --cobalt: #2433b0; --cobalt-deep: #18227a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #15181c; --fg: #e4e6e9; --muted: #9aa1aa; --rule: #2c3138; --accent: #9dbbe0; --tint: #1d2127;
+  --bg: #12131a; --surface: #1a1c26; --fg: #ecedf3; --muted: #a0a3b4; --rule: #2b2e3c; --link: #9fb0ff;
+  --cobalt: #2433b0; --cobalt-deep: #18227a;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { scroll-padding-top: 16px; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 18px;
   line-height: 1.6;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-a { color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+p { margin: 0; }
 
-/* Language switch: every text exists in both languages, one is hidden */
 html[data-lang="it"] [lang="en"]:not(html),
 html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 
-.top {
-  max-width: 1080px;
+.wrap {
+  max-width: 1200px;
   margin: 0 auto;
-  padding-block: 20px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Opening ---------- */
+.hero {
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  overflow: hidden;
+  position: relative;
+}
+.hero::after {
+  /* a faint grid, like squared notebook paper from the lab */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.hero > .wrap { position: relative; z-index: 1; }
+.bar {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px 24px;
-  border-bottom: 1px solid var(--rule);
-  font-family: var(--sans);
-  font-size: 14px;
+  gap: 14px 28px;
+  padding-block: 22px;
+  font-size: 15px;
 }
-.top nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.top nav a { color: var(--fg); text-decoration: none; }
-.top nav a:hover { color: var(--accent); text-decoration: underline; }
-.lang { display: flex; gap: 2px; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.bar a { color: var(--on-cobalt); text-decoration: none; }
+.bar a:hover { text-decoration: underline; }
+.lang { display: flex; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 3px; }
 .lang button {
-  font: inherit;
-  font-size: 13px;
-  padding: 2px 8px;
-  border: 1px solid transparent;
-  background: none;
-  color: var(--muted);
-  cursor: pointer;
-  border-radius: 3px;
+  font: inherit; font-size: 13px; font-weight: 500;
+  padding: 4px 12px; border: 0; border-radius: 999px;
+  background: none; color: var(--on-cobalt); cursor: pointer;
 }
-.lang button[aria-pressed="true"] { color: var(--fg); border-color: var(--rule); }
+.lang button[aria-pressed="true"] { background: var(--on-cobalt); color: var(--cobalt-deep); }
 
-.page {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding-block: 48px 64px;
+.hero-grid {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
+  gap: 56px;
+  align-items: end;
+  padding-block: 56px 72px;
 }
-aside.card { font-family: var(--sans); font-size: 14px; line-height: 1.55; }
-.card-inner { position: sticky; top: 24px; }
-aside h1 {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 1.15;
-  margin: 0 0 10px;
+.hero h1 {
+  font-weight: 800;
+  font-size: clamp(64px, 11vw, 168px);
+  line-height: .86;
+  letter-spacing: -.045em;
 }
-aside .role { margin: 0 0 4px; }
-aside .aff { margin: 0 0 24px; color: var(--muted); }
-aside dl { margin: 0; display: grid; gap: 12px; }
-aside dt { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
-aside dd { margin: 0; overflow-wrap: anywhere; }
-
-main { min-width: 0; max-width: 700px; }
-main > section + section { margin-top: 52px; }
-h2 {
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 16px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--rule);
+.hero h1 .last { display: block; color: var(--marigold); }
+.hero .role {
+  margin-top: 28px;
+  max-width: 34ch;
+  font-size: clamp(19px, 2vw, 23px);
+  line-height: 1.4;
+  color: var(--on-cobalt-soft);
 }
-h3 { font-size: 19px; font-weight: 600; line-height: 1.3; margin: 0 0 4px; }
-p { margin: 0 0 14px; }
-.lead { font-size: 20px; }
-.small { font-family: var(--sans); font-size: 14px; color: var(--muted); }
-
-.topics { display: grid; gap: 18px; margin: 20px 0; }
-.topics p { margin: 0; }
-.topic-label { font-family: var(--sans); font-size: 13px; color: var(--muted); display: block; margin-bottom: 2px; }
-
-ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-.entry { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; }
-.entry .when { font-family: var(--sans); font-size: 14px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
-.entry .what strong { font-weight: 600; }
-.entry .what span.d { display: block; color: var(--muted); font-size: 16px; }
-.paper-title { font-style: italic; }
-
-.project + .project { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--rule); }
-.project .meta { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0 0 12px; }
-.project video {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--tint);
-  border: 1px solid var(--rule);
-  margin: 4px 0 14px;
+.hero .role strong { color: var(--on-cobalt); font-weight: 500; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px; border-radius: 999px;
+  font-size: 15px; font-weight: 700; text-decoration: none;
+  border: 2px solid var(--marigold);
 }
-.project dl { margin: 0 0 12px; display: grid; gap: 4px; font-size: 16px; }
-.project dl div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; }
-.project dt { font-family: var(--sans); font-size: 14px; color: var(--muted); padding-top: 2px; }
-.project dd { margin: 0; }
-.links { font-family: var(--sans); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; }
+.btn.solid { background: var(--marigold); color: #14161f; }
+.btn.line { color: var(--on-cobalt); border-color: rgba(255,255,255,.55); }
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
 
-.skills { display: grid; gap: 20px; }
-.skills p { margin: 0; }
-.tools { font-family: var(--sans); font-size: 14px; color: var(--muted); }
-
-details { margin-top: 14px; }
-summary { font-family: var(--sans); font-size: 14px; color: var(--accent); cursor: pointer; }
-details ul.plain { margin-top: 14px; }
-
-footer {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding-block: 20px 32px;
-  border-top: 1px solid var(--rule);
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--muted);
+/* The choice card: the visitor meets a pre-selected default */
+.choice {
+  background: var(--surface);
+  color: var(--fg);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 30px 60px rgba(10, 16, 70, .35);
+  transform: rotate(-1.5deg);
 }
+.choice .q-label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.choice h2 { font-size: 26px; font-weight: 600; line-height: 1.15; margin: 6px 0 18px; }
+.opt {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 14px 14px;
+  border: 2px solid var(--rule);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.opt + .opt { margin-top: 10px; }
+.opt input { width: 22px; height: 22px; margin: 0; accent-color: var(--cobalt); }
+.opt strong { display: block; font-weight: 600; font-size: 17px; }
+.opt small { display: block; font-size: 13px; color: var(--muted); }
+.opt:has(input:checked) { border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 7%, var(--surface)); }
+.tag {
+  display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+  background: var(--marigold); color: #14161f; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  vertical-align: 2px;
+}
+.choice .note {
+  margin-top: 16px; font-size: 15px; line-height: 1.5; color: var(--muted);
+  min-height: 3em;
+}
+.choice .note b { color: var(--fg); font-weight: 600; }
 
-@media (max-width: 800px) {
+/* ---------- Sections ---------- */
+.sec { padding-block: 88px; }
+.sec + .sec { border-top: 1px solid var(--rule); }
+.sec-head {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 40px;
+  margin-bottom: 44px;
+}
+.sec-head .kicker { font-size: 14px; font-weight: 700; color: var(--link); padding-top: 12px; }
+.sec-head h2 { font-size: clamp(36px, 5vw, 60px); font-weight: 600; line-height: 1; letter-spacing: -.03em; max-width: 18ch; }
+.sec-head p { grid-column: 2; max-width: 62ch; color: var(--muted); font-size: 19px; }
+.indent { margin-left: 300px; }
+
+.themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.theme { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px; }
+.theme .t-label { font-size: 13px; font-weight: 700; color: var(--link); }
+.theme h3 { font-size: 24px; font-weight: 600; line-height: 1.12; margin: 10px 0 12px; }
+.theme p { font-size: 16px; color: var(--muted); }
+.method { margin-top: 28px; max-width: 70ch; font-size: 17px; }
+.method strong { font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip { font-size: 13px; font-weight: 500; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); }
+
+/* Presentations, grouped by year */
+.years { display: grid; gap: 36px; }
+.year { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; }
+.year .y { font-family: var(--display); font-size: 56px; font-weight: 800; line-height: .9; color: color-mix(in srgb, var(--link) 35%, var(--bg)); font-variant-numeric: tabular-nums; }
+.talks { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.talks li { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+.talks li:last-child { border-bottom: 0; padding-bottom: 0; }
+.talks .m { font-size: 14px; color: var(--muted); padding-top: 3px; }
+.talks .title { font-weight: 500; font-size: 19px; line-height: 1.35; }
+.talks .where { display: block; font-size: 15px; color: var(--muted); margin-top: 3px; }
+
+/* Projects */
+.project { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: start; }
+.project + .project { margin-top: 64px; }
+.project:nth-of-type(even) .media { order: 2; }
+.media video {
+  display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9;
+  border-radius: 14px; background: #0d0f1a;
+}
+.project .p-label { font-size: 13px; font-weight: 700; color: var(--link); }
+.project h3 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 600; line-height: 1.02; letter-spacing: -.02em; margin: 8px 0 14px; }
+.project p { color: var(--muted); font-size: 17px; }
+.facts { margin: 18px 0; display: grid; gap: 8px; font-size: 15px; }
+.facts div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; padding-top: 8px; border-top: 1px solid var(--rule); }
+.facts dt { font-weight: 700; }
+.facts dd { margin: 0; color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 15px; font-weight: 500; }
+
+/* Teaching + skills */
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.box { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px; }
+.box h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+.box p { font-size: 16px; color: var(--muted); }
+.box p + p { margin-top: 10px; }
+.box .tools { color: var(--fg); font-weight: 500; font-size: 14px; }
+.seminar { margin-bottom: 20px; background: var(--fg); color: var(--bg); border-radius: 16px; padding: 30px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.seminar .s-label { font-size: 13px; font-weight: 700; color: var(--marigold); }
+.seminar h3 { font-size: clamp(24px, 3vw, 34px); font-weight: 600; line-height: 1.1; margin: 8px 0 10px; }
+.seminar p { opacity: .75; font-size: 16px; }
+.seminar a { color: var(--bg); }
+
+/* Background timeline */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; padding-block: 22px; border-top: 1px solid var(--rule); }
+.timeline .when { font-weight: 700; color: var(--link); font-variant-numeric: tabular-nums; }
+.timeline strong { display: block; font-size: 20px; font-weight: 600; line-height: 1.3; }
+.timeline span.d { display: block; color: var(--muted); font-size: 16px; margin-top: 2px; }
+
+/* Contact */
+.contact { background: var(--cobalt-deep); color: var(--on-cobalt); padding-block: 88px 40px; }
+.contact h2 { font-size: clamp(44px, 7vw, 96px); font-weight: 800; line-height: .92; letter-spacing: -.04em; }
+.contact h2 span.hl { color: var(--marigold); }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.contact-grid .c-label { font-size: 13px; font-weight: 700; color: var(--marigold); }
+.contact-grid p { font-size: 18px; overflow-wrap: anywhere; }
+.contact a { color: var(--on-cobalt); }
+.foot { margin-top: 64px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.2); font-size: 14px; color: var(--on-cobalt-soft); }
+
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 44px; padding-block: 36px 56px; }
+  .choice { transform: none; max-width: 520px; }
+  .sec-head, .year, .timeline li { grid-template-columns: 1fr; gap: 10px; }
+  .sec-head p { grid-column: 1; }
+  .indent { margin-left: 0; }
+  .themes { grid-template-columns: 1fr; }
+  .project { grid-template-columns: 1fr; gap: 20px; }
+  .project:nth-of-type(even) .media { order: 0; }
+  .two, .contact-grid { grid-template-columns: 1fr; }
+  .seminar { grid-template-columns: 1fr; }
+  .year .y { font-size: 40px; }
+}
+@media (max-width: 520px) {
   body { font-size: 17px; }
-  .page { grid-template-columns: 1fr; gap: 32px; padding-block: 32px 48px; }
-  .card-inner { position: static; }
-  .entry, .project dl div { grid-template-columns: 1fr; gap: 0; }
+  .sec { padding-block: 64px; }
+  .bar nav { gap: 4px 16px; font-size: 14px; }
+  .talks li { grid-template-columns: 1fr; gap: 2px; }
+  .choice { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .opt, .btn { transition: none; }
 }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <nav aria-label="Sezioni">
-    <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a>
-    <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Presentations</span></a>
-    <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
-    <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
-    <a href="#competenze"><span lang="it">Competenze</span><span lang="en">Skills</span></a>
-    <a href="#percorso"><span lang="it">Percorso</span><span lang="en">Background</span></a>
-    <a href="cv.pdf">CV</a>
-  </nav>
-  <div class="lang" role="group" aria-label="Lingua / Language">
-    <button type="button" id="lang-it" data-set="it" aria-pressed="true">Italiano</button>
-    <button type="button" id="lang-en" data-set="en" aria-pressed="false">English</button>
+<header class="hero">
+  <div class="wrap">
+    <div class="bar">
+      <nav aria-label="Sezioni">
+        <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a>
+        <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
+        <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
+        <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
+        <a href="#percorso"><span lang="it">Percorso</span><span lang="en">Background</span></a>
+        <a href="#contatti"><span lang="it">Contatti</span><span lang="en">Contact</span></a>
+      </nav>
+      <div class="lang" role="group" aria-label="Lingua / Language">
+        <button type="button" id="lang-it" data-set="it" aria-pressed="true">IT</button>
+        <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>Elisa <span class="last">Pontivi</span></h1>
+        <p class="role" lang="it"><strong>Dottoranda in Methods and Models for Economic Decisions</strong> all’Università dell’Insubria. Studio come il modo in cui presentiamo le alternative cambia le scelte sostenibili.</p>
+        <p class="role" lang="en"><strong>PhD candidate in Methods and Models for Economic Decisions</strong> at the University of Insubria. I study how the way options are presented changes sustainable choices.</p>
+        <div class="hero-actions">
+          <a class="btn solid" href="#ricerca"><span lang="it">La mia ricerca</span><span lang="en">My research</span></a>
+          <a class="btn line" href="cv.pdf">CV (PDF)</a>
+        </div>
+      </div>
+
+      <form class="choice" id="choice" aria-labelledby="choice-q">
+        <span class="q-label"><span lang="it">Una piccola scelta</span><span lang="en">A small choice</span></span>
+        <h2 id="choice-q"><span lang="it">Quale bottiglia metti nel carrello?</span><span lang="en">Which bottle goes in your cart?</span></h2>
+        <label class="opt" for="opt-pet">
+          <input type="radio" name="bottle" id="opt-pet" value="pet" checked>
+          <span>
+            <strong><span lang="it">Plastica tradizionale</span><span lang="en">Conventional plastic</span><span class="tag"><span lang="it">già selezionata</span><span lang="en">pre-selected</span></span></strong>
+            <small>PET</small>
+          </span>
+        </label>
+        <label class="opt" for="opt-bio">
+          <input type="radio" name="bottle" id="opt-bio" value="bio">
+          <span>
+            <strong><span lang="it">Bioplastica</span><span lang="en">Bioplastic</span></strong>
+            <small><span lang="it">da fonti rinnovabili</span><span lang="en">from renewable sources</span></small>
+          </span>
+        </label>
+        <p class="note" id="note" aria-live="polite">
+          <span data-state="keep" lang="it">L’opzione già selezionata si chiama <b>default</b>. Spesso la teniamo senza pensarci.</span>
+          <span data-state="keep" lang="en">The pre-selected option is the <b>default</b>. We often keep it without thinking.</span>
+          <span data-state="switch" lang="it" hidden>Hai cambiato il default. <b>Quando e perché le persone lo fanno</b> è al centro della mia ricerca.</span>
+          <span data-state="switch" lang="en" hidden>You changed the default. <b>When and why people do that</b> is at the heart of my research.</span>
+        </p>
+      </form>
+    </div>
   </div>
 </header>
 
-<div class="page">
-  <aside class="card">
-    <div class="card-inner">
-      <h1>Elisa Pontivi</h1>
-      <p class="role">
-        <span lang="it">Dottoranda in Methods and Models for Economic Decisions</span>
-        <span lang="en">PhD candidate in Methods and Models for Economic Decisions</span>
-      </p>
-      <p class="aff">
-        <span lang="it">Università degli Studi dell’Insubria</span>
-        <span lang="en">University of Insubria, Italy</span>
-      </p>
-      <dl>
-        <div>
-          <dt>Email</dt>
-          <dd>epontivi@uninsubria.it<br>elisa.pontivi@yahoo.it</dd>
-        </div>
-        <div>
-          <dt>LinkedIn</dt>
-          <dd><a href="https://www.linkedin.com/in/elisa-pontivi-99b8b21b7/">elisa-pontivi</a></dd>
-        </div>
-        <div>
-          <dt>CV</dt>
-          <dd><a href="cv.pdf">Curriculum vitae (PDF)</a></dd>
-        </div>
-      </dl>
-    </div>
-  </aside>
-
-  <main>
-    <section id="profilo" aria-label="Profilo">
-      <p class="lead" lang="it">Sono dottoranda in Methods and Models for Economic Decisions all’Università degli Studi dell’Insubria. Mi occupo di economia comportamentale e sperimentale: studio come la presentazione delle alternative, le condizioni iniziali e le motivazioni individuali influenzano la valutazione e l’adozione di scelte sostenibili.</p>
-      <p class="lead" lang="en">I am a PhD candidate in Methods and Models for Economic Decisions at the University of Insubria. I work in behavioral and experimental economics, studying how the way options are presented, initial conditions and individual motivations shape the valuation and adoption of sustainable choices.</p>
-      <p lang="it">Dal 2017 al 2023 ho lavorato come contabile in uno studio commercialista e nel 2022 ho conseguito l’abilitazione come Esperta Contabile. Insegno all’università e nella scuola secondaria di secondo grado.</p>
-      <p lang="en">From 2017 to 2023 I worked as an accountant in an accounting firm, and in 2022 I qualified as an Accounting Expert. I teach at university and in upper-secondary school.</p>
-    </section>
-
-    <section id="ricerca">
-      <h2><span lang="it">Ricerca</span><span lang="en">Research</span></h2>
-      <div class="topics">
-        <div>
-          <span class="topic-label"><span lang="it">Valutazione economica</span><span lang="en">Economic valuation</span></span>
-          <h3><span lang="it">Disponibilità a pagare e ad accettare</span><span lang="en">Willingness to pay and willingness to accept</span></h3>
-          <p lang="it">Analizzo il valore attribuito alle alternative sostenibili attraverso decisioni incentivate, considerando anche il ruolo della dotazione iniziale e dell’avversione alla perdita.</p>
-          <p lang="en">I measure the value people place on sustainable alternatives through incentivized decisions, including the role of initial endowment and loss aversion.</p>
-        </div>
-        <div>
-          <span class="topic-label"><span lang="it">Architettura della scelta</span><span lang="en">Choice architecture</span></span>
+<main>
+  <section class="sec" id="ricerca">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span lang="it">Ricerca</span><span lang="en">Research</span></span>
+        <h2><span lang="it">Economia comportamentale e scelte sostenibili</span><span lang="en">Behavioral economics and sustainable choices</span></h2>
+        <p lang="it">Studio come la presentazione delle alternative, le condizioni iniziali e le motivazioni individuali influenzano la valutazione e l’adozione di scelte sostenibili.</p>
+        <p lang="en">I study how the presentation of options, initial conditions and individual motivations shape the valuation and adoption of sustainable choices.</p>
+      </div>
+      <div class="themes">
+        <article class="theme">
+          <span class="t-label"><span lang="it">Valutazione economica</span><span lang="en">Economic valuation</span></span>
+          <h3><span lang="it">Disponibilità a pagare e ad accettare</span><span lang="en">Willingness to pay and to accept</span></h3>
+          <p lang="it">Il valore attribuito alle alternative sostenibili, misurato con decisioni incentivate, considerando la dotazione iniziale e l’avversione alla perdita.</p>
+          <p lang="en">The value people place on sustainable alternatives, measured with incentivized decisions, accounting for initial endowment and loss aversion.</p>
+        </article>
+        <article class="theme">
+          <span class="t-label"><span lang="it">Architettura della scelta</span><span lang="en">Choice architecture</span></span>
           <h3><span lang="it">Default, intenzionalità e legittimità</span><span lang="en">Defaults, intentionality and legitimacy</span></h3>
-          <p lang="it">Studio come le opzioni predefinite influenzano il comportamento e se il loro effetto cambia quando il default è percepito come intenzionale, appropriato o coerente con le conseguenze ambientali.</p>
-          <p lang="en">I study how default options shape behavior, and whether their effect changes when the default is perceived as intentional, appropriate or consistent with its environmental consequences.</p>
-        </div>
-        <div>
-          <span class="topic-label"><span lang="it">Meccanismi comportamentali</span><span lang="en">Behavioral mechanisms</span></span>
+          <p lang="it">Come le opzioni predefinite influenzano il comportamento, e se l’effetto cambia quando il default appare intenzionale, appropriato o coerente con le conseguenze ambientali.</p>
+          <p lang="en">How default options shape behavior, and whether the effect changes when the default looks intentional, appropriate or consistent with its environmental consequences.</p>
+        </article>
+        <article class="theme">
+          <span class="t-label"><span lang="it">Meccanismi comportamentali</span><span lang="en">Behavioral mechanisms</span></span>
           <h3><span lang="it">Motivazioni morali e norme sociali</span><span lang="en">Moral motivations and social norms</span></h3>
-          <p lang="it">Considero il ruolo della salienza ambientale, delle motivazioni morali, delle norme sociali e della fiducia nella formazione delle preferenze e delle decisioni.</p>
-          <p lang="en">I look at the role of environmental salience, moral motivations, social norms and trust in how preferences and decisions are formed.</p>
+          <p lang="it">Il ruolo della salienza ambientale, delle motivazioni morali, delle norme sociali e della fiducia nella formazione delle preferenze.</p>
+          <p lang="en">The role of environmental salience, moral motivations, social norms and trust in how preferences are formed.</p>
+        </article>
+      </div>
+      <p class="method" lang="it"><strong>Metodo.</strong> Esperimenti economici, disegni randomizzati, analisi statistica ed econometrica. Programmo direttamente gli esperimenti online e verifico, oltre agli esiti, i meccanismi comportamentali.</p>
+      <p class="method" lang="en"><strong>Methods.</strong> Economic experiments, randomized designs, statistical and econometric analysis. I program online experiments myself and test the behavioral mechanisms as well as the outcomes.</p>
+      <div class="chips"><span class="chip">oTree</span><span class="chip">Python</span><span class="chip">R</span><span class="chip"><span lang="it">Econometria</span><span lang="en">Econometrics</span></span><span class="chip">ORSEE</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="presentazioni">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span lang="it">Presentazioni</span><span lang="en">Talks</span></span>
+        <h2><span lang="it">Conferenze, workshop e seminari</span><span lang="en">Conferences, workshops and seminars</span></h2>
+      </div>
+      <div class="years">
+        <div class="year">
+          <span class="y">2025</span>
+          <ul class="talks">
+            <li><span class="m"><span lang="it">mag</span><span lang="en">May</span></span><div><span class="title">Nudging Sustainability: Default Effects and Behavioral Spillovers in Sustainable Product Choices</span><span class="where">Oxford in Varese, Residence Week for Entrepreneurship Scholars · Varese</span></div></li>
+          </ul>
+        </div>
+        <div class="year">
+          <span class="y">2024</span>
+          <ul class="talks">
+            <li><span class="m"><span lang="it">set</span><span lang="en">Sep</span></span><div><span class="title">The psychological cost of sustainable choices</span><span class="where">Behavioral and Experimental Economics Network (BEEN) · <span lang="it">Torino</span><span lang="en">Turin</span></span></div></li>
+            <li><span class="m"><span lang="it">set</span><span lang="en">Sep</span></span><div><span class="title">Nudging Sustainability: exploring bioplastic preferences</span><span class="where">RWI Leibniz Institute for Economic Research · Bochum</span></div></li>
+            <li><span class="m"><span lang="it">lug</span><span lang="en">Jul</span></span><div><span class="title">The psychological cost of sustainable choices</span><span class="where">Summer School &amp; Workshop on Experimetrics &amp; Behavioral Economics · Soleto (Lecce)</span></div></li>
+            <li><span class="m"><span lang="it">mag</span><span lang="en">May</span></span><div><span class="title">Nudging Sustainability: exploring bioplastic preferences</span><span class="where">SIEDS · Castellanza (Varese)</span></div></li>
+            <li><span class="m"><span lang="it">mar</span><span lang="en">Mar</span></span><div><span class="title">Nudging Sustainability: exploring bioplastic preferences</span><span class="where">InExEc, Insubria Experimental Economics Center · Varese</span></div></li>
+            <li><span class="m"><span lang="it">gen</span><span lang="en">Jan</span></span><div><span class="title"><span lang="it">Disegno di un survey experiment sulle attitudini verso la bioplastica</span><span lang="en">Design of a survey experiment on attitudes towards bioplastics</span></span><span class="where">Behavioral and Experimental Economics Network (BEEN) · Bologna</span></div></li>
+          </ul>
+        </div>
+        <div class="year">
+          <span class="y">2023</span>
+          <ul class="talks">
+            <li><span class="m"><span lang="it">giu</span><span lang="en">Jun</span></span><div><span class="title">The Bioeconomy Transformation: Science, Economics, Business and Society</span></div></li>
+          </ul>
         </div>
       </div>
-      <p lang="it"><strong>Metodo.</strong> Utilizzo esperimenti economici, disegni randomizzati e analisi statistica ed econometrica. Sviluppo direttamente gli esperimenti online in oTree e affianco all’analisi degli esiti la verifica dei meccanismi comportamentali.</p>
-      <p lang="en"><strong>Methods.</strong> I use economic experiments, randomized designs and statistical and econometric analysis. I program online experiments in oTree myself, and alongside outcomes I test the behavioral mechanisms behind them.</p>
-    </section>
+    </div>
+  </section>
 
-    <section id="presentazioni">
-      <h2><span lang="it">Presentazioni</span><span lang="en">Presentations</span></h2>
-      <ul class="plain">
-        <li class="entry">
-          <div class="when"><span lang="it">Mag 2025</span><span lang="en">May 2025</span></div>
-          <div class="what"><span class="paper-title">Nudging Sustainability: Default Effects and Behavioral Spillovers in Sustainable Product Choices</span><span class="d">Oxford in Varese, Residence Week for Entrepreneurship Scholars · Varese</span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Set 2024</span><span lang="en">Sep 2024</span></div>
-          <div class="what"><span class="paper-title">The psychological cost of sustainable choices</span><span class="d">Behavioral and Experimental Economics Network (BEEN) · <span lang="it">Torino</span><span lang="en">Turin</span></span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Set 2024</span><span lang="en">Sep 2024</span></div>
-          <div class="what"><span class="paper-title">Nudging Sustainability: exploring bioplastic preferences</span><span class="d">RWI Leibniz Institute for Economic Research · Bochum, <span lang="it">Germania</span><span lang="en">Germany</span></span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Lug 2024</span><span lang="en">Jul 2024</span></div>
-          <div class="what"><span class="paper-title">The psychological cost of sustainable choices</span><span class="d">Summer School &amp; Workshop on Experimetrics &amp; Behavioral Economics · Soleto (Lecce)</span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Mag 2024</span><span lang="en">May 2024</span></div>
-          <div class="what"><span class="paper-title">Nudging Sustainability: exploring bioplastic preferences</span><span class="d">SIEDS, <span lang="it">Società Italiana di Economia, Demografia e Statistica</span><span lang="en">Italian Society of Economics, Demography and Statistics</span> · Castellanza (Varese)</span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Mar 2024</span><span lang="en">Mar 2024</span></div>
-          <div class="what"><span class="paper-title">Nudging Sustainability: exploring bioplastic preferences</span><span class="d">InExEc, Insubria Experimental Economics Center · Varese</span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Gen 2024</span><span lang="en">Jan 2024</span></div>
-          <div class="what"><span lang="it">Disegno del survey experiment sulle attitudini verso la bioplastica</span><span lang="en">Design of a survey experiment on attitudes towards bioplastics</span><span class="d">Behavioral and Experimental Economics Network (BEEN) · Bologna</span></div>
-        </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Giu 2023</span><span lang="en">Jun 2023</span></div>
-          <div class="what">The Bioeconomy Transformation: Science, Economics, Business and Society</div>
-        </li>
-      </ul>
-    </section>
-
-    <section id="progetti">
-      <h2><span lang="it">Progetti e collaborazioni</span><span lang="en">Projects and collaborations</span></h2>
+  <section class="sec" id="progetti">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span lang="it">Progetti</span><span lang="en">Projects</span></span>
+        <h2><span lang="it">Progetti e collaborazioni</span><span lang="en">Projects and collaborations</span></h2>
+      </div>
 
       <article class="project">
-        <h3>ProPla, Proteins from Plastics</h3>
-        <p class="meta"><span lang="it">Progetto Fondazione Cariplo · Università dell’Insubria</span><span lang="en">Fondazione Cariplo project · University of Insubria</span></p>
-        <video controls preload="metadata" playsinline aria-label="Video ProPla">
-          <source src="propla.mp4" type="video/mp4">
-        </video>
-        <p lang="it">Progetto dedicato al recupero delle microplastiche PET dalle acque e alla loro trasformazione in nuove risorse. Ho collaborato con il gruppo di economia ideando e realizzando il video che presenta i risultati del loro lavoro.</p>
-        <p lang="en">A project on recovering PET microplastics from water and turning them into new resources. I worked with the economics team, designing and producing the video that presents their results.</p>
-        <dl>
-          <div><dt><span lang="it">Ruolo</span><span lang="en">Role</span></dt><dd><span lang="it">Ideazione, montaggio e comunicazione scientifica</span><span lang="en">Concept, editing and science communication</span></dd></div>
-        </dl>
-        <p class="links">
-          <a href="https://www.uninsubria.it/ateneo/ci-presentiamo/comunicazione/tutte-le-notizie/progetto-propla-proteins-plastics-team-di"><span lang="it">Pagina del progetto</span><span lang="en">Project page</span></a>
-          <a href="propla.mp4"><span lang="it">Apri il video</span><span lang="en">Open the video</span></a>
-        </p>
-      </article>
-
-      <article class="project">
-        <h3><span lang="it">Pool ORSEE di InExEc</span><span lang="en">InExEc ORSEE participant pool</span></h3>
-        <p class="meta">InExEc, Insubria Experimental Economics Center</p>
-        <video controls preload="metadata" playsinline aria-label="Video InExEc">
-          <source src="inexec.mp4" type="video/mp4">
-        </video>
-        <p lang="it">Ho contribuito a realizzare il pool ORSEE di InExEc, il sistema con cui il centro recluta e gestisce i partecipanti agli esperimenti economici. Ho anche realizzato il video informativo per i partecipanti.</p>
-        <p lang="en">I helped set up the InExEc ORSEE pool, the system the lab uses to recruit and manage participants in economic experiments. I also produced the information video for participants.</p>
-        <dl>
-          <div><dt><span lang="it">Ruolo</span><span lang="en">Role</span></dt><dd><span lang="it">Implementazione, coordinamento e comunicazione con i partecipanti</span><span lang="en">Implementation, coordination and communication with participants</span></dd></div>
-          <div><dt><span lang="it">Scala</span><span lang="en">Scale</span></dt><dd><span lang="it">Centinaia di partecipanti</span><span lang="en">Several hundred participants</span></dd></div>
-        </dl>
-        <p class="links">
-          <a href="https://dieco.uninsubria.it/it/strutture/inexec-center"><span lang="it">Pagina di InExEc</span><span lang="en">InExEc website</span></a>
-          <a href="inexec.mp4"><span lang="it">Apri il video</span><span lang="en">Open the video</span></a>
-        </p>
-      </article>
-    </section>
-
-    <section id="didattica">
-      <h2><span lang="it">Didattica</span><span lang="en">Teaching</span></h2>
-      <p lang="it">All’università tengo esercitazioni di Microeconomia e attività di tutoraggio e supporto alla didattica. Nella scuola secondaria di secondo grado insegno discipline economiche, matematiche e statistiche, con percorsi di educazione civica.</p>
-      <p lang="en">At university I teach Microeconomics tutorials and work as a tutor and teaching assistant. In upper-secondary school I teach economics, mathematics and statistics, including civic education modules.</p>
-      <ul class="plain">
-        <li class="entry">
-          <div class="when">2023–2025</div>
-          <div class="what">
-            <strong lang="it">Seminario “Prevedere il rischio di impresa: Altman Z-Score”</strong>
-            <strong lang="en">Seminar “Predicting business risk: the Altman Z-Score”</strong>
-            <span class="d"><span lang="it">Corso di Bilancio, Controllo e Valutazione d’Azienda, Università dell’Insubria · aprile 2023, marzo 2024, marzo 2025 ·</span><span lang="en">Course in Financial Reporting, Control and Business Valuation, University of Insubria · April 2023, March 2024, March 2025 ·</span> <a href="altman.html"><span lang="it">materiali</span><span lang="en">materials</span></a></span>
-          </div>
-        </li>
-      </ul>
-      <p class="links" style="margin-top:16px">
-        <a href="giocosp.html"><span lang="it">Gioco interattivo per studenti</span><span lang="en">Interactive game for students</span></a>
-        <a href="index1.html"><span lang="it">Materiali di educazione civica</span><span lang="en">Civic education materials (Italian)</span></a>
-      </p>
-    </section>
-
-    <section id="competenze">
-      <h2><span lang="it">Competenze</span><span lang="en">Skills</span></h2>
-      <div class="skills">
-        <div>
-          <h3><span lang="it">Ricerca e dati</span><span lang="en">Research and data</span></h3>
-          <p lang="it">Disegno sperimentale, sviluppo di studi online, raccolta e analisi dei dati.</p>
-          <p lang="en">Experimental design, online study development, data collection and analysis.</p>
-          <p class="tools">oTree · Python · R · <span lang="it">econometria</span><span lang="en">econometrics</span></p>
+        <div class="media">
+          <video controls preload="metadata" playsinline aria-label="Video ProPla"><source src="propla.mp4" type="video/mp4"></video>
         </div>
         <div>
-          <h3><span lang="it">Contabilità e analisi aziendale</span><span lang="en">Accounting and business analysis</span></h3>
-          <p lang="it">Contabilità ordinaria, redazione e analisi di bilancio, reportistica. <a href="https://prezi.com/i/xew5awcbvmsg/">Esempio di report</a></p>
-          <p lang="en">Bookkeeping, preparation and analysis of financial statements, reporting. <a href="https://prezi.com/i/xew5awcbvmsg/">Sample report</a></p>
+          <span class="p-label"><span lang="it">Progetto Fondazione Cariplo · Università dell’Insubria</span><span lang="en">Fondazione Cariplo project · University of Insubria</span></span>
+          <h3>ProPla, Proteins from Plastics</h3>
+          <p lang="it">Recupero delle microplastiche PET dalle acque e loro trasformazione in nuove risorse. Con il gruppo di economia ho ideato e realizzato il video che ne presenta i risultati.</p>
+          <p lang="en">Recovering PET microplastics from water and turning them into new resources. With the economics team I designed and produced the video presenting the results.</p>
+          <dl class="facts">
+            <div><dt><span lang="it">Ruolo</span><span lang="en">Role</span></dt><dd><span lang="it">Ideazione, montaggio, comunicazione scientifica</span><span lang="en">Concept, editing, science communication</span></dd></div>
+          </dl>
+          <p class="links">
+            <a href="https://www.uninsubria.it/ateneo/ci-presentiamo/comunicazione/tutte-le-notizie/progetto-propla-proteins-plastics-team-di"><span lang="it">Pagina del progetto</span><span lang="en">Project page</span> ↗</a>
+            <a href="propla.mp4"><span lang="it">Apri il video</span><span lang="en">Open the video</span></a>
+          </p>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="media">
+          <video controls preload="metadata" playsinline aria-label="Video InExEc"><source src="inexec.mp4" type="video/mp4"></video>
+        </div>
+        <div>
+          <span class="p-label">InExEc, Insubria Experimental Economics Center</span>
+          <h3><span lang="it">Il pool ORSEE dei partecipanti</span><span lang="en">The ORSEE participant pool</span></h3>
+          <p lang="it">Ho contribuito a realizzare il sistema con cui il centro recluta e gestisce i partecipanti agli esperimenti economici, e il video informativo che lo presenta.</p>
+          <p lang="en">I helped build the system the lab uses to recruit and manage participants in economic experiments, and made the information video that introduces it.</p>
+          <dl class="facts">
+            <div><dt><span lang="it">Ruolo</span><span lang="en">Role</span></dt><dd><span lang="it">Implementazione, coordinamento, comunicazione</span><span lang="en">Implementation, coordination, communication</span></dd></div>
+            <div><dt><span lang="it">Scala</span><span lang="en">Scale</span></dt><dd><span lang="it">Centinaia di partecipanti</span><span lang="en">Hundreds of participants</span></dd></div>
+          </dl>
+          <p class="links">
+            <a href="https://dieco.uninsubria.it/it/strutture/inexec-center"><span lang="it">Pagina di InExEc</span><span lang="en">InExEc website</span> ↗</a>
+            <a href="inexec.mp4"><span lang="it">Apri il video</span><span lang="en">Open the video</span></a>
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="didattica">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span lang="it">Didattica e competenze</span><span lang="en">Teaching and skills</span></span>
+        <h2><span lang="it">In aula, in studio, sul web</span><span lang="en">In class, in practice, on the web</span></h2>
+      </div>
+
+      <div class="seminar">
+        <div>
+          <span class="s-label"><span lang="it">Seminario · 2023, 2024, 2025</span><span lang="en">Seminar · 2023, 2024, 2025</span></span>
+          <h3><span lang="it">Prevedere il rischio d’impresa: l’Altman Z-Score</span><span lang="en">Predicting business risk: the Altman Z-Score</span></h3>
+          <p lang="it">Corso di Bilancio, Controllo e Valutazione d’Azienda, Università dell’Insubria.</p>
+          <p lang="en">Course in Financial Reporting, Control and Business Valuation, University of Insubria.</p>
+        </div>
+        <a href="altman.html"><span lang="it">Materiali del seminario</span><span lang="en">Seminar materials</span> →</a>
+      </div>
+
+      <div class="two">
+        <div class="box">
+          <h3><span lang="it">Insegnamento</span><span lang="en">Teaching</span></h3>
+          <p lang="it">Esercitazioni di Microeconomia e tutoraggio all’università. Discipline economiche, matematiche e statistiche ed educazione civica nella scuola secondaria di secondo grado.</p>
+          <p lang="en">Microeconomics tutorials and tutoring at university. Economics, mathematics, statistics and civic education in upper-secondary school.</p>
+          <p class="links"><a href="giocosp.html"><span lang="it">Gioco interattivo per studenti</span><span lang="en">Interactive game for students</span></a><a href="index1.html"><span lang="it">Materiali di educazione civica</span><span lang="en">Civic education materials (IT)</span></a></p>
+        </div>
+        <div class="box">
+          <h3><span lang="it">Contabilità e bilancio</span><span lang="en">Accounting</span></h3>
+          <p lang="it">Contabilità ordinaria, redazione e analisi di bilancio, reportistica.</p>
+          <p lang="en">Bookkeeping, preparation and analysis of financial statements, reporting.</p>
           <p class="tools">TeamSystem</p>
+          <p class="links"><a href="https://prezi.com/i/xew5awcbvmsg/"><span lang="it">Esempio di report</span><span lang="en">Sample report</span> ↗</a></p>
         </div>
-        <div>
+        <div class="box">
           <h3><span lang="it">Web e comunicazione</span><span lang="en">Web and communication</span></h3>
-          <p lang="it">Pagine web, strumenti interattivi, presentazioni e video di divulgazione scientifica.</p>
+          <p lang="it">Siti, strumenti interattivi, presentazioni e video di divulgazione scientifica.</p>
           <p lang="en">Websites, interactive tools, presentations and science communication videos.</p>
           <p class="tools">HTML · CSS · JavaScript · GitHub Pages</p>
         </div>
-        <div>
+        <div class="box">
           <h3><span lang="it">Coordinamento</span><span lang="en">Coordination</span></h3>
-          <p lang="it">Allenatrice di pallavolo: pianificazione, gestione del gruppo e lavoro di squadra. <a href="allenamento.html">Esempio di allenamento</a></p>
-          <p lang="en">Volleyball coach: planning, group management and teamwork. <a href="allenamento.html">Sample training plan (Italian)</a></p>
+          <p lang="it">Allenatrice di pallavolo: pianificazione, gestione del gruppo e lavoro di squadra.</p>
+          <p lang="en">Volleyball coach: planning, group management and teamwork.</p>
+          <p class="links"><a href="allenamento.html"><span lang="it">Esempio di allenamento</span><span lang="en">Sample training plan (IT)</span></a></p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="percorso">
-      <h2><span lang="it">Formazione ed esperienza</span><span lang="en">Education and experience</span></h2>
-      <ul class="plain">
-        <li class="entry">
-          <div class="when"><span lang="it">in corso</span><span lang="en">ongoing</span></div>
-          <div class="what">
-            <strong lang="it">Dottorato in Methods and Models for Economic Decisions</strong>
-            <strong lang="en">PhD in Methods and Models for Economic Decisions</strong>
-            <span class="d"><span lang="it">Università degli Studi dell’Insubria</span><span lang="en">University of Insubria</span></span>
-          </div>
+  <section class="sec" id="percorso">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span lang="it">Percorso</span><span lang="en">Background</span></span>
+        <h2><span lang="it">Formazione ed esperienza</span><span lang="en">Education and experience</span></h2>
+      </div>
+      <ul class="timeline">
+        <li>
+          <span class="when"><span lang="it">In corso</span><span lang="en">Ongoing</span></span>
+          <div><strong><span lang="it">Dottorato in Methods and Models for Economic Decisions</span><span lang="en">PhD in Methods and Models for Economic Decisions</span></strong><span class="d"><span lang="it">Università degli Studi dell’Insubria</span><span lang="en">University of Insubria</span></span></div>
         </li>
-        <li class="entry">
-          <div class="when"><span lang="it">Nov 2022</span><span lang="en">Nov 2022</span></div>
-          <div class="what">
-            <strong lang="it">Abilitazione come Esperta Contabile</strong>
-            <strong lang="en">Qualified as Accounting Expert (Esperto Contabile)</strong>
-            <span class="d"><span lang="it">Ordine dei Dottori Commercialisti e degli Esperti Contabili di Como, sezione B</span><span lang="en">Order of Chartered Accountants and Accounting Experts of Como, section B</span></span>
-          </div>
+        <li>
+          <span class="when"><span lang="it">Novembre 2022</span><span lang="en">November 2022</span></span>
+          <div><strong><span lang="it">Abilitazione come Esperta Contabile</span><span lang="en">Qualified as Accounting Expert (Esperto Contabile)</span></strong><span class="d"><span lang="it">Ordine dei Dottori Commercialisti e degli Esperti Contabili di Como, sezione B</span><span lang="en">Order of Chartered Accountants and Accounting Experts of Como, section B</span></span></div>
         </li>
-        <li class="entry">
-          <div class="when">2017–2023</div>
-          <div class="what">
-            <strong lang="it">Contabile, studio commercialista</strong>
-            <strong lang="en">Accountant, accounting firm</strong>
-            <span class="d"><span lang="it">Contabilità ordinaria, redazione e analisi di bilancio</span><span lang="en">Bookkeeping, preparation and analysis of financial statements</span></span>
-          </div>
+        <li>
+          <span class="when">2017 – 2023</span>
+          <div><strong><span lang="it">Contabile in uno studio commercialista</span><span lang="en">Accountant at an accounting firm</span></strong><span class="d"><span lang="it">Contabilità ordinaria, redazione e analisi di bilancio</span><span lang="en">Bookkeeping, preparation and analysis of financial statements</span></span></div>
         </li>
-        <li class="entry">
-          <div class="when">—</div>
-          <div class="what">
-            <strong lang="it">Laurea magistrale in Global Entrepreneurship Economics and Management</strong>
-            <strong lang="en">MSc in Global Entrepreneurship Economics and Management</strong>
-            <span class="d"><span lang="it">Università degli Studi dell’Insubria · 110 e lode</span><span lang="en">University of Insubria · 110/110 cum laude</span></span>
-          </div>
+        <li>
+          <span class="when"><span lang="it">Laurea magistrale</span><span lang="en">Master’s degree</span></span>
+          <div><strong>Global Entrepreneurship Economics and Management</strong><span class="d"><span lang="it">Università degli Studi dell’Insubria · 110 e lode</span><span lang="en">University of Insubria · 110/110 cum laude</span></span></div>
         </li>
       </ul>
-    </section>
-  </main>
-</div>
+    </div>
+  </section>
+</main>
 
-<footer>Elisa Pontivi · <span lang="it">Università degli Studi dell’Insubria</span><span lang="en">University of Insubria</span></footer>
+<footer class="contact" id="contatti">
+  <div class="wrap">
+    <h2><span lang="it">Scrivimi per <span class="hl">ricerca</span>, didattica o collaborazioni.</span><span lang="en">Get in touch about <span class="hl">research</span>, teaching or collaborations.</span></h2>
+    <div class="contact-grid">
+      <div><span class="c-label">Email</span><p>epontivi@uninsubria.it<br>elisa.pontivi@yahoo.it</p></div>
+      <div><span class="c-label">LinkedIn</span><p><a href="https://www.linkedin.com/in/elisa-pontivi-99b8b21b7/">elisa-pontivi</a></p></div>
+      <div><span class="c-label">CV</span><p><a href="cv.pdf">Curriculum vitae (PDF)</a></p></div>
+    </div>
+    <div class="foot">Elisa Pontivi · <span lang="it">Università degli Studi dell’Insubria</span><span lang="en">University of Insubria</span></div>
+  </div>
+</footer>
 
 <script>
 (function () {
@@ -443,6 +564,15 @@ footer {
   setLang(initial === 'en' ? 'en' : 'it');
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () { setLang(b.dataset.set); });
+  });
+
+  var form = document.getElementById('choice');
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  form.addEventListener('change', function () {
+    var switched = document.getElementById('opt-bio').checked;
+    document.querySelectorAll('#note [data-state]').forEach(function (s) {
+      s.hidden = (s.dataset.state === 'switch') !== switched;
+    });
   });
 })();
 </script>
