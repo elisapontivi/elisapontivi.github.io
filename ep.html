@@ -110,6 +110,7 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 .lang button[aria-pressed="true"] { background: var(--on-cobalt); color: var(--cobalt-deep); }
 
 .hero-grid {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(500px, 560px);
   gap: 48px;
@@ -122,9 +123,20 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
   line-height: .86;
   letter-spacing: -.045em;
 }
-.hero h1 .last { display: block; color: var(--marigold); }
+.hero h1 .last { position: relative; display: inline-block; color: var(--marigold); }
+.hero h1 .last::after {
+  content: ""; position: absolute; left: -2%; right: -4%; bottom: -.12em; height: .2em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 30' preserveAspectRatio='none'%3E%3Cpath d='M4 20 C 80 6, 160 26, 240 12 S 360 8, 396 16' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  opacity: .9;
+}
+.rotator { margin-top: 26px; font-family: var(--display); font-size: clamp(26px, 3.2vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; }
+.rotator .lead-in { color: var(--on-cobalt-soft); font-weight: 400; }
+.rot { position: relative; display: inline-grid; vertical-align: bottom; overflow: hidden; height: 1.15em; }
+.rot > span { grid-area: 1 / 1; justify-self: start; color: var(--on-cobalt); background: linear-gradient(transparent 78%, var(--marigold) 78%, var(--marigold) 92%, transparent 92%); transform: translateY(110%); transition: transform .5s cubic-bezier(.2,.8,.2,1); white-space: nowrap; }
+.rot > span.on { transform: translateY(0); }
+.rot > span.off { transform: translateY(-110%); }
 .hero .role {
-  margin-top: 28px;
+  margin-top: 18px;
   max-width: 34ch;
   font-size: clamp(19px, 2vw, 23px);
   line-height: 1.4;
@@ -143,6 +155,20 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
 
 /* Collage: pieces pinned on the cobalt board, each tilted a little */
+.tape::before {
+  content: ""; position: absolute; top: -12px; left: 50%; width: 92px; height: 24px; translate: -50% 0; rotate: -3deg;
+  background: rgba(255, 255, 255, .55); box-shadow: 0 1px 2px rgba(0,0,0,.08); z-index: 2;
+}
+.pin::before {
+  content: ""; position: absolute; top: -10px; left: 50%; width: 18px; height: 18px; translate: -50% 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a7a, #d63b2b 60%, #9e2418); box-shadow: 0 3px 4px rgba(0,0,0,.35); z-index: 2;
+}
+.hint {
+  position: absolute; left: -62px; top: 396px; width: 120px; z-index: 6;
+  font-family: var(--hand); font-size: 28px; font-weight: 700; line-height: 1; color: var(--marigold);
+  transform: rotate(-8deg); pointer-events: none;
+}
+.hint svg { display: block; width: 70px; height: 56px; margin: 0 0 2px 46px; overflow: visible; }
 .collage { position: relative; height: 700px; }
 .piece {
   position: absolute;
@@ -324,6 +350,7 @@ a.piece { text-decoration: none; }
   .piece { position: relative; inset: auto; width: auto; }
   .choice { grid-column: 1 / -1; order: -1; }
   .sticky { align-self: start; }
+  .hint { display: none; }
   .sec-head, .year, .timeline li { grid-template-columns: 1fr; gap: 10px; }
   .sec-head p { grid-column: 1; }
   .indent { margin-left: 0; }
@@ -347,6 +374,7 @@ a.piece { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn, .piece { transition: none; animation: none; }
+  .rot > span { transition: none; }
 }
 </style>
 </head>
@@ -371,9 +399,11 @@ a.piece { text-decoration: none; }
 
     <div class="hero-grid">
       <div>
-        <h1>Elisa <span class="last">Pontivi</span></h1>
-        <p class="role" lang="it"><strong>Dottoranda in Methods and Models for Economic Decisions</strong> all’Università dell’Insubria. Studio perché le persone scelgono, o non scelgono, le alternative sostenibili e come il modo in cui le opzioni vengono presentate cambia queste decisioni.</p>
-        <p class="role" lang="en"><strong>PhD candidate in Methods and Models for Economic Decisions</strong> at the University of Insubria. I study why people choose, or don’t choose, sustainable alternatives, and how the way options are presented changes those decisions.</p>
+        <h1>Elisa<br><span class="last">Pontivi</span></h1>
+        <p class="rotator" lang="it" aria-label="Dottoranda, esercitatrice, docente, esperta contabile"><span class="lead-in">sono </span><span class="rot" aria-hidden="true"><span class="on">dottoranda</span><span>esercitatrice</span><span>docente</span><span>esperta contabile</span><span>allenatrice</span></span></p>
+        <p class="rotator" lang="en" aria-label="PhD candidate, teaching assistant, teacher, accounting expert"><span class="lead-in">I’m a </span><span class="rot" aria-hidden="true"><span class="on">PhD candidate</span><span>teaching assistant</span><span>teacher</span><span>accounting expert</span><span>volleyball coach</span></span></p>
+        <p class="role" lang="it">Dottorato in <strong>Methods and Models for Economic Decisions</strong> all’Università dell’Insubria. Studio perché scegliamo, o non scegliamo, le alternative sostenibili e come il modo in cui le opzioni vengono presentate cambia le nostre decisioni.</p>
+        <p class="role" lang="en">PhD in <strong>Methods and Models for Economic Decisions</strong> at the University of Insubria. I study why we choose, or don’t choose, sustainable alternatives, and how the way options are presented changes our decisions.</p>
         <div class="hero-actions">
           <a class="btn solid" href="#ricerca"><span lang="it">La mia ricerca</span><span lang="en">My research</span></a>
           <a class="btn line" href="cv.pdf">CV (PDF)</a>
@@ -381,7 +411,7 @@ a.piece { text-decoration: none; }
       </div>
 
       <div class="collage">
-        <a class="piece polaroid" href="#progetti">
+        <a class="piece polaroid tape" href="#progetti">
           <span class="img" style="background-image:url('img/propla.jpg')"><span class="play" aria-hidden="true"></span></span>
           <span class="cap"><span lang="it">ProPla · il mio video</span><span lang="en">ProPla · my video</span></span>
         </a>
@@ -395,6 +425,11 @@ a.piece { text-decoration: none; }
             <span class="tt">Nudging Sustainability: Default Effects and Behavioral Spillovers</span>
           </span>
         </a>
+
+        <div class="hint" aria-hidden="true">
+          <svg viewBox="0 0 70 56"><path d="M6 52 C 10 30, 30 14, 62 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M50 2 L 63 8 L 52 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span lang="it">provalo!</span><span lang="en">try it!</span>
+        </div>
 
         <form class="piece choice" id="choice" aria-labelledby="choice-q">
           <span class="q-label"><span lang="it">Prova un mini-esperimento</span><span lang="en">Try a mini experiment</span></span>
@@ -415,13 +450,13 @@ a.piece { text-decoration: none; }
           </p>
         </form>
 
-        <a class="piece board" href="#didattica">
+        <a class="piece board pin" href="#didattica">
           <span class="bt"><span lang="it">In classe</span><span lang="en">In class</span></span>
           <span class="bs"><span lang="it">Economia aziendale · Discipline turistiche · Matematica</span><span lang="en">Business economics · Tourism studies · Mathematics</span></span>
           <span class="eq"><span lang="it">Ricavi − Costi = Utile</span><span lang="en">Revenue − Costs = Profit</span></span>
         </a>
 
-        <div class="piece sticky">
+        <div class="piece sticky tape">
           <span class="sd"><span lang="it">Gennaio 2027</span><span lang="en">January 2027</span></span>
           <span class="st"><span lang="it">discussione della tesi di dottorato!</span><span lang="en">PhD thesis defense!</span></span>
         </div>
@@ -689,6 +724,25 @@ a.piece { text-decoration: none; }
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () { setLang(b.dataset.set); });
   });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.rot').forEach(function (rot) {
+      var words = rot.children, i = 0;
+      setInterval(function () {
+        var cur = words[i];
+        i = (i + 1) % words.length;
+        var next = words[i];
+        cur.classList.remove('on'); cur.classList.add('off');
+        next.classList.remove('off'); next.classList.add('on');
+        setTimeout(function () {
+          cur.style.transition = 'none';
+          cur.classList.remove('off');
+          void cur.offsetWidth;
+          cur.style.transition = '';
+        }, 600);
+      }, 2200);
+    });
+  }
 
   var form = document.getElementById('choice');
   form.addEventListener('submit', function (e) { e.preventDefault(); });
