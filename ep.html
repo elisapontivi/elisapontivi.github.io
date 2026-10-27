@@ -8,9 +8,10 @@
 <meta name="description" content="Elisa Pontivi, dottoranda in Methods and Models for Economic Decisions, Università degli Studi dell'Insubria. Economia comportamentale e sperimentale, scelte sostenibili.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&display=swap">
 <style>
-/* Layout: a full-bleed cobalt opening with a bento of project tiles and a roles strip,
+/* Layout: a full-bleed cobalt opening with a pinned-up collage (experiment card, video still,
+   conference badge, classroom board, sticky note) and a roles strip,
    then calm content sections on paper with wide year/label gutters. */
 :root {
   --cobalt: #2639c9;
@@ -26,6 +27,9 @@
   --link: #2639c9;
   --display: "Bricolage Grotesque", "Arial Black", "Helvetica Neue", sans-serif;
   --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --board: #23302b;
+  --chalk: #f1f0e6;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -107,9 +111,9 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
-  gap: 56px;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(500px, 560px);
+  gap: 48px;
+  align-items: center;
   padding-block: 56px 64px;
 }
 .hero h1 {
@@ -138,49 +142,69 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 .btn.line { color: var(--on-cobalt); border-color: rgba(255,255,255,.55); }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
 
-/* Bento of tiles: real images from the videos, the latest talk, the next milestone */
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 250px 200px;
-  gap: 12px;
+/* Collage: pieces pinned on the cobalt board, each tilted a little */
+.collage { position: relative; height: 700px; }
+.piece {
+  position: absolute;
+  box-shadow: 0 18px 40px rgba(8, 12, 60, .35);
+  transform: rotate(var(--r, 0deg));
+  transition: transform .25s ease;
+  animation: pin .7s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay: var(--d, 0s);
 }
-.tile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 4px;
-  padding: 18px;
-  border-radius: 16px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--on-cobalt);
-  min-width: 0;
+@keyframes pin { from { transform: translateY(-18px) rotate(calc(var(--r, 0deg) * 2)); } }
+a.piece { text-decoration: none; }
+.piece:hover { transform: rotate(0deg) translateY(-4px); z-index: 9; }
+
+/* video still, polaroid style */
+.polaroid { --r: -6deg; --d: .05s; left: 0; top: 4px; width: 236px; padding: 10px 10px 8px; background: #fff; color: #14161f; z-index: 2; }
+.polaroid .img { position: relative; display: block; height: 136px; background-size: cover; background-position: center; }
+.polaroid .play {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.92);
+  display: grid; place-items: center;
 }
-.tile .k { font-size: 12px; font-weight: 700; letter-spacing: .02em; }
-.tile .t { font-family: var(--display); font-size: 21px; font-weight: 600; line-height: 1.12; }
-.tile.photo { background-size: cover; background-position: center; }
-.tile.photo::before {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10,14,50,0) 30%, rgba(10,14,50,.82) 100%);
+.polaroid .play::after { content: ""; margin-left: 4px; border-left: 13px solid #14161f; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+.polaroid .cap { display: block; font-family: var(--hand); font-size: 22px; font-weight: 700; line-height: 1.1; padding: 8px 2px 2px; }
+
+/* conference badge on a lanyard */
+.badge { --r: 6deg; --d: .15s; right: 6px; top: 0; width: 206px; background: #fff; color: #14161f; border-radius: 12px; overflow: visible; z-index: 2; }
+.badge::before {
+  content: ""; position: absolute; left: 50%; top: -60px; width: 14px; height: 70px; translate: -50% 0;
+  background: repeating-linear-gradient(180deg, var(--marigold) 0 10px, #e9b225 10px 20px);
+  border-radius: 3px; z-index: -1;
 }
-.tile.photo > * { position: relative; }
-.tile.photo .k { color: var(--marigold); }
-.tile.big { grid-row: 1 / span 2; }
-.tile.sun { background: var(--marigold); color: #14161f; }
-.tile.sun .t { font-size: 18px; }
-.tile.ink { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3); }
-.tile.ink .k { color: var(--marigold); }
-.tile .play {
-  position: absolute; top: 16px; right: 16px;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,.92); display: grid; place-items: center;
-}
-.tile .play::after { content: ""; margin-left: 3px; border-left: 12px solid #14161f; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
-a.tile { transition: transform .2s ease; }
-a.tile:hover { transform: translateY(-3px); }
-.tiles .tile:nth-child(2) { grid-column: 2; grid-row: 1; }
+.badge .top { display: block; background: var(--marigold); padding: 12px 14px 10px; border-radius: 12px 12px 0 0; font-size: 12px; font-weight: 700; }
+.badge .hole { position: absolute; left: 50%; top: 6px; width: 34px; height: 7px; translate: -50% 0; border-radius: 99px; background: #fff; }
+.badge .body { display: block; padding: 12px 14px 14px; }
+.badge .nm { display: block; font-family: var(--display); font-size: 22px; font-weight: 800; line-height: 1; }
+.badge .sp { display: inline-block; margin: 6px 0 8px; padding: 2px 8px; border-radius: 99px; background: var(--cobalt); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.badge .tt { display: block; font-size: 13px; line-height: 1.35; color: #4a4d5c; }
+
+/* the mini experiment */
+.choice { --r: -1.5deg; --d: .3s; left: 74px; top: 206px; width: 340px; background: var(--surface); color: var(--fg); border-radius: 16px; padding: 20px 20px 16px; z-index: 5; }
+.choice .q-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--link); text-transform: uppercase; letter-spacing: .05em; }
+.choice .q-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--marigold); }
+.choice h2 { font-size: 21px; font-weight: 600; line-height: 1.2; margin: 6px 0 12px; }
+.opt { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: center; padding: 10px 12px; border: 2px solid var(--rule); border-radius: 10px; cursor: pointer; }
+.opt + .opt { margin-top: 8px; }
+.opt input { width: 18px; height: 18px; margin: 0; accent-color: var(--cobalt); }
+.opt strong { font-weight: 600; font-size: 16px; }
+.opt:has(input:checked) { border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 7%, var(--surface)); }
+.tag { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 99px; background: var(--marigold); color: #14161f; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; vertical-align: 2px; }
+.choice .note { margin-top: 12px; font-size: 14px; line-height: 1.45; color: var(--muted); min-height: 2.9em; }
+.choice .note b { color: var(--fg); font-weight: 600; }
+
+/* classroom board */
+.board { --r: 3deg; --d: .45s; right: 0; bottom: 0; width: 248px; padding: 16px 18px 18px; background: var(--board); color: var(--chalk); border: 8px solid #8a5a33; border-radius: 6px; z-index: 3; font-family: var(--hand); }
+.board .bt { display: block; font-size: 26px; font-weight: 700; line-height: 1; }
+.board .bs { display: block; font-size: 19px; line-height: 1.2; margin-top: 6px; opacity: .9; }
+.board .eq { display: block; font-size: 22px; margin-top: 10px; color: var(--marigold); }
+
+/* sticky note */
+.sticky { --r: -5deg; --d: .55s; left: 8px; bottom: 14px; width: 176px; padding: 16px 16px 18px; background: var(--marigold); color: #14161f; z-index: 4; font-family: var(--hand); }
+.sticky .sd { display: block; font-size: 30px; font-weight: 700; line-height: 1; }
+.sticky .st { display: block; font-size: 20px; line-height: 1.15; margin-top: 4px; }
 
 /* Roles strip at the foot of the opening */
 .roles {
@@ -296,8 +320,10 @@ a.tile:hover { transform: translateY(-3px); }
 
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; gap: 44px; padding-block: 36px 56px; }
-  .tiles { grid-template-rows: 200px 150px 170px; }
-  .tile.big { grid-row: 1 / span 2; }
+  .collage { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding-top: 30px; max-width: 620px; }
+  .piece { position: relative; inset: auto; width: auto; }
+  .choice { grid-column: 1 / -1; order: -1; }
+  .sticky { align-self: start; }
   .sec-head, .year, .timeline li { grid-template-columns: 1fr; gap: 10px; }
   .sec-head p { grid-column: 1; }
   .indent { margin-left: 0; }
@@ -313,13 +339,14 @@ a.tile:hover { transform: translateY(-3px); }
   .sec { padding-block: 64px; }
   .bar nav { gap: 4px 16px; font-size: 14px; }
   .talks li { grid-template-columns: 1fr; gap: 2px; }
-  .tiles { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: minmax(150px, auto); }
-  .tile.big { grid-row: auto; min-height: 230px; }
-  .tiles .tile:nth-child(2) { grid-column: auto; grid-row: auto; }
+  .collage { gap: 14px; }
+  .choice { padding: 16px; }
+  .polaroid .img { height: 110px; }
+  .badge .nm { font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .btn, a.tile { transition: none; }
+  .btn, .piece { transition: none; animation: none; }
 }
 </style>
 </head>
@@ -353,22 +380,55 @@ a.tile:hover { transform: translateY(-3px); }
         </div>
       </div>
 
-      <div class="tiles">
-        <a class="tile photo big" href="#progetti" style="background-image:url('img/propla.jpg')">
-          <span class="play" aria-hidden="true"></span>
-          <span class="k"><span lang="it">Progetto ProPla · video</span><span lang="en">ProPla project · video</span></span>
-          <span class="t"><span lang="it">Dalle microplastiche a nuove risorse</span><span lang="en">From microplastics to new resources</span></span>
+      <div class="collage">
+        <a class="piece polaroid" href="#progetti">
+          <span class="img" style="background-image:url('img/propla.jpg')"><span class="play" aria-hidden="true"></span></span>
+          <span class="cap"><span lang="it">ProPla · il mio video</span><span lang="en">ProPla · my video</span></span>
         </a>
-        <a class="tile photo" href="#progetti" style="background-image:url('img/inexec.jpg')">
-          <span class="play" aria-hidden="true"></span>
-          <span class="k"><span lang="it">InExEc · pool ORSEE</span><span lang="en">InExEc · ORSEE pool</span></span>
-          <span class="t"><span lang="it">Chi partecipa agli esperimenti</span><span lang="en">Who takes part in the experiments</span></span>
+
+        <a class="piece badge" href="#presentazioni">
+          <span class="hole" aria-hidden="true"></span>
+          <span class="top">Oxford in Varese · 2025</span>
+          <span class="body">
+            <span class="nm">Elisa Pontivi</span>
+            <span class="sp">Speaker</span>
+            <span class="tt">Nudging Sustainability: Default Effects and Behavioral Spillovers</span>
+          </span>
         </a>
-        <a class="tile sun" href="#presentazioni">
-          <span class="k"><span lang="it">Ultima presentazione · Oxford in Varese, 2025</span><span lang="en">Latest talk · Oxford in Varese, 2025</span></span>
-          <span class="t">Nudging Sustainability: Default Effects and Behavioral Spillovers</span>
+
+        <form class="piece choice" id="choice" aria-labelledby="choice-q">
+          <span class="q-label"><span lang="it">Prova un mini-esperimento</span><span lang="en">Try a mini experiment</span></span>
+          <h2 id="choice-q"><span lang="it">Devi comprare una bottiglia d’acqua. Quale scegli?</span><span lang="en">You are buying a bottle of water. Which one?</span></h2>
+          <label class="opt" for="opt-pet">
+            <input type="radio" name="bottle" id="opt-pet" value="pet" checked>
+            <strong><span lang="it">Plastica (PET)</span><span lang="en">Plastic (PET)</span><span class="tag"><span lang="it">già selezionata</span><span lang="en">pre-selected</span></span></strong>
+          </label>
+          <label class="opt" for="opt-bio">
+            <input type="radio" name="bottle" id="opt-bio" value="bio">
+            <strong><span lang="it">Bioplastica</span><span lang="en">Bioplastic</span></strong>
+          </label>
+          <p class="note" aria-live="polite">
+            <span data-state="keep" lang="it">Una delle due era già selezionata: è il <b>default</b>. Spesso lo teniamo senza pensarci.</span>
+            <span data-state="keep" lang="en">One option was already selected: the <b>default</b>. We often keep it without thinking.</span>
+            <span data-state="switch" lang="it" hidden>Hai cambiato il default! <b>Capire quando e perché lo facciamo</b> è il cuore della mia ricerca.</span>
+            <span data-state="switch" lang="en" hidden>You changed the default! <b>Understanding when and why we do that</b> is the core of my research.</span>
+          </p>
+        </form>
+
+        <a class="piece board" href="#didattica">
+          <span class="bt"><span lang="it">In classe</span><span lang="en">In class</span></span>
+          <span class="bs"><span lang="it">Economia aziendale · Discipline turistiche · Matematica</span><span lang="en">Business economics · Tourism studies · Mathematics</span></span>
+          <span class="eq"><span lang="it">Ricavi − Costi = Utile</span><span lang="en">Revenue − Costs = Profit</span></span>
         </a>
+
+        <div class="piece sticky">
+          <span class="sd"><span lang="it">Gennaio 2027</span><span lang="en">January 2027</span></span>
+          <span class="st"><span lang="it">discussione della tesi di dottorato!</span><span lang="en">PhD thesis defense!</span></span>
+        </div>
       </div>
+    </div>
+
+    <ul class="roles"      </div>
     </div>
 
     <ul class="roles" aria-label="Attività">
@@ -628,6 +688,15 @@ a.tile:hover { transform: translateY(-3px); }
   setLang(initial === 'en' ? 'en' : 'it');
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () { setLang(b.dataset.set); });
+  });
+
+  var form = document.getElementById('choice');
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  form.addEventListener('change', function () {
+    var switched = document.getElementById('opt-bio').checked;
+    form.querySelectorAll('[data-state]').forEach(function (el) {
+      el.hidden = (el.dataset.state === 'switch') !== switched;
+    });
   });
 
 })();
