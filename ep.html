@@ -110,7 +110,7 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
   grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
   gap: 56px;
   align-items: end;
-  padding-block: 56px 72px;
+  padding-block: 56px 64px;
 }
 .hero h1 {
   font-weight: 800;
@@ -175,6 +175,31 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
   min-height: 3em;
 }
 .choice .note b { color: var(--fg); font-weight: 600; }
+
+/* Roles strip at the foot of the opening */
+.roles {
+  list-style: none; margin: 0; padding: 0 0 40px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255,255,255,.28);
+}
+.roles li { padding: 20px 20px 0 0; }
+.roles li + li { padding-left: 20px; border-left: 1px solid rgba(255,255,255,.28); }
+.roles a { display: block; color: var(--on-cobalt); text-decoration: none; }
+.roles .r-kind { display: block; font-size: 13px; font-weight: 700; color: var(--marigold); }
+.roles strong { display: block; font-family: var(--display); font-size: 22px; font-weight: 600; line-height: 1.15; margin: 4px 0 4px; }
+.roles span.r-d { display: block; font-size: 14px; line-height: 1.45; color: var(--on-cobalt-soft); }
+.roles a:hover strong { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+@media (max-width: 960px) {
+  .roles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .roles li, .roles li + li { padding: 18px 16px 18px 0; border-left: 0; }
+  .roles li:nth-child(even) { padding-left: 16px; border-left: 1px solid rgba(255,255,255,.28); }
+  .roles li:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.28); }
+}
+@media (max-width: 420px) {
+  .roles { grid-template-columns: 1fr; }
+  .roles li:nth-child(even) { padding-left: 0; border-left: 0; }
+  .roles li + li { border-top: 1px solid rgba(255,255,255,.28); }
+}
 
 /* ---------- Sections ---------- */
 .sec { padding-block: 88px; }
@@ -339,6 +364,29 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
         </p>
       </form>
     </div>
+
+    <ul class="roles" aria-label="Attività">
+      <li><a href="#ricerca">
+        <span class="r-kind"><span lang="it">Ricerca</span><span lang="en">Research</span></span>
+        <strong><span lang="it">Dottoranda</span><span lang="en">PhD candidate</span></strong>
+        <span class="r-d"><span lang="it">Economia comportamentale e sperimentale, Università dell’Insubria</span><span lang="en">Behavioral and experimental economics, University of Insubria</span></span>
+      </a></li>
+      <li><a href="#didattica">
+        <span class="r-kind"><span lang="it">Università</span><span lang="en">University</span></span>
+        <strong><span lang="it">Esercitatrice</span><span lang="en">Teaching assistant</span></strong>
+        <span class="r-d"><span lang="it">Esercitazioni di Microeconomia e tutoraggio</span><span lang="en">Microeconomics tutorials and tutoring</span></span>
+      </a></li>
+      <li><a href="#didattica">
+        <span class="r-kind"><span lang="it">Scuola</span><span lang="en">School</span></span>
+        <strong><span lang="it">Docente</span><span lang="en">Teacher</span></strong>
+        <span class="r-d"><span lang="it">Economia, matematica ed educazione civica nella secondaria di secondo grado</span><span lang="en">Economics, mathematics and civic education in upper-secondary school</span></span>
+      </a></li>
+      <li><a href="#percorso">
+        <span class="r-kind"><span lang="it">Professione</span><span lang="en">Profession</span></span>
+        <strong><span lang="it">Esperta Contabile</span><span lang="en">Accounting Expert</span></strong>
+        <span class="r-d"><span lang="it">Iscritta all’Ordine di Como, sez. B · in studio dal 2017 al 2023</span><span lang="en">Registered with the Como Order, section B · accounting firm 2017–2023</span></span>
+      </a></li>
+    </ul>
   </div>
 </header>
 
