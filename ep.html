@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>
-/* Layout: a full-bleed cobalt opening built around a live "default option" choice card,
+/* Layout: a full-bleed cobalt opening with a bento of project tiles and a roles strip,
    then calm content sections on paper with wide year/label gutters. */
 :root {
   --cobalt: #2639c9;
@@ -138,43 +138,49 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 .btn.line { color: var(--on-cobalt); border-color: rgba(255,255,255,.55); }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
 
-/* The choice card: the visitor meets a pre-selected default */
-.choice {
-  background: var(--surface);
-  color: var(--fg);
-  border-radius: 18px;
-  padding: 26px;
-  box-shadow: 0 30px 60px rgba(10, 16, 70, .35);
-  transform: rotate(-1.5deg);
-}
-.choice .q-label { font-size: 13px; font-weight: 500; color: var(--muted); }
-.choice h2 { font-size: 26px; font-weight: 600; line-height: 1.15; margin: 6px 0 18px; }
-.opt {
+/* Bento of tiles: real images from the videos, the latest talk, the next milestone */
+.tiles {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: 250px 200px;
   gap: 12px;
-  align-items: center;
-  padding: 14px 14px;
-  border: 2px solid var(--rule);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: border-color .15s ease, background .15s ease;
 }
-.opt + .opt { margin-top: 10px; }
-.opt input { width: 22px; height: 22px; margin: 0; accent-color: var(--cobalt); }
-.opt strong { display: block; font-weight: 600; font-size: 17px; }
-.opt small { display: block; font-size: 13px; color: var(--muted); }
-.opt:has(input:checked) { border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 7%, var(--surface)); }
-.tag {
-  display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
-  background: var(--marigold); color: #14161f; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-  vertical-align: 2px;
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--on-cobalt);
+  min-width: 0;
 }
-.choice .note {
-  margin-top: 16px; font-size: 15px; line-height: 1.5; color: var(--muted);
-  min-height: 3em;
+.tile .k { font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.tile .t { font-family: var(--display); font-size: 21px; font-weight: 600; line-height: 1.12; }
+.tile.photo { background-size: cover; background-position: center; }
+.tile.photo::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,14,50,0) 30%, rgba(10,14,50,.82) 100%);
 }
-.choice .note b { color: var(--fg); font-weight: 600; }
+.tile.photo > * { position: relative; }
+.tile.photo .k { color: var(--marigold); }
+.tile.big { grid-row: 1 / span 2; }
+.tile.sun { background: var(--marigold); color: #14161f; }
+.tile.sun .t { font-size: 18px; }
+.tile.ink { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3); }
+.tile.ink .k { color: var(--marigold); }
+.tile .play {
+  position: absolute; top: 16px; right: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.92); display: grid; place-items: center;
+}
+.tile .play::after { content: ""; margin-left: 3px; border-left: 12px solid #14161f; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+a.tile { transition: transform .2s ease; }
+a.tile:hover { transform: translateY(-3px); }
+.tiles .tile:nth-child(2) { grid-column: 2; grid-row: 1; }
 
 /* Roles strip at the foot of the opening */
 .roles {
@@ -290,7 +296,8 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; gap: 44px; padding-block: 36px 56px; }
-  .choice { transform: none; max-width: 520px; }
+  .tiles { grid-template-rows: 200px 150px 170px; }
+  .tile.big { grid-row: 1 / span 2; }
   .sec-head, .year, .timeline li { grid-template-columns: 1fr; gap: 10px; }
   .sec-head p { grid-column: 1; }
   .indent { margin-left: 0; }
@@ -306,11 +313,13 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
   .sec { padding-block: 64px; }
   .bar nav { gap: 4px 16px; font-size: 14px; }
   .talks li { grid-template-columns: 1fr; gap: 2px; }
-  .choice { padding: 20px; }
+  .tiles { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: minmax(150px, auto); }
+  .tile.big { grid-row: auto; min-height: 230px; }
+  .tiles .tile:nth-child(2) { grid-column: auto; grid-row: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .opt, .btn { transition: none; }
+  .btn, a.tile { transition: none; }
 }
 </style>
 </head>
@@ -336,38 +345,30 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
     <div class="hero-grid">
       <div>
         <h1>Elisa <span class="last">Pontivi</span></h1>
-        <p class="role" lang="it"><strong>Dottoranda in Methods and Models for Economic Decisions</strong> all’Università dell’Insubria. Studio come il modo in cui presentiamo le alternative cambia le scelte sostenibili.</p>
-        <p class="role" lang="en"><strong>PhD candidate in Methods and Models for Economic Decisions</strong> at the University of Insubria. I study how the way options are presented changes sustainable choices.</p>
+        <p class="role" lang="it"><strong>Dottoranda in Methods and Models for Economic Decisions</strong> all’Università dell’Insubria. Studio perché le persone scelgono, o non scelgono, le alternative sostenibili e come il modo in cui le opzioni vengono presentate cambia queste decisioni.</p>
+        <p class="role" lang="en"><strong>PhD candidate in Methods and Models for Economic Decisions</strong> at the University of Insubria. I study why people choose, or don’t choose, sustainable alternatives, and how the way options are presented changes those decisions.</p>
         <div class="hero-actions">
           <a class="btn solid" href="#ricerca"><span lang="it">La mia ricerca</span><span lang="en">My research</span></a>
           <a class="btn line" href="cv.pdf">CV (PDF)</a>
         </div>
       </div>
 
-      <form class="choice" id="choice" aria-labelledby="choice-q">
-        <span class="q-label"><span lang="it">Una piccola scelta</span><span lang="en">A small choice</span></span>
-        <h2 id="choice-q"><span lang="it">Quale bottiglia metti nel carrello?</span><span lang="en">Which bottle goes in your cart?</span></h2>
-        <label class="opt" for="opt-pet">
-          <input type="radio" name="bottle" id="opt-pet" value="pet" checked>
-          <span>
-            <strong><span lang="it">Plastica tradizionale</span><span lang="en">Conventional plastic</span><span class="tag"><span lang="it">già selezionata</span><span lang="en">pre-selected</span></span></strong>
-            <small>PET</small>
-          </span>
-        </label>
-        <label class="opt" for="opt-bio">
-          <input type="radio" name="bottle" id="opt-bio" value="bio">
-          <span>
-            <strong><span lang="it">Bioplastica</span><span lang="en">Bioplastic</span></strong>
-            <small><span lang="it">da fonti rinnovabili</span><span lang="en">from renewable sources</span></small>
-          </span>
-        </label>
-        <p class="note" id="note" aria-live="polite">
-          <span data-state="keep" lang="it">L’opzione già selezionata si chiama <b>default</b>. Spesso la teniamo senza pensarci.</span>
-          <span data-state="keep" lang="en">The pre-selected option is the <b>default</b>. We often keep it without thinking.</span>
-          <span data-state="switch" lang="it" hidden>Hai cambiato il default. <b>Quando e perché le persone lo fanno</b> è al centro della mia ricerca.</span>
-          <span data-state="switch" lang="en" hidden>You changed the default. <b>When and why people do that</b> is at the heart of my research.</span>
-        </p>
-      </form>
+      <div class="tiles">
+        <a class="tile photo big" href="#progetti" style="background-image:url('img/propla.jpg')">
+          <span class="play" aria-hidden="true"></span>
+          <span class="k"><span lang="it">Progetto ProPla · video</span><span lang="en">ProPla project · video</span></span>
+          <span class="t"><span lang="it">Dalle microplastiche a nuove risorse</span><span lang="en">From microplastics to new resources</span></span>
+        </a>
+        <a class="tile photo" href="#progetti" style="background-image:url('img/inexec.jpg')">
+          <span class="play" aria-hidden="true"></span>
+          <span class="k"><span lang="it">InExEc · pool ORSEE</span><span lang="en">InExEc · ORSEE pool</span></span>
+          <span class="t"><span lang="it">Chi partecipa agli esperimenti</span><span lang="en">Who takes part in the experiments</span></span>
+        </a>
+        <a class="tile sun" href="#presentazioni">
+          <span class="k"><span lang="it">Ultima presentazione · Oxford in Varese, 2025</span><span lang="en">Latest talk · Oxford in Varese, 2025</span></span>
+          <span class="t">Nudging Sustainability: Default Effects and Behavioral Spillovers</span>
+        </a>
+      </div>
     </div>
 
     <ul class="roles" aria-label="Attività">
@@ -473,7 +474,7 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 
       <article class="project">
         <div class="media">
-          <video controls preload="metadata" playsinline aria-label="Video ProPla"><source src="propla.mp4" type="video/mp4"></video>
+          <video controls preload="metadata" playsinline poster="img/propla.jpg" aria-label="Video ProPla"><source src="propla.mp4" type="video/mp4"></video>
         </div>
         <div>
           <span class="p-label"><span lang="it">Progetto Fondazione Cariplo · Università dell’Insubria</span><span lang="en">Fondazione Cariplo project · University of Insubria</span></span>
@@ -492,7 +493,7 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 
       <article class="project">
         <div class="media">
-          <video controls preload="metadata" playsinline aria-label="Video InExEc"><source src="inexec.mp4" type="video/mp4"></video>
+          <video controls preload="metadata" playsinline poster="img/inexec.jpg" aria-label="Video InExEc"><source src="inexec.mp4" type="video/mp4"></video>
         </div>
         <div>
           <span class="p-label">InExEc, Insubria Experimental Economics Center</span>
@@ -629,14 +630,6 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
     b.addEventListener('click', function () { setLang(b.dataset.set); });
   });
 
-  var form = document.getElementById('choice');
-  form.addEventListener('submit', function (e) { e.preventDefault(); });
-  form.addEventListener('change', function () {
-    var switched = document.getElementById('opt-bio').checked;
-    document.querySelectorAll('#note [data-state]').forEach(function (s) {
-      s.hidden = (s.dataset.state === 'switch') !== switched;
-    });
-  });
 })();
 </script>
 </body>
