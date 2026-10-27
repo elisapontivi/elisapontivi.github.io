@@ -254,11 +254,16 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
 .links { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 15px; font-weight: 500; }
 
 /* Teaching + skills */
-.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.two { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .box { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px; }
+.box.wide { grid-column: 1 / -1; }
 .box h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
 .box p { font-size: 16px; color: var(--muted); }
 .box p + p { margin-top: 10px; }
+.courses { list-style: none; margin: 6px 0 16px; padding: 0; display: grid; gap: 6px; font-size: 16px; }
+.courses li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+.courses .yrs { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.box p strong { color: var(--fg); font-weight: 700; }
 .box .tools { color: var(--fg); font-weight: 500; font-size: 14px; }
 .seminar { margin-bottom: 20px; background: var(--fg); color: var(--bg); border-radius: 16px; padding: 30px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
 .seminar .s-label { font-size: 13px; font-weight: 700; color: var(--marigold); }
@@ -369,17 +374,17 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
       <li><a href="#ricerca">
         <span class="r-kind"><span lang="it">Ricerca</span><span lang="en">Research</span></span>
         <strong><span lang="it">Dottoranda</span><span lang="en">PhD candidate</span></strong>
-        <span class="r-d"><span lang="it">Economia comportamentale e sperimentale, Università dell’Insubria</span><span lang="en">Behavioral and experimental economics, University of Insubria</span></span>
+        <span class="r-d"><span lang="it">Economia comportamentale e sperimentale, Università dell’Insubria · discussione della tesi a gennaio 2027</span><span lang="en">Behavioral and experimental economics, University of Insubria · thesis defense in January 2027</span></span>
       </a></li>
       <li><a href="#didattica">
         <span class="r-kind"><span lang="it">Università</span><span lang="en">University</span></span>
         <strong><span lang="it">Esercitatrice</span><span lang="en">Teaching assistant</span></strong>
-        <span class="r-d"><span lang="it">Esercitazioni di Microeconomia e tutoraggio</span><span lang="en">Microeconomics tutorials and tutoring</span></span>
+        <span class="r-d"><span lang="it">Microeconomia, Economia industriale, Economia della tassazione</span><span lang="en">Microeconomics, Industrial Economics, Economics of Taxation</span></span>
       </a></li>
       <li><a href="#didattica">
         <span class="r-kind"><span lang="it">Scuola</span><span lang="en">School</span></span>
         <strong><span lang="it">Docente</span><span lang="en">Teacher</span></strong>
-        <span class="r-d"><span lang="it">Economia, matematica ed educazione civica nella secondaria di secondo grado</span><span lang="en">Economics, mathematics and civic education in upper-secondary school</span></span>
+        <span class="r-d"><span lang="it">Economia aziendale, Discipline turistiche e aziendali, Matematica</span><span lang="en">Business economics, Tourism and business studies, Mathematics</span></span>
       </a></li>
       <li><a href="#percorso">
         <span class="r-kind"><span lang="it">Professione</span><span lang="en">Profession</span></span>
@@ -525,10 +530,20 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
       </div>
 
       <div class="two">
-        <div class="box">
+        <div class="box wide">
           <h3><span lang="it">Insegnamento</span><span lang="en">Teaching</span></h3>
-          <p lang="it">Esercitazioni di Microeconomia e tutoraggio all’università. Discipline economiche, matematiche e statistiche ed educazione civica nella scuola secondaria di secondo grado.</p>
-          <p lang="en">Microeconomics tutorials and tutoring at university. Economics, mathematics, statistics and civic education in upper-secondary school.</p>
+          <p><strong><span lang="it">Esercitatrice all’Università dell’Insubria</span><span lang="en">Teaching assistant, University of Insubria</span></strong></p>
+          <ul class="courses">
+            <li><span lang="it">Microeconomia</span><span lang="en">Microeconomics</span> <span class="yrs">2023/24 · 2024/25 · 2025/26</span></li>
+            <li><span lang="it">Economia industriale</span><span lang="en">Industrial Economics</span> <span class="yrs">2026/27</span></li>
+            <li><span lang="it">Economia della tassazione</span><span lang="en">Economics of Taxation</span> <span class="yrs">2026/27</span></li>
+          </ul>
+          <p><strong><span lang="it">Docente nella scuola secondaria di secondo grado</span><span lang="en">Upper-secondary school teacher</span></strong></p>
+          <ul class="courses">
+            <li><span lang="it">Economia aziendale</span><span lang="en">Business economics</span></li>
+            <li><span lang="it">Discipline turistiche e aziendali</span><span lang="en">Tourism and business studies</span></li>
+            <li><span lang="it">Matematica</span><span lang="en">Mathematics</span></li>
+          </ul>
           <p class="links"><a href="giocosp.html"><span lang="it">Gioco interattivo per studenti</span><span lang="en">Interactive game for students</span></a><a href="index1.html"><span lang="it">Materiali di educazione civica</span><span lang="en">Civic education materials (IT)</span></a></p>
         </div>
         <div class="box">
@@ -545,9 +560,9 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
           <p class="tools">HTML · CSS · JavaScript · GitHub Pages</p>
         </div>
         <div class="box">
-          <h3><span lang="it">Coordinamento</span><span lang="en">Coordination</span></h3>
-          <p lang="it">Allenatrice di pallavolo: pianificazione, gestione del gruppo e lavoro di squadra.</p>
-          <p lang="en">Volleyball coach: planning, group management and teamwork.</p>
+          <h3><span lang="it">Sport</span><span lang="en">Sport</span></h3>
+          <p lang="it"><strong>Allenatrice di pallavolo di I grado.</strong> Pianificazione, gestione del gruppo e lavoro di squadra.</p>
+          <p lang="en"><strong>Level 1 volleyball coach.</strong> Planning, group management and teamwork.</p>
           <p class="links"><a href="allenamento.html"><span lang="it">Esempio di allenamento</span><span lang="en">Sample training plan (IT)</span></a></p>
         </div>
       </div>
@@ -562,8 +577,8 @@ html[data-lang="en"] [lang="it"]:not(html) { display: none !important; }
       </div>
       <ul class="timeline">
         <li>
-          <span class="when"><span lang="it">In corso</span><span lang="en">Ongoing</span></span>
-          <div><strong><span lang="it">Dottorato in Methods and Models for Economic Decisions</span><span lang="en">PhD in Methods and Models for Economic Decisions</span></strong><span class="d"><span lang="it">Università degli Studi dell’Insubria</span><span lang="en">University of Insubria</span></span></div>
+          <span class="when"><span lang="it">Gennaio 2027</span><span lang="en">January 2027</span></span>
+          <div><strong><span lang="it">Dottorato in Methods and Models for Economic Decisions</span><span lang="en">PhD in Methods and Models for Economic Decisions</span></strong><span class="d"><span lang="it">Università degli Studi dell’Insubria · discussione della tesi</span><span lang="en">University of Insubria · thesis defense</span></span></div>
         </li>
         <li>
           <span class="when"><span lang="it">Novembre 2022</span><span lang="en">November 2022</span></span>
