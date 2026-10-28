@@ -8,7 +8,7 @@
 <meta name="description" content="Elisa Pontivi, dottoranda in Methods and Models for Economic Decisions, Università degli Studi dell'Insubria. Economia comportamentale e sperimentale, scelte sostenibili.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&display=swap">
 <style>
 /* Layout: the opening is one big blue chalkboard: the name in the middle, every area written around it in chalk;
    then calm content sections on paper with wide year/label gutters. */
@@ -367,7 +367,8 @@ a.piece { text-decoration: none; }
 .name-block h1, .chalk { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); -webkit-mask-size: 160px; mask-size: 160px; }
 .board-area { position: relative; height: 640px; margin-top: 8px; }
 .name-block { position: absolute; left: 50%; top: 50%; translate: -50% -52%; text-align: center; width: min(560px, 60%); z-index: 2; }
-.name-block h1 { font-size: clamp(64px, 9vw, 132px); }
+.name-block h1 { font-family: "Cabin Sketch", var(--hand); font-weight: 700; font-size: clamp(64px, 9.5vw, 140px); line-height: .9; letter-spacing: 0; }
+.name-block h1 .last::after { bottom: -.02em; }
 .name-block .last { display: inline-block; }
 .chalk-sub { margin: 18px 0 0; font-family: var(--hand); font-size: clamp(22px, 2.2vw, 28px); color: var(--chalk); line-height: 1.15; }
 .name-note { margin: 10px auto 0; max-width: 40ch; font-size: 15px; color: var(--on-cobalt-soft); }
@@ -379,10 +380,10 @@ a.piece { text-decoration: none; }
   transform: rotate(var(--r, 0deg)); transition: transform .2s ease, color .2s ease;
 }
 .chalk:hover { transform: rotate(var(--r, 0deg)) scale(1.05); color: var(--marigold); text-decoration: none; }
-.chalk .ch-t { font-size: 38px; font-weight: 700; line-height: 1; position: relative; align-self: flex-start; }
+.chalk .ch-t { font-size: 44px; font-weight: 700; line-height: 1; position: relative; align-self: flex-start; }
 .chalk .ch-t::after { content: ""; position: absolute; left: -2%; right: -6%; bottom: -4px; height: 8px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6 C 50 2, 120 9, 198 4' fill='none' stroke='%23ffc83d' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%; }
-.chalk .ch-s { font-size: 22px; line-height: 1.1; max-width: 22ch; }
+.chalk .ch-s { font-size: 24px; line-height: 1.1; max-width: 22ch; }
 .chalk .ch-s.dim { opacity: .75; font-size: 19px; }
 .sketch { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
 .sketch .fill { fill: currentColor; }
@@ -411,6 +412,10 @@ a.piece { text-decoration: none; }
 .tray .stick.y { left: calc(12% + 70px); width: 38px; background: var(--marigold); transform: rotate(4deg); }
 .tray .eraser { position: absolute; top: -4px; right: 14%; width: 90px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #c9a46c 0 55%, #3b3b45 55%); }
 @keyframes draw { to { stroke-dashoffset: 0; } }
+.links { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+.links path { fill: none; stroke: rgba(241,240,230,.55); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 2 9; vector-effect: non-scaling-stroke;
+  -webkit-mask-image: linear-gradient(#000, #000); }
+.chalk { z-index: 2; }
 
 /* ---------- Areas on the home page ---------- */
 .areas { padding-block: 80px 96px; }
@@ -499,6 +504,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
 @media (max-width: 960px) {
   .board-area { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 20px; padding-block: 20px 36px; }
   .name-block { position: static; translate: none; width: auto; grid-column: 1 / -1; text-align: left; padding-bottom: 6px; }
+  .links, .ghosts { display: none; }
   .name-note { margin-left: 0; }
   .chalk { position: static; width: auto; }
   .c-path .sketch, .c-path .years { width: 100%; max-width: 300px; }
@@ -594,6 +600,14 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         <span class="g4">Attivo = Passivo + PN</span>
         <span class="g5">y = a·bˣ</span>
       </div>
+      <svg class="links" viewBox="0 0 1160 640" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M440 172 C 360 140, 290 140, 215 160"/>
+        <path d="M712 160 C 780 128, 850 112, 905 110"/>
+        <path d="M392 345 C 340 360, 300 372, 250 382"/>
+        <path d="M792 330 C 830 355, 852 382, 872 400"/>
+        <path d="M600 500 C 592 506, 584 512, 572 522"/>
+        <path d="M770 440 C 800 470, 822 495, 846 514"/>
+      </svg>
       <div class="name-block">
         <h1>Elisa<br><span class="last">Pontivi</span></h1>
         <p class="chalk-sub"><span lang="it">dottoranda · esercitatrice · docente · esperta contabile</span><span lang="en">PhD candidate · teaching assistant · teacher · accounting expert</span></p>
