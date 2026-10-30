@@ -585,38 +585,48 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .view.current { animation: none; }
   .rot > span { transition: none; }
 }
-/* ---------- Tidy board: three columns on wide screens ---------- */
-@media (min-width: 961px) and (max-width: 1179px) {
-  .board-area { height: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 32px; padding-block: 24px 40px; }
-  .name-block { position: static; translate: none; width: auto; grid-column: 1 / -1; padding-bottom: 8px; }
-  .links, .ghosts, .doodle { display: none; }
-  .chalk { position: static; width: auto; --r: 0deg; }
-  .c-path .sketch, .c-path .years { width: 100%; max-width: 300px; }
+/* ---------- Tidy board: each area in a chalk-drawn frame ---------- */
+.board-area .chalk:not(.c-cv) {
+  border: 2.5px solid rgba(241,240,230,.72);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  padding: 16px 20px 18px;
 }
-@media (min-width: 1180px) {
-  .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(500px, 1.55fr) minmax(0, 1fr); grid-template-rows: repeat(4, auto); gap: 26px 40px; padding-block: 26px 34px; margin-top: 0; }
-  .links, .ghosts { display: none; }
+.board-area .chalk:not(.c-cv):hover { border-color: var(--marigold); }
+.board-area .chalk .ch-t { font-size: 34px; }
+.board-area .chalk .ch-s { font-size: 21px; max-width: none; }
+.board-area .chalk .ch-s.dim { font-size: 18px; }
+.c-papers .ch-col { display: flex; flex-direction: column; gap: 2px; }
+.c-papers .ch-t, .c-papers .ch-t b { font-size: 34px; }
+.c-papers .ch-t b { font-size: 42px; }
+.c-volley { align-items: center; }
+@media (min-width: 961px) {
+  .board-area { height: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; padding-block: 18px 34px; margin-top: 0; align-items: stretch; }
+  .links, .ghosts, .doodle { display: none; }
+  .name-block { position: static; translate: none; width: auto; grid-column: 1 / -1; text-align: center; padding: 6px 0 14px; }
+  .name-block h1 { font-size: clamp(64px, 7.4vw, 112px); }
+  .name-block h1 br { display: none; }
+  .name-block h1 .last { margin-left: .28em; }
+  .name-note { max-width: 60ch; }
   .chalk { position: static; width: auto; max-width: none; }
-  .chalk .ch-t { font-size: 40px; }
-  .chalk .ch-s { font-size: 22px; max-width: 26ch; }
-  .chalk .ch-s.dim { font-size: 19px; }
-  .c-research { grid-column: 1; grid-row: 1; --r: -1.5deg; }
-  .c-papers   { grid-column: 1; grid-row: 2; --r: 1deg; }
-  .c-teach    { grid-column: 1; grid-row: 3; --r: -1deg; }
-  .c-volley   { grid-column: 1; grid-row: 4; --r: 1.5deg; align-self: end; }
-  .c-talks    { grid-column: 3; grid-row: 1; --r: 1.5deg; }
-  .c-projects { grid-column: 3; grid-row: 2; --r: -1deg; }
-  .c-path     { grid-column: 3; grid-row: 3 / span 2; --r: 1deg; }
-  .doodle     { display: none; }
-  .name-block { position: static; translate: none; width: auto; grid-column: 2; grid-row: 1 / span 3; align-self: center; }
-  .c-job      { grid-column: 2; grid-row: 4; justify-self: center; align-items: center; --r: -1deg; }
-  .c-job .ch-t { align-self: center; }
-  .c-papers .ch-t { font-size: 36px; white-space: nowrap; }
-  .chalk-sub { font-size: 24px; text-wrap: balance; }
-  .c-job .ch-s { max-width: none; }
-  .c-job { align-self: start; }
-  .c-research .sketch { width: 190px; }
-  .c-projects .sketch { width: 120px; }
+  .c-research { --r: -1deg; } .c-papers { --r: .8deg; } .c-talks { --r: -.6deg; } .c-projects { --r: 1deg; }
+  .c-teach { --r: .8deg; } .c-job { --r: -1deg; } .c-path { --r: .6deg; } .c-volley { --r: -.8deg; }
+  .c-research .sketch { width: 170px; }
+  .c-papers { flex-direction: row; align-items: center; gap: 12px; }
+  .c-papers svg { width: 46px; height: 54px; }
+  .c-papers svg { display: none; }
+  .c-papers .ch-t { font-size: 34px; }
+  .c-papers .ch-t b { font-size: 46px; }
+  .c-projects .sketch { width: 110px; }
+  .c-path { overflow: hidden; }
+  .c-path .sketch { width: 100%; max-width: 220px; }
+  .c-path .years { width: 100%; max-width: 205px; font-size: 18px; padding-left: 0; gap: 0; }
+  .c-volley { justify-content: center; }
+}
+@media (min-width: 961px) and (max-width: 1179px) {
+  .board-area .chalk .ch-t, .c-papers .ch-t { font-size: 29px; }
+  .board-area .chalk .ch-s { font-size: 19px; }
+  .c-path .years { font-size: 15px; }
+  .board-area .chalk:not(.c-cv) { padding: 14px 16px 16px; }
 }
 </style>
 </head>
