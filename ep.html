@@ -8,7 +8,7 @@
 <meta name="description" content="Elisa Pontivi, dottoranda in Methods and Models for Economic Decisions, Università degli Studi dell'Insubria. Economia comportamentale e sperimentale, scelte sostenibili.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&family=Fredericka+the+Great&family=Gochi+Hand&display=swap">
 <style>
 /* Layout: the opening is one big blue chalkboard: the name in the middle, every area written around it in chalk;
    then calm content sections on paper with wide year/label gutters. */
@@ -26,7 +26,7 @@
   --link: #2639c9;
   --display: "Bricolage Grotesque", "Arial Black", "Helvetica Neue", sans-serif;
   --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --hand: "Gochi Hand", "Caveat", "Segoe Print", "Comic Sans MS", cursive;
   --board: #23302b;
   --chalk: #f1f0e6;
 }
@@ -585,47 +585,56 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .view.current { animation: none; }
   .rot > span { transition: none; }
 }
-/* ---------- Tidy board: each area in a chalk-drawn frame ---------- */
+/* ---------- Tidy board: chalk-framed areas around the name ---------- */
 .board-area .chalk:not(.c-cv) {
   border: 2.5px solid rgba(241,240,230,.72);
   border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
   padding: 16px 20px 18px;
 }
 .board-area .chalk:not(.c-cv):hover { border-color: var(--marigold); }
-.board-area .chalk .ch-t { font-size: 34px; }
-.board-area .chalk .ch-s { font-size: 21px; max-width: none; }
-.board-area .chalk .ch-s.dim { font-size: 18px; }
+.board-area .chalk .ch-t { font-family: "Fredericka the Great", var(--hand); font-weight: 400; font-size: 30px; }
+.board-area .chalk .ch-s { font-size: 20px; max-width: none; }
+.board-area .chalk .ch-s.dim { font-size: 17px; }
+.c-research .ch-t { color: #ffc83d; } .c-papers .ch-t { color: #9fe0ff; } .c-talks .ch-t { color: #ffa3c8; } .c-projects .ch-t { color: #a8f0b4; }
+.c-teach .ch-t { color: #ffa3c8; } .c-job .ch-t { color: #9fe0ff; } .c-path .ch-t { color: #a8f0b4; }
 .c-papers .ch-col { display: flex; flex-direction: column; gap: 2px; }
-.c-papers .ch-t, .c-papers .ch-t b { font-size: 34px; }
-.c-papers .ch-t b { font-size: 42px; }
+.c-papers .ch-t b { font-size: 1.35em; color: var(--marigold); font-weight: 400; }
 .c-volley { align-items: center; }
+.arrows { display: none; }
 @media (min-width: 961px) {
-  .board-area { height: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; padding-block: 18px 34px; margin-top: 0; align-items: stretch; }
+  .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "res pap tal" "tea name pro" "job pat vol"; gap: 26px 34px; padding-block: 22px 36px; margin-top: 0; align-items: stretch; }
   .links, .ghosts, .doodle { display: none; }
-  .name-block { position: static; translate: none; width: auto; grid-column: 1 / -1; text-align: center; padding: 6px 0 14px; }
-  .name-block h1 { font-size: clamp(64px, 7.4vw, 112px); }
-  .name-block h1 br { display: none; }
-  .name-block h1 .last { margin-left: .28em; }
-  .name-note { max-width: 60ch; }
+  .name-block { grid-area: name; position: relative; left: auto; top: auto; translate: none; width: auto; text-align: center; align-self: center; padding: 34px 54px; }
+  .name-block h1 { font-size: clamp(64px, 7.2vw, 108px); }
+  .chalk-sub { font-size: 22px; text-wrap: balance; }
+  .name-note { font-size: 19px; }
   .chalk { position: static; width: auto; max-width: none; }
-  .c-research { --r: -1deg; } .c-papers { --r: .8deg; } .c-talks { --r: -.6deg; } .c-projects { --r: 1deg; }
-  .c-teach { --r: .8deg; } .c-job { --r: -1deg; } .c-path { --r: .6deg; } .c-volley { --r: -.8deg; }
-  .c-research .sketch { width: 170px; }
-  .c-papers { flex-direction: row; align-items: center; gap: 12px; }
-  .c-papers svg { width: 46px; height: 54px; }
-  .c-papers svg { display: none; }
-  .c-papers .ch-t { font-size: 34px; }
-  .c-papers .ch-t b { font-size: 46px; }
+  .c-research { grid-area: res; --r: -1.2deg; } .c-papers { grid-area: pap; --r: .8deg; } .c-talks { grid-area: tal; --r: 1.2deg; }
+  .c-teach { grid-area: tea; --r: -.8deg; align-self: center; } .c-projects { grid-area: pro; --r: .8deg; align-self: center; }
+  .c-job { grid-area: job; --r: 1deg; } .c-path { grid-area: pat; --r: -.6deg; } .c-volley { grid-area: vol; --r: -1deg; justify-content: center; }
+  .c-research .sketch { width: 160px; }
+  .c-papers { flex-direction: row; align-items: center; gap: 14px; }
+  .c-papers svg { width: 46px; height: 54px; flex: none; }
   .c-projects .sketch { width: 110px; }
-  .c-path { overflow: hidden; }
   .c-path .sketch { width: 100%; max-width: 220px; }
   .c-path .years { width: 100%; max-width: 205px; font-size: 18px; padding-left: 0; gap: 0; }
-  .c-volley { justify-content: center; }
+  .arrows { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .ar { position: absolute; width: 58px; height: 29px; fill: none; stroke: var(--chalk); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: .85; overflow: visible; }
+  .ar path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 1s ease 1s forwards; }
+  .ar-n  { top: -14px; left: calc(50% - 29px); rotate: -90deg; }
+  .ar-s  { bottom: -14px; left: calc(50% - 29px); rotate: 90deg; }
+  .ar-e  { top: calc(50% - 14px); right: -26px; }
+  .ar-w  { top: calc(50% - 14px); left: -26px; rotate: 180deg; }
+  .ar-ne { top: -4px; right: -12px; rotate: -35deg; }
+  .ar-nw { top: -4px; left: -12px; rotate: -145deg; }
+  .ar-se { bottom: -4px; right: -12px; rotate: 35deg; }
+  .ar-sw { bottom: -4px; left: -12px; rotate: 145deg; }
 }
 @media (min-width: 961px) and (max-width: 1179px) {
-  .board-area .chalk .ch-t, .c-papers .ch-t { font-size: 29px; }
-  .board-area .chalk .ch-s { font-size: 19px; }
-  .c-path .years { font-size: 15px; }
+  .board-area .chalk .ch-t { font-size: 25px; }
+  .board-area .chalk .ch-s { font-size: 18px; }
+  .name-block { padding: 34px 40px; }
+  .bar nav { font-size: 19px; gap: 4px 16px; }
   .board-area .chalk:not(.c-cv) { padding: 14px 16px 16px; }
 }
 </style>
@@ -684,6 +693,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </svg>
       <div class="name-block">
         <h1>Elisa<br><span class="last">Pontivi</span></h1>
+        <span class="arrows" aria-hidden="true"><svg class="ar ar-n" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-ne" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-e" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-se" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-s" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-sw" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-w" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-nw" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg></span>
         <p class="chalk-sub"><span lang="it">dottoranda · esercitatrice · docente · esperta contabile</span><span lang="en">PhD candidate · teaching assistant · teacher · certified accountant</span></p>
         <p class="name-note" lang="it">Economia comportamentale e sperimentale, Università dell’Insubria.</p>
         <p class="name-note" lang="en">Behavioral and experimental economics, University of Insubria.</p>
