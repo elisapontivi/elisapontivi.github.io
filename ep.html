@@ -601,12 +601,20 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
 .c-papers .ch-t b { font-size: 1.35em; color: var(--marigold); font-weight: 400; }
 .c-volley { align-items: center; }
 .arrows { display: none; }
+.bigarrows { display: none; }
+@media (min-width: 961px) {
+  .bigarrows { display: block; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); }
+  .bigarrows path { fill: none; stroke: var(--chalk); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+  .bigarrows path.ghost { stroke-width: 1.6; opacity: .55; }
+  .board-area { position: relative; }
+}
 .board-area .chalk { position: relative; inset: auto; }
 .chalk .ic { position: absolute; top: 14px; right: 16px; width: 50px; height: 50px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
 .c-job .ic { top: auto; bottom: 14px; }
 .c-talks .ic { color: #ffa3c8; } .c-teach .ic { color: #ffa3c8; } .c-job .ic { color: #9fe0ff; } .c-path .ic { color: #a8f0b4; }
 @media (min-width: 961px) {
-  .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "res pap tal" "tea name pro" "job pat vol"; gap: 26px 34px; padding-block: 22px 36px; margin-top: 0; align-items: stretch; }
+  .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "res pap tal" "tea name pro" "job pat vol"; gap: 34px 44px; padding-block: 22px 36px; margin-top: 0; align-items: stretch; }
   .links, .ghosts, .doodle { display: none; }
   .name-block { grid-area: name; position: relative; left: auto; top: auto; translate: none; width: auto; text-align: center; align-self: center; padding: 34px 54px; }
   .name-block h1 { font-size: clamp(64px, 7.2vw, 108px); }
@@ -622,7 +630,6 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .c-projects .sketch { width: 110px; }
   .c-path .sketch { width: 100%; max-width: 220px; }
   .c-path .years { width: 100%; max-width: 205px; font-size: 18px; padding-left: 0; gap: 0; }
-  .arrows { display: block; position: absolute; inset: 0; pointer-events: none; }
   .ar { position: absolute; width: 84px; height: 42px; fill: none; stroke: var(--chalk); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
   .ar { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); }
   .ar .th { stroke-width: 1.4; opacity: .7; }
@@ -698,9 +705,9 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         <path d="M600 500 C 592 506, 584 512, 572 522"/>
         <path d="M770 440 C 800 470, 822 495, 846 514"/>
       </svg>
+      <svg class="bigarrows" aria-hidden="true"></svg>
       <div class="name-block">
         <h1>Elisa<br><span class="last">Pontivi</span></h1>
-        <span class="arrows" aria-hidden="true"><svg class="ar ar-n" viewBox="0 0 100 50"><path d="M4 30 C 20 16, 34 42, 52 26 S 78 16, 92 24"/><path d="M80 13 L93 24 L81 35"/></svg><svg class="ar ar-ne" viewBox="0 0 100 50"><path d="M6 36 C 30 38, 42 6, 28 10 C 14 14, 30 36, 58 28 L90 22"/><path d="M78 11 L92 22 L77 31"/></svg><svg class="ar ar-e" viewBox="0 0 100 50"><path d="M6 26 L88 23"/><path class="th" d="M9 29 L86 26"/><path d="M74 12 L91 24 L75 36"/></svg><svg class="ar ar-se" viewBox="0 0 100 50"><path d="M4 32 Q 24 12, 44 28 T 90 22"/><path d="M78 11 L92 22 L80 33"/></svg><svg class="ar ar-s" viewBox="0 0 100 50"><path d="M18 28 c -9 -6, 3 -18, 11 -7 c 5 9, -7 13, -5 2 C 32 32, 62 30, 90 24"/><path d="M79 13 L92 24 L78 32"/></svg><svg class="ar ar-sw" viewBox="0 0 100 50"><path class="dash" d="M4 26 C 30 30, 60 18, 90 24"/><path d="M78 14 L92 24 L79 34"/></svg><svg class="ar ar-w" viewBox="0 0 100 50"><path d="M4 40 C 30 4, 68 4, 92 22"/><path d="M83 9 L93 23 L78 27"/></svg><svg class="ar ar-nw" viewBox="0 0 100 50"><path d="M4 26 c 6 -9, 10 9, 16 0 s 10 9, 16 0 s 10 9, 16 0 L 90 24"/><path d="M79 14 L92 24 L80 34"/></svg></span>
         <p class="chalk-sub"><span lang="it">dottoranda · esercitatrice · docente · esperta contabile</span><span lang="en">PhD candidate · teaching assistant · teacher · certified accountant</span></p>
         <p class="name-note" lang="it">Economia comportamentale e sperimentale, Università dell’Insubria.</p>
         <p class="name-note" lang="en">Behavioral and experimental economics, University of Insubria.</p>
@@ -1151,6 +1158,49 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   window.addEventListener('load', route);
   route();
 
+})();
+</script>
+<script>
+/* Chalk arrows from the name to every area on the board */
+(function () {
+  var board = document.querySelector('.board-area'), svg = document.querySelector('.bigarrows');
+  if (!board || !svg) return;
+  var NS = 'http://www.w3.org/2000/svg', animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function exit(r, cx, cy, tx, ty) {
+    var dx = tx - cx, dy = ty - cy, t = Math.min(Math.abs((r.w / 2) / (dx || 1e-6)), Math.abs((r.h / 2) / (dy || 1e-6)));
+    return [cx + dx * t, cy + dy * t];
+  }
+  function add(d, cls, len, delay) {
+    var el = document.createElementNS(NS, 'path'); el.setAttribute('d', d); if (cls) el.setAttribute('class', cls); svg.appendChild(el);
+    if (animate) { var L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+      el.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 700, delay: delay, fill: 'forwards', easing: 'ease-out' }); }
+  }
+  function draw() {
+    svg.innerHTML = '';
+    if (window.innerWidth < 961) return;
+    var b = board.getBoundingClientRect(), nb = document.querySelector('.name-block'), n = nb.getBoundingClientRect();
+    var cs = getComputedStyle(nb), pl = parseFloat(cs.paddingLeft), pt = parseFloat(cs.paddingTop);
+    var nr = { w: n.width - 2 * pl + 36, h: n.height - 2 * pt + 30 }, ncx = n.left - b.left + n.width / 2, ncy = n.top - b.top + n.height / 2;
+    svg.setAttribute('viewBox', '0 0 ' + b.width + ' ' + b.height);
+    board.querySelectorAll('.chalk:not(.c-cv)').forEach(function (box, i) {
+      var r = box.getBoundingClientRect(); if (!r.width) return;
+      var bcx = r.left - b.left + r.width / 2, bcy = r.top - b.top + r.height / 2;
+      var S = exit(nr, ncx, ncy, bcx, bcy), E = exit({ w: r.width + 22, h: r.height + 22 }, bcx, bcy, ncx, ncy);
+      var dx = E[0] - S[0], dy = E[1] - S[1], len = Math.hypot(dx, dy), bend = (i % 2 ? 1 : -1) * Math.min(26, len * .22);
+      var C = [(S[0] + E[0]) / 2 - dy / len * bend, (S[1] + E[1]) / 2 + dx / len * bend];
+      var d = 'M' + S[0].toFixed(1) + ' ' + S[1].toFixed(1) + ' Q' + C[0].toFixed(1) + ' ' + C[1].toFixed(1) + ' ' + E[0].toFixed(1) + ' ' + E[1].toFixed(1);
+      var ux = E[0] - C[0], uy = E[1] - C[1], ul = Math.hypot(ux, uy); ux /= ul; uy /= ul;
+      var h = 20, a = .5, hx1 = E[0] - h * (ux * Math.cos(a) - uy * Math.sin(a)), hy1 = E[1] - h * (uy * Math.cos(a) + ux * Math.sin(a));
+      var hx2 = E[0] - h * (ux * Math.cos(-a) - uy * Math.sin(-a)), hy2 = E[1] - h * (uy * Math.cos(-a) + ux * Math.sin(-a));
+      var delay = 600 + i * 120;
+      add(d, '', len, delay);
+      add('M' + (S[0] + 2).toFixed(1) + ' ' + (S[1] + 2.5).toFixed(1) + ' Q' + (C[0] + 3).toFixed(1) + ' ' + (C[1] - 2).toFixed(1) + ' ' + (E[0] - ux * 6 + 1.5).toFixed(1) + ' ' + (E[1] - uy * 6 + 2).toFixed(1), 'ghost', len, delay + 80);
+      add('M' + hx1.toFixed(1) + ' ' + hy1.toFixed(1) + ' L' + E[0].toFixed(1) + ' ' + E[1].toFixed(1) + ' L' + hx2.toFixed(1) + ' ' + hy2.toFixed(1), '', 40, delay + 650);
+    });
+  }
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { animate = false; draw(); }, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw); else window.addEventListener('load', draw);
+  window.addEventListener('hashchange', function () { if (!location.hash || location.hash === '#home') setTimeout(function () { animate = false; draw(); }, 50); });
 })();
 </script>
 </body>
