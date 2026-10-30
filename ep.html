@@ -280,6 +280,17 @@ a.piece { text-decoration: none; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .chip { font-size: 13px; font-weight: 500; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); }
 
+/* Working papers */
+.papers { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.paper { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 28px; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 30px; }
+.paper .wp { font-family: "Cabin Sketch", var(--display); font-size: 64px; font-weight: 700; line-height: .9; color: var(--link); }
+.paper .wp small { display: block; font-family: var(--body); font-size: 13px; font-weight: 700; color: var(--muted); margin-top: 6px; }
+.paper h3 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 600; line-height: 1.15; margin: 0 0 10px; }
+.paper .status { display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--marigold) 30%, var(--surface)); margin-bottom: 12px; }
+.paper p { color: var(--muted); font-size: 16.5px; max-width: 72ch; }
+.paper .meta { margin-top: 12px; font-size: 14.5px; color: inherit; }
+.paper .meta a { font-weight: 700; }
+
 /* Presentations, grouped by year */
 .years { display: grid; gap: 36px; }
 .year { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; }
@@ -407,6 +418,12 @@ a.piece { text-decoration: none; }
 .c-path .sketch { width: 300px; margin-top: 6px; }
 .c-path .years { display: flex; justify-content: space-between; width: 280px; font-size: 22px; padding-left: 6px; }
 .c-cv { --r: -6deg; left: 22%; top: 160px; display: none; }
+.c-papers { --r: 2deg; --d: .5s; left: 42%; top: -8px; flex-direction: row; align-items: center; gap: 14px; }
+.c-papers svg { width: 64px; height: 74px; flex: none; }
+.c-papers .ch-t { font-size: 38px; }
+.c-papers .ch-t b { color: var(--marigold); font-size: 1.3em; }
+.c-papers .ch-s { font-size: 20px; max-width: 24ch; }
+.c-papers .ch-col { display: flex; flex-direction: column; gap: 2px; }
 .c-volley { --r: -6deg; --d: 1s; left: 4%; bottom: 14px; flex-direction: row; align-items: center; gap: 10px; }
 .c-volley svg { width: 56px; height: 56px; }
 .c-volley .ch-s { font-size: 24px; }
@@ -527,6 +544,8 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .sec-head p { grid-column: 1; }
   .indent { margin-left: 0; }
   .themes { grid-template-columns: 1fr; }
+  .paper { grid-template-columns: 1fr; gap: 8px; padding: 22px; }
+  .paper .wp { font-size: 44px; }
   .project { grid-template-columns: 1fr; gap: 20px; }
   .project:nth-of-type(even) .media { order: 0; }
   .two, .contact-grid { grid-template-columns: 1fr; }
@@ -569,7 +588,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   <div class="wrap">
     <a class="vb-home" href="#home">← Elisa Pontivi</a>
     <nav aria-label="Aree">
-      <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a>
+      <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
       <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
       <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
       <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
@@ -587,7 +606,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   <div class="wrap">
     <div class="bar">
       <nav aria-label="Sezioni">
-        <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a>
+        <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
         <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
         <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
         <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
@@ -631,6 +650,15 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
           <circle cx="14" cy="54" r="9"/><path d="M32 56 h70"/>
           <path class="arrow" d="M150 62 C 170 64, 186 54, 196 40 M186 42 l10 -3 l1 11"/>
         </svg>
+      </a>
+
+      <a class="chalk c-papers" href="#papers">
+        <svg class="sketch" viewBox="0 0 64 74" aria-hidden="true">
+          <path d="M14 4 L58 6 L56 66 L12 64 Z"/><path d="M8 10 L6 70 L50 72"/><path d="M2 16 L1 74"/>
+          <path d="M22 18 h26 M22 28 h28 M22 38 h22 M22 48 h26"/>
+        </svg>
+        <span class="ch-col"><span class="ch-t"><b>3</b> working papers</span>
+        <span class="ch-s"><span lang="it">default · WTP/WTA · hypothetical bias</span><span lang="en">defaults · WTP/WTA · hypothetical bias</span></span></span>
       </a>
 
       <a class="chalk c-talks" href="#presentazioni">
@@ -731,7 +759,52 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </div>
       <p class="method" lang="it"><strong>Metodo.</strong> Esperimenti economici incentivati e non incentivati, disegni randomizzati, analisi statistica ed econometrica. Preregistro gli studi su OSF (Open Science Framework) prima della raccolta dei dati. Programmo direttamente gli esperimenti online e verifico, oltre agli esiti, i meccanismi comportamentali.</p>
       <p class="method" lang="en"><strong>Methods.</strong> Incentivized and non-incentivized economic experiments, randomized designs, statistical and econometric analysis. I preregister my studies on OSF (Open Science Framework) before collecting data. I program online experiments myself and test the behavioral mechanisms as well as the outcomes.</p>
-      <div class="chips"><span class="chip">oTree</span><span class="chip">Python</span><span class="chip">R</span><span class="chip"><span lang="it">Econometria</span><span lang="en">Econometrics</span></span><span class="chip">ORSEE</span><span class="chip"><span lang="it">Preregistrazione</span><span lang="en">Preregistration</span></span><span class="chip">OSF</span></div>
+      <div class="chips"><span class="chip">oTree</span><span class="chip">Python</span><span class="chip">Stata</span><span class="chip">R</span><span class="chip"><span lang="it">Econometria</span><span lang="en">Econometrics</span></span><span class="chip">ORSEE</span><span class="chip"><span lang="it">Preregistrazione</span><span lang="en">Preregistration</span></span><span class="chip">OSF</span></div>
+      <nav class="next" aria-label="Altre aree">
+        <a href="#home">← <span lang="it">Tutte le aree</span><span lang="en">All areas</span></a>
+        <a class="nx" href="#papers"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span>Working papers →</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="sec view" id="papers">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Working papers</span>
+        <h2><span lang="it">Tre lavori in corso</span><span lang="en">Three papers in progress</span></h2>
+        <p lang="it">Un modello teorico, un esperimento incentivato e il suo confronto ipotetico: tre lavori sul ruolo del default e degli incentivi nelle scelte sostenibili.</p>
+        <p lang="en">A theoretical model, an incentivized experiment and its hypothetical counterpart: three papers on the role of defaults and incentives in sustainable choice.</p>
+      </div>
+      <ol class="papers">
+        <li class="paper">
+          <div class="wp">1<small>2026</small></div>
+          <div>
+            <h3>The Two Roles of the Default in Sustainable Choice</h3>
+            <span class="status"><span lang="it">Teorico · sottomissione prevista a Theory and Decision</span><span lang="en">Theory · to be submitted to Theory and Decision</span></span>
+            <p lang="it">Un modello in cui il default ha un ruolo normativo (raccomandazione implicita) e uno informativo (segnale che modifica le credenze). L’utilità integra avversione alle perdite, costo di cambiamento, motivazione morale e conformità alle aspettative sociali; le soglie di WTP e WTA sono derivate in forma chiusa, con le condizioni per distinguere la lettura normativa da quella informativa.</p>
+            <p lang="en">A model in which the default plays a normative role (an implicit recommendation) and an informational role (a signal that updates beliefs). Utility combines loss aversion, switching costs, moral motivation and conformity to social expectations; WTP and WTA thresholds are derived in closed form, together with the conditions that separate the normative from the informational reading.</p>
+          </div>
+        </li>
+        <li class="paper">
+          <div class="wp">2<small>2026</small></div>
+          <div>
+            <h3>Intentionally Green: How Default Design Shapes Sustainable Valuation</h3>
+            <span class="status"><span lang="it">Esperimento di laboratorio · dati raccolti (ottobre 2026)</span><span lang="en">Lab experiment · data collected (October 2026)</span></span>
+            <p lang="it">Esperimento incentivato con disegno fattoriale 2×2×2 between-subjects (formato WTP/WTA × entità del beneficio ambientale × default casuale o intenzionale), N = 400, meccanismo Becker–DeGroot–Marschak. Ho curato tutto il progetto: disegno, programmazione in oTree, reclutamento con ORSEE, parere del Comitato Etico, preregistrazione e raccolta dati.</p>
+            <p lang="en">Incentivized experiment with a 2×2×2 between-subjects factorial design (WTP/WTA format × size of the environmental benefit × random or intentional default), N = 400, Becker–DeGroot–Marschak mechanism. I ran the whole project: design, oTree programming, ORSEE recruitment, ethics approval, preregistration and data collection.</p>
+            <p class="meta"><span lang="it">Preregistrazione:</span><span lang="en">Preregistration:</span> <a href="https://osf.io/qwbfv" target="_blank" rel="noopener">osf.io/qwbfv</a> · <span lang="it">dà il titolo alla tesi di dottorato</span><span lang="en">gives the PhD thesis its title</span></p>
+          </div>
+        </li>
+        <li class="paper">
+          <div class="wp">3<small>in prep.</small></div>
+          <div>
+            <h3>Does It Matter If It Is Real? Incentives, Cheap Talk and the WTA–WTP Gap in Sustainable Choices</h3>
+            <span class="status"><span lang="it">Survey experiment online · in preparazione</span><span lang="en">Online survey experiment · in preparation</span></span>
+            <p lang="it">Un survey experiment non incentivato, appaiato alle celle dell’esperimento incentivato e con uno script di cheap talk (Cummings e Taylor, 1999), per misurare l’hypothetical bias e l’effetto degli incentivi monetari sul gap tra WTA e WTP.</p>
+            <p lang="en">A non-incentivized survey experiment, matched to the cells of the incentivized experiment and including a cheap-talk script (Cummings and Taylor, 1999), to measure hypothetical bias and the effect of monetary incentives on the WTA–WTP gap.</p>
+          </div>
+        </li>
+      </ol>
       <nav class="next" aria-label="Altre aree">
         <a href="#home">← <span lang="it">Tutte le aree</span><span lang="en">All areas</span></a>
         <a class="nx" href="#presentazioni"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span><span lang="it">Presentazioni</span><span lang="en">Talks</span> →</a>
