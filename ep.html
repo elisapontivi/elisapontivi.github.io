@@ -601,6 +601,10 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
 .c-papers .ch-t b { font-size: 1.35em; color: var(--marigold); font-weight: 400; }
 .c-volley { align-items: center; }
 .arrows { display: none; }
+.board-area .chalk { position: relative; inset: auto; }
+.chalk .ic { position: absolute; top: 14px; right: 16px; width: 50px; height: 50px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+.c-job .ic { top: auto; bottom: 14px; }
+.c-talks .ic { color: #ffa3c8; } .c-teach .ic { color: #ffa3c8; } .c-job .ic { color: #9fe0ff; } .c-path .ic { color: #a8f0b4; }
 @media (min-width: 961px) {
   .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "res pap tal" "tea name pro" "job pat vol"; gap: 26px 34px; padding-block: 22px 36px; margin-top: 0; align-items: stretch; }
   .links, .ghosts, .doodle { display: none; }
@@ -619,16 +623,19 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .c-path .sketch { width: 100%; max-width: 220px; }
   .c-path .years { width: 100%; max-width: 205px; font-size: 18px; padding-left: 0; gap: 0; }
   .arrows { display: block; position: absolute; inset: 0; pointer-events: none; }
-  .ar { position: absolute; width: 58px; height: 29px; fill: none; stroke: var(--chalk); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: .85; overflow: visible; }
-  .ar path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 1s ease 1s forwards; }
-  .ar-n  { top: -14px; left: calc(50% - 29px); rotate: -90deg; }
-  .ar-s  { bottom: -14px; left: calc(50% - 29px); rotate: 90deg; }
-  .ar-e  { top: calc(50% - 14px); right: -26px; }
-  .ar-w  { top: calc(50% - 14px); left: -26px; rotate: 180deg; }
-  .ar-ne { top: -4px; right: -12px; rotate: -35deg; }
-  .ar-nw { top: -4px; left: -12px; rotate: -145deg; }
-  .ar-se { bottom: -4px; right: -12px; rotate: 35deg; }
-  .ar-sw { bottom: -4px; left: -12px; rotate: 145deg; }
+  .ar { position: absolute; width: 84px; height: 42px; fill: none; stroke: var(--chalk); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+  .ar { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); }
+  .ar .th { stroke-width: 1.4; opacity: .7; }
+  .ar .dash { stroke-dasharray: 7 7; }
+  .ar path:not(.dash) { stroke-dasharray: 300; stroke-dashoffset: 300; animation: draw 1.1s ease 1s forwards; }
+  .ar-n  { top: -26px; left: calc(50% - 42px); rotate: -84deg; }
+  .ar-s  { bottom: -26px; left: calc(50% - 30px); rotate: 95deg; }
+  .ar-e  { top: calc(50% - 30px); right: -46px; rotate: -4deg; }
+  .ar-w  { top: calc(50% - 8px); left: -46px; rotate: 186deg; }
+  .ar-ne { top: -6px; right: -26px; rotate: -38deg; }
+  .ar-nw { top: -2px; left: -28px; rotate: -150deg; }
+  .ar-se { bottom: -8px; right: -24px; rotate: 32deg; }
+  .ar-sw { bottom: -6px; left: -28px; rotate: 146deg; }
 }
 @media (min-width: 961px) and (max-width: 1179px) {
   .board-area .chalk .ch-t { font-size: 25px; }
@@ -646,7 +653,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
     <a class="vb-home" href="#home">← Elisa Pontivi</a>
     <nav aria-label="Aree">
       <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
-      <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
+      <a href="#presentazioni"><span lang="it">Conferenze</span><span lang="en">Conferences</span></a>
       <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
       <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
       <a href="#competenze"><span lang="it">Competenze</span><span lang="en">Skills</span></a>
@@ -664,7 +671,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
     <div class="bar">
       <nav aria-label="Sezioni">
         <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
-        <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
+        <a href="#presentazioni"><span lang="it">Conferenze</span><span lang="en">Conferences</span></a>
         <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
         <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
         <a href="#competenze"><span lang="it">Competenze</span><span lang="en">Skills</span></a>
@@ -693,7 +700,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </svg>
       <div class="name-block">
         <h1>Elisa<br><span class="last">Pontivi</span></h1>
-        <span class="arrows" aria-hidden="true"><svg class="ar ar-n" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-ne" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-e" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-se" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-s" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-sw" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-w" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg><svg class="ar ar-nw" viewBox="0 0 60 30"><path d="M4 18 C 18 8, 34 24, 52 14 M42 8 L53 14 L44 23"/></svg></span>
+        <span class="arrows" aria-hidden="true"><svg class="ar ar-n" viewBox="0 0 100 50"><path d="M4 30 C 20 16, 34 42, 52 26 S 78 16, 92 24"/><path d="M80 13 L93 24 L81 35"/></svg><svg class="ar ar-ne" viewBox="0 0 100 50"><path d="M6 36 C 30 38, 42 6, 28 10 C 14 14, 30 36, 58 28 L90 22"/><path d="M78 11 L92 22 L77 31"/></svg><svg class="ar ar-e" viewBox="0 0 100 50"><path d="M6 26 L88 23"/><path class="th" d="M9 29 L86 26"/><path d="M74 12 L91 24 L75 36"/></svg><svg class="ar ar-se" viewBox="0 0 100 50"><path d="M4 32 Q 24 12, 44 28 T 90 22"/><path d="M78 11 L92 22 L80 33"/></svg><svg class="ar ar-s" viewBox="0 0 100 50"><path d="M18 28 c -9 -6, 3 -18, 11 -7 c 5 9, -7 13, -5 2 C 32 32, 62 30, 90 24"/><path d="M79 13 L92 24 L78 32"/></svg><svg class="ar ar-sw" viewBox="0 0 100 50"><path class="dash" d="M4 26 C 30 30, 60 18, 90 24"/><path d="M78 14 L92 24 L79 34"/></svg><svg class="ar ar-w" viewBox="0 0 100 50"><path d="M4 40 C 30 4, 68 4, 92 22"/><path d="M83 9 L93 23 L78 27"/></svg><svg class="ar ar-nw" viewBox="0 0 100 50"><path d="M4 26 c 6 -9, 10 9, 16 0 s 10 9, 16 0 s 10 9, 16 0 L 90 24"/><path d="M79 14 L92 24 L80 34"/></svg></span>
         <p class="chalk-sub"><span lang="it">dottoranda · esercitatrice · docente · esperta contabile</span><span lang="en">PhD candidate · teaching assistant · teacher · certified accountant</span></p>
         <p class="name-note" lang="it">Economia comportamentale e sperimentale, Università dell’Insubria.</p>
         <p class="name-note" lang="en">Behavioral and experimental economics, University of Insubria.</p>
@@ -720,7 +727,8 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </a>
 
       <a class="chalk c-talks" href="#presentazioni">
-        <span class="ch-t"><span lang="it">Presentazioni</span><span lang="en">Talks</span></span>
+        <svg class="ic" viewBox="0 0 60 70" aria-hidden="true"><rect x="20" y="4" width="20" height="34" rx="10"/><path d="M24 14 h12 M24 21 h12 M24 28 h12"/><path d="M12 30 c 0 14, 36 14, 36 0"/><path d="M30 45 v14 M18 62 c 8 -3, 16 -3, 24 0"/></svg>
+        <span class="ch-t"><span lang="it">Conferenze</span><span lang="en">Conferences</span></span>
         <span class="ch-s">Varese · Torino · Bochum<br>Soleto · Castellanza · Bologna</span>
       </a>
 
@@ -733,18 +741,20 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </a>
 
       <a class="chalk c-teach" href="#didattica">
+        <svg class="ic" viewBox="0 0 70 60" aria-hidden="true"><path d="M35 14 C 26 6, 12 6, 4 10 V 52 C 12 48, 26 48, 35 56 C 44 48, 58 48, 66 52 V 10 C 58 6, 44 6, 35 14 Z"/><path d="M35 14 V 56"/><path d="M11 20 c 6 -2, 12 -2, 17 1 M11 29 c 6 -2, 12 -2, 17 1 M42 21 c 5 -3, 11 -3, 17 -1"/></svg>
         <span class="ch-t"><span lang="it">Didattica</span><span lang="en">Teaching</span></span>
         <span class="ch-s"><span lang="it">Microeconomia · Economia industriale · Economia della tassazione</span><span lang="en">Microeconomics · Industrial Economics · Economics of Taxation</span></span>
         <span class="ch-s dim"><span lang="it">a scuola: Ec. aziendale, Disc. turistiche, Matematica</span><span lang="en">in school: Business, Tourism studies, Mathematics</span></span>
       </a>
 
       <a class="chalk c-job" href="#competenze">
-        <span class="ch-eq"><span lang="it">Ricavi − Costi = Utile</span><span lang="en">Revenue − Costs = Profit</span></span>
+        <svg class="ic" viewBox="0 0 54 66" aria-hidden="true"><path d="M6 4 L48 5 L47 62 L7 61 Z"/><path d="M13 11 h28 v12 h-28 z"/><path d="M14 32 h5 M25 32 h5 M36 32 h5 M14 42 h5 M25 42 h5 M36 42 h5 M14 52 h5 M25 52 h5 M36 52 h5"/></svg>
         <span class="ch-t"><span lang="it">Esperta Contabile</span><span lang="en">Certified Accountant</span></span>
         <span class="ch-s"><span lang="it">e poi dati, web, bilanci…</span><span lang="en">plus data, web, financial statements…</span></span>
       </a>
 
       <a class="chalk c-path" href="#percorso">
+        <svg class="ic" viewBox="0 0 70 56" aria-hidden="true"><path d="M4 20 L35 6 L66 20 L35 34 Z"/><path d="M16 26 V 40 C 24 48, 46 48, 54 40 V 26"/><path d="M62 22 V 40 M58 44 l4 -5 l4 5"/></svg>
         <span class="ch-t"><span lang="it">Percorso</span><span lang="en">Background</span></span>
         <svg class="sketch line" viewBox="0 0 300 40" aria-hidden="true">
           <path d="M4 22 C 80 18, 180 26, 288 20 M278 13 l11 7 l-11 7"/>
@@ -864,7 +874,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </ol>
       <nav class="next" aria-label="Altre aree">
         <a href="#home">← <span lang="it">Tutte le aree</span><span lang="en">All areas</span></a>
-        <a class="nx" href="#presentazioni"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span><span lang="it">Presentazioni</span><span lang="en">Talks</span> →</a>
+        <a class="nx" href="#presentazioni"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span><span lang="it">Conferenze</span><span lang="en">Conferences</span> →</a>
       </nav>
     </div>
   </section>
@@ -872,7 +882,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   <section class="sec view" id="presentazioni">
     <div class="wrap">
       <div class="sec-head">
-        <span class="kicker"><span lang="it">Presentazioni</span><span lang="en">Talks</span></span>
+        <span class="kicker"><span lang="it">Conferenze</span><span lang="en">Conferences</span></span>
         <h2><span lang="it">Conferenze, workshop e seminari</span><span lang="en">Conferences, workshops and seminars</span></h2>
       </div>
       <div class="years">
