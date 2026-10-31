@@ -8,7 +8,7 @@
 <meta name="description" content="Elisa Pontivi, dottoranda in Methods and Models for Economic Decisions, Università degli Studi dell'Insubria. Economia comportamentale e sperimentale, scelte sostenibili.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&family=Fredericka+the+Great&family=Gochi+Hand&display=swap">
 <style>
 /* Layout: the opening is one big blue chalkboard: the name in the middle, every area written around it in chalk;
    then calm content sections on paper with wide year/label gutters. */
@@ -26,7 +26,7 @@
   --link: #2639c9;
   --display: "Bricolage Grotesque", "Arial Black", "Helvetica Neue", sans-serif;
   --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --hand: "Gochi Hand", "Caveat", "Segoe Print", "Comic Sans MS", cursive;
   --board: #23302b;
   --chalk: #f1f0e6;
 }
@@ -585,6 +585,140 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   .view.current { animation: none; }
   .rot > span { transition: none; }
 }
+/* ---------- Tidy board: chalk-framed areas around the name ---------- */
+.board-area .chalk:not(.c-cv) {
+  border: 2.5px solid rgba(241,240,230,.72);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  padding: 16px 20px 18px;
+}
+.board-area .chalk:not(.c-cv):hover { border-color: var(--marigold); }
+.board-area .chalk .ch-t { font-family: "Fredericka the Great", var(--hand); font-weight: 400; font-size: 30px; }
+.board-area .chalk .ch-s { font-size: 20px; max-width: none; }
+.board-area .chalk .ch-s.dim { font-size: 17px; }
+.c-research .ch-t { color: #ffc83d; } .c-papers .ch-t { color: #9fe0ff; } .c-talks .ch-t { color: #ffa3c8; } .c-projects .ch-t { color: #a8f0b4; }
+.c-teach .ch-t { color: #ffa3c8; } .c-job .ch-t { color: #9fe0ff; } .c-path .ch-t { color: #a8f0b4; }
+.c-papers .ch-col { display: flex; flex-direction: column; gap: 2px; }
+.c-papers .ch-t b { font-size: 1.35em; color: var(--marigold); font-weight: 400; }
+.c-volley { align-items: center; }
+.arrows { display: none; }
+.bigarrows { display: none; }
+@media (min-width: 961px) {
+  .bigarrows { display: block; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); }
+  .bigarrows path { fill: none; stroke: var(--chalk); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+  .bigarrows path.ghost { stroke-width: 1.6; opacity: .55; }
+  .board-area { position: relative; }
+}
+.board-area .chalk { position: relative; inset: auto; }
+.chalk .ic { position: absolute; top: 14px; right: 16px; width: 50px; height: 50px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+.c-job .ic { top: auto; bottom: 14px; }
+.c-job .ch-s { padding-right: 56px; }
+.c-talks .ic { color: #ffa3c8; } .c-teach .ic { color: #ffa3c8; } .c-job .ic { color: #9fe0ff; } .c-path .ic { color: #a8f0b4; }
+@media (min-width: 961px) {
+  .board-area { height: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "res pap tal" "tea name pro" "job pat vol"; gap: 34px 44px; padding-block: 22px 36px; margin-top: 0; align-items: stretch; }
+  .links, .ghosts, .doodle { display: none; }
+  .name-block { grid-area: name; position: relative; left: auto; top: auto; translate: none; width: auto; text-align: center; align-self: center; padding: 26px 40px; }
+  .name-block h1 { font-size: clamp(64px, 7.2vw, 108px); }
+  .chalk-sub { font-size: 22px; text-wrap: balance; }
+  .name-note { font-size: 19px; }
+  .chalk { position: static; width: auto; max-width: none; }
+  .c-research { grid-area: res; --r: -1.2deg; } .c-papers { grid-area: pap; --r: .8deg; } .c-talks { grid-area: tal; --r: 1.2deg; }
+  .c-teach { grid-area: tea; --r: -.8deg; align-self: center; } .c-projects { grid-area: pro; --r: .8deg; align-self: center; }
+  .c-job { grid-area: job; --r: 1deg; } .c-path { grid-area: pat; --r: -.6deg; } .c-volley { grid-area: vol; --r: -1deg; justify-content: center; }
+  .c-research .sketch { width: 160px; }
+  .c-papers { flex-direction: row; align-items: center; gap: 14px; }
+  .c-papers svg { width: 46px; height: 54px; flex: none; }
+  .c-projects .sketch { width: 110px; }
+  .c-path .sketch { width: 100%; max-width: 220px; }
+  .c-path .years { width: 100%; max-width: 205px; font-size: 18px; padding-left: 0; gap: 0; }
+  .ar { position: absolute; width: 84px; height: 42px; fill: none; stroke: var(--chalk); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+  .ar { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"); }
+  .ar .th { stroke-width: 1.4; opacity: .7; }
+  .ar .dash { stroke-dasharray: 7 7; }
+  .ar path:not(.dash) { stroke-dasharray: 300; stroke-dashoffset: 300; animation: draw 1.1s ease 1s forwards; }
+  .ar-n  { top: -26px; left: calc(50% - 42px); rotate: -84deg; }
+  .ar-s  { bottom: -26px; left: calc(50% - 30px); rotate: 95deg; }
+  .ar-e  { top: calc(50% - 30px); right: -46px; rotate: -4deg; }
+  .ar-w  { top: calc(50% - 8px); left: -46px; rotate: 186deg; }
+  .ar-ne { top: -6px; right: -26px; rotate: -38deg; }
+  .ar-nw { top: -2px; left: -28px; rotate: -150deg; }
+  .ar-se { bottom: -8px; right: -24px; rotate: 32deg; }
+  .ar-sw { bottom: -6px; left: -28px; rotate: 146deg; }
+}
+@media (min-width: 961px) and (max-width: 1179px) {
+  .board-area .chalk .ch-t { font-size: 25px; }
+  .board-area .chalk .ch-s { font-size: 18px; }
+  .name-block { padding: 34px 40px; }
+  .bar nav { font-size: 19px; gap: 4px 16px; }
+  .board-area .chalk:not(.c-cv) { padding: 14px 16px 16px; }
+}
+
+/* ---------- Inner pages: the same blue chalkboard ---------- */
+main {
+  --bg: var(--cobalt); --surface: rgba(255,255,255,.04); --fg: var(--chalk); --muted: rgba(241,240,230,.74);
+  --rule: rgba(241,240,230,.32); --link: var(--marigold);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.32'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px 240px, var(--cobalt); color: var(--fg);
+}
+body.viewing { background: var(--cobalt); }
+body.viewing .viewbar { border-bottom: 2px dashed rgba(241,240,230,.3); }
+main .sec-head .kicker { font-family: var(--hand); font-size: 24px; font-weight: 400; color: var(--chalk); padding-top: 4px; }
+main .sec-head h2 { font-family: "Fredericka the Great", var(--hand); font-weight: 400; color: var(--h, var(--marigold)); }
+#ricerca { --h: #ffc83d; } #papers { --h: #9fe0ff; } #presentazioni { --h: #ffa3c8; } #progetti { --h: #a8f0b4; }
+#didattica { --h: #ffa3c8; } #competenze { --h: #9fe0ff; } #percorso { --h: #a8f0b4; }
+main .theme, main .paper, main .box {
+  background: rgba(255,255,255,.035); border: 2.5px solid rgba(241,240,230,.62);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+}
+main .theme h3, main .paper h3, main .box h3 { font-family: var(--hand); font-weight: 400; font-size: 30px; line-height: 1.08; color: var(--h, var(--chalk)); }
+main .theme .t-label, main .project .p-label { font-family: var(--hand); font-weight: 400; font-size: 20px; color: var(--chalk); opacity: .85; }
+main .paper .wp { color: var(--h); }
+main .paper .status { background: rgba(255,200,61,.16); color: var(--chalk); }
+main .chip { background: transparent; border: 1.5px solid rgba(241,240,230,.5); color: var(--chalk); }
+main .year .y { font-family: "Fredericka the Great", var(--hand); font-weight: 400; color: var(--h); }
+main .seminar { background: rgba(255,200,61,.12); color: var(--chalk); border: 2.5px dashed rgba(255,200,61,.6); }
+main .seminar a { color: var(--marigold) !important; }
+main .project h3 { font-family: "Fredericka the Great", var(--hand); font-weight: 400; color: var(--h); }
+main .next .nx { font-family: "Fredericka the Great", var(--hand); font-weight: 400; color: var(--h); }
+main .media video { border: 3px solid rgba(241,240,230,.75); }
+.contact h2 { font-family: "Fredericka the Great", var(--hand); font-weight: 400; letter-spacing: 0; line-height: 1.05; }
+
+/* ---------- CV note pinned on the board ---------- */
+.note { display: inline-flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 4px 14px; margin-top: 14px; padding: 6px 16px 7px; white-space: nowrap;
+  background: #fff3b8; color: #1d2470; font-family: var(--hand); font-size: 17px; line-height: 1.2; rotate: -1.5deg;
+  box-shadow: 0 6px 14px rgba(0,0,0,.22); position: relative; z-index: 3; }
+.note::before { content: ""; position: absolute; top: -9px; left: 50%; width: 70px; height: 18px; translate: -50% 0; rotate: 3deg; background: rgba(255,255,255,.55); }
+.note a { color: #1d2470; text-decoration: underline; text-decoration-thickness: 1.5px; }
+.note a:hover { color: #c2410c; }
+
+/* ---------- Hover: chalk re-traced and an eraser appears ---------- */
+.board-area .chalk:not(.c-cv)::after { content: ""; position: absolute; right: 12px; bottom: -11px; width: 52px; height: 20px; border-radius: 4px;
+  background: linear-gradient(180deg, #c9a46c 0 55%, #3b3b45 55%); opacity: 0; translate: 16px 0; rotate: -6deg; transition: opacity .25s ease, translate .35s ease; }
+.board-area .chalk:not(.c-cv):hover::after { opacity: 1; translate: 0 0; }
+.board-area .chalk:not(.c-cv):hover { box-shadow: 0 0 0 1px rgba(255,200,61,.35), 0 0 24px rgba(255,255,255,.08); }
+.board-area .chalk:hover .ch-t::after { animation: retrace .5s ease; }
+@keyframes retrace { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { .board-area .chalk:hover .ch-t::after { animation: none; } }
+@media (min-width: 961px) and (max-width: 1179px) { .chalk .ic { width: 38px; height: 38px; top: 10px; right: 10px; } .c-teach .ic { display: none; } }
+@media (max-width: 520px) { .note { flex-wrap: wrap; white-space: normal; } }
+
+/* ---------- A few areas are post-it notes stuck on the board ---------- */
+.board-area .chalk.postit {
+  --pi: #fff3a6; color: #1d2470; background: var(--pi); border: 0; border-radius: 2px 2px 3px 18px / 2px 2px 3px 10px;
+  box-shadow: 0 10px 18px -6px rgba(0,0,0,.35), inset 0 -18px 24px -18px rgba(0,0,0,.12);
+  text-shadow: none; -webkit-mask-image: none; mask-image: none;
+}
+.board-area .chalk.postit::before { content: ""; position: absolute; top: -10px; left: 50%; width: 84px; height: 22px; translate: -50% 0; rotate: -3deg; background: rgba(255,255,255,.5); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.board-area .chalk.postit .ch-t { color: #1d2470 !important; }
+.board-area .chalk.postit .ch-t::after { filter: brightness(.75) saturate(1.4); }
+.board-area .chalk.postit .ch-s, .board-area .chalk.postit .ic, .board-area .chalk.postit .sketch { color: #1d2470; }
+.board-area .chalk.postit .ch-t b { color: #c2410c; }
+.board-area .chalk.postit:hover { color: #1d2470; box-shadow: 0 14px 22px -6px rgba(0,0,0,.4); }
+.board-area .c-papers.postit { --pi: #ffe08a; }
+.board-area .c-teach.postit { --pi: #ffc9de; }
+.board-area .c-volley.postit { --pi: #c7f2cf; }
+@media (min-width: 961px) {
+  .c-papers.postit { --r: -2deg; } .c-teach.postit { --r: 2.2deg; } .c-volley.postit { --r: -2.5deg; }
+}
 </style>
 </head>
 <body>
@@ -594,7 +728,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
     <a class="vb-home" href="#home">← Elisa Pontivi</a>
     <nav aria-label="Aree">
       <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
-      <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
+      <a href="#presentazioni"><span lang="it">Conferenze</span><span lang="en">Conferences</span></a>
       <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
       <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
       <a href="#competenze"><span lang="it">Competenze</span><span lang="en">Skills</span></a>
@@ -612,7 +746,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
     <div class="bar">
       <nav aria-label="Sezioni">
         <a href="#ricerca"><span lang="it">Ricerca</span><span lang="en">Research</span></a> <a href="#papers">Working papers</a>
-        <a href="#presentazioni"><span lang="it">Presentazioni</span><span lang="en">Talks</span></a>
+        <a href="#presentazioni"><span lang="it">Conferenze</span><span lang="en">Conferences</span></a>
         <a href="#progetti"><span lang="it">Progetti</span><span lang="en">Projects</span></a>
         <a href="#didattica"><span lang="it">Didattica</span><span lang="en">Teaching</span></a>
         <a href="#competenze"><span lang="it">Competenze</span><span lang="en">Skills</span></a>
@@ -639,11 +773,13 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         <path d="M600 500 C 592 506, 584 512, 572 522"/>
         <path d="M770 440 C 800 470, 822 495, 846 514"/>
       </svg>
+      <svg class="bigarrows" aria-hidden="true"></svg>
       <div class="name-block">
         <h1>Elisa<br><span class="last">Pontivi</span></h1>
         <p class="chalk-sub"><span lang="it">dottoranda · esercitatrice · docente · esperta contabile</span><span lang="en">PhD candidate · teaching assistant · teacher · certified accountant</span></p>
-        <p class="name-note" lang="it">Economia comportamentale e sperimentale, Università dell’Insubria. Clicca una scritta sulla lavagna per aprire l’area.</p>
-        <p class="name-note" lang="en">Behavioral and experimental economics, University of Insubria. Click any writing on the board to open that area.</p>
+        <p class="name-note" lang="it">Economia comportamentale e sperimentale, Università dell’Insubria.</p>
+        <p class="name-note" lang="en">Behavioral and experimental economics, University of Insubria.</p>
+        <p class="note"><a href="cv.pdf"><span lang="it">Scarica il CV</span><span lang="en">Download CV</span></a> <a href="mailto:epontivi@uninsubria.it">epontivi@uninsubria.it</a> <a href="https://www.linkedin.com/in/elisa-pontivi-99b8b21b7/">LinkedIn</a></p>
       </div>
 
       <a class="chalk c-research" href="#ricerca">
@@ -657,7 +793,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         </svg>
       </a>
 
-      <a class="chalk c-papers" href="#papers">
+      <a class="chalk c-papers postit" href="#papers">
         <svg class="sketch" viewBox="0 0 64 74" aria-hidden="true">
           <path d="M14 4 L58 6 L56 66 L12 64 Z"/><path d="M8 10 L6 70 L50 72"/><path d="M2 16 L1 74"/>
           <path d="M22 18 h26 M22 28 h28 M22 38 h22 M22 48 h26"/>
@@ -667,7 +803,8 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </a>
 
       <a class="chalk c-talks" href="#presentazioni">
-        <span class="ch-t"><span lang="it">Presentazioni</span><span lang="en">Talks</span></span>
+        <svg class="ic" viewBox="0 0 60 70" aria-hidden="true"><rect x="20" y="4" width="20" height="34" rx="10"/><path d="M24 14 h12 M24 21 h12 M24 28 h12"/><path d="M12 30 c 0 14, 36 14, 36 0"/><path d="M30 45 v14 M18 62 c 8 -3, 16 -3, 24 0"/></svg>
+        <span class="ch-t"><span lang="it">Conferenze</span><span lang="en">Conferences</span></span>
         <span class="ch-s">Varese · Torino · Bochum<br>Soleto · Castellanza · Bologna</span>
       </a>
 
@@ -679,19 +816,21 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         <span class="ch-s">ProPla · InExEc</span>
       </a>
 
-      <a class="chalk c-teach" href="#didattica">
+      <a class="chalk c-teach postit" href="#didattica">
+        <svg class="ic" viewBox="0 0 70 60" aria-hidden="true"><path d="M35 14 C 26 6, 12 6, 4 10 V 52 C 12 48, 26 48, 35 56 C 44 48, 58 48, 66 52 V 10 C 58 6, 44 6, 35 14 Z"/><path d="M35 14 V 56"/><path d="M11 20 c 6 -2, 12 -2, 17 1 M11 29 c 6 -2, 12 -2, 17 1 M42 21 c 5 -3, 11 -3, 17 -1"/></svg>
         <span class="ch-t"><span lang="it">Didattica</span><span lang="en">Teaching</span></span>
         <span class="ch-s"><span lang="it">Microeconomia · Economia industriale · Economia della tassazione</span><span lang="en">Microeconomics · Industrial Economics · Economics of Taxation</span></span>
         <span class="ch-s dim"><span lang="it">a scuola: Ec. aziendale, Disc. turistiche, Matematica</span><span lang="en">in school: Business, Tourism studies, Mathematics</span></span>
       </a>
 
       <a class="chalk c-job" href="#competenze">
-        <span class="ch-eq"><span lang="it">Ricavi − Costi = Utile</span><span lang="en">Revenue − Costs = Profit</span></span>
+        <svg class="ic" viewBox="0 0 54 66" aria-hidden="true"><path d="M6 4 L48 5 L47 62 L7 61 Z"/><path d="M13 11 h28 v12 h-28 z"/><path d="M14 32 h5 M25 32 h5 M36 32 h5 M14 42 h5 M25 42 h5 M36 42 h5 M14 52 h5 M25 52 h5 M36 52 h5"/></svg>
         <span class="ch-t"><span lang="it">Esperta Contabile</span><span lang="en">Certified Accountant</span></span>
-        <span class="ch-s"><span lang="it">e poi dati, web, bilanci…</span><span lang="en">plus data, web, financial statements…</span></span>
+        <span class="ch-s"><span lang="it">Esperienza in studio di dottori commercialisti, 2017–2023</span><span lang="en">Experience in a chartered accountants’ firm, 2017–2023</span></span>
       </a>
 
       <a class="chalk c-path" href="#percorso">
+        <svg class="ic" viewBox="0 0 70 56" aria-hidden="true"><path d="M4 20 L35 6 L66 20 L35 34 Z"/><path d="M16 26 V 40 C 24 48, 46 48, 54 40 V 26"/><path d="M62 22 V 40 M58 44 l4 -5 l4 5"/></svg>
         <span class="ch-t"><span lang="it">Percorso</span><span lang="en">Background</span></span>
         <svg class="sketch line" viewBox="0 0 300 40" aria-hidden="true">
           <path d="M4 22 C 80 18, 180 26, 288 20 M278 13 l11 7 l-11 7"/>
@@ -708,7 +847,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
         <text class="goldt" x="-2" y="70">p*</text>
       </svg>
 
-      <a class="chalk c-volley" href="#competenze">
+      <a class="chalk c-volley postit" href="#competenze">
         <svg class="sketch" viewBox="0 0 60 60" aria-hidden="true">
           <circle cx="30" cy="30" r="25"/>
           <path d="M30 5 C 22 20, 22 40, 34 55"/><path d="M8 20 C 24 24, 42 22, 54 14"/><path d="M10 44 C 26 36, 44 38, 55 40"/>
@@ -811,7 +950,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
       </ol>
       <nav class="next" aria-label="Altre aree">
         <a href="#home">← <span lang="it">Tutte le aree</span><span lang="en">All areas</span></a>
-        <a class="nx" href="#presentazioni"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span><span lang="it">Presentazioni</span><span lang="en">Talks</span> →</a>
+        <a class="nx" href="#presentazioni"><span class="nk"><span lang="it">Prossima area</span><span lang="en">Next area</span></span><span lang="it">Conferenze</span><span lang="en">Conferences</span> →</a>
       </nav>
     </div>
   </section>
@@ -819,7 +958,7 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   <section class="sec view" id="presentazioni">
     <div class="wrap">
       <div class="sec-head">
-        <span class="kicker"><span lang="it">Presentazioni</span><span lang="en">Talks</span></span>
+        <span class="kicker"><span lang="it">Conferenze</span><span lang="en">Conferences</span></span>
         <h2><span lang="it">Conferenze, workshop e seminari</span><span lang="en">Conferences, workshops and seminars</span></h2>
       </div>
       <div class="years">
@@ -1088,6 +1227,49 @@ body.viewing::before { content: ""; position: fixed; inset: 0 0 auto; height: en
   window.addEventListener('load', route);
   route();
 
+})();
+</script>
+<script>
+/* Chalk arrows from the name to every area on the board */
+(function () {
+  var board = document.querySelector('.board-area'), svg = document.querySelector('.bigarrows');
+  if (!board || !svg) return;
+  var NS = 'http://www.w3.org/2000/svg', animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function exit(r, cx, cy, tx, ty) {
+    var dx = tx - cx, dy = ty - cy, t = Math.min(Math.abs((r.w / 2) / (dx || 1e-6)), Math.abs((r.h / 2) / (dy || 1e-6)));
+    return [cx + dx * t, cy + dy * t];
+  }
+  function add(d, cls, len, delay) {
+    var el = document.createElementNS(NS, 'path'); el.setAttribute('d', d); if (cls) el.setAttribute('class', cls); svg.appendChild(el);
+    if (animate) { var L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+      el.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 700, delay: delay, fill: 'forwards', easing: 'ease-out' }); }
+  }
+  function draw() {
+    svg.innerHTML = '';
+    if (window.innerWidth < 961) return;
+    var b = board.getBoundingClientRect(), nb = document.querySelector('.name-block'), n = nb.getBoundingClientRect();
+    var cs = getComputedStyle(nb), pl = parseFloat(cs.paddingLeft), pt = parseFloat(cs.paddingTop);
+    var nr = { w: n.width - 2 * pl + 36, h: n.height - 2 * pt + 30 }, ncx = n.left - b.left + n.width / 2, ncy = n.top - b.top + n.height / 2;
+    svg.setAttribute('viewBox', '0 0 ' + b.width + ' ' + b.height);
+    board.querySelectorAll('.chalk:not(.c-cv)').forEach(function (box, i) {
+      var r = box.getBoundingClientRect(); if (!r.width) return;
+      var bcx = r.left - b.left + r.width / 2, bcy = r.top - b.top + r.height / 2;
+      var S = exit(nr, ncx, ncy, bcx, bcy), E = exit({ w: r.width + 22, h: r.height + 22 }, bcx, bcy, ncx, ncy);
+      var dx = E[0] - S[0], dy = E[1] - S[1], len = Math.hypot(dx, dy), bend = (i % 2 ? 1 : -1) * Math.min(26, len * .22);
+      var C = [(S[0] + E[0]) / 2 - dy / len * bend, (S[1] + E[1]) / 2 + dx / len * bend];
+      var d = 'M' + S[0].toFixed(1) + ' ' + S[1].toFixed(1) + ' Q' + C[0].toFixed(1) + ' ' + C[1].toFixed(1) + ' ' + E[0].toFixed(1) + ' ' + E[1].toFixed(1);
+      var ux = E[0] - C[0], uy = E[1] - C[1], ul = Math.hypot(ux, uy); ux /= ul; uy /= ul;
+      var h = 20, a = .5, hx1 = E[0] - h * (ux * Math.cos(a) - uy * Math.sin(a)), hy1 = E[1] - h * (uy * Math.cos(a) + ux * Math.sin(a));
+      var hx2 = E[0] - h * (ux * Math.cos(-a) - uy * Math.sin(-a)), hy2 = E[1] - h * (uy * Math.cos(-a) + ux * Math.sin(-a));
+      var delay = 600 + i * 120;
+      add(d, '', len, delay);
+      add('M' + (S[0] + 2).toFixed(1) + ' ' + (S[1] + 2.5).toFixed(1) + ' Q' + (C[0] + 3).toFixed(1) + ' ' + (C[1] - 2).toFixed(1) + ' ' + (E[0] - ux * 6 + 1.5).toFixed(1) + ' ' + (E[1] - uy * 6 + 2).toFixed(1), 'ghost', len, delay + 80);
+      add('M' + hx1.toFixed(1) + ' ' + hy1.toFixed(1) + ' L' + E[0].toFixed(1) + ' ' + E[1].toFixed(1) + ' L' + hx2.toFixed(1) + ' ' + hy2.toFixed(1), '', 40, delay + 650);
+    });
+  }
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { animate = false; draw(); }, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw); else window.addEventListener('load', draw);
+  window.addEventListener('hashchange', function () { if (!location.hash || location.hash === '#home') setTimeout(function () { animate = false; draw(); }, 50); });
 })();
 </script>
 </body>
