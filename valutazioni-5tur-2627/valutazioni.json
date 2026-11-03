@@ -1,0 +1,131 @@
+{
+"iter": 600000,
+"studenti": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20
+],
+"sali": {
+"1": "qvsE11bif3cHTV0gookI0w==",
+"2": "G0vsFVSFQ9tHyzXDhM+AOg==",
+"3": "tvCJ9Bhf9UGmi5PvDxjCwA==",
+"4": "LHTd/sy4v+bs2sg1zNDDOA==",
+"5": "cR75jE8ERPvQz2huBJAFxg==",
+"6": "6vTuurlnLzNIvVoRvJZTAA==",
+"7": "+8Bbumd2OrpWGouvE0lxaQ==",
+"8": "q0bu/JH/M2UVi2nCqlHqLg==",
+"9": "CUSIj7Jx3TMQtvDE4RZ1AA==",
+"10": "WkOySLrJQN8AYsBDYRbeMw==",
+"11": "ENsTgeu0oRwcRmCaITr1uQ==",
+"12": "/S5RslUQ9efZhkzU4vtYOw==",
+"13": "N9ZcN1AuBNibGm2KfW0wDQ==",
+"14": "RccQoPtg8I6ymiu24a27QA==",
+"15": "z7yNMPT8dyY+ymTPlF73tA==",
+"16": "0hkOoH5+lOZriYTKtvKP+g==",
+"17": "BBy7+mRHrtYwhQ2YrMY+Ww==",
+"18": "2Rb+APflIG5lkHiONobD/w==",
+"19": "9/e9iMi6smCLTRHqSXLlNg==",
+"20": "lUNH6zi/VYdOxVJGgAsOVQ=="
+},
+"valutazioni": [
+{
+"id": "2026-11-03",
+"titolo": "Verifiche DTA del 21/10 e di recupero, con voto finale",
+"file": {
+"1": {
+"f": "f9d6d63bb75339bd",
+"i": "23m5KPv+WHkdjgHR"
+},
+"2": {
+"f": "17c5bc952b90c8f7",
+"i": "U97J5txN9y+5hVK8"
+},
+"3": {
+"f": "fbffe033dd1cf6ef",
+"i": "kFdUCqjEwNKPhz5c"
+},
+"4": {
+"f": "b2f73fc7a53e8e0f",
+"i": "UbrYkPyitkGMZRsq"
+},
+"5": {
+"f": "c35f4d2ebcc8a82e",
+"i": "myS9FhmOo0jWGS2U"
+},
+"6": {
+"f": "413b057ad066ef21",
+"i": "nIJSLbAnklYpm9y9"
+},
+"7": {
+"f": "f5f8f5d7dd4a479c",
+"i": "lFDjRKcSK64EdRxj"
+},
+"8": {
+"f": "a7c8b9c6bf22cde9",
+"i": "ePmYZ9FxCwbKK8b3"
+},
+"9": {
+"f": "4c82a0f451610726",
+"i": "ypVo5flZZoRRuFrv"
+},
+"10": {
+"f": "b26a4db9f54bf749",
+"i": "Q424OwI+QHYVlMAh"
+},
+"11": {
+"f": "7d9bff90deea9700",
+"i": "zMfMbv3/FPBWUTwm"
+},
+"12": {
+"f": "0f141284e2b875fb",
+"i": "KqkR0+T8VIKkecnc"
+},
+"13": {
+"f": "30821622beca8581",
+"i": "yKQ4MKjfYKJ4VxaY"
+},
+"14": {
+"f": "279b9e677063ced4",
+"i": "5cVmylhbO1PP3nZD"
+},
+"15": {
+"f": "a969fd03a5f4335f",
+"i": "50y3MUGAPhgki3F8"
+},
+"16": {
+"f": "9974c21f76c73e2b",
+"i": "eeU/7afTGAlhNRMk"
+},
+"17": {
+"f": "ebd8d1c4d65f4073",
+"i": "5HZDwMJiK4JnuhvZ"
+},
+"18": {
+"f": "4e87f671880f6b08",
+"i": "DZ1V7GzcZlMy3+S7"
+},
+"19": {
+"f": "4aa114240d9213ff",
+"i": "JVQt4TX7vAPrmXIk"
+}
+}
+}
+]
+}
