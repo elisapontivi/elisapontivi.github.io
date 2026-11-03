@@ -1,0 +1,159 @@
+{
+"iter": 600000,
+"studenti": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20,
+21,
+22,
+23,
+24,
+25,
+26
+],
+"sali": {
+"1": "iU7LjJijzomWsJ5K+GZoXw==",
+"2": "MarIUXSYJoPC7vK+B8zQLQ==",
+"3": "TkN2mvhkcXx3tyDswvqpZQ==",
+"4": "SIVDP/x7KyvWoMuI0/qsyw==",
+"5": "O6092vau3LzFP8DQCU2/dw==",
+"6": "7RPcedamEQGR9ojSn5WK+Q==",
+"7": "elQMNTycPAb9obAxp0OYqA==",
+"8": "zn0U9pMDXykNq19d2airKw==",
+"9": "E+xvfN/LfxQ0lBYIOF/5NQ==",
+"10": "s8Na6j7psWDhOoqkrCrU1g==",
+"11": "YxzZweYp52p7hjtJPQfT5Q==",
+"12": "s2fU59S+udDQ6QzLbc8fHw==",
+"13": "tvbGrxjxjWfblgTJd5DSSg==",
+"14": "TrH5rsaTeXf0RqllkckRAg==",
+"15": "eyqzZDlpJDlNX06I/rijqg==",
+"16": "720Qe8hrQqGhpZIgIlsmvA==",
+"17": "DJXKrYh9hfK/HmznLIxSWA==",
+"18": "DUhDqJfGOiw/ezkV+NUN+g==",
+"19": "LNqosAdQaSnLNSJiA+6p6A==",
+"20": "ubF2GAzFstipha75eOtQHg==",
+"21": "VDspx7pv99TP6tfddTXRug==",
+"22": "v3hsjnlQcEpkt415JF7a4A==",
+"23": "Fpz+QsUTfINakrVHzwV4uw==",
+"24": "rK8WPjYsLu3CRuWzyQKpTQ==",
+"25": "M0gLby81Wd3I+rKn6BrJYw==",
+"26": "5vm7GAOmeu0iTaKodtBUqw=="
+},
+"valutazioni": [
+{
+"id": "2026-10-22",
+"titolo": "Verifica del 22/10/2026 – Dalla contabilità al bilancio",
+"file": {
+"1": {
+"f": "d9318f2dceeee8c1",
+"i": "3Fw0hxBf8+9FDlz0"
+},
+"2": {
+"f": "c6c60402f4d7f404",
+"i": "v0SntI0TYY9TtSfi"
+},
+"5": {
+"f": "105d9602fd09fa73",
+"i": "35dmoIZX5/KkdAtj"
+},
+"6": {
+"f": "892a2f7bebfcaf49",
+"i": "cqR5umZ35OgBvPpN"
+},
+"8": {
+"f": "c1bd8898e1cd98f7",
+"i": "9ThPiA4J8BavvAde"
+},
+"9": {
+"f": "b81bbfc040e60b0b",
+"i": "wjackejop+wL/USe"
+},
+"10": {
+"f": "50bb27f3caf70142",
+"i": "hVLCzrxabknM9a/2"
+},
+"11": {
+"f": "ab49517ea23eced3",
+"i": "jCJ9dyf7EhZZ0uOC"
+},
+"12": {
+"f": "723d22eac9f94861",
+"i": "CF606xxG/x/xpJ8m"
+},
+"13": {
+"f": "80f9e53f2f76d68d",
+"i": "9zRe7XnLOueUnpQf"
+},
+"14": {
+"f": "c52a0bd85cf84956",
+"i": "NoGO2JK6qQRd1d7k"
+},
+"15": {
+"f": "0629d6b40d66341a",
+"i": "X0rsBslxlXK9zesA"
+},
+"16": {
+"f": "fd530b750d9acf1d",
+"i": "V0LwHsOD+nZ3S8Qa"
+},
+"17": {
+"f": "069f86c8231ab729",
+"i": "dbSoGA5dKYfC0pzd"
+},
+"18": {
+"f": "5308db35e63b5cda",
+"i": "LIMrOe5QqMiCXFbd"
+},
+"19": {
+"f": "b0d88d3e3e8a376a",
+"i": "Vpm2tQIiRPkPRC/l"
+},
+"20": {
+"f": "6b38938e0e589597",
+"i": "eD0A+IW2P4NQP+Ft"
+},
+"21": {
+"f": "f6284e04bf4bab0e",
+"i": "8JOTinIyGTIDpSjl"
+},
+"22": {
+"f": "8e65b965a5d50ba3",
+"i": "0ertJdNW+Aa1Z/Y2"
+},
+"23": {
+"f": "b93a3ef232fe26b3",
+"i": "ST9FT8vOKSGvLZoZ"
+},
+"24": {
+"f": "77d0ce7047912743",
+"i": "k3IRCyFgHy14r2cs"
+},
+"25": {
+"f": "5de24b60a7bc4955",
+"i": "4iCiSTt9NM9jjMhK"
+},
+"26": {
+"f": "2b8ab83862a53521",
+"i": "782cRptztyp9Sk+T"
+}
+}
+}
+]
+}
