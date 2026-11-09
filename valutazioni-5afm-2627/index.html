@@ -41,7 +41,7 @@ li a{flex:none;font-weight:700;color:var(--acc);text-decoration:none;border:1px 
 <select id="n" required><option value="">Scegli il tuo numero</option></select>
 <label for="c">Codice: giorno e mese di nascita</label>
 <input id="c" inputmode="numeric" placeholder="gg/mm" required>
-<p class="hint">Per esempio 05/03</p>
+<p class="hint">Per esempio 05/03 oppure 0503</p>
 <button id="b" type="submit">Vedi le mie valutazioni</button>
 </form>
 <p id="m" class="msg" role="status"></p>
@@ -58,8 +58,13 @@ li a{flex:none;font-weight:700;color:var(--acc);text-decoration:none;border:1px 
 const $=id=>document.getElementById(id);
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 let D=null;
-function norm(s){const d=s.match(/\d+/g)||[];if(d.length==1&&(d[0].length==4||d[0].length==8))return d[0].slice(0,4);
- if(d.length>=2){const g=+d[0],m=+d[1];if(g<1||g>31||m<1||m>12)return null;return d[0].padStart(2,'0')+d[1].padStart(2,'0')}return null}
+function norms(s){const d=s.match(/\d+/g)||[],ok=(g,m)=>g>=1&&g<=31&&m>=1&&m<=12,c=(g,m)=>String(g).padStart(2,'0')+String(m).padStart(2,'0'),out=[];
+ if(d.length>=2){if(ok(+d[0],+d[1]))out.push(c(d[0],d[1]))}
+ else if(d.length==1){const t=d[0];
+  if(t.length==4||t.length==6||t.length==8){if(ok(+t.slice(0,2),+t.slice(2,4)))out.push(t.slice(0,4))}
+  else if(t.length==3){if(ok(+t.slice(0,2),+t.slice(2)))out.push(c(t.slice(0,2),t.slice(2)));if(ok(+t.slice(0,1),+t.slice(1)))out.push(c(t.slice(0,1),t.slice(1)))}
+  else if(t.length==2&&ok(+t[0],+t[1]))out.push(c(t[0],t[1]))}
+ return [...new Set(out)]}
 function say(t,c){$('m').textContent=t;$('m').className='msg '+(c||'')}
 async function keyFor(n,code){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey']);
  return crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(D.sali[n]),iterations:D.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt'])}
@@ -69,13 +74,15 @@ if(location.protocol==='file:')say('Questa pagina funziona solo online: aprila d
 fetch('valutazioni.json').then(r=>r.json()).then(d=>{D=d;d.studenti.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;$('n').appendChild(o)})})
  .catch(()=>say('Non riesco a caricare le valutazioni. Riprova tra poco.','err'));
 $('f').addEventListener('submit',async ev=>{ev.preventDefault();
- const n=$('n').value,code=norm($('c').value);
+ const n=$('n').value,codes=norms($('c').value);
  if(!n){say('Scegli il tuo numero di registro.','err');return}
- if(!code){say('Scrivi giorno e mese come gg/mm.','err');return}
+ if(!codes.length){say('Scrivi giorno e mese, per esempio 16/09 oppure 1609.','err');return}
  const mine=D.valutazioni.filter(v=>v.file[n]);
  $('b').disabled=true;say('Apertura in corso…');
- try{const items=[];let wrong=false;const key=mine.length?await keyFor(n,code):null;
-  for(const v of mine){try{const pt=await dec(v.id,v.file[n],key);items.push({v,url:URL.createObjectURL(new Blob([pt],{type:'application/pdf'}))})}catch(e){if(e.message==='net')throw e;wrong=true;break}}
+ try{let items=[],wrong=true;
+  for(const code of codes){items=[];wrong=false;const key=mine.length?await keyFor(n,code):null;
+   for(const v of mine){try{const pt=await dec(v.id,v.file[n],key);items.push({v,url:URL.createObjectURL(new Blob([pt],{type:'application/pdf'}))})}catch(e){if(e.message==='net')throw e;wrong=true;break}}
+   if(!wrong)break}
   if(wrong){say('Codice non corretto: controlla numero, giorno e mese di nascita.','err');return}
   $('ul').innerHTML='';
   items.forEach(({v,url})=>{const li=document.createElement('li');const s=document.createElement('span');s.textContent=v.titolo;
