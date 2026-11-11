@@ -24,6 +24,7 @@ button{width:100%;font:inherit;font-weight:700;border:0;border-radius:10px;paddi
 button:disabled{opacity:.6}
 .msg{min-height:1.5em;margin:12px 0 0}.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
 h2{font-size:1.05rem;margin:0 0 10px}
+.lkh{margin-top:18px}
 ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 li{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 li span{min-width:0}
@@ -50,6 +51,7 @@ li a{flex:none;font-weight:700;color:var(--acc);text-decoration:none;border:1px 
 <h2 id="lt"></h2>
 <ul id="ul"></ul>
 <p id="none" class="foot" hidden>Non ci sono ancora valutazioni per te.</p>
+<div id="lk" hidden><h2 class="lkh">Per te</h2><ul id="ll"></ul></div>
 <button class="out" id="out" type="button">Esci</button>
 </div>
 <p class="foot">Ogni file contiene voto, griglia di valutazione, commento e foto della verifica con gli errori segnati. I file sono cifrati: senza il codice giusto non si possono aprire.</p>
@@ -79,18 +81,23 @@ $('f').addEventListener('submit',async ev=>{ev.preventDefault();
  if(!codes.length){say('Scrivi giorno e mese, per esempio 16/09 oppure 1609.','err');return}
  const mine=D.valutazioni.filter(v=>v.file[n]);
  $('b').disabled=true;say('Apertura in corso…');
- try{let items=[],wrong=true;
-  for(const code of codes){items=[];wrong=false;const key=mine.length?await keyFor(n,code):null;
+ const myl=(D.link||[]).filter(l=>l.file[n]);
+ try{let items=[],links=[],wrong=true;
+  for(const code of codes){items=[];links=[];wrong=false;const key=(mine.length||myl.length)?await keyFor(n,code):null;
    for(const v of mine){try{const pt=await dec(v.id,v.file[n],key);items.push({v,url:URL.createObjectURL(new Blob([pt],{type:'application/pdf'}))})}catch(e){if(e.message==='net')throw e;wrong=true;break}}
+   if(!wrong)for(const l of myl){try{const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(l.file[n].i)},key,b64(l.file[n].c));links.push({l,url:new TextDecoder().decode(pt)})}catch(e){wrong=true;break}}
    if(!wrong)break}
   if(wrong){say('Codice non corretto: controlla numero, giorno e mese di nascita.','err');return}
-  $('ul').innerHTML='';
+  $('ul').innerHTML='';$('ll').innerHTML='';
+  links.forEach(({l,url})=>{if(!/^https:\/\//.test(url))return;const li=document.createElement('li');const s=document.createElement('span');s.textContent=l.titolo;
+   const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='Apri';li.append(s,a);$('ll').appendChild(li)});
+  $('lk').hidden=!links.length;
   items.forEach(({v,url})=>{const li=document.createElement('li');const s=document.createElement('span');s.textContent=v.titolo;
    const a=document.createElement('a');a.href=url;a.download='valutazione_'+v.id+'_n'+String(n).padStart(2,'0')+'.pdf';a.textContent='Scarica PDF';li.append(s,a);$('ul').appendChild(li)});
   $('none').hidden=items.length>0;$('lt').textContent='Studente n. '+n+': le tue valutazioni';
   $('login').hidden=true;$('list').hidden=false;say('');
  }catch(_){say('Non riesco a caricare i file. Riprova tra poco.','err')}finally{$('b').disabled=false}});
-$('out').addEventListener('click',()=>{$('ul').querySelectorAll('a').forEach(a=>URL.revokeObjectURL(a.href));$('c').value='';$('list').hidden=true;$('login').hidden=false});
+$('out').addEventListener('click',()=>{$('ll').innerHTML='';$('lk').hidden=true;$('ul').querySelectorAll('a').forEach(a=>URL.revokeObjectURL(a.href));$('c').value='';$('list').hidden=true;$('login').hidden=false});
 </script>
 </body>
 </html>
