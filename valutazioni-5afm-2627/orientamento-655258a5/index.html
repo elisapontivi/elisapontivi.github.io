@@ -36,6 +36,7 @@ button:disabled{opacity:.6}
 <p id="m" class="msg" role="status"></p>
 </div>
 <script>
+(()=>{
 const CFG={"iter": 600000, "iv": "7AkICiVqtVv7kTTo", "keys": {"7": {"k": "+z7+P91eXrDc1gtNfR17wHLBL45F9p3z2ynh9c3l/YEllPIud1WcVgHgs+/AgTrl", "i": "e9O+bwAgbkuXa5QE"}, "21": {"k": "FWEih8VPBej35BMYRlKUKr1SHtYbhEk1mfKMnDpB2hSOMSGabuikIq3i2fRpak82", "i": "iK1TRQ5asFTJvnvb"}}};
 const $=id=>document.getElementById(id);
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
@@ -66,6 +67,7 @@ $('f').addEventListener('submit',async ev=>{ev.preventDefault();
   const html=new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(CFG.iv)},key,enc));
   document.open();document.write(html);document.close();
  }catch(_){say('Non riesco ad aprire la pagina. Riprova tra poco.','err')}finally{const b=$('b');if(b)b.disabled=false}});
+})();
 </script>
 </body>
 </html>
