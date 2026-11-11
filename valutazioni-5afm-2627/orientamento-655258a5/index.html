@@ -60,7 +60,7 @@ $('f').addEventListener('submit',async ev=>{ev.preventDefault();
    const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey']);
    const kk=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(D.sali[n]),iterations:CFG.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
    try{K=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(w.i)},kk,b64(w.k));break}catch(_){}}
-  if(!K){say('Numero o codice non corretto, oppure questa pagina non è per te.','err');return}
+  if(!K){say('Accesso non consentito.','err');return}
   const key=await crypto.subtle.importKey('raw',K,'AES-GCM',false,['decrypt']);
   const enc=await (await fetch('c.bin',{cache:'no-store'})).arrayBuffer();
   const html=new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(CFG.iv)},key,enc));
