@@ -194,3 +194,25 @@ input[type=date] { -webkit-appearance: none; appearance: none; min-height: 42px;
 
 .tg:not(.day) .ev { padding: 3px 4px; font-size: 10px; }
 .tg:not(.day) .ev b { font-size: 10.5px; line-height: 1.2; }
+
+/* mese tipo agenda: lezioni scritte nelle celle */
+.month { gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+.month .wd { background: var(--card); border-bottom: 1px solid var(--line); padding: 7px 0; }
+.month button.d { aspect-ratio: auto; min-height: 82px; border: 0; border-radius: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); align-items: stretch; padding: 4px 3px; gap: 3px; justify-content: flex-start; background: var(--card); }
+.month button.d:nth-child(7n+7) { border-right: 0; }
+.month button.d > span:first-child { align-self: center; font-size: 13px; width: 24px; height: 24px; line-height: 24px; border-radius: 50%; text-align: center; }
+.month button.d.today { border-color: var(--line); color: inherit; }
+.month button.d.today > span:first-child { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.month button.d.sel { background: color-mix(in srgb, var(--accent) 10%, var(--card)); color: inherit; }
+.month button.d.out { background: var(--bg2); }
+.month button.d.out > span:first-child { color: var(--ink3); }
+.month .evs { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+.month .evs i { display: block; font-style: normal; font-size: 9.5px; line-height: 1.25; padding: 2px 3px; border-radius: 4px; background: var(--c); color: #fff; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.month .evs i b { font-weight: 700; }
+.month .evs i.x { background: color-mix(in srgb, var(--c) 22%, var(--card)); color: var(--ink2); text-decoration: line-through; }
+.month .evs .more { font-size: 9.5px; color: var(--ink3); text-align: center; }
+@media (min-width: 600px) { .month .evs i { font-size: 11px; } .month button.d { min-height: 96px; } }
+
+.month { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.month button.d { min-width: 0; overflow: hidden; }
+.month .evs i b { display: block; }

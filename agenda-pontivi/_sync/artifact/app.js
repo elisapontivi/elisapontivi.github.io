@@ -289,7 +289,7 @@ function viewMese() {
     const k = addDays(start, i);
     const ls = by.get(k) || [];
     const cls = [k.slice(0, 7) !== S.monthKey ? 'out' : '', k === t ? 'today' : '', k === S.selDay ? 'sel' : ''].join(' ');
-    h += `<button class="d ${cls}" data-act="day" data-k="${k}"><span>${Number(k.slice(8))}</span><span class="dots">${ls.map(l => `<i class="${isOff(l) ? 'x' : ''}" style="--c:${colorOf(l.corso)}"></i>`).join('')}</span></button>`;
+    h += `<button class="d ${cls}" data-act="day" data-k="${k}"><span>${Number(k.slice(8))}</span><span class="evs">${ls.slice(0, 3).map(l => `<i class="${isOff(l) ? 'x' : ''}" style="--c:${colorOf(l.corso)}"><b>${hm(l.start)}</b> ${esc(shortName(l.corso).split(' ').pop())}</i>`).join('')}${ls.length > 3 ? `<span class="more">+${ls.length - 3}</span>` : ''}</span></button>`;
   }
   h += '</div>';
   const sel = by.get(S.selDay) || [];
