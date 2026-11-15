@@ -57,6 +57,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent && echo "Build di Pages richiesta"
+      - name: Verifica che il feed pubblicato sia online
+        continue-on-error: true
+        run: |
+          code=$(curl -sS -o /tmp/feed.ics -w '%{http_code}' https://elisapontivi.github.io/agenda-pontivi/agenda.ics)
+          echo "HTTP $code · eventi nel feed online: $(grep -c BEGIN:VEVENT /tmp/feed.ics) · tipo: $(curl -sSI https://elisapontivi.github.io/agenda-pontivi/agenda.ics | grep -i '^content-type' | tr -d '\r')"
+          head -c 300 /tmp/feed.ics
       - name: Segnala se nessun calendario era raggiungibile
         run: |
           node -e "const s=require('./data.json').status; console.log(s.message); if (s.lastSuccess!==s.lastAttempt) { console.error('::error::'+s.message); process.exit(1) }"
