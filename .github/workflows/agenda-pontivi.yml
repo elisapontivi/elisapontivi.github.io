@@ -62,7 +62,10 @@ jobs:
         run: |
           code=$(curl -sS -o /tmp/feed.ics -w '%{http_code}' https://elisapontivi.github.io/agenda-pontivi/agenda.ics)
           echo "HTTP $code · eventi nel feed online: $(grep -c BEGIN:VEVENT /tmp/feed.ics) · tipo: $(curl -sSI https://elisapontivi.github.io/agenda-pontivi/agenda.ics | grep -i '^content-type' | tr -d '\r')"
-          head -c 300 /tmp/feed.ics
+          head -c 120 /tmp/feed.ics; echo
+          for f in "" app.js styles.css data.json manifest.webmanifest sw.js icon-192.png; do
+            echo "$(curl -s -o /dev/null -w '%{http_code} %{content_type}' https://elisapontivi.github.io/agenda-pontivi/$f) /agenda-pontivi/$f"
+          done
       - name: Segnala se nessun calendario era raggiungibile
         run: |
           node -e "const s=require('./data.json').status; console.log(s.message); if (s.lastSuccess!==s.lastAttempt) { console.error('::error::'+s.message); process.exit(1) }"
