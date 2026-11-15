@@ -1,0 +1,62 @@
+name: Agenda Pontivi – sincronizzazione
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'   # ogni 6 ore (UTC). GitHub può ritardare di qualche minuto.
+  workflow_dispatch:          # "Run workflow" = Aggiorna ora
+  push:
+    branches: [main]
+    paths:
+      - 'agenda-pontivi/_sync/sync.mjs'
+      - '.github/workflows/agenda-pontivi.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: agenda-pontivi
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: agenda-pontivi
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            agenda-pontivi
+            .github
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test dello script (dati di prova, nessuna chiamata a Cineca)
+        run: node _sync/test/run-tests.mjs _sync/test/fixtures
+      - name: Leggi i 3 calendari Cineca e confronta con lo stato precedente
+        run: node _sync/sync.mjs data.json .
+      - name: Salva dati, storico e file ICS
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json agenda.ics agenda-con-annullate.ics
+          if git diff --cached --quiet; then echo "Nessun cambiamento"; exit 0; fi
+          git commit -q -m "Agenda Pontivi: sincronizzazione $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git push -q origin HEAD:main && exit 0
+            git fetch -q --depth=20 origin main && git rebase -q origin/main || true
+            sleep 5
+          done
+          exit 1
+      - name: Pubblica su GitHub Pages
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent && echo "Build di Pages richiesta"
+      - name: Segnala se nessun calendario era raggiungibile
+        run: |
+          node -e "const s=require('./data.json').status; console.log(s.message); if (s.lastSuccess!==s.lastAttempt) { console.error('::error::'+s.message); process.exit(1) }"

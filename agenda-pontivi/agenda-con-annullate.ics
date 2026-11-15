@@ -1,0 +1,250 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Agenda Universita Pontivi//IT
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Università – Pontivi
+X-WR-TIMEZONE:Europe/Rome
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:up-6a9fff272da699001974ac6f@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20260925T130000Z
+DTEND:20260925T160000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 12 MTG – Varese · Pad. Monte generoso – Via Monte Genero
+ so 71\, 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi H-Z\, Cognomi A
+ -G\nFonte: https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendar
+ ioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6a9ffcd425ec890053b17d7b@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20260928T153000Z
+DTEND:20260928T183000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' - Digitale Integrato - (U35R)\nNota: Eserci
+ tazione a distanza\nFonte: https://unins.prod.up.cineca.it/calendarioPubbl
+ ico/linkCalendarioId=6a589161be17f20034361fc6
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 89161be17f20034361fc6
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6aa93481e74374001989e141@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261009T130000Z
+DTEND:20261009T160000Z
+SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia\, Diritto e Finanza d'
+ Impresa (U17R)\nNota: Esercitazioni a distanza\nFonte: https://unins.prod.
+ up.cineca.it/calendarioPubblico/linkCalendarioId=6a5898010fc640018f92fece
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 898010fc640018f92fece
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6aa9269a0d36b80083dab1e9@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261015T153000Z
+DTEND:20261015T193000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' - Digitale Integrato - (U35R)\nNota: Eserci
+ tazioni a distanza\nFonte: https://unins.prod.up.cineca.it/calendarioPubbl
+ ico/linkCalendarioId=6a589161be17f20034361fc6
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 89161be17f20034361fc6
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6aa92f8b7c881300872c2128@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261016T130000Z
+DTEND:20261016T160000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 2 SEP – Varese · Pad. Seppilli – Via Ottorino Rossi 9\, 
+ 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi H-Z\, Cognomi A
+ -G\nFonte: https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendar
+ ioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6ab3b4ebe560910040d3dfdb@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261023T073000Z
+DTEND:20261023T103000Z
+SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia\, Diritto e Finanza d'
+ Impresa (U17R)\nNota: Esercitazioni a distanza\nFonte: https://unins.prod.
+ up.cineca.it/calendarioPubblico/linkCalendarioId=6a5898010fc640018f92fece
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 898010fc640018f92fece
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6a9fff777a3b1e00145ef28e@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261023T130000Z
+DTEND:20261023T160000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 5 TM – Varese · Padiglione Morselli – Via Ottorino Rossi
+  9\, 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi A-G\, Cognomi H
+ -Z\nNota: Videoconferenza da 5 TM a 6PM\nFonte: https://unins.prod.up.cine
+ ca.it/calendarioPubblico/linkCalendarioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6a9fff9c2da699001974ac7a@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261113T140000Z
+DTEND:20261113T170000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 5 TM\, Aula 6 PM – Varese · Padiglione Morselli – Via Ot
+ torino Rossi 9\, 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi A-G\, Cognomi H
+ -Z\nNota: Videoconferenza da 5 TM a 6PM\nFonte: https://unins.prod.up.cine
+ ca.it/calendarioPubblico/linkCalendarioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6ab3b51c20a9e9004b30d9c5@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261120T090000Z
+DTEND:20261120T120000Z
+SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia\, Diritto e Finanza d'
+ Impresa (U17R)\nNota: Esercitazioni a distanza\nFonte: https://unins.prod.
+ up.cineca.it/calendarioPubblico/linkCalendarioId=6a5898010fc640018f92fece
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 898010fc640018f92fece
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6a9ffd3825ec890053b17d84@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261123T163000Z
+DTEND:20261123T193000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' - Digitale Integrato - (U35R)\nNota: Eserci
+ tazioni a distanza\nFonte: https://unins.prod.up.cineca.it/calendarioPubbl
+ ico/linkCalendarioId=6a589161be17f20034361fc6
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 89161be17f20034361fc6
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6a9fffbf0c671100348cd27a@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261127T140000Z
+DTEND:20261127T170000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 5 TM\, Aula 6 PM – Varese · Padiglione Morselli – Via Ot
+ torino Rossi 9\, 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi A-G\, Cognomi H
+ -Z\nNota: Videoconferenza da 5 TM a 6PM\nFonte: https://unins.prod.up.cine
+ ca.it/calendarioPubblico/linkCalendarioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6ab3b5486d616500693031e2@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261204T090000Z
+DTEND:20261204T120000Z
+SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia\, Diritto e Finanza d'
+ Impresa (U17R)\nNota: Esercitazione a distanza\nFonte: https://unins.prod.
+ up.cineca.it/calendarioPubblico/linkCalendarioId=6a5898010fc640018f92fece
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 898010fc640018f92fece
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6aa926debcf69a007d82562b@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261210T163000Z
+DTEND:20261210T203000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:A distanza
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' - Digitale Integrato - (U35R)\nNota: Eserci
+ tazione a distanza\nFonte: https://unins.prod.up.cineca.it/calendarioPubbl
+ ico/linkCalendarioId=6a589161be17f20034361fc6
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 89161be17f20034361fc6
+END:VEVENT
+BEGIN:VEVENT
+UID:up-6aa92fe90d36b80083dab57f@agenda-pontivi
+DTSTAMP:20261115T160241Z
+DTSTART:20261211T140000Z
+DTEND:20261211T170000Z
+SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
+LOCATION:Aula 5 TM\, Aula 6 PM – Varese · Padiglione Morselli – Via Ot
+ torino Rossi 9\, 21100 Varese
+DESCRIPTION:Esercitazione\nCorso di laurea: Economia e Management dell'Inno
+ vazione e della Sostenibilita' (U20R)\nPartizioni: Cognomi A-G\, Cognomi H
+ -Z\nNota: Videoconferenza da 5 TM a 6PM\nFonte: https://unins.prod.up.cine
+ ca.it/calendarioPubblico/linkCalendarioId=6a588a9f4737d600190c6e1a
+STATUS:CONFIRMED
+SEQUENCE:0
+LAST-MODIFIED:20261115T155323Z
+URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
+ 88a9f4737d600190c6e1a
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Agenda Università – Pontivi · feed calendario</title>
+<style>body{font:16px/1.5 system-ui,-apple-system,sans-serif;max-width:560px;margin:40px auto;padding:0 20px;color:#1d1f24;background:#f6f3ec}a{color:#2f6f62}code{background:#ebe5d8;padding:2px 6px;border-radius:5px;word-break:break-all}@media(prefers-color-scheme:dark){body{background:#121418;color:#eceae4}code{background:#252a33}a{color:#6cc3ae}}</style></head>
+<body><h1>Agenda Università – Pontivi</h1>
+<p>Feed iCalendar delle lezioni, aggiornato ogni 6 ore dai calendari pubblici Cineca University Planner dell'Università dell'Insubria.</p>
+<p><a href="webcal://elisapontivi.github.io/agenda-pontivi/agenda.ics"><b>Iscriviti dal Calendario dell'iPhone</b></a></p>
+<p>URL di sottoscrizione:<br><code>https://elisapontivi.github.io/agenda-pontivi/agenda.ics</code></p>
+<p><a href="agenda.ics">Scarica agenda.ics</a> · <a href="agenda-con-annullate.ics">versione con le annullate</a></p>
+<p id="st" style="color:#8d8f95;font-size:14px"></p>
+<script>fetch('data.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{const s=d.status;document.getElementById('st').textContent=(s.ok?'Ultima sincronizzazione riuscita: ':'Attenzione: '+s.message+'. Ultimo aggiornamento riuscito: ')+new Date(s.lastSuccess).toLocaleString('it-IT',{timeZone:'Europe/Rome'})})</script>
+</body></html>
