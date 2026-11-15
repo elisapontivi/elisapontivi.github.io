@@ -1,6 +1,8 @@
 // Agenda Università – Pontivi · interfaccia
 const TZ = 'Europe/Rome';
 const FEED = 'https://elisapontivi.github.io/agenda-pontivi/';
+const SITE = FEED;
+const ON_PAGES = location.hostname.endsWith('github.io');
 const RUN_URL = 'https://github.com/elisapontivi/elisapontivi.github.io/actions/workflows/agenda-pontivi.yml';
 const STALE_HOURS = 8; // oltre: la sincronizzazione automatica non sta rispondendo
 const CHANGED_DAYS = 14;
@@ -158,7 +160,8 @@ function viewHome() {
   const week = list.filter(l => { const k = dayKey(l.start); return k >= mon && k <= sun; });
   const hist = (S.data?.history || []).filter(h => h.kind !== 'inizio').slice(0, 4);
   const toConfirm = list.filter(l => isPast(l) && counts(l) && !conf(l)).length;
-  let h = filterBar();
+  let h = ON_PAGES ? '' : `<div class="filterbar"><span>Versione sempre aggiornata: <b>${SITE.replace('https://', '')}</b></span><a class="btn small" href="${SITE}" target="_blank" rel="noopener">Apri</a></div>`;
+  h += filterBar();
   if (next) {
     const k = dayKey(next.start);
     h += `<div class="card hero" style="--c:${colorOf(next.corso)}"><div class="k">${isNow(next) ? 'Lezione in corso' : 'Prossima lezione'}</div>
@@ -361,13 +364,15 @@ function viewAltro() {
     <div class="actions"><button class="btn primary" data-act="copyFeed">Copia indirizzo</button><a class="btn" href="webcal://elisapontivi.github.io/agenda-pontivi/agenda.ics">Apri in Calendario</a></div>
     <div class="note">Il server rigenera il file ogni 6 ore. Con quale frequenza l'iPhone lo rilegge dipende da Calendario di Apple: di solito da 15 minuti a qualche ora, e puoi sceglierlo in <b>Calendario → Account → Recupera</b>. Ogni lezione ha un identificativo stabile, quindi una lezione spostata viene aggiornata, non duplicata.</div>
     <p style="margin:6px 0 0;font-size:14px"><b>Download una tantum:</b> <a href="${FEED}agenda.ics" target="_blank" rel="noopener">agenda.ics</a> · <a href="${FEED}agenda-con-annullate.ics" target="_blank" rel="noopener">con le annullate</a></p></div>`;
-  h += `<h2 class="sec">Sulla schermata Home</h2><div class="card"><ol class="steps"><li>Apri questa pagina in <b>Safari</b> (dal menu ⋯ dell'artifact: "Apri nel browser"), con l'accesso a claude.ai.</li><li>Tocca <b>Condividi</b> (il quadrato con la freccia).</li><li>Scegli <b>Aggiungi alla schermata Home</b> e conferma.</li></ol><p class="faint" style="margin:0">Avrai un'icona che apre direttamente l'agenda. Non è un'app installabile offline (PWA): le pagine artifact non possono usare i service worker.</p></div>`;
+  h += ON_PAGES
+    ? `<h2 class="sec">Sulla schermata Home</h2><div class="card"><ol class="steps"><li>Apri questa pagina in <b>Safari</b>.</li><li>Tocca <b>Condividi</b> (il quadrato con la freccia).</li><li>Scegli <b>Aggiungi alla schermata Home</b> e conferma.</li></ol><p class="faint" style="margin:0">L'agenda si apre a schermo intero come un'app e, senza rete, mostra gli ultimi dati scaricati.</p></div>`
+    : `<h2 class="sec">Sito sempre aggiornato</h2><div class="card"><p style="margin:0 0 10px;font-size:14px">La versione aggiornata in automatico ogni 6 ore è su GitHub. Aprila in Safari e aggiungila alla schermata Home.</p><a class="btn primary" href="${SITE}" target="_blank" rel="noopener">Apri ${SITE.replace('https://', '')}</a></div>`;
   h += `<h2 class="sec">Fonti e sincronizzazione</h2>${statusCard()}<div class="card" style="margin-top:10px"><ul class="list">${(st.sources || []).map(s => `<li><b>${esc(s.name)}</b> <span class="tag ${s.ok && !s.suspicious ? 'ok' : 'bad'}">${s.ok && !s.suspicious ? 'OK' : 'Problema'}</span><div class="faint">${s.ok ? `${s.total} impegni letti, ${s.matched} con docente Pontivi` : esc(s.error || '')}${s.warning ? ' · ' + esc(s.warning) : ''}</div><a href="${esc(s.url)}" target="_blank" rel="noopener" style="font-size:13px">Apri il calendario ufficiale</a></li>`).join('')}</ul>
     <p class="faint">Ultimo tentativo: ${st.lastAttempt ? esc(fmt(st.lastAttempt, { dateStyle: 'medium', timeStyle: 'short' })) : '—'} · sincronizzazioni eseguite: ${st.runs || 0}</p></div>`;
   h += `<div class="note" style="margin-top:10px">Ogni 6 ore un job sul server (GitHub Actions) legge i 3 calendari pubblici Cineca University Planner dell'Insubria e tiene solo gli impegni con docente Pontivi, anche come co-docente. Le partizioni (es. Cognomi A-G / H-Z) svolte insieme diventano una lezione sola. Se un calendario non risponde, restano visibili gli ultimi dati verificati e nessuna lezione viene cancellata.</div>`;
   h += `<h2 class="sec">Aspetto</h2><div class="seg">${['auto', 'chiaro', 'scuro'].map(t => `<button data-act="theme" data-v="${t}" class="${(store.get('theme', 'auto')) === t ? 'on' : ''}">${cap(t)}</button>`).join('')}</div>`;
   h += `<h2 class="sec">Storico modifiche</h2><a class="btn" href="#storico">Apri lo storico (${(S.data?.history || []).length})</a>`;
-  h += `<h2 class="sec">Privacy</h2><div class="note">L'agenda è privata: la vede solo chi ha accesso a questo artifact. Contiene soltanto dati già pubblicati sui calendari pubblici dell'università. Se la condividi, chi la apre può leggere le lezioni ma non modificare le tue conferme.</div>`;
+  h += `<h2 class="sec">Privacy</h2><div class="note">${ON_PAGES ? 'La pagina contiene soltanto dati già pubblici sui calendari dell\'università ed è esclusa dai motori di ricerca (noindex), ma chi conosce l\'indirizzo può aprirla. Le tue conferme "svolta/annullata" restano solo su questo dispositivo.' : 'Questo artifact è privato: lo vede solo chi ha accesso. Contiene soltanto dati già pubblici sui calendari dell\'università.'}</div>`;
   return h;
 }
 function viewStorico() {
@@ -417,11 +422,10 @@ function openFilters() {
 }
 function openRefresh() {
   const st = S.data?.status || {};
-  openSheet(`<h2>Aggiorna ora</h2><p style="font-size:14px;line-height:1.5">Ho ricaricato gli ultimi dati. Ultimo controllo dei calendari Cineca: <b>${st.lastAttempt ? esc(fmt(st.lastAttempt, { weekday: 'long', hour: '2-digit', minute: '2-digit' })) : '—'}</b> (${esc(ago(st.lastAttempt))}).</p>
-    <h3 class="small">Forzare una sincronizzazione subito</h3>
-    <ol class="steps"><li>Apri la pagina della sincronizzazione su GitHub (serve l'accesso a GitHub).</li><li>Tocca <b>Run workflow</b> → <b>Run workflow</b>.</li><li>In circa un minuto il feed dell'iPhone è aggiornato. Questa pagina riceve i nuovi dati al passaggio successivo (entro 6 ore), oppure subito se scrivi a Claude "aggiorna l'agenda Pontivi".</li></ol>
-    <div class="actions"><a class="btn primary" href="${RUN_URL}" target="_blank" rel="noopener">Apri la sincronizzazione</a><a class="btn" href="${esc((st.sources || [])[0]?.url || '#')}" target="_blank" rel="noopener">Calendario Cineca</a></div>
-    <p class="faint">Le pagine artifact non possono contattare altri siti, quindi la lettura di Cineca avviene sempre sul server.</p>`);
+  openSheet(`<h2>Aggiorna ora</h2><p style="font-size:14px;line-height:1.5">Ho ricaricato i dati. Ultimo controllo dei calendari Cineca: <b>${st.lastAttempt ? esc(fmt(st.lastAttempt, { weekday: 'long', hour: '2-digit', minute: '2-digit' })) : '—'}</b> (${esc(ago(st.lastAttempt))}). Il controllo è automatico ogni 6 ore.</p>
+    <h3 class="small">Per forzare un controllo subito</h3>
+    <ol class="steps"><li>Apri la pagina della sincronizzazione su GitHub (devi aver fatto l'accesso a GitHub).</li><li>Tocca <b>Run workflow</b>, poi di nuovo <b>Run workflow</b>.</li><li>Dopo 1–2 minuti tocca di nuovo ↻ qui${ON_PAGES ? '' : ' (o apri il sito su GitHub)'}.</li></ol>
+    <div class="actions"><a class="btn primary" href="${RUN_URL}" target="_blank" rel="noopener">Apri la sincronizzazione</a><a class="btn" href="${esc((st.sources || [])[0]?.url || '#')}" target="_blank" rel="noopener">Calendario Cineca</a></div>`);
 }
 function openSheet(html) { $('#sheetBody').innerHTML = html; $('#sheet').classList.add('on'); $('#scrim').classList.add('on'); $('#sheet').scrollTop = 0; }
 function closeSheet() { $('#sheet').classList.remove('on'); $('#scrim').classList.remove('on'); }
@@ -541,5 +545,6 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', applyThe
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.data && Date.now() - new Date(S.data.generatedAt) > 3600000) load(); });
 applyTheme();
 load();
+if (ON_PAGES && 'serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 initDb();
 setInterval(() => { if (S.data) renderSyncLine(); }, 60000);

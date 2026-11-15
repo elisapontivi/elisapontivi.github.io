@@ -19,8 +19,9 @@ Agenda delle lezioni di Elisa Pontivi all'Università dell'Insubria, sincronizza
 ## Dove gira
 
 - **GitHub Actions**: `.github/workflows/agenda-pontivi.yml`, ogni 6 ore (e a richiesta con *Run workflow*). Esegue i test, sincronizza, fa commit dei file in `agenda-pontivi/` e chiede la build di GitHub Pages. Se nessun calendario è raggiungibile il job fallisce e GitHub manda una email.
-- **GitHub Pages**: https://elisapontivi.github.io/agenda-pontivi/ (feed ICS e dati).
-- **Artifact claude.ai** (interfaccia principale, privata): sorgenti in `_sync/artifact/`. Le conferme "svolta/annullata" sono salvate nel database dell'artifact. Un'attività pianificata di Claude copia `data.json` da qui all'artifact ogni 6 ore.
+- **GitHub Pages**: https://elisapontivi.github.io/agenda-pontivi/ è il sito completo (agenda settimanale, giornaliera e mensile, elenco, riepilogo ore, storico) e legge `data.json` aggiornato da Actions. Installabile sulla schermata Home (manifest + service worker). Le conferme "svolta/annullata" sono salvate nel browser del dispositivo.
+- Feed iPhone: https://elisapontivi.github.io/agenda-pontivi/agenda.ics (sottoscrizione) e `agenda-con-annullate.ics`.
+- Interfaccia: `index.html`, `app.js`, `styles.css`, `sw.js`, `manifest.webmanifest` in `agenda-pontivi/`. La stessa pagina esiste come artifact claude.ai (copia con i dati del 15/11/2026, che rimanda a questo sito).
 
 ## Comandi
 
