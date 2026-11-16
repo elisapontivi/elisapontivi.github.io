@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materiali 5ª Turismo</title>
+<meta name="description" content="Video e documenti di Discipline turistiche aziendali per la classe 5ª Turismo, a.s. 2026/27.">
+<style>
+:root{--bg:#f6f2ea;--card:#fff;--ink:#1d2b33;--mute:#5e6b72;--acc:#0e4a5a;--wine:#8a2e3b;--line:#e2dacb;--soft:#f1ebe0}
+@media (prefers-color-scheme:dark){:root{--bg:#121722;--card:#1a2232;--ink:#e8ecf3;--mute:#9aa4b5;--acc:#8db3ff;--wine:#f0a0aa;--line:#2f394b;--soft:#1f2940;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:28px 16px 80px}
+.ey{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wine);font-weight:700;margin:0 0 6px}
+h1{font-size:1.9rem;margin:0 0 6px;color:var(--acc);line-height:1.2}
+.sub{color:var(--mute);margin:0 0 18px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+nav a{font-size:.9rem;font-weight:600;color:var(--acc);text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px}
+section{margin:0 0 34px}
+h2{font-size:1.3rem;margin:0 0 4px;color:var(--acc)}
+.desc{color:var(--mute);margin:0 0 14px}
+.vtitle{font-size:1.08rem;margin:0 0 4px}
+.vsub{color:var(--mute);margin:0 0 12px;font-size:.95rem}
+.player{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+video{display:block;width:100%;height:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:16px}
+.card h3{font-size:1rem;margin:0 0 10px;color:var(--acc)}
+ol{margin:0;padding-left:22px;columns:2;column-gap:32px}
+ol li{margin:3px 0;break-inside:avoid}
+ol a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--mute)}
+ol a:hover{color:var(--acc)}
+.t{color:var(--mute);font-variant-numeric:tabular-nums;font-size:.9rem;margin-right:6px}
+.docs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.docs li{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.docs b{display:block;font-weight:650}
+.docs small{color:var(--mute)}
+.docs div{min-width:0}
+.btn{flex:none;font-weight:700;color:#fff;background:var(--acc);text-decoration:none;border-radius:9px;padding:9px 14px;white-space:nowrap}
+@media (prefers-color-scheme:dark){.btn{color:#0f1622}}
+a:focus-visible{outline:3px solid #d99a2b;outline-offset:3px}
+.foot{border-top:1px solid var(--line);padding-top:16px;color:var(--mute);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (max-width:640px){ol{columns:1}h1{font-size:1.5rem}.docs li{flex-direction:column;align-items:flex-start}}
+</style>
+<script src="config.js"></script>
+<script src="classe.js"></script>
+</head>
+<body>
+<main>
+<p class="ey">Discipline turistiche aziendali · a.s. 2026/27</p>
+<h1>Il materiale della 5ª Turismo</h1>
+<p class="sub">Video spiegati e documenti da scaricare per studiare e prepararsi alla seconda prova.</p>
+<nav><a href="#video">Video</a><a href="#documenti">Documenti da scaricare</a></nav>
+
+<section id="video" aria-labelledby="video-h">
+<h2 id="video-h">Video</h2>
+<div id="videos"></div>
+</section>
+
+<section id="documenti" aria-labelledby="doc-h">
+<h2 id="doc-h">Documenti da scaricare</h2>
+<p class="desc">Si aprono nel browser: da lì puoi salvarli o stamparli.</p>
+<ul class="docs" id="docs"></ul>
+</section>
+
+<footer class="foot"><span>5ª Turismo · Materiale di classe</span><span>Prof.ssa Elisa Pontivi</span></footer>
+</main>
+
+<script>
+/* =====================================================================
+   MATERIALI. Per aggiungere qualcosa basta una riga qui sotto.
+   Video: key = nome breve senza spazi (serve al registro video;
+   va aggiunto anche in registro-video.html).
+   ===================================================================== */
+const VIDEOS = [
+  {
+    key: "business_plan",
+    titolo: "Come si scrive il business plan",
+    sottotitolo: "Caso Valli e Laghi Viaggi srl · svolgimento guidato, passo per passo",
+    src: "../business-plan-5tur/business-plan-valli-e-laghi.mp4",
+    poster: "../business-plan-5tur/copertina.jpg",
+    capitoli: [["Introduzione",0],["La struttura dell'elaborato",15],["Executive summary",43],["Presentazione dell'azienda",92],["Analisi del bilancio",126],["Idea imprenditoriale (Abell)",200],["Mercato e concorrenza",236],["Analisi SWOT",284],["Strategia",319],["Marketing mix: prodotto",348],["Marketing mix: prezzo",394],["Distribuzione e comunicazione",443],["Organizzazione",472],["Le ipotesi",509],["Previsioni di vendita",584],["Piano degli investimenti",631],["Fonti di finanziamento",688],["Piano di ammortamento del mutuo",713],["Costo del personale",830],["Altri costi",909],["Conto economico previsionale",974],["Punto di pareggio",1070],["Budget di cassa",1134],["Conclusione",1202],["Prima di consegnare",1261]]
+  }
+];
+const DOCUMENTI = [
+  { titolo: "Business plan Valli e Laghi Viaggi · testo e svolgimento", nota: "PDF · 18 pagine · da stampare, segue il video", file: "Business_plan_Valli_e_Laghi_da_stampare.pdf" }
+];
+
+/* ---------------------- da qui in giù non serve toccare ---------------------- */
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+const fmt = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+
+/* REGISTRO VIDEO: play, pausa, salti, fine e secondi realmente guardati (solo studenti). */
+function track(v, key) {
+  const isStudent = () => window.Accesso && Accesso.profile && Accesso.profile.role === "student";
+  const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
+    : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+  let session = null, last = null, acc = 0, lastSent = 0, seekFrom = null;
+  const send = (kind, from = null, keepalive = false) => {
+    if (!isStudent()) return;
+    if (!session || Date.now() - lastSent > 30 * 60 * 1000) session = uuid();   // dopo 30 minuti di pausa conta come nuova visione
+    const watched = Math.round(acc * 10) / 10; acc = 0; lastSent = Date.now();
+    Cloud.video({
+      p_video: key, p_session: session, p_kind: kind,
+      p_pos: Math.round(v.currentTime * 10) / 10,
+      p_dur: isFinite(v.duration) ? Math.round(v.duration) : null,
+      p_watched: watched, p_from: from == null ? null : Math.round(from * 10) / 10
+    }, keepalive).catch(() => {});
+  };
+  v.addEventListener("play", () => { last = v.currentTime; send("play"); });
+  v.addEventListener("timeupdate", () => {
+    const t = v.currentTime;
+    if (!v.paused && !v.seeking && last != null) { const d = t - last; if (d > 0 && d < 2 * (v.playbackRate || 1) + 1) acc += d; }
+    last = t;
+    if (!v.paused && Date.now() - lastSent >= 15000) send("progress");
+  });
+  v.addEventListener("seeking", () => { if (seekFrom == null) seekFrom = last; });
+  v.addEventListener("seeked", () => {
+    const from = seekFrom; seekFrom = null; last = v.currentTime;
+    if (session && from != null && Math.abs(v.currentTime - from) > 2) send("seek", from);
+  });
+  v.addEventListener("pause", () => { if (!v.ended && !v.seeking) send("pause"); });
+  v.addEventListener("ended", () => send("ended"));
+  const bye = () => { if (session && (acc > 0 || !v.paused)) send("close", null, true); };
+  addEventListener("pagehide", bye);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") bye(); });
+}
+
+const box = document.getElementById("videos");
+VIDEOS.forEach((d, i) => {
+  const wrap = el("div"); wrap.id = "v-" + d.key; if (i) wrap.style.marginTop = "34px";
+  wrap.append(el("h3", "vtitle", d.titolo));
+  if (d.sottotitolo) wrap.append(el("p", "vsub", d.sottotitolo));
+  const pl = el("div", "player"), v = document.createElement("video");
+  v.controls = true; v.preload = "metadata"; v.playsInline = true; if (d.poster) v.poster = d.poster; v.src = d.src;
+  v.setAttribute("controlsList", "nodownload");
+  pl.append(v); wrap.append(pl);
+  if (d.capitoli && d.capitoli.length) {
+    const c = el("div", "card"), ol = el("ol");
+    c.append(el("h3", null, "Capitoli"));
+    d.capitoli.forEach(([t, s]) => {
+      const li = el("li"), a = el("a"); a.href = "#v-" + d.key;
+      a.append(el("span", "t", fmt(s)), document.createTextNode(t));
+      a.onclick = e => { e.preventDefault(); v.currentTime = s; v.play().catch(() => {}); pl.scrollIntoView({ behavior: "smooth", block: "start" }); };
+      li.append(a); ol.append(li);
+    });
+    c.append(ol); wrap.append(c);
+  }
+  box.append(wrap);
+  track(v, d.key);
+});
+
+const ul = document.getElementById("docs");
+DOCUMENTI.forEach(d => {
+  const li = el("li"), dv = el("div");
+  dv.append(el("b", null, d.titolo)); if (d.nota) dv.append(el("small", null, d.nota));
+  const a = el("a", "btn", "Apri il PDF"); a.href = d.file; a.target = "_blank"; a.rel = "noopener";
+  li.append(dv, a); ul.append(li);
+});
+</script>
+</body>
+</html>
