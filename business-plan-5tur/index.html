@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Come si scrive il business plan – Valli e Laghi Viaggi</title>
+<style>
+:root{--bg:#f6f2ea;--card:#fff;--ink:#1d2b33;--mute:#5e6b72;--acc:#0e4a5a;--wine:#8a2e3b;--line:#e2dacb}
+@media (prefers-color-scheme:dark){:root{--bg:#121722;--card:#1a2232;--ink:#e8ecf3;--mute:#9aa4b5;--acc:#8db3ff;--wine:#f0a0aa;--line:#2f394b;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+.ey{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wine);font-weight:700;margin:0 0 6px}
+h1{font-size:1.7rem;margin:0 0 6px;color:var(--acc)}
+.sub{color:var(--mute);margin:0 0 20px}
+.player{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+video{display:block;width:100%;height:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:20px}
+.card h2{font-size:1.1rem;margin:0 0 10px;color:var(--acc)}
+ol{margin:0;padding-left:22px;columns:2;column-gap:32px}
+li{margin:3px 0;break-inside:avoid}
+li a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--mute)}
+li a:hover{color:var(--acc)}
+.t{color:var(--mute);font-variant-numeric:tabular-nums;font-size:.9rem;margin-right:6px}
+@media (max-width:640px){ol{columns:1}h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<main>
+<p class="ey">Discipline turistiche aziendali · Classe 5ª Turismo</p>
+<h1>Come si scrive il business plan</h1>
+<p class="sub">Caso Valli e Laghi Viaggi srl · svolgimento guidato, passo per passo</p>
+
+<div class="player">
+<video id="v" controls preload="metadata" playsinline poster="copertina.jpg">
+<source src="business-plan-valli-e-laghi.mp4" type="video/mp4">
+Il tuo browser non riesce a riprodurre il video.
+</video>
+</div>
+
+<div class="card">
+<h2>Capitoli</h2>
+<ol id="cap"></ol>
+</div>
+</main>
+<script>
+const CAP=[["Introduzione",0],["La struttura dell'elaborato",15],["Executive summary",43],["Presentazione dell'azienda",92],["Analisi del bilancio",126],["Idea imprenditoriale (Abell)",200],["Mercato e concorrenza",236],["Analisi SWOT",284],["Strategia",319],["Marketing mix: prodotto",348],["Marketing mix: prezzo",394],["Distribuzione e comunicazione",443],["Organizzazione",472],["Le ipotesi",509],["Previsioni di vendita",584],["Piano degli investimenti",631],["Fonti di finanziamento",688],["Piano di ammortamento del mutuo",713],["Costo del personale",830],["Altri costi",909],["Conto economico previsionale",974],["Punto di pareggio",1070],["Budget di cassa",1134],["Conclusione",1202],["Prima di consegnare",1261]];
+const v=document.getElementById('v'),ol=document.getElementById('cap');
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+CAP.forEach(([t,s])=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#';a.innerHTML='<span class="t">'+fmt(s)+'</span>'+t;a.onclick=e=>{e.preventDefault();v.currentTime=s;v.play().catch(()=>{});window.scrollTo({top:0,behavior:'smooth'});};li.appendChild(a);ol.appendChild(li);});
+</script>
+</body>
+</html>
