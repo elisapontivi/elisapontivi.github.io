@@ -60,6 +60,130 @@
 },
 "valutazioni": [
 {
+"id": "2026-11-12",
+"titolo": "Verifica del 12/11/2026 (con recupero del 16/11) – Omega spa",
+"file": {
+"1": {
+"f": "6d9b00b0ef653ba3",
+"i": "odGwy4hhdhYbnmK/"
+},
+"2": {
+"f": "3e4c57b41c106d6e",
+"i": "/7y49GBGzvl7iy49"
+},
+"3": {
+"f": "0336e0be1428be0c",
+"i": "CQQ+vwDr4YOUCQCt"
+},
+"4": {
+"f": "69726e5bdf75aacf",
+"i": "dBy2O2ol/2XhIyCi"
+},
+"5": {
+"f": "929adf8ad06ba7a1",
+"i": "D7y137LZ+2+bbySF"
+},
+"6": {
+"f": "3db37e5907aac113",
+"i": "oACrKKEaS6ecJNFa"
+},
+"7": {
+"f": "43319b8de05afdf6",
+"i": "a+Hu/Zkus5jHXodl"
+},
+"8": {
+"f": "43bb2c7e752a4177",
+"i": "hVj/9M8E2hzbd1Tb"
+},
+"9": {
+"f": "e545dfbe93490b5a",
+"i": "3MGXUVb9hQTEmmYU"
+},
+"10": {
+"f": "4ce4ee879e7b93d3",
+"i": "igrjpvg4wuwjlIIU"
+},
+"11": {
+"f": "ca3efa3c5a651b18",
+"i": "+MeTKQyjo9cc4yzb"
+},
+"12": {
+"f": "05f736dd9d010cad",
+"i": "sZCXV8YkHls9wg0G"
+},
+"13": {
+"f": "42a57be31279a7a0",
+"i": "0mP3sC5jrKeRGwpr"
+},
+"14": {
+"f": "6b45c02f650806dc",
+"i": "B7c5Wij7HCOS8OfT"
+},
+"15": {
+"f": "59a6b2626fb70979",
+"i": "ntzO5WKT6jipaV/F"
+},
+"16": {
+"f": "5c6956c730dc10c1",
+"i": "qIgg2FEAwfM96K/P"
+},
+"17": {
+"f": "fe9b24d0e5843ef2",
+"i": "SDPXURDnPSnhc+Nk"
+},
+"18": {
+"f": "c914a594b7bdfae9",
+"i": "BZYaN8Ct+pudn5Jv"
+},
+"19": {
+"f": "bee7b8a566e0e356",
+"i": "q0RpUjDrycq+37sn"
+},
+"20": {
+"f": "51d2e1d682b2a85d",
+"i": "ZlVa9n0XsQlKd676"
+},
+"21": {
+"f": "61d5b7c8d0196266",
+"i": "G92JgFq5wrxTw4m1"
+},
+"22": {
+"f": "65101bdde6338628",
+"i": "Nx7OWn4r4R4suQLy"
+},
+"23": {
+"f": "23147a3ed7a908e8",
+"i": "xUv5Jl8qvSY/OfS6"
+},
+"24": {
+"f": "5c2f015e377f0d5a",
+"i": "cOXziNxm0vkGDthj"
+},
+"25": {
+"f": "1e39b48431ad5f7e",
+"i": "vVH+/z67/VquctM4"
+},
+"26": {
+"f": "b449324b4a2abca2",
+"i": "0f47FkVAfe3d0mZy"
+},
+"27": {
+"f": "24d6717ac543f961",
+"i": "hi24la81C8R33xRB"
+}
+}
+},
+{
+"id": "2026-11-09-esercitazione",
+"titolo": "Esercitazione per la 3ª verifica – correzione del 09/11/2026",
+"file": {
+"7": {
+"f": "81f3666b98c2ee9c",
+"i": "wxi+tWIRdi1m0a5K"
+}
+}
+},
+{
 "id": "2026-10-22",
 "titolo": "Verifica del 22/10/2026 – Dalla contabilità al bilancio",
 "file": {
@@ -154,16 +278,6 @@
 "27": {
 "f": "2b8ab83862a53521",
 "i": "782cRptztyp9Sk+T"
-}
-}
-},
-{
-"id": "2026-11-09-esercitazione",
-"titolo": "Esercitazione per la 3ª verifica – correzione del 09/11/2026",
-"file": {
-"7": {
-"f": "81f3666b98c2ee9c",
-"i": "wxi+tWIRdi1m0a5K"
 }
 }
 }
