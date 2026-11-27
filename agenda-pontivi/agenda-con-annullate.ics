@@ -9,7 +9,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:up-6a9fff272da699001974ac6f@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20260925T130000Z
 DTEND:20260925T160000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -27,7 +27,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6a9ffcd425ec890053b17d7b@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20260928T153000Z
 DTEND:20260928T183000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -44,7 +44,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6aa93481e74374001989e141@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261009T130000Z
 DTEND:20261009T160000Z
 SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
@@ -60,7 +60,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6aa9269a0d36b80083dab1e9@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261015T153000Z
 DTEND:20261015T193000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -77,7 +77,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6aa92f8b7c881300872c2128@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261016T130000Z
 DTEND:20261016T160000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -95,7 +95,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6ab3b4ebe560910040d3dfdb@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261023T073000Z
 DTEND:20261023T103000Z
 SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
@@ -111,7 +111,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6a9fff777a3b1e00145ef28e@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261023T130000Z
 DTEND:20261023T160000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -129,7 +129,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6a9fff9c2da699001974ac7a@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261113T140000Z
 DTEND:20261113T170000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -147,7 +147,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6ab3b51c20a9e9004b30d9c5@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261120T090000Z
 DTEND:20261120T120000Z
 SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
@@ -163,7 +163,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6a9ffd3825ec890053b17d84@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261123T163000Z
 DTEND:20261123T193000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -180,7 +180,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6a9fffbf0c671100348cd27a@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261127T140000Z
 DTEND:20261127T170000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -198,7 +198,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6ab3b5486d616500693031e2@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261204T090000Z
 DTEND:20261204T120000Z
 SUMMARY:Mod. 1 Economia della Tassazione (Esercitazione)
@@ -214,7 +214,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6aa926debcf69a007d82562b@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261210T163000Z
 DTEND:20261210T203000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
@@ -231,7 +231,7 @@ URL:https://unins.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=6a5
 END:VEVENT
 BEGIN:VEVENT
 UID:up-6aa92fe90d36b80083dab57f@agenda-pontivi
-DTSTAMP:20261126T214010Z
+DTSTAMP:20261127T084438Z
 DTSTART:20261211T140000Z
 DTEND:20261211T170000Z
 SUMMARY:Mod. 1 Economia Industriale (Esercitazione)
